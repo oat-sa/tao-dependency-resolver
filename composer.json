@@ -19,12 +19,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "OAT\\DependencyResolver\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "OAT\\DependencyResolver\\Test\\": "tests/"
         }
     },
     "replace": {
