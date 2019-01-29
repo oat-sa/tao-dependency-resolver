@@ -19,3 +19,18 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    Composer\Factory:
+        class: Composer\Factory
+
+    Composer\IO\IOInterface:
+        class: Composer\IO\NullIO
+
+    Composer\Composer:
+        factory: 'Composer\Factory:createComposer'
+        arguments:
+            $localConfig: '%kernel.project_dir%/../package-tao/composer.json'
+            $cwd: '%kernel.project_dir%/../test-dependency-resolver/'
+
+    Composer\Installer\SuggestedPackagesReporter:
+        autowire: true

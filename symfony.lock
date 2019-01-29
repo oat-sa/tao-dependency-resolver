@@ -1,4 +1,40 @@
 {
+    "composer/ca-bundle": {
+        "version": "1.1.4"
+    },
+    "composer/composer": {
+        "version": "1.8.0"
+    },
+    "composer/semver": {
+        "version": "1.4.2"
+    },
+    "composer/spdx-licenses": {
+        "version": "1.5.0"
+    },
+    "composer/xdebug-handler": {
+        "version": "1.3.2"
+    },
+    "justinrainbow/json-schema": {
+        "version": "5.2.8"
+    },
+    "naneau/semver": {
+        "version": "0.0.7"
+    },
+    "oat-sa/extension-tao-itemqti": {
+        "version": "dev-develop"
+    },
+    "oat-sa/lib-beeme": {
+        "version": "0.0.0"
+    },
+    "oat-sa/lib-tao-dtms": {
+        "version": "v1.0.0"
+    },
+    "oat-sa/lib-tao-qti": {
+        "version": "v4.3.1"
+    },
+    "oat-sa/oatbox-extension-installer": {
+        "version": "dev-master"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -9,6 +45,15 @@
         "version": "1.1.0"
     },
     "psr/simple-cache": {
+        "version": "1.0.1"
+    },
+    "qtism/qtism": {
+        "version": "0.16.1"
+    },
+    "seld/jsonlint": {
+        "version": "1.7.1"
+    },
+    "seld/phar-utils": {
         "version": "1.0.1"
     },
     "symfony/cache": {
@@ -73,6 +118,9 @@
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.10.0"
+    },
+    "symfony/process": {
+        "version": "v4.2.2"
     },
     "symfony/routing": {
         "version": "4.2",
