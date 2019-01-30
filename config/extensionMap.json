@@ -1,7 +1,7 @@
 {
-  "taoQtiItem": "https://github.com/oat-sa/extension-tao-itemqti",
-  "taoItems": "git@github.com:oat-sa/extension-tao-item.git",
-  "taoBackOffice": "git@github.com:oat-sa/extension-tao-backoffice.git",
-  "tao": "git@github.com:oat-sa/tao-core.git",
-  "generis": "git@github.com:oat-sa/generis.git"
+  "taoQtiItem": "oat-sa/extension-tao-itemqti",
+  "taoItems": "oat-sa/extension-tao-item",
+  "taoBackOffice": "oat-sa/extension-tao-backoffice",
+  "tao": "oat-sa/tao-core",
+  "generis": "oat-sa/generis"
 }
