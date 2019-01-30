@@ -6,11 +6,15 @@ use OAT\DependencyResolver\Extension\Extension;
 
 class ExtensionFactory
 {
-    public function create(
-        string $extensionName,
-        string $repositoryName,
-        string $branch = Extension::DEFAULT_BRANCH
-    ): Extension {
-        return new Extension($extensionName, $repositoryName, $branch);
+    private $extensionMap = [];
+
+    public function __construct(array $extensionMap)
+    {
+        $this->extensionMap = $extensionMap;
+    }
+
+    public function create(string $extensionName, string $branch = Extension::DEFAULT_BRANCH): Extension
+    {
+        return new Extension($extensionName, $this->extensionMap[$extensionName], $branch);
     }
 }
