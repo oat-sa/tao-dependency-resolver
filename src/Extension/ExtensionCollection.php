@@ -21,6 +21,9 @@ class ExtensionCollection
         return $this;
     }
 
+    /**
+     * @return Extension[]
+     */
     public function all(): array
     {
         return array_values($this->extensions);
