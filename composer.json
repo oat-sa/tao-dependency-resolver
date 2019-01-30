@@ -7,6 +7,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "composer/composer": "^1.8",
+        "nikic/php-parser": "^4.2",
         "oat-sa/oatbox-extension-installer": "~1.1||dev-master",
         "symfony/console": "4.2.*",
         "symfony/dotenv": "4.2.*",

@@ -17,20 +17,11 @@
     "justinrainbow/json-schema": {
         "version": "5.2.8"
     },
-    "naneau/semver": {
-        "version": "0.0.7"
+    "nikic/php-parser": {
+        "version": "v4.2.0"
     },
     "oat-sa/extension-tao-itemqti": {
         "version": "dev-develop"
-    },
-    "oat-sa/lib-beeme": {
-        "version": "0.0.0"
-    },
-    "oat-sa/lib-tao-dtms": {
-        "version": "v1.0.0"
-    },
-    "oat-sa/lib-tao-qti": {
-        "version": "v4.3.1"
     },
     "oat-sa/oatbox-extension-installer": {
         "version": "dev-master"
@@ -46,9 +37,6 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
-    },
-    "qtism/qtism": {
-        "version": "0.16.1"
     },
     "seld/jsonlint": {
         "version": "1.7.1"

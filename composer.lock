@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "42359eb1752663394f7dc07d6ceb97ce",
+    "content-hash": "784af2db8b8bef39df30d8ab6630ded2",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -64,16 +64,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "1.8.1",
+            "version": "1.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "b3a6f3932feec1150d8a73eaec92be4223bae1a9"
+                "reference": "a6a3b44581398b7135c7baa0557b7c5b10808b47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/b3a6f3932feec1150d8a73eaec92be4223bae1a9",
-                "reference": "b3a6f3932feec1150d8a73eaec92be4223bae1a9",
+                "url": "https://api.github.com/repos/composer/composer/zipball/a6a3b44581398b7135c7baa0557b7c5b10808b47",
+                "reference": "a6a3b44581398b7135c7baa0557b7c5b10808b47",
                 "shasum": ""
             },
             "require": {
@@ -140,7 +140,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2019-01-29T13:01:51+00:00"
+            "time": "2019-01-30T07:31:34+00:00"
         },
         {
             "name": "composer/semver",
@@ -376,292 +376,55 @@
             "time": "2019-01-14T23:55:14+00:00"
         },
         {
-            "name": "naneau/semver",
-            "version": "0.0.7",
+            "name": "nikic/php-parser",
+            "version": "v4.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/naneau/semver.git",
-                "reference": "60ea59641aad840f97f3c9057e2f2b7bc087eaa3"
+                "url": "https://github.com/nikic/PHP-Parser.git",
+                "reference": "594bcae1fc0bccd3993d2f0d61a018e26ac2865a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/naneau/semver/zipball/60ea59641aad840f97f3c9057e2f2b7bc087eaa3",
-                "reference": "60ea59641aad840f97f3c9057e2f2b7bc087eaa3",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/594bcae1fc0bccd3993d2f0d61a018e26ac2865a",
+                "reference": "594bcae1fc0bccd3993d2f0d61a018e26ac2865a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "ext-tokenizer": "*",
+                "php": ">=7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0.0"
+                "phpunit/phpunit": "^6.5 || ^7.0"
             },
+            "bin": [
+                "bin/php-parse"
+            ],
             "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Naneau\\SemVer\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Maurice Fonk",
-                    "email": "maurice@naneau.net",
-                    "homepage": "http://mauricefonk.com",
-                    "role": "developer"
-                }
-            ],
-            "description": "A decent, standards-compliant, Semantic Versioning (SemVer) parser and library",
-            "homepage": "https://github.com/naneau/semver",
-            "keywords": [
-                "semantic",
-                "semver",
-                "versioning"
-            ],
-            "time": "2013-01-04T00:00:00+00:00"
-        },
-        {
-            "name": "oat-sa/extension-tao-itemqti",
-            "version": "dev-develop",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/oat-sa/extension-tao-itemqti.git",
-                "reference": "3d5e65e2fe352d4296fd57964d488070a0421bf6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/oat-sa/extension-tao-itemqti/zipball/3d5e65e2fe352d4296fd57964d488070a0421bf6",
-                "reference": "3d5e65e2fe352d4296fd57964d488070a0421bf6",
-                "shasum": ""
-            },
-            "require": {
-                "naneau/semver": "~0.0.7",
-                "oat-sa/lib-tao-qti": "~4.3.0",
-                "oat-sa/oatbox-extension-installer": "~1.1||dev-master"
-            },
-            "type": "tao-extension",
             "extra": {
-                "tao-extension-name": "taoQtiItem"
+                "branch-alias": {
+                    "dev-master": "4.2-dev"
+                }
             },
             "autoload": {
                 "psr-4": {
-                    "oat\\taoQtiItem\\": ""
+                    "PhpParser\\": "lib/PhpParser"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-2.0-only"
+                "BSD-3-Clause"
             ],
             "authors": [
                 {
-                    "name": "Open Assessment Technologies S.A.",
-                    "homepage": "http://www.taotesting.com"
-                },
-                {
-                    "name": "Jérôme Bogaerts",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Joel Bout",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Bertrand Chevrier",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Lionel Lecaque",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Patrick Plichart",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Dieter Raber",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Somsack Sipasseuth",
-                    "role": "Developer"
+                    "name": "Nikita Popov"
                 }
             ],
-            "description": "extension to create QTI items",
-            "homepage": "http://www.taotesting.com",
+            "description": "A PHP parser written in PHP",
             "keywords": [
-                "OAT",
-                "QTI",
-                "TAO",
-                "computer-based-assessment"
+                "parser",
+                "php"
             ],
-            "time": "2019-01-28T16:14:27+00:00"
-        },
-        {
-            "name": "oat-sa/lib-beeme",
-            "version": "0.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/oat-sa/lib-beeme.git",
-                "reference": "af3020dceddd44117efe3164ec9b24d6588ed4d6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/oat-sa/lib-beeme/zipball/af3020dceddd44117efe3164ec9b24d6588ed4d6",
-                "reference": "af3020dceddd44117efe3164ec9b24d6588ed4d6",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "oat\\beeme\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Adrean Boyadzhiev",
-                    "email": "adrean.boyadzhiev@gmail.com"
-                },
-                {
-                    "name": "Jérôme Bogaerts",
-                    "email": "jerome@taotesting.com"
-                }
-            ],
-            "description": "Simple mathematical expression/equation parser and calculator.",
-            "keywords": [
-                "math calculator",
-                "math parser",
-                "shunting-yard algorithm"
-            ],
-            "time": "2016-04-05T09:23:52+00:00"
-        },
-        {
-            "name": "oat-sa/lib-tao-dtms",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/oat-sa/lib-tao-dtms.git",
-                "reference": "dc3979af897154850756bc72e19a9670064b9f25"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/oat-sa/lib-tao-dtms/zipball/dc3979af897154850756bc72e19a9670064b9f25",
-                "reference": "dc3979af897154850756bc72e19a9670064b9f25",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "oat\\dtms\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "Open Assessment Technologies S.A.",
-                    "homepage": "http://www.taotesting.com"
-                },
-                {
-                    "name": "Ivan Klimchuk",
-                    "email": "ivan@klimchuk.com",
-                    "homepage": "http://klimchuk.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Classes for manipulate dates and intervals with microseconds precision",
-            "keywords": [
-                "date",
-                "datetime",
-                "fractions",
-                "interval",
-                "iso8601",
-                "microseconds",
-                "milliseconds",
-                "ms",
-                "time"
-            ],
-            "time": "2018-02-19T14:54:02+00:00"
-        },
-        {
-            "name": "oat-sa/lib-tao-qti",
-            "version": "v4.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/oat-sa/lib-tao-qti.git",
-                "reference": "cee64f9be0611b89fa0e2aeda7642bd8804c0d06"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/oat-sa/lib-tao-qti/zipball/cee64f9be0611b89fa0e2aeda7642bd8804c0d06",
-                "reference": "cee64f9be0611b89fa0e2aeda7642bd8804c0d06",
-                "shasum": ""
-            },
-            "require": {
-                "oat-sa/lib-beeme": "~0.0.0",
-                "php": ">=5.3.10",
-                "qtism/qtism": "0.16.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "<6.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "helpers/"
-                ],
-                "psr-4": {
-                    "qti\\customOperators\\": "model/operators/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "Open Assessment Technologies S.A.",
-                    "homepage": "http://www.taotesting.com"
-                },
-                {
-                    "name": "Jérôme Bogaerts",
-                    "email": "jerome@taotesting.com",
-                    "homepage": "http://www.taotesting.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "QTI Software Module Library for TAO",
-            "homepage": "http://www.taotesting.com",
-            "keywords": [
-                "CBA",
-                "Computer-Aided Assessment",
-                "Computer-Assisted Assessment",
-                "Computer-Based Assessment",
-                "IMS",
-                "OAT",
-                "QTI",
-                "TAO"
-            ],
-            "time": "2018-05-08T14:03:01+00:00"
+            "time": "2019-01-12T16:31:37+00:00"
         },
         {
             "name": "oat-sa/oatbox-extension-installer",
@@ -904,63 +667,6 @@
                 "simple-cache"
             ],
             "time": "2017-10-23T01:57:42+00:00"
-        },
-        {
-            "name": "qtism/qtism",
-            "version": "0.16.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/oat-sa/qti-sdk.git",
-                "reference": "a943bff8f34d21cbe47a8985d3cd5e096a591513"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/oat-sa/qti-sdk/zipball/a943bff8f34d21cbe47a8985d3cd5e096a591513",
-                "reference": "a943bff8f34d21cbe47a8985d3cd5e096a591513",
-                "shasum": ""
-            },
-            "require": {
-                "oat-sa/lib-tao-dtms": "1.0.0",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "<6.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "qtism\\": "."
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "Open Assessment Technologies S.A.",
-                    "homepage": "http://www.taotesting.com"
-                },
-                {
-                    "name": "Jérôme Bogaerts",
-                    "email": "jerome@taotesting.com",
-                    "homepage": "http://www.taotesting.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "OAT QTI Software Module Library",
-            "homepage": "http://www.taotesting.com",
-            "keywords": [
-                "CBA",
-                "Computer-Aided Assessment",
-                "Computer-Assisted Assessment",
-                "Computer-Based Assessment",
-                "IMS",
-                "OAT",
-                "QTI",
-                "TAO"
-            ],
-            "time": "2018-05-08T13:54:16+00:00"
         },
         {
             "name": "seld/jsonlint",
@@ -2299,7 +2005,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "oat-sa/extension-tao-itemqti": 20,
         "oat-sa/oatbox-extension-installer": 20
     },
     "prefer-stable": false,

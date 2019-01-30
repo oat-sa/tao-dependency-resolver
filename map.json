@@ -1,0 +1,7 @@
+{
+  "taoQtiItem": "nikic/PHP-Parser",
+  "taoItems": "git@github.com:oat-sa/extension-tao-item.git",
+  "taoBackOffice": "git@github.com:oat-sa/extension-tao-backoffice.git",
+  "tao": "git@github.com:oat-sa/tao-core.git",
+  "generis": "git@github.com:oat-sa/generis.git"
+}

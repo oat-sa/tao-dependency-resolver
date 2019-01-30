@@ -2,13 +2,19 @@
 
 namespace OAT\DependencyResolver\Command;
 
+use Composer\Composer;
+use Composer\DependencyResolver\Operation\InstallOperation;
 use Composer\EventDispatcher\Event;
 use Composer\Factory;
 use Composer\Installer;
 use Composer\Installer\InstallerEvent;
+use Composer\Installer\InstallerEvents;
+use Composer\Installer\PackageEvent;
+use Composer\Installer\PackageEvents;
 use Composer\IO\ConsoleIO;
 use Composer\IO\IOInterface;
 use OAT\DependencyResolver\Downloader\RootPackageDownloader;
+use OAT\DependencyResolver\Extractor\RemoteManifestDependenciesExtractor;
 use OAT\DependencyResolver\Resolver\DependencyResolverInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -24,26 +30,24 @@ class DependencyResolverCommand extends Command
     /** @var DependencyResolverInterface */
     private $dependencyResolver;
 
-    /** @var IOInterface */
-    private $IO;
-    /**
-     * @var Factory
-     */
+    /** @var Factory */
     private $factory;
 
+    /** @var RemoteManifestDependenciesExtractor */
+    private $remoteManifestDependenciesExtractor;
+
     public function __construct(
-        IOInterface $IO,
         Factory $factory,
         RootPackageDownloader $rootPackageDownloader,
-        DependencyResolverInterface $dependencyResolver
+        DependencyResolverInterface $dependencyResolver,
+    RemoteManifestDependenciesExtractor $remoteManifestDependenciesExtractor
     )
     {
         parent::__construct('dependency:resolve');
-
-        $this->IO = $IO;
         $this->rootPackageDownloader = $rootPackageDownloader;
         $this->dependencyResolver = $dependencyResolver;
         $this->factory = $factory;
+        $this->remoteManifestDependenciesExtractor = $remoteManifestDependenciesExtractor;
     }
 
     protected function configure()
@@ -57,30 +61,31 @@ class DependencyResolverCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        var_dump($this->remoteManifestDependenciesExtractor->extractDependencies('https://raw.githubusercontent.com/oat-sa/tao-core/master/manifest.php'));
+        exit;
+        $io = new ConsoleIO($input, $output, $this->getHelperSet());
         $directory = $input->getArgument('directoryName');
         $package = $input->getArgument('packageName');
 
-        $config = Factory::createConfig();
+        $config = Factory::createConfig($io);
 
         $this->rootPackageDownloader->download($config, $package, $directory);
 
-        $io = new ConsoleIO($input, $output, $this->getHelperSet());
-
-        $output->setVerbosity(OutputInterface::VERBOSITY_DEBUG);
-
         $composer = $this->factory->createComposer($io, $directory . DIRECTORY_SEPARATOR . 'composer.json', false, $directory);
 
-        //$composer->getEventDispatcher()->addListener(Installer\InstallerEvents::POST_DEPENDENCIES_SOLVING, function(InstallerEvent $event) {
-        //    var_dump($event->getOperations());
-        //    //$event->getRequest()->install('oat-sa/extension-tao-task-queue');
-        //});
+        $this->install($composer, $io);
 
-        //$this->dependencyResolver->resolve($composer, 'whatever');
+        return 1;
+    }
+
+    private function install(Composer $composer, IOInterface $io)
+    {
+        $composer->getEventDispatcher()->addListener(InstallerEvents::PRE_DEPENDENCIES_SOLVING, function(InstallerEvent $event) {
+            //$event->getRequest()->install('oat-sa/extension-tao-task-queue');
+        });
 
         $install = Installer::create($io, $composer);
 
         $install->run();
-
-        return 1;
     }
 }
