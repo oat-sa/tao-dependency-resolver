@@ -21,6 +21,6 @@ class ExtensionMapFactory
             throw new LogicException(sprintf('Parameter "extension.map.path" cannot be empty.'));
         }
 
-        return json_decode(file_get_contents($this->parameterBag->get('extension.map.path')));
+        return json_decode(file_get_contents($this->parameterBag->get('extension.map.path')), true);
     }
 }
