@@ -5,13 +5,13 @@ namespace OAT\DependencyResolver\Extension;
 class Extension
 {
     const DEFAULT_BRANCH = 'develop';
+    const BRANCH_PREFIX = 'dev';
 
     /** @var string */
     private $extensionName; // taoItems
 
     /** @var string */
     private $repositoryName; // oat-sa/tao-core
-
 
     /** @var string */
     private $branch = self::DEFAULT_BRANCH;
@@ -45,6 +45,10 @@ class Extension
         return $this->branch;
     }
 
+    public function getPrefixedBranch(): string
+    {
+        return sprintf('%s-%s', static::BRANCH_PREFIX, $this->branch);
+    }
 
     public function getRemoteComposerUrl(): string
     {
