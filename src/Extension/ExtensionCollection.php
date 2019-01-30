@@ -5,7 +5,7 @@ namespace OAT\DependencyResolver\Extension;
 class ExtensionCollection
 {
     /** @var Extension[] */
-    private $extensions;
+    private $extensions = [];
 
     public function __construct(array $extensions = [])
     {
