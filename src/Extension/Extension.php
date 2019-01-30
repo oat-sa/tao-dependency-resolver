@@ -16,13 +16,6 @@ class Extension
     /** @var string */
     private $branch = self::DEFAULT_BRANCH;
 
-    /**
-     * Extension constructor.
-     * @param string $extensionName
-     * @param string $composerName
-     * @param string $repositoryName
-     * @param string $branch
-     */
     public function __construct(string $extensionName, string $repositoryName, string $branch)
     {
         $this->extensionName = $extensionName;
