@@ -88,7 +88,7 @@ class DependencyResolverCommand extends Command
         $rootExtension = $this->extensionFactory->create($rootExtensionName, $rootExtensionBranch);
 
         $extensionCollection = $this->remoteManifestDependenciesExtractor->extractExtensionsRecursively(
-            new ExtensionCollection([]),
+            new ExtensionCollection(),
             $rootExtension,
             $extensionToBranchMap
         );
