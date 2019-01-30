@@ -28,4 +28,9 @@ class ExtensionCollection
     {
         return $this->extensions[$extensionName] ?? null;
     }
+
+    public function has(string $extensionName): bool
+    {
+        return array_key_exists($extensionName, $this->extensions);
+    }
 }
