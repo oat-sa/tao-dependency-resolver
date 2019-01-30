@@ -6,21 +6,22 @@ class Extension
 {
     const DEFAULT_BRANCH = 'develop';
     const BRANCH_PREFIX = 'dev';
+    const GITHUB_RAW_BASE_URL = 'https://raw.githubusercontent.com';
 
     /** @var string */
-    private $extensionName; // taoItems
+    private $extensionName;
 
     /** @var string */
-    private $repositoryName; // oat-sa/tao-core
+    private $repositoryName;
 
     /** @var string */
-    private $branch = self::DEFAULT_BRANCH;
+    private $branchName = self::DEFAULT_BRANCH;
 
-    public function __construct(string $extensionName, string $repositoryName, string $branch)
+    public function __construct(string $extensionName, string $repositoryName, string $branchName)
     {
         $this->extensionName = $extensionName;
         $this->repositoryName = $repositoryName;
-        $this->branch = $branch;
+        $this->branchName = $branchName;
     }
 
     public function getExtensionName(): string
@@ -33,23 +34,24 @@ class Extension
         return $this->repositoryName;
     }
 
-    public function getBranch(): string
+    public function getBranchName(): string
     {
-        return $this->branch;
+        return $this->branchName;
     }
 
-    public function getPrefixedBranch(): string
+    public function getPrefixedBranchName(): string
     {
-        return sprintf('%s-%s', static::BRANCH_PREFIX, $this->branch);
+        return sprintf('%s-%s', static::BRANCH_PREFIX, $this->branchName);
     }
 
     public function getRemoteComposerUrl(): string
     {
-        return 'https://raw.githubusercontent.com/' .$this->repositoryName. '/' . $this->branch . '/composer.json';
+        return sprintf('%s/%s/%s/composer.json', static::GITHUB_RAW_BASE_URL, $this->repositoryName, $this->branchName);
     }
 
     public function getRemoteManifestUrl(): string
     {
-        return 'https://raw.githubusercontent.com/' .$this->repositoryName. '/' . $this->branch . '/manifest.php';
+        return sprintf('%s/%s/%s/manifest.php', static::GITHUB_RAW_BASE_URL, $this->repositoryName, $this->branchName);
     }
 }
+
