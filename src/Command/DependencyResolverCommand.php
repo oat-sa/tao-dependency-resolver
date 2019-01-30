@@ -97,7 +97,7 @@ class DependencyResolverCommand extends Command
 
         $this->rootPackageDownloader->download(
             $config,
-            $this->remoteExtensionComposerNameExtractor->extractComposerName($rootExtension) . ':dev-' . $rootExtensionBranch,
+            $this->remoteExtensionComposerNameExtractor->extractComposerName($rootExtension) . ':' . $rootExtension->getPrefixedBranch(),
             $directory
         );
 
@@ -114,7 +114,7 @@ class DependencyResolverCommand extends Command
             foreach ($extensionCollection->all() as $extension) {
                 $event->getRequest()->install(
                     $this->remoteExtensionComposerNameExtractor->extractComposerName($extension),
-                    new Constraint('==', 'dev-' . $extension->getBranch())
+                    new Constraint('==', $extension->getPrefixedBranch())
                 );
             }
         });
