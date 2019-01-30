@@ -17,6 +17,8 @@ class ExtensionCollection
     public function add(Extension $extension): self
     {
         $this->extensions[$extension->getExtensionName()] = $extension;
+
+        return $this;
     }
 
     public function all(): array
