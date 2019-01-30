@@ -8,7 +8,7 @@ class ExtensionFactory
 {
     private $extensionMap = [];
 
-    public function __construct(array $extensionMap)
+    public function __construct(array $extensionMap = [])
     {
         $this->extensionMap = $extensionMap;
     }

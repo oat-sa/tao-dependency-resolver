@@ -7,7 +7,7 @@ class ExtensionCollection
     /** @var Extension[] */
     private $extensions;
 
-    public function __construct(array $extensions)
+    public function __construct(array $extensions = [])
     {
         foreach ($extensions as $extension) {
             $this->add($extension);
