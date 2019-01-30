@@ -6,7 +6,7 @@ use OAT\DependencyResolver\Extension\Extension;
 
 class ExtensionFactory
 {
-    private $extensionMap = [];
+    private $extensionMap;
 
     public function __construct(array $extensionMap = [])
     {
