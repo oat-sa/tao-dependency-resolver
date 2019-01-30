@@ -4,7 +4,7 @@ namespace OAT\DependencyResolver\Extension;
 
 class Extension
 {
-    const DEFAULT_BRANCH = 'dev-develop';
+    const DEFAULT_BRANCH = 'develop';
 
     /** @var string */
     private $extensionName; // taoItems
