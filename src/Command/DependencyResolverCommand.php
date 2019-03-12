@@ -41,10 +41,10 @@ class DependencyResolverCommand extends Command
     {
         $this
             ->setName('dependencies:resolve')
-            ->addArgument('package-remote-url', InputArgument::REQUIRED, 'Name of the extension being tested.')
-            ->addArgument('package-branch', InputArgument::OPTIONAL, 'Name of the branch being tested.', Extension::DEFAULT_BRANCH)
-            ->addArgument('directory', InputArgument::OPTIONAL, 'Directory in which to download dependencies', __DIR__ . '/../../tmp')
-            ->addOption('dependencies-branch', 'ext', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY);
+            ->addArgument('package-name', InputArgument::REQUIRED, 'Name of the extension being tested.')
+            ->addOption('package-branch', 'b', InputOption::VALUE_REQUIRED, 'Name of the branch being tested.', Extension::DEFAULT_BRANCH)
+            ->addOption('extensions-branch', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, Extension::DEFAULT_BRANCH)
+            ->addOption('directory', 'd', InputOption::VALUE_REQUIRED, 'Directory in which to download dependencies', __DIR__ . '/../../tmp');
     }
 
     /**
@@ -57,23 +57,22 @@ class DependencyResolverCommand extends Command
     {
         // Build root extension.
         $rootExtension = $this->extensionFactory->create(
-            $input->getArgument('package-remote-url'),
-            $input->getArgument('package-branch')
+            $input->getArgument('package-name'),
+            $input->getOption('package-branch')
         );
 
-        $extensionBranchMap = $this->getExtensionToBranchMap($input->getOption('dependencies-branch'));
+        $extensionBranchMap = $this->getExtensionToBranchMap($input->getOption('extensions-branch'));
 
         // Resolve all extensions.
         $extensionCollection = $this->dependencyResolver->resolve($rootExtension, $extensionBranchMap);
 
-        foreach($extensionCollection as $extension) {
+        foreach ($extensionCollection as $extension) {
             var_dump($extension->getExtensionName());
         }
-        exit;
 
         // Get composer IO Helper
         $consoleIo = new ConsoleIO($input, $output, $this->getHelperSet());
-        return $this->extensionInstaller->install($rootExtension, $extensionCollection, $input->getArgument('directory'), $consoleIo);
+        return $this->extensionInstaller->install($rootExtension, $extensionCollection, $input->getOption('directory'), $consoleIo);
     }
 
     private function getExtensionToBranchMap(array $extensionsBranches)
