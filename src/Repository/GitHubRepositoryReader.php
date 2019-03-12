@@ -56,8 +56,9 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
             $repository->addBranch($this->analyzeBranch($repository, $branchName));
         }
 
-        // Finally determines the extension name.
+        // Finally determines the extension name and composer name.
         $repository->setExtensionName($this->getExtensionName($repository, 'develop'));
+        $repository->setComposerName($this->getComposerName($repository, 'develop'));
 
         return $repository;
     }
@@ -238,6 +239,45 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
                         if ($extensionName !== '') {
                             return $extensionName;
                         }
+                    }
+                }
+            }
+        }
+
+        return '__NOT_FOUND__';
+    }
+
+
+    /**
+     * {@inheritdoc}
+     * Composer name can be located in composer.json['name'].
+     */
+    public function getComposerName(Repository $repository, string $branchName): ?string
+    {
+        // Tries to get extension name from given branch, then fallback to develop, master, or any other branch existing.
+        $branchNames = [$branchName];
+        if ($branchName !== 'develop') {
+            $branchNames[] = 'develop';
+        }
+        if ($branchName !== 'master') {
+            $branchNames[] = 'master';
+        }
+        foreach (array_keys($repository->getBranches()) as $existingBranchName) {
+            if (!in_array($existingBranchName, $branchNames)) {
+                $branchNames[] = $existingBranchName;
+            }
+        }
+
+        // Tries to find extension from composer.json for each branch, until we find.
+        foreach ($branchNames as $branchName) {
+            $branch = $repository->getBranch($branchName);
+
+            if ($branch !== null) {
+                $file = $branch->getFile(self::COMPOSER_FILENAME);
+                if ($file !== null) {
+                    $extensionName = $file->getComposerName();
+                    if ($extensionName !== '') {
+                        return $extensionName;
                     }
                 }
             }

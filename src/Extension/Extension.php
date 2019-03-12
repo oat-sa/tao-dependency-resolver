@@ -23,12 +23,14 @@ class Extension
      * Extension constructor.
      * @param string $extensionName
      * @param string $repositoryName
+     * @param string $composerName
      * @param string $branchName
      */
-    public function __construct(string $extensionName, string $repositoryName, string $branchName)
+    public function __construct(string $extensionName, string $repositoryName, string $composerName, string $branchName)
     {
         $this->extensionName = $extensionName;
         $this->repositoryName = $repositoryName;
+        $this->composerName = $composerName;
         $this->branchName = $branchName;
     }
 
@@ -54,16 +56,6 @@ class Extension
     public function getComposerName(): string
     {
         return $this->composerName;
-    }
-
-    /**
-     * @param string $composerName
-     * @return $this
-     */
-    public function setComposerName(string $composerName): self
-    {
-        $this->composerName = $composerName;
-        return $this;
     }
 
     /**

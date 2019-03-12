@@ -6,7 +6,10 @@ Resolves the requires tree from manifests.php in each extension needed.
 
 ## Installation
 
-composer install
+$ composer install
+
+php min version required: 7.1
+php extensions required: php7.1-xml, php7.1-mbstring
 
 ## Resolve dependencies
 

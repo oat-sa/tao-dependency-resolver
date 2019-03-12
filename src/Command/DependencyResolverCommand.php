@@ -43,7 +43,7 @@ class DependencyResolverCommand extends Command
             ->setName('dependencies:resolve')
             ->addArgument('package-name', InputArgument::REQUIRED, 'Name of the extension being tested.')
             ->addOption('package-branch', 'b', InputOption::VALUE_REQUIRED, 'Name of the branch being tested.', Extension::DEFAULT_BRANCH)
-            ->addOption('extensions-branch', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, Extension::DEFAULT_BRANCH)
+            ->addOption('extensions-branch', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Branch to load for each extension.')
             ->addOption('directory', 'd', InputOption::VALUE_REQUIRED, 'Directory in which to download dependencies', __DIR__ . '/../../tmp');
     }
 
@@ -66,8 +66,9 @@ class DependencyResolverCommand extends Command
         // Resolve all extensions.
         $extensionCollection = $this->dependencyResolver->resolve($rootExtension, $extensionBranchMap);
 
+        echo 'The following rxtensions will be installed:', "\n";
         foreach ($extensionCollection as $extension) {
-            var_dump($extension->getExtensionName());
+            echo '- ', $extension->getExtensionName(), "\n";
         }
 
         // Get composer IO Helper

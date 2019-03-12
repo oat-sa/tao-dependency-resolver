@@ -5,6 +5,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "irtTest",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -29,6 +30,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -43,6 +45,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-advkv-dynamodb",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -75,6 +78,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "generis",
+        "composerName": "oat-sa\/generis",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -125,6 +129,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "ekstera",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -150,6 +155,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "tao",
+        "composerName": "oat-sa\/tao-core",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -204,6 +210,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/generis-auth-keyvalue",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -236,6 +243,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoTestTaker",
+        "composerName": "oat-sa\/extension-tao-testtaker",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -290,6 +298,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "generisHard",
+        "composerName": "oat-sa\/extension-generis-hard",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -344,6 +353,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "kutimo",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -367,6 +377,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tao",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -464,6 +475,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "qtism\/qtism",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -496,6 +508,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/generis-auth-ldap",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -528,6 +541,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/oatbox-extension-installer",
         "onPackagist": true,
         "branches": {
             "master": {
@@ -549,6 +563,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -563,6 +578,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoResultServer",
+        "composerName": "oat-sa\/extension-tao-outcome",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -615,6 +631,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoGroups",
+        "composerName": "oat-sa\/extension-tao-group",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -673,6 +690,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoItems",
+        "composerName": "oat-sa\/extension-tao-item",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -729,6 +747,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoTests",
+        "composerName": "oat-sa\/extension-tao-test",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -787,6 +806,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoLti",
+        "composerName": "oat-sa\/extension-tao-lti",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -841,6 +861,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoDelivery",
+        "composerName": "oat-sa\/extension-tao-delivery",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -897,6 +918,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -911,6 +933,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -925,6 +948,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-tao-qti",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -961,6 +985,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoQtiItem",
+        "composerName": "oat-sa\/extension-tao-itemqti",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1019,6 +1044,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoQtiTest",
+        "composerName": "oat-sa\/extension-tao-testqti",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1083,6 +1109,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoSimpleDelivery",
+        "composerName": "oat-sa\/extension-tao-deliverysimple",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1139,6 +1166,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoDevTools",
+        "composerName": "oat-sa\/extension-tao-devtools",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1193,6 +1221,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoCe",
+        "composerName": "oat-sa\/extension-tao-community",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1271,6 +1300,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "funcAcl",
+        "composerName": "oat-sa\/extension-tao-funcacl",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1325,6 +1355,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoResults",
+        "composerName": "oat-sa\/extension-tao-outcomerdf",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1379,6 +1410,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoOpenWebItem",
+        "composerName": "oat-sa\/extension-tao-itemhtml",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1435,6 +1467,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "wfEngine",
+        "composerName": "oat-sa\/extension-tao-wfengine",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1487,6 +1520,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "wfAuthoring",
+        "composerName": "oat-sa\/extension-tao-wfauthoring",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1541,6 +1575,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoWfTest",
+        "composerName": "oat-sa\/extension-tao-testwf",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1595,6 +1630,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoAltResultStorage",
+        "composerName": "oat-sa\/extension-tao-outcomekeyvalue",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1647,6 +1683,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoCampaign",
+        "composerName": "oat-sa\/extension-tao-campaign",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1700,6 +1737,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "ontoBrowser",
+        "composerName": "oat-sa\/extension-tao-ontobrowser",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1754,6 +1792,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoLtiBasicOutcome",
+        "composerName": "oat-sa\/extension-tao-outcomelti",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1808,6 +1847,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "ltiDeliveryProvider",
+        "composerName": "oat-sa\/extension-tao-ltideliveryprovider",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1872,6 +1912,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "ltiTestConsumer",
+        "composerName": "oat-sa\/extension-tao-testlti",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1926,6 +1967,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoResultsUdp",
+        "composerName": "oat-sa\/extension-tao-outcomeudp",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -1978,6 +2020,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "filemanager",
+        "composerName": "oat-sa\/extension-tao-filemanager",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -2030,6 +2073,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoWfAdvTest",
+        "composerName": "oat-sa\/extension-tao-testwfauthoring",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -2084,6 +2128,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoUpdate",
+        "composerName": "oat-sa\/extension-tao-update",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -2144,6 +2189,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-tao-controllermap",
         "onPackagist": true,
         "branches": {
             "master": {
@@ -2167,6 +2213,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "qtiItemPci",
+        "composerName": "oat-sa\/extension-tao-itemqti-pci",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -2221,6 +2268,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tao-build",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -2253,6 +2301,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "ivaynberg\/select2",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -2274,6 +2323,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -2306,6 +2356,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoDacSimple",
+        "composerName": "oat-sa\/extension-tao-dac-simple",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -2362,6 +2413,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -2376,6 +2428,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/phing-task-tao",
         "onPackagist": true,
         "branches": {
             "master": {
@@ -2397,6 +2450,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -2411,6 +2465,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -2425,6 +2480,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoOutcomeRds",
+        "composerName": "oat-sa\/extension-tao-outcomerds",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -2479,6 +2535,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "clearfw\/clearfw",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -2511,6 +2568,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -2525,6 +2583,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "qtiItemPic",
+        "composerName": "oat-sa\/extension-tao-itemqti-pic",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -2579,6 +2638,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "parccStudentTools",
+        "composerName": "oat-sa\/extension-parcc-student-tools",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -2631,6 +2691,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tao",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -2741,6 +2802,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -2755,6 +2817,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": []
     },
@@ -2764,6 +2827,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoTalk",
+        "composerName": "oat\/taoTalk",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -2816,6 +2880,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoOutcomeUi",
+        "composerName": "oat-sa\/extension-tao-outcomeui",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -2876,6 +2941,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/jig",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -2908,6 +2974,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoParcc",
+        "composerName": "oat-sa\/extension-tao-parcc",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -2982,6 +3049,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "parccMetadata",
+        "composerName": "oat-sa\/extension-parcc-metadata",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -3038,6 +3106,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -3052,6 +3121,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -3070,6 +3140,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoMediaManager",
+        "composerName": "oat-sa\/extension-tao-mediamanager",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -3126,6 +3197,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoGmdb",
+        "composerName": "oat-sa\/extension-tao-gmdb",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -3178,6 +3250,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -3192,6 +3265,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-tao-solarium",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -3228,6 +3302,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -3246,6 +3321,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -3264,6 +3340,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "zendframework\/zendsearch",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -3285,6 +3362,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoBooklet",
+        "composerName": "oat-sa\/extension-tao-booklet",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -3343,6 +3421,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoTestLinear",
+        "composerName": "oat-sa\/extension-tao-testlinear",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -3397,6 +3476,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoDeliveryTemplate",
+        "composerName": "oat-sa\/extension-tao-deliverytemplate",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -3451,6 +3531,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoRevision",
+        "composerName": "oat-sa\/extension-tao-revision",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -3511,6 +3592,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/deploy-test-package",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -3632,6 +3714,7 @@
         "private": false,
         "defaultBranch": "develop",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -3650,6 +3733,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -3664,6 +3748,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoWorkspace",
+        "composerName": "oat-sa\/extension-tao-workspace",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -3720,6 +3805,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -3738,6 +3824,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoCssDevKit",
+        "composerName": "oat-sa\/extension-tao-cssdevkit",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -3796,6 +3883,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoClientDiagnostic",
+        "composerName": "oat-sa\/extension-tao-clientdiag",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -3850,6 +3938,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -3864,6 +3953,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoQtiPrint",
+        "composerName": "oat-sa\/extension-tao-qtiprint",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -3920,6 +4010,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoThemingPlatform",
+        "composerName": "oat-sa\/extension-tao-theming-platform",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -3974,6 +4065,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoDataUri",
+        "composerName": "oat-sa\/extension-tao-datauri",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -4022,6 +4114,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -4036,6 +4129,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "pciSamples",
+        "composerName": "oat-sa\/extension-pcisample",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -4090,6 +4184,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoCat",
+        "composerName": "oat-sa\/extension-tao-randomcat",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -4121,6 +4216,7 @@
         "private": true,
         "defaultBranch": "develop",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "zendframework\/skeleton-application",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -4142,6 +4238,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoDeliverySchedule",
+        "composerName": "oat-sa\/extension-tao-delivery-schedule",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -4196,6 +4293,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "development": {
@@ -4214,6 +4312,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -4228,6 +4327,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoExtraPic",
+        "composerName": "oat-sa\/extension-tao-extrapic",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -4280,6 +4380,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -4294,6 +4395,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoAct",
+        "composerName": "oat-sa\/extension-tao-act",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -4400,6 +4502,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-tao-zendsearch",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -4436,6 +4539,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoBackOffice",
+        "composerName": "oat-sa\/extension-tao-backoffice",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -4490,6 +4594,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoProctoring",
+        "composerName": "oat-sa\/extension-tao-proctoring",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -4556,6 +4661,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -4570,6 +4676,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoTestCenter",
+        "composerName": "oat-sa\/extension-tao-testcenter",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -4632,6 +4739,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -4650,6 +4758,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoFrontOffice",
+        "composerName": "oat-sa\/extension-tao-frontoffice",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -4686,6 +4795,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -4718,6 +4828,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -4732,6 +4843,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoMp",
+        "composerName": "oat-sa\/extension-tao-mp",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -4804,6 +4916,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tao",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -4912,6 +5025,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -4926,6 +5040,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -4944,6 +5059,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tao",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -5003,6 +5119,7 @@
         "private": true,
         "defaultBranch": "develop",
         "extensionName": "unisa",
+        "composerName": "oat-sa\/extension-tao-unisa",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -5036,6 +5153,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-advkv-couchbase",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -5068,6 +5186,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "xmlEdit",
+        "composerName": "oat-sa\/extension-tao-xmledit",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -5120,6 +5239,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-tao-dtms",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -5152,6 +5272,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-oatbox-taskqueue",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -5184,6 +5305,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoMpArt",
+        "composerName": "oat-sa\/extension-tao-mpart",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -5248,6 +5370,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/test-package-deployer",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -5273,6 +5396,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -5287,6 +5411,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoDeliveryRdf",
+        "composerName": "oat-sa\/extension-tao-delivery-rdf",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -5351,6 +5476,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -5365,6 +5491,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoDepp",
+        "composerName": "oat-sa\/extension-tao-depp",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -5429,6 +5556,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/deploy-test-package",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -5487,6 +5615,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tao",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -5539,6 +5668,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoInvalsi",
+        "composerName": "oat-sa\/extension-tao-invalsi",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -5621,6 +5751,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-generis-smooth",
         "onPackagist": true,
         "branches": {
             "master": {
@@ -5642,6 +5773,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoMonitoring",
+        "composerName": "oat-sa\/extension-tao-monitoring",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -5704,6 +5836,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-beeme",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -5736,6 +5869,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "xmlEditRp",
+        "composerName": "oat-sa\/extension-tao-xmledit-responseprocessing",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -5790,6 +5924,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "xmlEditQtiDebugger",
+        "composerName": "oat-sa\/extension-tao-xmledit-qtidebugger",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -5844,6 +5979,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "itemqtiCreator",
+        "composerName": "oat-sa\/extension-itemqti-creator",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -5898,6 +6034,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/extension-builder",
         "onPackagist": true,
         "branches": {
             "master": {
@@ -5919,6 +6056,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "unisaTheme",
+        "composerName": "oat-sa\/extension-tao-unisa-theme",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -5972,6 +6110,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -5986,6 +6125,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -6000,6 +6140,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoEventLog",
+        "composerName": "oat-sa\/extension-tao-eventlog",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -6068,6 +6209,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoPublishing",
+        "composerName": "oat-sa\/extension-tao-publishing",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -6122,6 +6264,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoClientRestrict",
+        "composerName": "oat-sa\/extension-tao-client-restrict",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -6180,6 +6323,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-generis-aws",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -6212,6 +6356,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-flysystem-filecache",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -6244,6 +6389,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoTestRunnerPlugins",
+        "composerName": "oat-sa\/extension-tao-test-runner-plugins",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -6304,6 +6450,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoRestApiDocs",
+        "composerName": "oat-sa\/extension-tao-restapi-docs",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -6356,6 +6503,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoActAuthoring",
+        "composerName": "oat-sa\/extension-tao-act-authoring",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -6387,6 +6535,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-generis-search",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -6419,6 +6568,7 @@
         "private": true,
         "defaultBranch": "develop",
         "extensionName": "taoPfs",
+        "composerName": "oat-sa\/extension-tao-pfs",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -6479,6 +6629,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoMpArtData",
+        "composerName": "oat-sa\/extension-tao-mpart-data",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -6531,6 +6682,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoMpArtDataTest",
+        "composerName": "oat-sa\/extension-tao-mpart-datatest",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -6585,6 +6737,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoSaml",
+        "composerName": "oat-sa\/extension-tao-saml",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -6639,6 +6792,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoNccer",
+        "composerName": "oat-sa\/extension-tao-nccer",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -6709,6 +6863,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -6723,6 +6878,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoNccerDelivery",
+        "composerName": "oat-sa\/extension-tao-nccer-delivery",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -6807,6 +6963,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-tao-qti-result-reporting",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -6839,6 +6996,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoRestAPI",
+        "composerName": "oat-sa\/extension-tao-restful",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -6874,6 +7032,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoItemRestApi",
+        "composerName": "oat-sa\/extension-tao-item-restapi",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -6911,6 +7070,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoQtiItemRestApi",
+        "composerName": "oat-sa\/extension-tao-qtiitem-restapi",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -6969,6 +7129,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoNccerAuthoring",
+        "composerName": "oat-sa\/extension-tao-nccer-authoring",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -7051,6 +7212,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -7069,6 +7231,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/deploy-test-package",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -7163,6 +7326,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoMarking",
+        "composerName": "oat-sa\/extension-tao-marking",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -7198,6 +7362,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoLom",
+        "composerName": "oat-sa\/extension-tao-lom",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -7252,6 +7417,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -7266,6 +7432,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoBlueprints",
+        "composerName": "oat-sa\/extension-tao-blueprints",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -7318,6 +7485,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tao",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -7417,6 +7585,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoNbce",
+        "composerName": "oat-sa\/extension-tao-nbce",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -7483,6 +7652,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -7501,6 +7671,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoOpenId",
+        "composerName": "oat-sa\/extension-tao-openid",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -7555,6 +7726,7 @@
         "private": true,
         "defaultBranch": "jpinf01dep",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": []
     },
@@ -7564,6 +7736,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoMext",
+        "composerName": "oat-sa\/extension-tao-mext",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -7620,6 +7793,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/cluster-aggregate",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -7652,6 +7826,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/deploy-test-package",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -7757,6 +7932,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "ltiProctoring",
+        "composerName": "oat-sa\/extension-lti-proctoring",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -7817,6 +7993,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoLati",
+        "composerName": "oat-sa\/extension-tao-lati",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -7869,6 +8046,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoNfer",
+        "composerName": "oat-sa\/extension-tao-nfer",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -7931,6 +8109,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -7945,6 +8124,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoResourceWorkflow",
+        "composerName": "oat-sa\/extension-tao-resource-workflow",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -7999,6 +8179,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoOperations",
+        "composerName": "oat-sa\/extension-tao-operations",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -8061,6 +8242,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/deploy-test-package",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -8089,6 +8271,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "ltiClientdiag",
+        "composerName": "oat-sa\/extension-lti-clientdiag",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -8143,6 +8326,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -8157,6 +8341,7 @@
         "private": true,
         "defaultBranch": "uscer01dee",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": []
     },
@@ -8166,6 +8351,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoInvalsiScq",
+        "composerName": "oat-sa\/extension-tao-invalsi-scq",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -8220,6 +8406,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/swagger-json-collector",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -8252,6 +8439,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoTestRunnerTools",
+        "composerName": "oat-sa\/extension-tao-test-runner-tools",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -8306,6 +8494,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tao-multitenancy",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -8438,6 +8627,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-oatbox-multitenancy",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -8474,6 +8664,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "parccTei",
+        "composerName": "oat-sa\/extension-parcc-tei",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -8530,6 +8721,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoItemPrint",
+        "composerName": "oat-sa\/extension-tao-itemprint",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -8582,6 +8774,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-test-cat",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -8614,6 +8807,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -8632,6 +8826,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/depp-principals-portal",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -8668,6 +8863,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -8700,6 +8896,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tenant-registry-client",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -8732,6 +8929,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoOauth",
+        "composerName": "oat-sa\/extension-tao-oauth",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -8788,6 +8986,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/pre-psr-httpmiddlewares",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -8820,6 +9019,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -8838,6 +9038,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "trainingBranding",
+        "composerName": "oat-sa\/training-branding",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -8890,6 +9091,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "trainingPci",
+        "composerName": "oat-sa\/training-pci",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -8926,6 +9128,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -8944,6 +9147,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoPremium",
+        "composerName": "oat-sa\/extension-tao-premium",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -9040,6 +9244,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -9058,6 +9263,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoFooBar",
+        "composerName": "oat-sa\/extension-tao-foobar",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -9110,6 +9316,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoDeliveryKv",
+        "composerName": "oat-sa\/extension-tao-delivery-keyvalue",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -9166,6 +9373,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoTaskQueue",
+        "composerName": "oat-sa\/extension-tao-task-queue",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -9220,6 +9428,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoBattery",
+        "composerName": "oat-sa\/extension-tao-battery",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -9274,6 +9483,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -9292,6 +9502,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoStyles",
+        "composerName": "oat-sa\/extension-tao-styles",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -9346,6 +9557,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/qa-autotests",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -9378,6 +9590,7 @@
         "private": true,
         "defaultBranch": "develop",
         "extensionName": "taoIave",
+        "composerName": "oat-sa\/extension-tao-iave",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -9440,6 +9653,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lib-tao-elasticsearch",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -9476,6 +9690,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/depp-teacher-portal",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -9512,6 +9727,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoSync",
+        "composerName": "oat-sa\/extension-tao-sync",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -9582,6 +9798,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoScheduler",
+        "composerName": "oat-sa\/extension-tao-scheduler",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -9638,6 +9855,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -9656,6 +9874,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoEncryption",
+        "composerName": "oat-sa\/extension-tao-encryption",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -9714,6 +9933,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoTextHelp",
+        "composerName": "oat-sa\/extension-tao-texthelp",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -9766,6 +9986,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tao-community",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -9863,6 +10084,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tao-enterprise",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -9892,6 +10114,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tao-enterprise-act",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -9945,6 +10168,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoNcsbn",
+        "composerName": "oat-sa\/extension-tao-ncsbn",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -10011,6 +10235,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "btDelivery",
+        "composerName": "oat-sa\/extension-tao-ncsbn-delivery",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -10079,6 +10304,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "btRelease",
+        "composerName": "oat-sa\/extension-tao-ncsbn-release",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -10135,6 +10361,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "btRest",
+        "composerName": "oat-sa\/extension-tao-ncsbn-rest",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -10191,6 +10418,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -10205,6 +10433,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -10223,6 +10452,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoColorContrast",
+        "composerName": "oat-sa\/extension-tao-colorcontrast",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -10275,6 +10505,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/test-package-deployer",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -10307,6 +10538,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "test\/csvtoexcel",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -10343,6 +10575,7 @@
         "private": true,
         "defaultBranch": "ussbn01dee",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": []
     },
@@ -10352,6 +10585,7 @@
         "private": true,
         "defaultBranch": "develop",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -10386,6 +10620,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -10400,6 +10635,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoOffline",
+        "composerName": "oat-sa\/extension-tao-offline",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -10454,6 +10690,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoMobileApp",
+        "composerName": "oat-sa\/extension-tao-mobile-app",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -10520,6 +10757,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoCaed",
+        "composerName": "oat-sa\/extension-tao-caed",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -10574,6 +10812,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoQtiTestPreviewer",
+        "composerName": "oat-sa\/extension-tao-testqti-previewer",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -10634,6 +10873,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -10648,6 +10888,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -10662,6 +10903,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/oneroster-import",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -10694,6 +10936,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -10708,6 +10951,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tao-enterprise-caed",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -10734,6 +10978,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -10752,6 +10997,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoNbcot",
+        "composerName": "oat-sa\/extension-tao-nbcot",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -10808,6 +11054,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -10822,6 +11069,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tao-enterprise-depp",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -10849,6 +11097,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tao-enterprise-nbcot",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -10878,6 +11127,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "ltiOutcomeUi",
+        "composerName": "oat-sa\/extension-lti-outcomeui",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -10924,6 +11174,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoActOffline",
+        "composerName": "oat-sa\/extension-tao-act-offline",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -10984,6 +11235,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoResultExports",
+        "composerName": "oat-sa\/extension-tao-result-export",
         "onPackagist": true,
         "branches": {
             "develop": {
@@ -11044,6 +11296,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoStaticDeliveries",
+        "composerName": "oat-sa\/extension-tao-static-deliveries",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11102,6 +11355,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tao-enterprise-nccer",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11162,6 +11416,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/tao-enterprise-invalsi",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11215,6 +11470,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/pdf-generator",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11251,6 +11507,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11269,6 +11526,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11287,6 +11545,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "eloquent\/composer-npm-bridge",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -11308,6 +11567,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "taoLtiConsumer",
+        "composerName": "oat-sa\/extension-tao-lti-consumer",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11343,6 +11603,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -11357,6 +11618,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -11371,6 +11633,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "ltiAdvantage",
+        "composerName": "oat-sa\/extension-lti-advantage",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11423,6 +11686,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/simple-roster",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11459,6 +11723,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -11473,6 +11738,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11491,6 +11757,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "taoInfosign",
+        "composerName": "oat-sa\/extension-tao-infosign",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11547,6 +11814,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11565,6 +11833,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11583,6 +11852,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11615,6 +11885,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/lambda-assignment-manager",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11647,6 +11918,7 @@
         "private": false,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {
@@ -11668,6 +11940,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "oat-sa\/oat-intranet-api",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11700,6 +11973,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -11718,6 +11992,7 @@
         "private": true,
         "defaultBranch": "master",
         "extensionName": "__NOT_FOUND__",
+        "composerName": "__NOT_FOUND__",
         "onPackagist": false,
         "branches": {
             "master": {

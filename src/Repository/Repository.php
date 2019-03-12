@@ -4,7 +4,7 @@ namespace OAT\DependencyResolver\Repository;
 
 class Repository implements \JsonSerializable
 {
-    const CSV_TITLES = ['repositoryName', 'extensionName', 'privacy', 'packagist', 'defaultBranch'];
+    const CSV_TITLES = ['repositoryName', 'extensionName', 'composerName', 'privacy', 'packagist', 'defaultBranch'];
 
     /** @var string */
     private $owner = '';
@@ -20,6 +20,9 @@ class Repository implements \JsonSerializable
 
     /** @var string */
     private $extensionName = '';
+
+    /** @var string */
+    private $composerName = '';
 
     /** @var bool */
     private $onPackagist = false;
@@ -38,10 +41,20 @@ class Repository implements \JsonSerializable
      * @param bool $private
      * @param string $defaultBranch
      * @param string $extensionName
+     * @param string $composerName
      * @param bool $onPackagist
      * @param array $branches
      */
-    public function __construct(string $owner = '', string $name = '', bool $private = false, string $defaultBranch = '', string $extensionName = '', bool $onPackagist = false, array $branches = [])
+    public function __construct(
+        string $owner = '',
+        string $name = '',
+        bool $private = false,
+        string $defaultBranch = '',
+        string $extensionName = '',
+        string $composerName = '',
+        bool $onPackagist = false,
+        array $branches = []
+    )
     {
         $this
             ->setOwner($owner)
@@ -49,6 +62,7 @@ class Repository implements \JsonSerializable
             ->setPrivate($private)
             ->setDefaultBranch($defaultBranch)
             ->setExtensionName($extensionName)
+            ->setComposerName($composerName)
             ->setOnPackagist($onPackagist)
             ->setBranches($branches);
     }
@@ -71,6 +85,7 @@ class Repository implements \JsonSerializable
             ->setPrivate($properties['private'])
             ->setDefaultBranch($properties['defaultBranch'])
             ->setExtensionName($properties['extensionName'])
+            ->setComposerName($properties['composerName'])
             ->setOnPackagist($properties['onPackagist'])
             ->setBranches($branches);
 
@@ -169,6 +184,24 @@ class Repository implements \JsonSerializable
     }
 
     /**
+     * @return string
+     */
+    public function getComposerName(): string
+    {
+        return $this->composerName;
+    }
+
+    /**
+     * @param string $composerName
+     * @return $this
+     */
+    public function setComposerName(string $composerName): self
+    {
+        $this->composerName = $composerName;
+        return $this;
+    }
+
+    /**
      * @return bool
      */
     public function isOnPackagist(): bool
@@ -234,6 +267,7 @@ class Repository implements \JsonSerializable
             'private' => $this->isPrivate(),
             'defaultBranch' => $this->getDefaultBranch(),
             'extensionName' => $this->getExtensionName(),
+            'composerName' => $this->getComposerName(),
             'onPackagist' => $this->isOnPackagist(),
             'branches' => $this->getBranches(),
         ];
@@ -249,6 +283,7 @@ class Repository implements \JsonSerializable
         $line = [
             $this->getName(),
             $this->getExtensionName(),
+            $this->getComposerName(),
             $this->isPrivate() ? 'private' : 'public',
             $this->isOnPackagist() ? 'yes' : 'no',
             $this->getDefaultBranch(),

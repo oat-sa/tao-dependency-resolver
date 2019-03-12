@@ -36,13 +36,17 @@ class ConnectedGithubClient extends Client
 
     /**
      * Always make authenticated requests to avoid limitations.
+     * Returns organisation's number of private and public repositories.
+     *
      * @todo: add some cache
      * @see https://github.com/KnpLabs/php-github-api#cache-usage
+     *
+     * @return array
      */
-    public function authenticateAndCheck()
+    public function authenticateAndCheck(): array
     {
         if ($this->connected) {
-            return;
+            return [];
         }
 
         $this->authenticate($this->token, null, self::AUTH_HTTP_TOKEN);
@@ -56,12 +60,7 @@ class ConnectedGithubClient extends Client
 
         $this->connected = true;
 
-        $message = 'Connected to GitHub with http token.' . "\n"
-            . 'Organisation "' . $this->organization . '" has:' . "\n"
-            . '- ' . $organisationProps['public_repos'] . ' public repositories' . "\n"
-            . '- ' . $organisationProps['total_private_repos'] . ' private repositories' . "\n";
-
-        echo $message;
+        return $organisationProps;
     }
 
     /**
@@ -69,7 +68,13 @@ class ConnectedGithubClient extends Client
      */
     public function getRepositoryList(string $owner): array
     {
-        $this->authenticateAndCheck();
+        $organisationProps = $this->authenticateAndCheck();
+
+        $message = 'Connected to GitHub with http token.' . "\n"
+            . 'Organisation "' . $this->organization . '" has:' . "\n"
+            . '- ' . $organisationProps['public_repos'] . ' public repositories' . "\n"
+            . '- ' . $organisationProps['total_private_repos'] . ' private repositories' . "\n";
+        echo $message;
 
         $organisationApi = $this->getOrganizationApi();
         $organisationApi->setPerPage(self::REPOSITORIES_PER_PAGE);

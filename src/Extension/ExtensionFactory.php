@@ -28,6 +28,9 @@ class ExtensionFactory
             throw new NotMappedException(sprintf('Extension "%s" not found in map.', $extensionName));
         }
 
-        return new Extension($extensionName, $this->extensionMap[$extensionName], $branch);
+        $extensionMapItem = $this->extensionMap[$extensionName];
+        $extension = new Extension($extensionName, $extensionMapItem['repository_name'], $extensionMapItem['composer_name'], $branch);
+
+        return $extension;
     }
 }

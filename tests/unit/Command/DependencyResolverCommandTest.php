@@ -52,13 +52,13 @@ class DependencyResolverCommandTest extends TestCase
         $this->assertEquals('dependencies:resolve', $this->subject->getName());
 
         $arguments = [
-            'package-remote-url' => new InputArgument('package-remote-url', InputArgument::REQUIRED, 'Name of the extension being tested.'),
-            'package-branch' => new InputArgument('package-branch', InputArgument::OPTIONAL, 'Name of the branch being tested.', Extension::DEFAULT_BRANCH),
-            'directory' => new InputArgument('directory', InputArgument::OPTIONAL, 'Directory in which to download dependencies', realpath(__DIR__ . '/../../../src/Command') . '/../../tmp'),
+            'package-name' => new InputArgument('package-name', InputArgument::REQUIRED, 'Name of the extension being tested.'),
         ];
         $this->assertEquals($arguments, $this->subject->getDefinition()->getArguments());
         $options = [
-            'dependencies-branch' => new InputOption('dependencies-branch', 'ext', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY),
+            'package-branch' => new InputOption('package-branch', 'b', InputOption::VALUE_REQUIRED, 'Name of the branch being tested.', Extension::DEFAULT_BRANCH),
+            'extensions-branch' => new InputOption('extensions-branch', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Branch to load for each extension.'),
+            'directory' => new InputOption('directory', 'd', InputOption::VALUE_REQUIRED, 'Directory in which to download dependencies', realpath(__DIR__ . '/../../../src/Command') . '/../../tmp'),
         ];
         $this->assertEquals($options, $this->subject->getDefinition()->getOptions());
     }
