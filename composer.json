@@ -8,8 +8,11 @@
         "ext-iconv": "*",
         "ext-json": "*",
         "composer/composer": "^1.8",
+        "knplabs/github-api": "^2.11",
+        "knplabs/packagist-api": "^1.5",
         "nikic/php-parser": "^4.2",
         "oat-sa/oatbox-extension-installer": "~1.1||dev-master",
+        "php-http/guzzle6-adapter": "^1.1",
         "symfony/console": "4.2.*",
         "symfony/dotenv": "4.2.*",
         "symfony/expression-language": "4.2.*",
@@ -33,7 +36,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "OAT\\DependencyResolver\\Test\\": "tests/"
+            "OAT\\DependencyResolver\\": "tests/"
         }
     },
     "replace": {

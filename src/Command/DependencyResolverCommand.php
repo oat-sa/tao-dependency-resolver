@@ -2,126 +2,78 @@
 
 namespace OAT\DependencyResolver\Command;
 
-use Composer\Composer;
-use Composer\DependencyResolver\Operation\InstallOperation;
-use Composer\EventDispatcher\Event;
-use Composer\Factory;
-use Composer\Installer;
-use Composer\Installer\InstallerEvent;
-use Composer\Installer\InstallerEvents;
-use Composer\Installer\PackageEvent;
-use Composer\Installer\PackageEvents;
 use Composer\IO\ConsoleIO;
-use Composer\IO\IOInterface;
-use Composer\Semver\Constraint\Constraint;
-use OAT\DependencyResolver\Downloader\RootPackageDownloader;
-use OAT\DependencyResolver\Extension\ExtensionCollection;
-use OAT\DependencyResolver\Extractor\RemoteExtensionComposerNameExtractor;
-use OAT\DependencyResolver\Extractor\RemoteManifestExtensionsExtractor;
-use OAT\DependencyResolver\Factory\ExtensionFactory;
-use OAT\DependencyResolver\Resolver\DependencyResolverInterface;
+use OAT\DependencyResolver\Installer\ExtensionInstaller;
+use OAT\DependencyResolver\Extension\Extension;
+use OAT\DependencyResolver\Extension\ExtensionFactory;
+use OAT\DependencyResolver\Manifest\DependencyResolver;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DependencyResolverCommand extends Command
 {
-    /** @var RootPackageDownloader */
-    private $rootPackageDownloader;
-
-    /** @var DependencyResolverInterface */
-    private $dependencyResolver;
-
-    /** @var Factory */
-    private $factory;
-
-    /** @var RemoteManifestExtensionsExtractor */
-    private $remoteManifestDependenciesExtractor;
-
-    /** @var RemoteExtensionComposerNameExtractor */
-    private $remoteExtensionComposerNameExtractor;
-
     /** @var ExtensionFactory */
     private $extensionFactory;
 
+    /** @var ExtensionInstaller */
+    private $extensionInstaller;
+
+    /** @var DependencyResolver */
+    private $dependencyResolver;
+
     public function __construct(
-        Factory $factory,
-        RootPackageDownloader $rootPackageDownloader,
-        DependencyResolverInterface $dependencyResolver,
-        RemoteManifestExtensionsExtractor $remoteManifestDependenciesExtractor,
-        RemoteExtensionComposerNameExtractor $remoteExtensionComposerNameExtractor,
-        ExtensionFactory $extensionFactory
+        ExtensionFactory $extensionFactory,
+        ExtensionInstaller $extensionInstaller,
+        DependencyResolver $dependencyResolver
     )
     {
-        parent::__construct('dependency:resolve');
+        parent::__construct();
 
-        $this->rootPackageDownloader = $rootPackageDownloader;
-        $this->dependencyResolver = $dependencyResolver;
-        $this->factory = $factory;
-        $this->remoteManifestDependenciesExtractor = $remoteManifestDependenciesExtractor;
-        $this->remoteExtensionComposerNameExtractor = $remoteExtensionComposerNameExtractor;
         $this->extensionFactory = $extensionFactory;
+        $this->extensionInstaller = $extensionInstaller;
+        $this->dependencyResolver = $dependencyResolver;
     }
 
     protected function configure()
     {
-        parent::configure();
-
         $this
-            ->addArgument('rootExtensionName', InputArgument::REQUIRED)
-            ->addArgument('rootExtensionBranch', InputArgument::REQUIRED)
-            ->addArgument('directoryName', InputArgument::REQUIRED)
-            ->addOption('extensionBranch', 'ext', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY);
+            ->setName('dependencies:resolve')
+            ->addArgument('package-remote-url', InputArgument::REQUIRED, 'Name of the extension being tested.')
+            ->addArgument('package-branch', InputArgument::OPTIONAL, 'Name of the branch being tested.', Extension::DEFAULT_BRANCH)
+            ->addArgument('directory', InputArgument::OPTIONAL, 'Directory in which to download dependencies', __DIR__ . '/../../tmp')
+            ->addOption('dependencies-branch', 'ext', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY);
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int status code
+     * @throws \Exception
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new ConsoleIO($input, $output, $this->getHelperSet());
-        $directory = $input->getArgument('directoryName');
-        $rootExtensionName = $input->getArgument('rootExtensionName');
-        $rootExtensionBranch = $input->getArgument('rootExtensionBranch');
-        $extensionToBranchMap = $this->getExtensionToBranchMap($input->getOption('extensionBranch'));
-
-        $rootExtension = $this->extensionFactory->create($rootExtensionName, $rootExtensionBranch);
-
-        $extensionCollection = $this->remoteManifestDependenciesExtractor->extractExtensionsRecursively(
-            new ExtensionCollection(),
-            $rootExtension,
-            $extensionToBranchMap
+        // Build root extension.
+        $rootExtension = $this->extensionFactory->create(
+            $input->getArgument('package-remote-url'),
+            $input->getArgument('package-branch')
         );
 
-        $config = Factory::createConfig($io);
+        $extensionBranchMap = $this->getExtensionToBranchMap($input->getOption('dependencies-branch'));
 
-        $this->rootPackageDownloader->download(
-            $config,
-            $this->remoteExtensionComposerNameExtractor->extractComposerName($rootExtension) . ':' . $rootExtension->getPrefixedBranchName(),
-            $directory
-        );
+        // Resolve all extensions.
+        $extensionCollection = $this->dependencyResolver->resolve($rootExtension, $extensionBranchMap);
 
-        $composer = $this->factory->createComposer($io, $directory . DIRECTORY_SEPARATOR . 'composer.json', false, $directory);
+        foreach($extensionCollection as $extension) {
+            var_dump($extension->getExtensionName());
+        }
+        exit;
 
-        $this->install($composer, $extensionCollection, $io);
-
-        return 1;
-    }
-
-    private function install(Composer $composer, ExtensionCollection $extensionCollection, IOInterface $io)
-    {
-        $composer->getEventDispatcher()->addListener(InstallerEvents::PRE_DEPENDENCIES_SOLVING, function (InstallerEvent $event) use ($extensionCollection) {
-            foreach ($extensionCollection->all() as $extension) {
-                $event->getRequest()->install(
-                    $this->remoteExtensionComposerNameExtractor->extractComposerName($extension),
-                    new Constraint('==', $extension->getPrefixedBranchName())
-                );
-            }
-        });
-
-        $install = Installer::create($io, $composer);
-
-        $install->run();
+        // Get composer IO Helper
+        $consoleIo = new ConsoleIO($input, $output, $this->getHelperSet());
+        return $this->extensionInstaller->install($rootExtension, $extensionCollection, $input->getArgument('directory'), $consoleIo);
     }
 
     private function getExtensionToBranchMap(array $extensionsBranches)

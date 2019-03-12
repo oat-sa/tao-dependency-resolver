@@ -2,40 +2,62 @@
 
 namespace OAT\DependencyResolver\Extension;
 
-class ExtensionCollection
+class ExtensionCollection extends \ArrayObject
 {
     /** @var Extension[] */
     private $extensions = [];
 
-    public function __construct(array $extensions = [])
+    /**
+     * @param Extension $extension
+     * @return $this
+     */
+    public function add(Extension $extension)
     {
-        foreach ($extensions as $extension) {
-            $this->add($extension);
-        }
-    }
-
-    public function add(Extension $extension): self
-    {
-        $this->extensions[$extension->getExtensionName()] = $extension;
+        $this->offsetSet($extension->getExtensionName(), $extension);
 
         return $this;
     }
 
     /**
-     * @return Extension[]
+     * @param mixed $index
+     * @param mixed $newval
      */
-    public function all(): array
+    public function offsetSet($index, $newval)
     {
-        return array_values($this->extensions);
+        if (!$newval instanceof Extension) {
+            throw new \TypeError('Extension provided is not an instance of ' . Extension::class . '.');
+        }
+
+        $this->extensions[$index] = $newval;
     }
 
-    public function get(string $extensionName): ?Extension
+    /**
+     * @param string $index
+     * @return Extension|null
+     */
+    public function offsetGet($index): ?Extension
     {
-        return $this->extensions[$extensionName] ?? null;
+        if (!$this->offsetExists($index)) {
+            return null;
+        }
+
+        return $this->extensions[$index];
     }
 
-    public function has(string $extensionName): bool
+    /**
+     * @param mixed $index
+     * @return bool
+     */
+    public function offsetExists($index): bool
     {
-        return array_key_exists($extensionName, $this->extensions);
+        return array_key_exists($index, $this->extensions);
+    }
+
+    /**
+     * @return \ArrayIterator
+     */
+    public function getIterator(): \ArrayIterator
+    {
+        return new \ArrayIterator($this->extensions);
     }
 }

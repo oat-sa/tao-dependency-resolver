@@ -6,7 +6,6 @@ class Extension
 {
     const DEFAULT_BRANCH = 'develop';
     const BRANCH_PREFIX = 'dev';
-    const GITHUB_RAW_BASE_URL = 'https://raw.githubusercontent.com';
 
     /** @var string */
     private $extensionName;
@@ -15,8 +14,17 @@ class Extension
     private $repositoryName;
 
     /** @var string */
+    private $composerName = '';
+
+    /** @var string */
     private $branchName = self::DEFAULT_BRANCH;
 
+    /**
+     * Extension constructor.
+     * @param string $extensionName
+     * @param string $repositoryName
+     * @param string $branchName
+     */
     public function __construct(string $extensionName, string $repositoryName, string $branchName)
     {
         $this->extensionName = $extensionName;
@@ -24,34 +32,54 @@ class Extension
         $this->branchName = $branchName;
     }
 
+    /**
+     * @return string
+     */
     public function getExtensionName(): string
     {
         return $this->extensionName;
     }
 
+    /**
+     * @return string
+     */
     public function getRepositoryName(): string
     {
         return $this->repositoryName;
     }
 
+    /**
+     * @return string
+     */
+    public function getComposerName(): string
+    {
+        return $this->composerName;
+    }
+
+    /**
+     * @param string $composerName
+     * @return $this
+     */
+    public function setComposerName(string $composerName): self
+    {
+        $this->composerName = $composerName;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function getBranchName(): string
     {
         return $this->branchName;
     }
 
+    /**
+     * @return string
+     */
     public function getPrefixedBranchName(): string
     {
         return sprintf('%s-%s', static::BRANCH_PREFIX, $this->branchName);
-    }
-
-    public function getRemoteComposerUrl(): string
-    {
-        return sprintf('%s/%s/%s/composer.json', static::GITHUB_RAW_BASE_URL, $this->repositoryName, $this->branchName);
-    }
-
-    public function getRemoteManifestUrl(): string
-    {
-        return sprintf('%s/%s/%s/manifest.php', static::GITHUB_RAW_BASE_URL, $this->repositoryName, $this->branchName);
     }
 }
 
