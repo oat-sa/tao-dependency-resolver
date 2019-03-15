@@ -9,7 +9,12 @@ Resolves the requires tree from manifests.php in each extension needed.
 $ composer install
 
 php min version required: 7.1
+
 php extensions required: php7.1-xml, php7.1-mbstring
+
+## Authentification
+
+You need to provide a valid GitHub token with "repo" autorizations into <project dir>/config/services.yaml, in the key parameters > github.token.
 
 ## Resolve dependencies
 
@@ -24,7 +29,7 @@ $ php bin/console dependencies:resolve <root extension name> [-b root extension 
 
 Reads all oat-sa repositories on github to populate a map (currently in <project config dir>/repositoryMap.json).
 
-/!\ Not needed at the time, it's up to date now and quite time consuming...
+*/!\ Not needed at the time, it's up to date now and quite time consuming...*
 
 $ php bin/console repositories:update [-b branch name] [-r] [-l limit]
 

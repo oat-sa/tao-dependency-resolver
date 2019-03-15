@@ -6,7 +6,7 @@
 parameters:
     repository.map.path: '%kernel.project_dir%/config/repositoryMap.json'
     github.organization: oat-sa
-    github.token: 43adab9f244fb75a3c06b96b773b506005221c47
+    github.token: <your token here>
 
 services:
     # default configuration for services in *this* file
