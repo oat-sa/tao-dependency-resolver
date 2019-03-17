@@ -1,13 +1,22 @@
 # Repository lister and updater
 
 To help maintaining the mapping of **extension name** to **repository name**, a tool has been developed in the same repository.
+It will read the list of all oat-sa repositories on Github and for each repository, will inspect the following facts:
+
+- privacy
+- presence on packagist.org when the repository is public
+- `develop` and `master` branch presence
+- default branch
+- on `develop` and `master` branch:
+    - presence of `manifest.php` and `composer.json`
+    - name of the repository in `composer.json`
+    - name of the extension in `manifest.php` (key `name`) and `composer.json` (key `extra.tao-extension-name`)
+- finally determine the **extension name** used by the [dependency resolver tool](dependency-resolver.md).
 
 
 ## Update repositories
 
 Reads all oat-sa repositories on Github to populate a map (currently in `<project config dir>/repositoryMap.json`).
-
-*/!\ Not needed at the time, it's up to date now and quite time consuming...*
 
 ```
 $ php bin/console repositories:update [-b branch name] [-r] [-l limit]
