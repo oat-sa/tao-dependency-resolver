@@ -53,6 +53,7 @@ This tool reads every oat-sa repositories in Github and maintains the map of **e
 
 **/!\ This is not needed each time, there is an up-to-date map currently provided in `<project config dir>/repositoryMap.json` and it is quite time consuming...**
 
+
 #### Update repositories
 
 Reads and analyzes repositories from Github.
@@ -61,9 +62,10 @@ Reads and analyzes repositories from Github.
 $ php bin/console repositories:update [-b branch name] [-r] [-l limit]
 ```
 
-- `branch name`: name of the branch we want to inspect first when update repository list
-- `-r`: reloads the list in addition to analyzing every repository 
-- `limit`: number of repositories to analyze at a time
+- `branch name` : name of the branch we want to inspect first when updating repository list. Defaults to `develop`
+- `-r` : reloads the list of oat-sa repositories in addition to analyzing every repository
+- `limit` : number of repositories to analyze at a time
+
 
 #### Dump repository list
 
@@ -73,4 +75,4 @@ Dumps the repository map to a CSV file for human reading and analysis.
 $ php bin/console repositories:dump [-f filename]
 ```
 
-- `filename`: CSV filename. Defaults to <projet root dir>/repositories.csv
+- `filename` : CSV filename. Defaults to `<projet root dir>/repositories.csv`
