@@ -4,6 +4,8 @@ Resolves the requires tree from manifests.php in each extension needed.
 
 /!\ Works on **extension** names, not repository names.
 
+A more extensive explanation of the problematics and solutions is exposed in the [documentation](doc/dependency-resolver.md).
+
 ## Installation
 
 $ composer install
