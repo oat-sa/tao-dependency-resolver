@@ -37,40 +37,38 @@ Most of the **Tao extensions** repositories are currently based on the same patt
 
 33 extension repositories make exceptions:
 
-| Repository name                    | Branches   | Default | Packagist | Missing files         | Repository name         | Extension names                             | 
-|------------------------------------|------------|---------|-----------|-----------------------|-------------------------|---------------------------------------------| 
-| extension-generis-hard-pg          | none       |         | Missing   | manifest and composer |                         | none                                        | 
-| extension-tao-unisa                | no master  | develop |           | manifest and composer |                         |                                             | 
-| extension-tao-authorization-server | no develop |         | Missing   | manifest and composer |                         | none                                        | 
-| extension-tao-itemapip             | no develop |         | Missing   | manifest and composer |                         | none                                        | 
-| extension-experimental-ekstera     | no develop |         | Missing   | manifest and composer |                         |                                             | 
-| extension-experimental-kutimo      | no develop |         | Missing   | manifest and composer |                         |                                             | 
-| extension-tao-randomcat            | no develop |         | Missing   | manifest and composer |                         |                                             | 
-| extension-tao-act-authoring        | no develop |         |           | manifest and composer |                         |                                             | 
-| extension-tao-iave                 |            | develop |           |                       |                         |                                             | 
-| extension-tao-pfs                  |            | develop |           |                       |                         |                                             | 
-| extension-tao-talk                 |            |         | Missing   |                       | taoTalk (composer.json) |                                             | 
-| extension-lti-outcomeui            |            |         | Missing   | manifest              |                         |                                             | 
-| extension-tao-item-restapi         |            |         | Missing   | manifest and composer |                         |                                             | 
-| extension-tao-lti-consumer         |            |         | Missing   | manifest and composer |                         |                                             | 
-| extension-tao-restful              |            |         | Missing   | manifest and composer |                         |                                             | 
-| extension-lti-advantage            |            |         | Missing   |                       |                         |                                             | 
-| extension-parcc-tei                |            |         | Missing   |                       |                         |                                             | 
-| extension-tao-delivery-keyvalue    |            |         | Missing   |                       |                         |                                             | 
-| extension-tao-foobar               |            |         | Missing   |                       |                         |                                             | 
-| extension-tao-itemprint            |            |         | Missing   |                       |                         |                                             | 
-| extension-tao-qtiitem-restapi      |            |         | Missing   |                       |                         |                                             | 
-| extension-tao-restapi-docs         |            |         | Missing   |                       |                         |                                             | 
-| extension-tao-static-deliveries    |            |         | Missing   |                       |                         |                                             | 
-| extension-tao-test-runner-tools    |            |         | Missing   |                       |                         |                                             | 
-| irt-test                           |            |         | Missing   |                       |                         | irtTest                                     | 
-| Ontology-gmdb                      |            |         | Missing   |                       | taoGmdb (composer.json) | taoGmdb                                     | 
-| training-branding                  |            |         | Missing   |                       |                         | trainingBranding                            | 
-| training-pci                       |            |         | Missing   | manifest              |                         | trainingPci                                 | 
-| extension-tao-frontoffice          |            |         |           | manifest              |                         |                                             | 
-| extension-tao-marking              |            |         |           | manifest and composer |                         |                                             | 
-| extension-tao-extrapic             |            |         |           |                       |                         | taoExtraPic (develop), taoTextHelp (master) | 
-| generis                            |            |         |           |                       |                         | generis                                     | 
-| tao-core                           |            |         |           |                       |                         | tao                                         | 
-
-
+| Repository name                    | Branches   | Default | Packagist | Missing files      | Repo name (composer.json) | Extension name                              | 
+|------------------------------------|------------|---------|-----------|--------------------|---------------------------|---------------------------------------------| 
+| extension-generis-hard-pg          | none       |         | Missing   | manifest, composer |                           | none                                        | 
+| extension-tao-unisa                | no master  | develop |           | manifest, composer |                           |                                             | 
+| extension-tao-authorization-server | no develop |         | Missing   | manifest, composer |                           | none                                        | 
+| extension-tao-itemapip             | no develop |         | Missing   | manifest, composer |                           | none                                        | 
+| extension-experimental-ekstera     | no develop |         | Missing   | manifest, composer |                           |                                             | 
+| extension-experimental-kutimo      | no develop |         | Missing   | manifest, composer |                           |                                             | 
+| extension-tao-randomcat            | no develop |         | Missing   | manifest, composer |                           |                                             | 
+| extension-tao-act-authoring        | no develop |         |           | manifest, composer |                           |                                             | 
+| extension-tao-iave                 |            | develop |           |                    |                           |                                             | 
+| extension-tao-pfs                  |            | develop |           |                    |                           |                                             | 
+| extension-tao-talk                 |            |         | Missing   |                    | taoTalk                   |                                             | 
+| extension-lti-outcomeui            |            |         | Missing   | manifest           |                           |                                             | 
+| extension-tao-item-restapi         |            |         | Missing   | manifest, composer |                           |                                             | 
+| extension-tao-lti-consumer         |            |         | Missing   | manifest, composer |                           |                                             | 
+| extension-tao-restful              |            |         | Missing   | manifest, composer |                           |                                             | 
+| extension-lti-advantage            |            |         | Missing   |                    |                           |                                             | 
+| extension-parcc-tei                |            |         | Missing   |                    |                           |                                             | 
+| extension-tao-delivery-keyvalue    |            |         | Missing   |                    |                           |                                             | 
+| extension-tao-foobar               |            |         | Missing   |                    |                           |                                             | 
+| extension-tao-itemprint            |            |         | Missing   |                    |                           |                                             | 
+| extension-tao-qtiitem-restapi      |            |         | Missing   |                    |                           |                                             | 
+| extension-tao-restapi-docs         |            |         | Missing   |                    |                           |                                             | 
+| extension-tao-static-deliveries    |            |         | Missing   |                    |                           |                                             | 
+| extension-tao-test-runner-tools    |            |         | Missing   |                    |                           |                                             | 
+| irt-test                           |            |         | Missing   |                    |                           | irtTest                                     | 
+| Ontology-gmdb                      |            |         | Missing   |                    | taoGmdb                   | taoGmdb                                     | 
+| training-branding                  |            |         | Missing   |                    |                           | trainingBranding                            | 
+| training-pci                       |            |         | Missing   | manifest           |                           | trainingPci                                 | 
+| extension-tao-frontoffice          |            |         |           | manifest           |                           |                                             | 
+| extension-tao-marking              |            |         |           | manifest, composer |                           |                                             | 
+| extension-tao-extrapic             |            |         |           |                    |                           | taoExtraPic (develop), taoTextHelp (master) | 
+| generis                            |            |         |           |                    |                           | generis                                     | 
+| tao-core                           |            |         |           |                    |                           | tao                                         | 
