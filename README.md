@@ -33,8 +33,10 @@ There are two tools in this repository:
 
 ### Dependency resolver
 
+Read more about this tool [here](doc/dependency-resolver.md).
+
 ```
-$ php bin/console dependencies:resolve <root extension name> [-b root extension branch] [--extension-branch dependency extensions branch] [-d directory] 
+$ php bin/console dependencies:resolve <root extension name> [-b <root extension branch>] [--extension-branch <dependency extensions branch>] [-d <directory>] 
 ```
 
 - `root extension name`: "manifest name", not the repository name, e.g. "taoQtiTest", not "oat-sa/extension-tao-testqti".
@@ -45,11 +47,11 @@ $ php bin/console dependencies:resolve <root extension name> [-b root extension 
 
 ### Repository lister
 
-This tool reads avery oat-sa repositories in Github and maintains the map of **extension name** to **repository name**.
+Read more about this tool [here](doc/repository-updater.md).
+
+This tool reads every oat-sa repositories in Github and maintains the map of **extension name** to **repository name**.
 
 **/!\ This is not needed each time, there is an up-to-date map currently provided in `<project config dir>/repositoryMap.json` and it is quite time consuming...**
-
-Read more about this tool [here](doc/repository-updater.md).
 
 #### Update repositories
 
@@ -63,7 +65,7 @@ $ php bin/console repositories:update [-b branch name] [-r] [-l limit]
 - `-r`: reloads the list in addition to analyzing every repository 
 - `limit`: number of repositories to analyze at a time
 
-#### Dumps repositories list
+#### Dump repository list
 
 Dumps the repository map to a CSV file for human reading and analysis.
 
