@@ -2,8 +2,7 @@
 
 namespace OAT\DependencyResolver\Extension;
 
-use OAT\DependencyResolver\FileSystem\FileAccessException;
-use OAT\DependencyResolver\Repository\Repository;
+use OAT\DependencyResolver\Repository\Entity\Repository;
 use OAT\DependencyResolver\Repository\RepositoryMapAccessor;
 
 class ExtensionMapFactory

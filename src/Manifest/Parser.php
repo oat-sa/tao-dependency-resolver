@@ -2,7 +2,7 @@
 
 namespace OAT\DependencyResolver\Manifest;
 
-use OAT\DependencyResolver\Extension\Extension;
+use OAT\DependencyResolver\Manifest\Interfaces\FinderInterface;
 use PhpParser\NodeTraverserInterface;
 use PhpParser\NodeVisitor;
 use PhpParser\Parser as PhpParser;
@@ -12,10 +12,10 @@ class Parser
     /** @var PhpParser */
     private $phpParser;
 
-    /** @var ExtensionNameFinder */
+    /** @var FinderInterface */
     private $extensionNameFinder;
 
-    /** @var DependencyNamesFinder */
+    /** @var FinderInterface */
     private $dependencyNamesFinder;
 
     /** @var NodeTraverserInterface */
@@ -23,15 +23,16 @@ class Parser
 
     /**
      * Parser constructor.
-     * @param PhpParser $phpParser
-     * @param ExtensionNameFinder $extensionNameFinder
-     * @param DependencyNamesFinder $dependencyNamesFinder
+     *
+     * @param PhpParser              $phpParser
+     * @param FinderInterface        $extensionNameFinder
+     * @param FinderInterface        $dependencyNamesFinder
      * @param NodeTraverserInterface $traverser
      */
     public function __construct(
         PhpParser $phpParser,
-        ExtensionNameFinder $extensionNameFinder,
-        DependencyNamesFinder $dependencyNamesFinder,
+        FinderInterface $extensionNameFinder,
+        FinderInterface $dependencyNamesFinder,
         NodeTraverserInterface $traverser
     )
     {

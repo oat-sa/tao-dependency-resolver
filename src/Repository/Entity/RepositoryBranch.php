@@ -1,6 +1,8 @@
 <?php
 
-namespace OAT\DependencyResolver\Repository;
+namespace OAT\DependencyResolver\Repository\Entity;
+
+use OAT\DependencyResolver\Repository\GitHubRepositoryReader;
 
 class RepositoryBranch implements \JsonSerializable
 {

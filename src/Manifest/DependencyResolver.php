@@ -2,11 +2,11 @@
 
 namespace OAT\DependencyResolver\Manifest;
 
-use OAT\DependencyResolver\Extension\Extension;
+use OAT\DependencyResolver\Extension\Entity\Extension;
+use OAT\DependencyResolver\Extension\Exception\NotMappedException;
 use OAT\DependencyResolver\Extension\ExtensionCollection;
 use OAT\DependencyResolver\Extension\ExtensionFactory;
-use OAT\DependencyResolver\Extension\NotMappedException;
-use OAT\DependencyResolver\Repository\RepositoryReaderInterface;
+use OAT\DependencyResolver\Repository\Interfaces\RepositoryReaderInterface;
 
 class DependencyResolver
 {

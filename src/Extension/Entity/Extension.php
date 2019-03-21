@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace OAT\DependencyResolver\Extension;
+namespace OAT\DependencyResolver\Extension\Entity;
 
 class Extension
 {
@@ -74,4 +74,3 @@ class Extension
         return sprintf('%s-%s', static::BRANCH_PREFIX, $this->branchName);
     }
 }
-

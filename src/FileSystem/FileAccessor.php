@@ -2,6 +2,8 @@
 
 namespace OAT\DependencyResolver\FileSystem;
 
+use OAT\DependencyResolver\FileSystem\Exception\FileAccessException;
+
 class FileAccessor
 {
     /**

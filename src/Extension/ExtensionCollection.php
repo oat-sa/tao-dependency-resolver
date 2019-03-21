@@ -2,6 +2,8 @@
 
 namespace OAT\DependencyResolver\Extension;
 
+use OAT\DependencyResolver\Extension\Entity\Extension;
+
 class ExtensionCollection extends \ArrayObject
 {
     /** @var Extension[] */

@@ -1,14 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace OAT\DependencyResolver\Manifest;
-
-use PhpParser\Node;
-use PhpParser\NodeTraverser;
-use PhpParser\NodeVisitorAbstract;
-use PhpParser\Node\Expr\Array_;
-use PhpParser\Node\Expr\ArrayItem;
-use PhpParser\Node\Scalar\String_;
+namespace OAT\DependencyResolver\Manifest\Interfaces;
 
 interface FinderInterface
 {

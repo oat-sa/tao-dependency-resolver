@@ -1,6 +1,6 @@
 <?php
 
-namespace OAT\DependencyResolver\Repository;
+namespace OAT\DependencyResolver\Repository\Entity;
 
 class RepositoryFile implements \JsonSerializable
 {
