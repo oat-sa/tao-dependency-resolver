@@ -24,7 +24,7 @@
 
     <testsuites>
         <testsuite name="Dependency Resolver Test Suite">
-            <directory>tests</directory>
+            <directory>tests/unit</directory>
         </testsuite>
     </testsuites>
 

@@ -1,7 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Extension;
 
+use OAT\DependencyResolver\Extension\Entity\Extension;
 use PHPUnit\Framework\TestCase;
 
 class ExtensionCollectionTest extends TestCase
@@ -16,13 +19,13 @@ class ExtensionCollectionTest extends TestCase
         $this->subject = new ExtensionCollection();
     }
 
-    public function testConstructor_ReturnsAnEmptyCollection()
+    public function testConstructorReturnsAnEmptyCollection()
     {
         $this->assertInstanceOf(ExtensionCollection::class, $this->subject);
         $this->assertCount(0, $this->subject->getIterator());
     }
 
-    public function testAdd_WithValidExtension_ReturnsCollectionWithOneExtension()
+    public function testAddWithValidExtensionReturnsCollectionWithOneExtension()
     {
         $extensionName = 'extensionName';
         /** @var Extension $extension */
@@ -35,7 +38,7 @@ class ExtensionCollectionTest extends TestCase
         $this->assertEquals($extension, $this->subject->offsetGet($extensionName));
     }
 
-    public function testOffsetSet_WithInvalidExtension_ThrowsException()
+    public function testOffsetSetWithInvalidExtensionThrowsException()
     {
         $extensionName = 'extensionName';
         $extension = 'not an Extension object';
@@ -43,15 +46,15 @@ class ExtensionCollectionTest extends TestCase
         $this->subject->offsetSet($extensionName, $extension);
     }
 
-    public function testOffsetGet_WithNotExistingExtension_ReturnsNull()
+    public function testOffsetGetWithNotExistingExtensionReturnsNull()
     {
         $extensionName = 'extensionName';
         /** @var Extension $extension */
-        $extension = $this->createConfiguredMock(Extension::class, ['getExtensionName' => $extensionName]);
+        $this->createConfiguredMock(Extension::class, ['getExtensionName' => $extensionName]);
         $this->assertNull($this->subject->offsetget($extensionName . 'blah'));
     }
 
-    public function testGetIterator_WithExtensions_ReturnsIteratorOnExtensions()
+    public function testGetIteratorWithExtensionsReturnsIteratorOnExtensions()
     {
         $extensionName1 = 'extensionName1';
         /** @var Extension $extension1 */
@@ -72,5 +75,40 @@ class ExtensionCollectionTest extends TestCase
             $extensionArray[] = $extension;
         }
         $this->assertEquals([$extension1, $extension2], $extensionArray);
+    }
+
+    public function testGenerateComposerJson()
+    {
+        $extensionName1 = 'extensionName1';
+        $reposirotyName1 = 'name of repo 1';
+        $branchName1 = 'name of branch 1';
+        /** @var Extension $extension1 */
+        $extension1 = $this->createConfiguredMock(Extension::class, [
+            'getExtensionName' => $extensionName1,
+            'getRepositoryName' => $reposirotyName1,
+            'getPrefixedBranchName' => $branchName1,
+        ]);
+        $extensionName2 = 'extensionName2';
+        $reposirotyName2 = 'name of repo 2';
+        $branchName2 = 'name of branch 2';
+        /** @var Extension $extension2 */
+        $extension2 = $this->createConfiguredMock(Extension::class, [
+            'getExtensionName' => $extensionName2,
+            'getRepositoryName' => $reposirotyName2,
+            'getPrefixedBranchName' => $branchName2,
+        ]);
+
+        $this->subject
+            ->add($extension1)
+            ->add($extension2);
+
+        $expected = '{
+    "require": {
+        "' . $reposirotyName1 . '": "' . $branchName1 . '",
+        "' . $reposirotyName2 . '": "' . $branchName2 . '"
+    }
+}';
+
+        $this->assertEquals($expected, $this->subject->generateComposerJson());
     }
 }

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Manifest;
 
@@ -18,26 +20,26 @@ class ExtensionNameFinderTest extends TestCase
         $this->subject = new ExtensionNameFinder();
     }
 
-    public function testConstructor_ReturnsExtensionNameFinderWithEmptyExtensionName()
+    public function testConstructorReturnsExtensionNameFinderWithEmptyExtensionName()
     {
         $this->assertInstanceOf(ExtensionNameFinder::class, $this->subject);
         $this->assertEquals('', $this->subject->getResult());
     }
 
-    public function testClear_ReturnsExtensionNameFinderWithEmptyExtensionName()
+    public function testClearReturnsExtensionNameFinderWithEmptyExtensionName()
     {
         $this->assertInstanceOf(ExtensionNameFinder::class, $this->subject->clear());
         $this->assertEquals('', $this->subject->getResult());
     }
 
-    public function testEnterNode_WithNonArrayItemNode_ReturnsEmptyExtensionName()
+    public function testEnterNodeWithNonArrayItemNodeReturnsEmptyExtensionName()
     {
         $node = new String_('');
         $this->assertNull($this->subject->enterNode($node));
         $this->assertEquals('', $this->subject->getResult());
     }
 
-    public function testEnterNode_WithNonStringKeyNode_ReturnsEmptyExtensionName()
+    public function testEnterNodeWithNonStringKeyNodeReturnsEmptyExtensionName()
     {
         $value = new String_('');
         $key = new Array_();
@@ -46,7 +48,7 @@ class ExtensionNameFinderTest extends TestCase
         $this->assertEquals('', $this->subject->getResult());
     }
 
-    public function testEnterNode_WithNonNameKeyNode_ReturnsEmptyExtensionName()
+    public function testEnterNodeWithNonNameKeyNodeReturnsEmptyExtensionName()
     {
         $value = new String_('');
         $key = new String_('');
@@ -55,7 +57,7 @@ class ExtensionNameFinderTest extends TestCase
         $this->assertEquals('', $this->subject->getResult());
     }
 
-    public function testEnterNode_WithEmptyName_ReturnsEmptyExtensionName()
+    public function testEnterNodeWithEmptyNameReturnsEmptyExtensionName()
     {
         $value = new String_('');
         $key = new String_($this->subject::NAME_AST_TOKEN_KEY);
@@ -64,7 +66,7 @@ class ExtensionNameFinderTest extends TestCase
         $this->assertEquals('', $this->subject->getResult());
     }
 
-    public function testEnterNode_WithExtension_ReturnsExtensionName()
+    public function testEnterNodeWithExtensionReturnsExtensionName()
     {
         $extensionName = 'name of the extension';
 

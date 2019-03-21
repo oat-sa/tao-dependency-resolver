@@ -1,7 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace OAT\DependencyResolver\FileSystem;
 
+use OAT\DependencyResolver\FileSystem\Exception\FileAccessException;
 use PHPUnit\Framework\TestCase;
 
 class FileAccessorTest extends TestCase
@@ -18,28 +21,21 @@ class FileAccessorTest extends TestCase
         $this->subject = new FileAccessor();
     }
 
-    public function testGetContents_WithValidFilename_ReturnsContents()
+    public function testGetContentsWithValidFilenameReturnsContents()
     {
         $filePath = __DIR__ . '/../../resources/raw.githubusercontent.com/oat-sa/generis/develop/manifest.php';
         $contents = file_get_contents($filePath);
         $this->assertEquals($contents, $this->subject->getContents($filePath));
     }
 
-    public function testGetContents_WithInvalidLocalFilename_ThrowsException()
+    public function testGetContentsWithInvalidLocalFilenameThrowsException()
     {
         $filePath = __DIR__ . '/../../resources/raw.githubusercontent.com/oat-sa/unknown/develop/manifest.php';
         $this->expectException(FileAccessException::class);
         $this->subject->getContents($filePath);
     }
 
-    public function testGetContents_WithInvalidDistantFilename_ThrowsException()
-    {
-        $url = 'http://example.com/not-existing-file.txt';
-        $this->expectException(FileAccessException::class);
-        $this->assertNull($this->subject->getContents($url));
-    }
-
-    public function testSetContents_WithValidFilename_CreatesNewFileAndReturnsTrue()
+    public function testSetContentsWithValidFilenameCreatesNewFileAndReturnsTrue()
     {
         $tmpDir = __DIR__ . '/../../../resources/not-existing-directory/';
         $filePath = $tmpDir . 'php-unit-test.txt';
@@ -50,7 +46,7 @@ class FileAccessorTest extends TestCase
         rmdir($tmpDir);
     }
 
-    public function testSetContents_WithValidFilenameAndEmptyContents_CreatesNewEmptyFileAndReturnsTrue()
+    public function testSetContentsWithValidFilenameAndEmptyContentsCreatesNewEmptyFileAndReturnsTrue()
     {
         $tmpDir = sys_get_temp_dir();
         $filePath = tempnam($tmpDir, 'php-unit-test');
@@ -59,7 +55,7 @@ class FileAccessorTest extends TestCase
         unlink($filePath);
     }
 
-    public function testSetContents_WithNonAccessibleFile_ThrowsException()
+    public function testSetContentsWithNonAccessibleFileThrowsException()
     {
         // Makes a read-only file.
         $tmpDir = sys_get_temp_dir();

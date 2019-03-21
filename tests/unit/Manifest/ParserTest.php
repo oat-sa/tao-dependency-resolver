@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Manifest;
 
@@ -25,48 +27,87 @@ class ParserTest extends TestCase
         $this->subject = new Parser($phpParser, $extensionNameFinder, $dependencyNamesFinder, $traverser);
     }
 
-    public function testConstructor_ReturnsRemoteManifestReader()
+    /**
+     * @throws \ReflectionException
+     */
+    public function testConstructorReturnsRemoteManifestReader()
     {
         $this->assertInstanceOf(Parser::class, $this->subject);
         $this->assertInstanceOf(PhpCodeParser::class, $this->getPrivateProperty($this->subject, 'phpParser'));
-        $this->assertInstanceOf(ExtensionNameFinder::class, $this->getPrivateProperty($this->subject, 'extensionNameFinder'));
-        $this->assertInstanceOf(DependencyNamesFinder::class, $this->getPrivateProperty($this->subject, 'dependencyNamesFinder'));
-        $this->assertInstanceOf(NodeTraverserInterface::class, $this->getPrivateProperty($this->subject, 'nodeTraverser'));
+        $this->assertInstanceOf(
+            ExtensionNameFinder::class,
+            $this->getPrivateProperty($this->subject, 'extensionNameFinder')
+        );
+        $this->assertInstanceOf(
+            DependencyNamesFinder::class,
+            $this->getPrivateProperty($this->subject, 'dependencyNamesFinder')
+        );
+        $this->assertInstanceOf(
+            NodeTraverserInterface::class,
+            $this->getPrivateProperty($this->subject, 'nodeTraverser')
+        );
     }
 
     /**
      * @dataProvider extensionsToTest
+     *
      * @param string $extensionName
      * @param string $expectedName
-     * @param array $expectedDependencyNames
      */
-    public function testGetExtensionName($extensionName, $expectedName, $expectedDependencyNames)
+    public function testGetExtensionName($extensionName, $expectedName)
     {
-        $manifestFileName = __DIR__ . '/../../resources/raw.githubusercontent.com/' . $extensionName . '/develop/manifest.php';
+        $manifestFileName = __DIR__
+            . DIRECTORY_SEPARATOR . '..'
+            . DIRECTORY_SEPARATOR . '..'
+            . DIRECTORY_SEPARATOR . 'resources'
+            . DIRECTORY_SEPARATOR . 'raw.githubusercontent.com'
+            . DIRECTORY_SEPARATOR . $extensionName
+            . DIRECTORY_SEPARATOR . 'develop'
+            . DIRECTORY_SEPARATOR . 'manifest.php';
         $manifestContents = file_get_contents($manifestFileName);
         $this->assertEquals($expectedName, $this->subject->getExtensionName($manifestContents));
-    }
-
-    /**
-     * @dataProvider extensionsToTest
-     * @param string $extensionName
-     * @param string $expectedName
-     * @param array $expectedDependencyNames
-     */
-    public function testGetDependencyNames($extensionName, $expectedName, $expectedDependencyNames)
-    {
-        $manifestFileName = __DIR__ . '/../../resources/raw.githubusercontent.com/' . $extensionName . '/develop/manifest.php';
-        $manifestContents = file_get_contents($manifestFileName);
-        $this->assertEquals($expectedDependencyNames, $this->subject->getDependencyNames($manifestContents));
     }
 
     public function extensionsToTest()
     {
         return [
-            'no dependency' => ['oat-sa/generis', 'generis', []],
-            'one dependency' => ['oat-sa/tao-core', 'tao', ['generis']],
-            'two direct dependencies' => ['oat-sa/extension-tao-backoffice', 'taoBackOffice', ['tao', 'generis']],
-            'three direct dependencies and one transitive dependency' => ['oat-sa/extension-tao-itemqti', 'taoQtiItem', ['taoItems', 'tao', 'generis']],
+            '0 dependency' => ['oat-sa/generis', 'generis'],
+            '1 dependency' => ['oat-sa/tao-core', 'tao'],
+            '2 direct dependencies' => ['oat-sa/extension-tao-backoffice', 'taoBackOffice'],
+            '3 direct dependencies + 1 transitive dependency' => ['oat-sa/extension-tao-itemqti', 'taoQtiItem'],
+        ];
+    }
+
+    /**
+     * @dataProvider dependenciesToTest
+     *
+     * @param string $extensionName
+     * @param array  $expectedDependencyNames
+     */
+    public function testGetDependencyNames($extensionName, $expectedDependencyNames)
+    {
+        $manifestFileName = __DIR__
+            . DIRECTORY_SEPARATOR . '..'
+            . DIRECTORY_SEPARATOR . '..'
+            . DIRECTORY_SEPARATOR . 'resources'
+            . DIRECTORY_SEPARATOR . 'raw.githubusercontent.com'
+            . DIRECTORY_SEPARATOR . $extensionName
+            . DIRECTORY_SEPARATOR . 'develop'
+            . DIRECTORY_SEPARATOR . 'manifest.php';
+        $manifestContents = file_get_contents($manifestFileName);
+        $this->assertEquals($expectedDependencyNames, $this->subject->getDependencyNames($manifestContents));
+    }
+
+    public function dependenciesToTest()
+    {
+        return [
+            '0 dependency' => ['oat-sa/generis', []],
+            '1 dependency' => ['oat-sa/tao-core', ['generis']],
+            '2 direct dependencies' => ['oat-sa/extension-tao-backoffice', ['tao', 'generis']],
+            '3 direct dependencies + 1 transitive dependency' => [
+                'oat-sa/extension-tao-itemqti',
+                ['taoItems', 'tao', 'generis'],
+            ],
         ];
     }
 }

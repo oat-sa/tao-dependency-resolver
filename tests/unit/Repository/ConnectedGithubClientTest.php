@@ -2,52 +2,111 @@
 
 namespace OAT\DependencyResolver\Repository;
 
-use Github\Api\ApiInterface;
-use Github\Api\GitData;
-use Github\Api\Organization;
-use Github\Api\Repo;
-use OAT\DependencyResolver\FileSystem\FileAccessor;
-use OAT\DependencyResolver\Manifest\DependencyNamesFinder;
-use OAT\DependencyResolver\Manifest\ExtensionNameFinder;
-use OAT\DependencyResolver\Manifest\Parser;
-use OAT\DependencyResolver\TestHelpers\LocalFileAccessor;
+use Github\Exception\RuntimeException;
+use OAT\DependencyResolver\Repository\Entity\Repository;
+use OAT\DependencyResolver\Repository\Exception\BranchNotFoundException;
+use OAT\DependencyResolver\Repository\Exception\EmptyRepositoryException;
+use OAT\DependencyResolver\Repository\Exception\FileNotFoundException;
 use OAT\DependencyResolver\TestHelpers\ProtectedAccessorTrait;
-use PhpParser\Lexer;
-use PhpParser\NodeTraverser;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PhpParser\Parser as PhpParser;
 
 /**
  * Sociable unit tests for GitHubRepositoryReader class.
  */
-class ConnectedGithubClientTest //extends TestCase
+class ConnectedGithubClientTest extends TestCase
 {
-    /** @var ConnectedGithubClientForTesting */
+    use ProtectedAccessorTrait;
+
+    /** @var ConnectedGithubClient */
     private $subject;
+
+    /** @var GithubClientProxy|MockObject */
+    private $client;
 
     public function setUp()
     {
-        $this->subject = new ConnectedGithubClientForTesting();
+        $this->client = $this->createMock(GithubClientProxy::class);
+        $this->subject = new ConnectedGithubClient($this->client);
     }
 
-    public function testConstructor_ReturnsConnectedGithubClient()
+    /**
+     * @throws \ReflectionException
+     */
+    public function testConstructorReturnsConnectedGithubClientWithEmptyToken()
     {
         $this->assertInstanceOf(ConnectedGithubClient::class, $this->subject);
+        $this->assertEquals($this->client, $this->getPrivateProperty($this->subject, 'client'));
+        $this->assertEquals('', $this->getPrivateProperty($this->subject, 'token'));
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    public function testSetToken()
+    {
+        $token = 'anything in there';
+        $this->subject->setToken($token);
+        $this->assertEquals($token, $this->getPrivateProperty($this->subject, 'token'));
+    }
+
+    /**
+     * In fact this is really testing authenticateAndCheck protected method.
+     *
+     * @throws \ReflectionException
+     */
+    public function testGetOrganizationPropertiesWhenAlreadyAuthenticatedReturnsExistingOrganizationProperties()
+    {
+        $this->setPrivateProperty($this->subject, 'authenticated', true);
+        $this->assertEquals([], $this->subject->getOrganizationProperties(''));
+    }
+
+    /**
+     * In fact this is really testing authenticateAndCheck protected method.
+     */
+    public function testGetOrganizationPropertiesWithFailingAuthenticationThrowsException()
+    {
+        $authenticationExceptionMessage = 'blah blah blah';
+
+        $this->client->method('getOrganizationProperties')->with('')
+            ->willThrowException(new \Exception($authenticationExceptionMessage));
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage(
+            'A error occurred when trying to authenticate to Github API: ' . $authenticationExceptionMessage
+        );
+        $this->subject->getOrganizationProperties('');
+    }
+
+    /**
+     * In fact this is really testing authenticateAndCheck protected method.
+     */
+    public function testGetOrganizationPropertiesWhenNotAuthenticatedReturnsOrganizationProperties()
+    {
+        $owner = 'owner name';
+        $properties = ['properties'];
+
+        $this->client->method('getOrganizationProperties')->with($owner)->willReturn($properties);
+
+        $this->assertEquals($properties, $this->subject->getOrganizationProperties($owner));
     }
 
     /**
      * @dataProvider listsToTest
-     * @param array $pageResults
-     * @param $expected
+     *
+     * @param string $owner
+     * @param array  $pageResults
+     * @param        $expected
      */
     public function testGetRepositoryList(string $owner, array $pageResults, array $expected)
     {
-        /** @var Organization $organizationApi */
-        $organizationApi = $this->createMock(Organization::class);
-        $organizationApi->method('repositories')->willReturnOnConsecutiveCalls(...$pageResults);
-        $this->subject->setOrganizationApi($organizationApi);
-        $this->assertEquals($expected, $this->subject->getRepositoryList($owner));
+        $this->client->method('getRepositoryList')->willReturnCallback(
+            function ($organization, $page, $perPage) use ($owner, $pageResults) {
+                return $pageResults[$page - 1];
+            }
+        );
+
+        $this->assertEquals($expected, $this->subject->getRepositoryList($owner, 2));
     }
 
     public function listsToTest()
@@ -71,7 +130,7 @@ class ConnectedGithubClientTest //extends TestCase
             'empty list' => [
                 $owner,
                 [[]],
-                []
+                [],
             ],
             'one result' => [
                 $owner,
@@ -81,130 +140,237 @@ class ConnectedGithubClientTest //extends TestCase
             'two pages result' => [
                 $owner,
                 [[$props1, $props2], [$props3]],
-                [$owner . '/' . $name1 => $repo1, $owner . '/' . $name2 => $repo2, $owner . '/' . $name3 => $repo3],
+                [
+                    $owner . '/' . $name1 => $repo1,
+                    $owner . '/' . $name2 => $repo2,
+                    $owner . '/' . $name3 => $repo3,
+                ],
             ],
         ];
     }
 
-    public function testConstructor_ReturnsGitHubRepositoryReaderWithFileAccessor()
+    /**
+     * @throws \ReflectionException
+     */
+    public function testGetContentsWithNotExistingFileThrowsException()
     {
-        $this->assertInstanceOf(RepositoryReaderInterface::class, $this->subject);
-        $this->assertInstanceOf(FileAccessor::class, $this->getPrivateProperty($this->subject, 'fileAccessor'));
-    }
+        $owner = 'name of the owner';
+        $repositoryName = 'the repo';
+        $branchName = 'the branch';
+        $fileName = 'a name for this file';
+        $branchReference = 'BranchReference';
+        $reference = ['ref' => $branchReference];
 
-    public function testGetFileContents_WithNonExistingFile_ReturnsEmptyString()
-    {
-        $this->assertEquals('', $this->subject->getFileContents('oat-sa/generis', 'develop', 'non-existing-file.php'));
-    }
+        // We just bypass the authentication (tested above).
+        $this->setPrivateProperty($this->subject, 'authenticated', true);
 
-    public function testGetFileContents_WithExistingFile_ReturnsFileContents()
-    {
-        $this->assertEquals(
-            file_get_contents(__DIR__ . '/../../resources/raw.githubusercontent.com/oat-sa/generis/develop/manifest.php'),
-            $this->subject->getFileContents('oat-sa/generis', 'develop', 'manifest.php')
+        // Assume the reference exists (tested below).
+        $this->client->method('getReference')->with($owner, $repositoryName, $branchName)->willReturn($reference);
+        $this->client->method('getFileContents')->with($owner, $repositoryName, $branchReference, $fileName)
+            ->willThrowException(new RuntimeException('message', 404));
+
+        $this->expectException(FileNotFoundException::class);
+        $this->expectExceptionMessage(
+            sprintf(
+                'File "%s" not found in branch "%s" of repository "%s/%s".',
+                $fileName,
+                $branchName,
+                $owner,
+                $repositoryName
+            )
         );
+        $this->subject->getContents($owner, $repositoryName, $branchName, $fileName);
     }
 
-    public function testGetComposerContents_WithNonExistingFile_ThrowsException()
+    /**
+     * @throws \ReflectionException
+     */
+    public function testGetContentsWithRuntimeExceptionWithAnotherCodeThrowsTheException()
     {
-        $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('composer.json of repository "oat-sa/not-existing-repository" does not exist.');
-        $this->subject->getComposerContents('oat-sa/not-existing-repository', 'develop');
+        $owner = 'name of the owner';
+        $repositoryName = 'the repo';
+        $branchName = 'and the branch';
+        $fileName = 'a name for this file please';
+        $branchReference = 'BranchReference';
+        $reference = ['ref' => $branchReference];
+        $message = 'the exception message';
+        $exceptionCode = 1012;
+        $exception = new RuntimeException($message, $exceptionCode);
+
+        // We just bypass the authentication (tested above).
+        $this->setPrivateProperty($this->subject, 'authenticated', true);
+
+        // Assume the reference exists (tested below).
+        $this->client->method('getReference')->with($owner, $repositoryName, $branchName)->willReturn($reference);
+        $this->client->method('getFileContents')->with($owner, $repositoryName, $branchReference, $fileName)
+            ->willThrowException($exception);
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage($message);
+        $this->expectExceptionCode($exceptionCode);
+        $this->subject->getContents($owner, $repositoryName, $branchName, $fileName);
     }
 
-    public function testGetComposerContents_WithNonJsonValidFile_ThrowsException()
+    /**
+     * @throws \ReflectionException
+     */
+    public function testGetContentsWithAnotherExceptionThrowsTheException()
     {
-        $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('composer.json of repository "wrong-repo" is not valid json.');
-        $this->subject->getComposerContents('wrong-repo', 'develop');
+        $owner = 'name of the owner';
+        $repositoryName = 'the repo';
+        $branchName = 'and the branch';
+        $fileName = 'a name for this file please';
+        $branchReference = 'BranchReference';
+        $reference = ['ref' => $branchReference];
+        $message = 'the exception message';
+        $exceptionCode = 1012;
+        $exception = new \Exception($message, $exceptionCode);
+
+        // We just bypass the authentication (tested above).
+        $this->setPrivateProperty($this->subject, 'authenticated', true);
+
+        // Assume the reference exists (tested below).
+        $this->client->method('getReference')->with($owner, $repositoryName, $branchName)->willReturn($reference);
+        $this->client->method('getFileContents')->with($owner, $repositoryName, $branchReference, $fileName)
+            ->willThrowException($exception);
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage($message);
+        $this->expectExceptionCode($exceptionCode);
+        $this->subject->getContents($owner, $repositoryName, $branchName, $fileName);
     }
 
-    public function testGetComposerContents_WithvalidJsonFile_ReturnsArray()
+    /**
+     * @throws \ReflectionException
+     */
+    public function testGetContentsWithExistingFileReturnFileContents()
     {
-        $this->assertEquals(
-            json_decode(file_get_contents(__DIR__ . '/../../resources/raw.githubusercontent.com/oat-sa/tao-core/develop/composer.json'), true),
-            $this->subject->getComposerContents('oat-sa/tao-core', 'develop')
+        $owner = 'name of the owner';
+        $repositoryName = 'the repo';
+        $branchName = 'and the branch';
+        $fileName = 'a name for this file please';
+        $contents = 'contents of the file';
+        $branchReference = 'BranchReference';
+        $reference = ['ref' => $branchReference];
+
+        // We just bypass the authentication (tested above).
+        $this->setPrivateProperty($this->subject, 'authenticated', true);
+
+        // Assume the reference exists (tested below).
+        $this->client->method('getReference')->with($owner, $repositoryName, $branchName)->willReturn($reference);
+
+        $this->client->method('getFileContents')->with($owner, $repositoryName, $branchReference, $fileName)
+            ->willReturn($contents);
+
+        $this->assertEquals($contents, $this->subject->getContents($owner, $repositoryName, $branchName, $fileName));
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    public function testGetBranchReferenceWithEmptyRepositoryThrowsException()
+    {
+        $owner = 'name of the owner';
+        $repositoryName = 'the repo';
+        $branchName = 'and the branch';
+
+        // We just bypass the authentication (tested above).
+        $this->setPrivateProperty($this->subject, 'authenticated', true);
+
+        $this->client->method('getReference')->with($owner, $repositoryName, $branchName)
+            ->willThrowException(new RuntimeException('', 409));
+
+        $this->expectException(EmptyRepositoryException::class);
+        $this->subject->getBranchReference($owner, $repositoryName, $branchName);
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    public function testGetBranchReferenceWithNotExistingBranchThrowsException()
+    {
+        $owner = 'name of the owner';
+        $repositoryName = 'the repo';
+        $branchName = 'and the branch';
+
+        // We just bypass the authentication (tested above).
+        $this->setPrivateProperty($this->subject, 'authenticated', true);
+
+        $this->client->method('getReference')->with($owner, $repositoryName, $branchName)
+            ->willThrowException(new RuntimeException('', 404));
+
+        $this->expectException(BranchNotFoundException::class);
+        $this->expectExceptionMessage(
+            sprintf('Unable to retrieve reference to "%s/%s/%s".', $owner, $repositoryName, $branchName)
         );
+        $this->subject->getBranchReference($owner, $repositoryName, $branchName);
     }
 
-    public function testGetManifestContents()
+    /**
+     * @throws \ReflectionException
+     */
+    public function testGetBranchReferenceWithOtherExceptionThrowsTheException()
     {
-        return [
-            'no dependency' => [
-                'generis', 'oat-sa/generis', 'develop',
-                [],
-            ],
-            'one dependency' => [
-                'tao', 'oat-sa/tao-core', 'develop',
-                ['generis'],
-            ],
-            'two direct dependencies' => [
-                'taoBackOffice', 'oat-sa/extension-tao-backoffice', 'develop',
-                ['tao', 'generis'],
-            ],
-            'three direct dependencies and one transitive dependency' => [
-                'taoQtiItem', 'oat-sa/extension-tao-itemqti', 'develop',
-                ['taoItems', 'tao', 'generis'],
-            ],
+        $owner = 'name of the owner';
+        $repositoryName = 'the repo';
+        $branchName = 'and the branch';
+        $message = 'the exception message';
+        $exceptionCode = 1012;
+        $exception = new RuntimeException($message, $exceptionCode);
+
+        // We just bypass the authentication (tested above).
+        $this->setPrivateProperty($this->subject, 'authenticated', true);
+
+        $this->client->method('getReference')->with($owner, $repositoryName, $branchName)
+            ->willThrowException($exception);
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage($message);
+        $this->expectExceptionCode($exceptionCode);
+        $this->subject->getBranchReference($owner, $repositoryName, $branchName);
+    }
+
+    /**
+     * @throws \ReflectionException
+     */
+    public function testGetBranchReferenceWithNotExistingBranchButExistingBranchIncludingBranchNameThrowsException()
+    {
+        $owner = 'name of the owner';
+        $repositoryName = 'the repo';
+        $branchName = 'and the branch';
+        $references = [
+            ['ref' => 'otherBranch1Reference'],
+            ['ref' => 'otherBranch2Reference'],
         ];
-    }
-}
 
-class ConnectedGithubClientForTesting extends ConnectedGithubClient
-{
-    const REPOSITORIES_PER_PAGE = 2;
+        // We just bypass the authentication (tested above).
+        $this->setPrivateProperty($this->subject, 'authenticated', true);
 
-    /** @var Organization */
-    private $organizationApi;
+        $this->client->method('getReference')->with($owner, $repositoryName, $branchName)->willReturn($references);
 
-    /** @var Repo */
-    private $repositoryApi;
-
-    /** @var GitData */
-    private $gitDataApi;
-
-    public function getOrganizationApi(): Organization
-    {
-        return $this->organizationApi;
+        $this->expectException(BranchNotFoundException::class);
+        $this->expectExceptionMessage(
+            sprintf('Unable to retrieve reference to "%s/%s/%s".', $owner, $repositoryName, $branchName)
+        );
+        $this->subject->getBranchReference($owner, $repositoryName, $branchName);
     }
 
     /**
-     * @param Organization $organizationApi
-     * @return $this
+     * @throws \ReflectionException
      */
-    public function setOrganizationApi(Organization $organizationApi): self
+    public function testGetBranchReferenceWithExistingBranchReturnsReference()
     {
-        $this->organizationApi = $organizationApi;
-        return $this;
-    }
+        $owner = 'name of the owner';
+        $repositoryName = 'the repo';
+        $branchName = 'and the branch';
+        $branchReference = 'BranchReference';
+        $reference = ['ref' => $branchReference];
 
-    public function getRepositoryApi(): Repo
-    {
-        return $this->repositoryApi;
-    }
+        // We just bypass the authentication (tested above).
+        $this->setPrivateProperty($this->subject, 'authenticated', true);
 
-    /**
-     * @param Repo $repositoryApi
-     * @return $this
-     */
-    public function setRepositoryApi(Repo $repositoryApi): self
-    {
-        $this->repositoryApi = $repositoryApi;
-        return $this;
-    }
+        $this->client->method('getReference')->with($owner, $repositoryName, $branchName)->willReturn($reference);
 
-    public function getGitDataApi(): GitData
-    {
-        return $this->gitDataApi;
-    }
-
-    /**
-     * @param GitData $gitDataApi
-     * @return $this
-     */
-    public function setGitDataApi(GitData $gitDataApi): self
-    {
-        $this->gitDataApi = $gitDataApi;
-        return $this;
+        $this->assertEquals($branchReference, $this->subject->getBranchReference($owner, $repositoryName, $branchName));
     }
 }
