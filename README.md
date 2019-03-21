@@ -24,7 +24,7 @@ PHP extensions required: php7.1-xml, php7.1-mbstring
 
 ## Authentification
 
-You need to provide a valid GitHub token with "repo" access rights into `<project dir>/config/services.yaml`, in the key `parameters > github.token`.
+You need to provide a valid [GitHub token](https://github.com/settings/tokens) with "repo" access rights into `<project dir>/config/services.yaml`, in the key `parameters > github.token`.
 
 
 ## The tools
@@ -36,10 +36,10 @@ There are two tools in this repository:
 Read more about this tool [here](doc/dependency-resolver.md).
 
 ```
-$ php bin/console dependencies:resolve <root extension name> [-b <root extension branch>] [--extension-branch <dependency extensions branch>] [-d <directory>] 
+$ php bin/console dependencies:resolve <root extension or repository name> [--package-branch <root extension branch>] [--extension-branch <dependency extensions branch>] [--directory <directory>] 
 ```
 
-- `root extension name`: "manifest name", not the repository name, e.g. "taoQtiTest", not "oat-sa/extension-tao-testqti".
+- `root extension or repository name`: "manifest name", not the repository name, e.g. "taoQtiTest", not "oat-sa/extension-tao-testqti".
 - `root extension branch`: the branch of the extension to be tested
 - `dependency extensions branch`: the branch to download for each dependency. This will be changed to provide a file name with a mapping 'extension'=>'branch to load'.
 - `directory`: the directory where you want to install the whole package. Defaults to `<project root dir>/tmp`
