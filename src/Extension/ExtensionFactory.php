@@ -2,6 +2,9 @@
 
 namespace OAT\DependencyResolver\Extension;
 
+use OAT\DependencyResolver\Extension\Entity\Extension;
+use OAT\DependencyResolver\Extension\Exception\NotMappedException;
+
 class ExtensionFactory
 {
     /** @var array */
@@ -9,6 +12,7 @@ class ExtensionFactory
 
     /**
      * ExtensionFactory constructor.
+     *
      * @param array $extensionMap
      */
     public function __construct(array $extensionMap)
@@ -19,6 +23,7 @@ class ExtensionFactory
     /**
      * @param string $extensionName
      * @param string $branch
+     *
      * @return Extension
      * @throws NotMappedException
      */
@@ -40,7 +45,12 @@ class ExtensionFactory
         }
 
         $extensionMapItem = $this->extensionMap[$extensionName];
-        $extension = new Extension($extensionName, $extensionMapItem['repository_name'], $extensionMapItem['composer_name'], $branch);
+        $extension = new Extension(
+            $extensionName,
+            $extensionMapItem['repository_name'],
+            $extensionMapItem['composer_name'],
+            $branch
+        );
 
         return $extension;
     }

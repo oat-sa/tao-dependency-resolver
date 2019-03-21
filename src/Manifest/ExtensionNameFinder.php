@@ -2,11 +2,12 @@
 
 namespace OAT\DependencyResolver\Manifest;
 
+use OAT\DependencyResolver\Manifest\Interfaces\FinderInterface;
 use PhpParser\Node;
-use PhpParser\NodeTraverser;
-use PhpParser\NodeVisitorAbstract;
 use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Scalar\String_;
+use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitorAbstract;
 
 class ExtensionNameFinder extends NodeVisitorAbstract implements FinderInterface
 {
@@ -27,6 +28,7 @@ class ExtensionNameFinder extends NodeVisitorAbstract implements FinderInterface
 
     /**
      * Returns all found extension names.
+     *
      * @return string
      */
     public function getResult()
@@ -36,13 +38,14 @@ class ExtensionNameFinder extends NodeVisitorAbstract implements FinderInterface
 
     /**
      * Stores extension names found in "requires" sub-array.
+     *
      * @param Node $node
+     *
      * @return int|null
      */
     public function enterNode(Node $node)
     {
-        if (
-            $node instanceof ArrayItem
+        if ($node instanceof ArrayItem
             && $node->key instanceof String_
             && $node->key->value == self::NAME_AST_TOKEN_KEY
             && $node->value instanceof String_
@@ -50,5 +53,7 @@ class ExtensionNameFinder extends NodeVisitorAbstract implements FinderInterface
             $this->extensionName = $node->value->value;
             return NodeTraverser::STOP_TRAVERSAL;
         }
+
+        return null;
     }
 }

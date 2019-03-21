@@ -21,6 +21,7 @@ class Extension
 
     /**
      * Extension constructor.
+     *
      * @param string $extensionName
      * @param string $repositoryName
      * @param string $composerName

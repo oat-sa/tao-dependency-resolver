@@ -3,11 +3,12 @@ declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Manifest;
 
+use OAT\DependencyResolver\Manifest\Interfaces\FinderInterface;
 use PhpParser\Node;
-use PhpParser\NodeVisitorAbstract;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Scalar\String_;
+use PhpParser\NodeVisitorAbstract;
 
 class DependencyNamesFinder extends NodeVisitorAbstract implements FinderInterface
 {
@@ -28,6 +29,7 @@ class DependencyNamesFinder extends NodeVisitorAbstract implements FinderInterfa
 
     /**
      * Returns all found extension names.
+     *
      * @return array
      */
     public function getResult()
@@ -37,12 +39,12 @@ class DependencyNamesFinder extends NodeVisitorAbstract implements FinderInterfa
 
     /**
      * Stores extension names found in "requires" sub-array.
+     *
      * @param Node $node
      */
     public function enterNode(Node $node)
     {
-        if (
-            $node instanceof ArrayItem
+        if ($node instanceof ArrayItem
             && $node->key instanceof String_
             && $node->key->value == self::REQUIRES_AST_TOKEN_KEY
             && $node->value instanceof Array_

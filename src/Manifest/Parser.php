@@ -34,8 +34,7 @@ class Parser
         FinderInterface $extensionNameFinder,
         FinderInterface $dependencyNamesFinder,
         NodeTraverserInterface $traverser
-    )
-    {
+    ) {
         $this->phpParser = $phpParser;
         $this->extensionNameFinder = $extensionNameFinder;
         $this->dependencyNamesFinder = $dependencyNamesFinder;
@@ -44,6 +43,7 @@ class Parser
 
     /**
      * Retrieves extension name from manifest contents.
+     *
      * @param string $manifestContents
      *
      * @return string
@@ -55,6 +55,7 @@ class Parser
 
     /**
      * Finds required dependency names in manifest contents.
+     *
      * @param string|null $manifestContents
      *
      * @return array
@@ -66,8 +67,10 @@ class Parser
 
     /**
      * Parses the given manifest contents and populates the extensionNames and dependencyNames properties.
-     * @param string $manifestContents
+     *
+     * @param string                      $manifestContents
      * @param NodeVisitor|FinderInterface $finder
+     *
      * @return mixed
      */
     private function parse(string $manifestContents, NodeVisitor $finder)

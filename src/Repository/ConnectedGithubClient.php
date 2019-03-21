@@ -105,12 +105,13 @@ class ConnectedGithubClient
      * @param string $owner
      * @param string $repositoryName
      * @param string $branchName
-     * @param string $filename
+     * @param string $fileName
+     *
      * @return string|null
      * @throws FileNotFoundException when the file does not exist
      * @throws ErrorException when another error occurs
      */
-    public function getContents(string $owner, string $repositoryName, string $branchName, string $filename): ?string
+    public function getContents(string $owner, string $repositoryName, string $branchName, string $fileName): ?string
     {
         $this->authenticateAndCheck($owner);
 
@@ -122,7 +123,15 @@ class ConnectedGithubClient
         } catch (RuntimeException $exception) {
             if ($exception->getCode() === 404) {
                 // Throws an understandable exception.
-                throw new FileNotFoundException('File "' . $filename . '" not found in branch "' . $branchName . '".');
+                throw new FileNotFoundException(
+                    sprintf(
+                        'File "%s" not found in branch "%s" of repository "%s/%s".',
+                        $fileName,
+                        $branchName,
+                        $owner,
+                        $repositoryName
+                    )
+                );
             }
 
             // Transmits any other exception.
@@ -153,13 +162,16 @@ class ConnectedGithubClient
             switch ($exception->getCode()) {
                 case 404:
                     // Throws an understandable exception.
-                    throw new BranchNotFoundException('Unable to retrieve reference to "' . $owner . '/' . $repositoryName . '/' . $branchName . '".');
+                    throw new BranchNotFoundException(
+                        sprintf('Unable to retrieve reference to "%s/%s/%s".', $owner, $repositoryName, $branchName)
+                    );
 
                 case 409:
                     // Throws an understandable exception.
                     throw new EmptyRepositoryException($repositoryName);
             }
 
+            // Transmits any other exception.
             throw $exception;
         }
 

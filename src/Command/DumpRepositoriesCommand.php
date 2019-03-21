@@ -17,6 +17,7 @@ class DumpRepositoriesCommand extends Command
 
     /**
      * UpdateRepositoryMapCommand constructor.
+     *
      * @param RepositoryMapAccessor $repositoryMapAccessor
      */
     public function __construct(RepositoryMapAccessor $repositoryMapAccessor)
@@ -29,12 +30,19 @@ class DumpRepositoriesCommand extends Command
     protected function configure()
     {
         $this->setName('repositories:dump')
-            ->addOption('filename', 'f', InputOption::VALUE_REQUIRED, 'Filename to which to export the repository table', self::DEFAULT_CSV_FILE);
+            ->addOption(
+                'filename',
+                'f',
+                InputOption::VALUE_REQUIRED,
+                'Filename to which to export the repository table',
+                self::DEFAULT_CSV_FILE
+            );
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
+     *
      * @return int status code
      */
     protected function execute(InputInterface $input, OutputInterface $output): int

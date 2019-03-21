@@ -11,6 +11,7 @@ class ExtensionCollection extends \ArrayObject
 
     /**
      * @param Extension $extension
+     *
      * @return $this
      */
     public function add(Extension $extension)
@@ -26,7 +27,7 @@ class ExtensionCollection extends \ArrayObject
      */
     public function offsetSet($index, $newval)
     {
-        if (!$newval instanceof Extension) {
+        if (! $newval instanceof Extension) {
             throw new \TypeError('Extension provided is not an instance of ' . Extension::class . '.');
         }
 
@@ -35,11 +36,12 @@ class ExtensionCollection extends \ArrayObject
 
     /**
      * @param string $index
+     *
      * @return Extension|null
      */
     public function offsetGet($index): ?Extension
     {
-        if (!$this->offsetExists($index)) {
+        if (! $this->offsetExists($index)) {
             return null;
         }
 
@@ -48,6 +50,7 @@ class ExtensionCollection extends \ArrayObject
 
     /**
      * @param mixed $index
+     *
      * @return bool
      */
     public function offsetExists($index): bool

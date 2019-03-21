@@ -27,16 +27,16 @@ class DependencyResolver
 
     /**
      * DependencyResolver constructor.
+     *
      * @param RepositoryReaderInterface $repositoryReader
-     * @param Parser $parser
-     * @param ExtensionFactory $extensionFactory
+     * @param Parser                    $parser
+     * @param ExtensionFactory          $extensionFactory
      */
     public function __construct(
         RepositoryReaderInterface $repositoryReader,
         Parser $parser,
         ExtensionFactory $extensionFactory
-    )
-    {
+    ) {
         $this->repositoryReader = $repositoryReader;
         $this->parser = $parser;
         $this->extensionFactory = $extensionFactory;
@@ -44,8 +44,9 @@ class DependencyResolver
     }
 
     /**
-     * @param Extension $rootExtension
+     * @param Extension  $rootExtension
      * @param array|null $extensionBranchMap
+     *
      * @return ExtensionCollection
      * @throws NotMappedException
      */
@@ -64,13 +65,18 @@ class DependencyResolver
 
     /**
      * @param Extension $rootExtension
+     *
      * @throws NotMappedException when the found extension is not mapped.
      */
     private function extractExtensionsRecursively(Extension $rootExtension)
     {
         // Retrieves all required dependency names.
         [$owner, $repositoryName] = explode('/', $rootExtension->getRepositoryName());
-        $manifestContents = $this->repositoryReader->getManifestContents($owner, $repositoryName, $rootExtension->getBranchName());
+        $manifestContents = $this->repositoryReader->getManifestContents(
+            $owner,
+            $repositoryName,
+            $rootExtension->getBranchName()
+        );
 
         if ($manifestContents === null) {
             return;
@@ -78,7 +84,7 @@ class DependencyResolver
         $dependencyNames = $this->parser->getDependencyNames($manifestContents);
 
         foreach ($dependencyNames as $extensionName) {
-            if (!$this->extensionCollection->offsetExists($extensionName)) {
+            if (! $this->extensionCollection->offsetExists($extensionName)) {
                 // Finds the mapped branch.
                 $branchName = $this->extensionBranchMap[$extensionName] ?? Extension::DEFAULT_BRANCH;
 

@@ -13,6 +13,7 @@ interface FinderInterface
 
     /**
      * Returns found result.
+     *
      * @return mixed
      */
     public function getResult();

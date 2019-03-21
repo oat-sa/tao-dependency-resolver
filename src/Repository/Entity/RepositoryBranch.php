@@ -17,7 +17,8 @@ class RepositoryBranch implements \JsonSerializable
 
     /**
      * RepositoryBranch constructor.
-     * @param string $name
+     *
+     * @param string                      $name
      * @param array|RepositoryFile[]|null $files
      */
     public function __construct(string $name = '', array $files = [])
@@ -29,6 +30,7 @@ class RepositoryBranch implements \JsonSerializable
 
     /**
      * @param array $properties
+     *
      * @return $this
      */
     public function constructFromArray(array $properties): self
@@ -46,7 +48,6 @@ class RepositoryBranch implements \JsonSerializable
         return $this;
     }
 
-
     /**
      * @return string
      */
@@ -57,6 +58,7 @@ class RepositoryBranch implements \JsonSerializable
 
     /**
      * @param string $name
+     *
      * @return $this
      */
     public function setName(string $name): self
@@ -75,6 +77,7 @@ class RepositoryBranch implements \JsonSerializable
 
     /**
      * @param array|RepositoryFile[] $files
+     *
      * @return $this
      */
     public function setFiles(array $files): self
@@ -85,6 +88,7 @@ class RepositoryBranch implements \JsonSerializable
 
     /**
      * @param string $fileName
+     *
      * @return RepositoryFile|null
      */
     public function getFile($fileName): ?RepositoryFile
@@ -94,6 +98,7 @@ class RepositoryBranch implements \JsonSerializable
 
     /**
      * @param RepositoryFile $file
+     *
      * @return $this
      */
     public function addFile(RepositoryFile $file): self

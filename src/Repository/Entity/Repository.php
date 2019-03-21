@@ -1,6 +1,6 @@
 <?php
 
-namespace OAT\DependencyResolver\Repository;
+namespace OAT\DependencyResolver\Repository\Entity;
 
 class Repository implements \JsonSerializable
 {
@@ -36,14 +36,15 @@ class Repository implements \JsonSerializable
 
     /**
      * Repository constructor.
+     *
      * @param string $owner
      * @param string $name
-     * @param bool $private
+     * @param bool   $private
      * @param string $defaultBranch
      * @param string $extensionName
      * @param string $composerName
-     * @param bool $onPackagist
-     * @param array $branches
+     * @param bool   $onPackagist
+     * @param array  $branches
      */
     public function __construct(
         string $owner = '',
@@ -54,8 +55,7 @@ class Repository implements \JsonSerializable
         string $composerName = '',
         bool $onPackagist = false,
         array $branches = []
-    )
-    {
+    ) {
         $this
             ->setOwner($owner)
             ->setName($name)
@@ -69,6 +69,7 @@ class Repository implements \JsonSerializable
 
     /**
      * @param array $properties
+     *
      * @return $this
      */
     public function constructFromArray(array $properties): self
@@ -102,6 +103,7 @@ class Repository implements \JsonSerializable
 
     /**
      * @param string $owner
+     *
      * @return $this
      */
     public function setOwner(string $owner): self
@@ -109,7 +111,6 @@ class Repository implements \JsonSerializable
         $this->owner = $owner;
         return $this;
     }
-
 
     /**
      * @return string
@@ -121,6 +122,7 @@ class Repository implements \JsonSerializable
 
     /**
      * @param string $name
+     *
      * @return $this
      */
     public function setName(string $name): self
@@ -139,6 +141,7 @@ class Repository implements \JsonSerializable
 
     /**
      * @param bool $private
+     *
      * @return $this
      */
     public function setPrivate(bool $private): self
@@ -157,6 +160,7 @@ class Repository implements \JsonSerializable
 
     /**
      * @param string $defaultBranch
+     *
      * @return $this
      */
     public function setDefaultBranch(string $defaultBranch): self
@@ -175,6 +179,7 @@ class Repository implements \JsonSerializable
 
     /**
      * @param string $extensionName
+     *
      * @return $this
      */
     public function setExtensionName(string $extensionName): self
@@ -193,6 +198,7 @@ class Repository implements \JsonSerializable
 
     /**
      * @param string $composerName
+     *
      * @return $this
      */
     public function setComposerName(string $composerName): self
@@ -211,6 +217,7 @@ class Repository implements \JsonSerializable
 
     /**
      * @param bool $onPackagist
+     *
      * @return $this
      */
     public function setOnPackagist(bool $onPackagist): self
@@ -229,6 +236,7 @@ class Repository implements \JsonSerializable
 
     /**
      * @param array $branches
+     *
      * @return $this
      */
     public function setBranches(array $branches): self
@@ -239,6 +247,7 @@ class Repository implements \JsonSerializable
 
     /**
      * @param string $branchName
+     *
      * @return RepositoryBranch|null
      */
     public function getBranch($branchName): ?RepositoryBranch
@@ -248,6 +257,7 @@ class Repository implements \JsonSerializable
 
     /**
      * @param RepositoryBranch $branch
+     *
      * @return $this
      */
     public function addBranch(RepositoryBranch $branch): self

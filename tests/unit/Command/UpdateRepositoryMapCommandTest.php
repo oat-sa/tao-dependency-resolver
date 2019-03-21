@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Command;
 
-use OAT\DependencyResolver\Extension\Extension;
-use OAT\DependencyResolver\Extension\ExtensionMapFactory;
-use OAT\DependencyResolver\Extension\ExtensionMapUpdater;
-use OAT\DependencyResolver\Repository\RepositoryReaderInterface;
+use OAT\DependencyResolver\Repository\RepositoryMapUpdater;
+use OAT\DependencyResolver\TestHelpers\ProtectedAccessorTrait;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -21,13 +19,12 @@ class UpdateRepositoryMapCommandTest extends TestCase
     /** @var UpdateRepositoryMapCommand */
     private $subject;
 
-    /** @var ExtensionMapUpdater */
-    private $extensionMapUpdater;
+    /** @var RepositoryMapUpdater */
+    private $repositoryMapUpdater;
 
     public function setUp()
     {
-        $this->extensionMapUpdater = $this->createMock(ExtensionMapUpdater::class);
-        $this->extensionMapFactory = $this->createMock(ExtensionMapFactory::class);
+        $this->repositoryMapUpdater = $this->createMock(RepositoryMapUpdater::class);
 
         $this->subject = new UpdateRepositoryMapCommand($this->repositoryMapUpdater);
     }

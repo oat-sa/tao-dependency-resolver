@@ -14,8 +14,9 @@ use OAT\DependencyResolver\Repository\Interfaces\RepositoryReaderInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 
-class GitHubRepositoryReader implements RepositoryReaderInterface
+class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareInterface
 {
+    use LoggerAwareTrait;
     const COMPOSER_FILENAME = 'composer.json';
     const MANIFEST_FILENAME = 'manifest.php';
 
@@ -27,8 +28,9 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
 
     /**
      * GitHubRepositoryReader constructor.
+     *
      * @param ConnectedGithubClient $connectedGithubClient
-     * @param Parser $parser
+     * @param Parser                $parser
      */
     public function __construct(ConnectedGithubClient $connectedGithubClient, Parser $parser)
     {
@@ -69,7 +71,7 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
         }
 
         // Analyzes existing branches.
-        foreach ($branches as $branchName => $branchRef) {
+        foreach (array_keys($branches) as $branchName) {
             $repository->addBranch($this->analyzeBranch($repository, $branchName));
         }
 
@@ -84,15 +86,20 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
      * Checks existence of branch in repository.
      *
      * @param Repository $repository
-     * @param string $branchName
+     * @param string     $branchName
      *
      * @return array
+     * @throws EmptyRepositoryException when the repository is empty.
+     * @throws RuntimeException when another error occurs.
      */
     public function findBranch(Repository $repository, string $branchName): array
     {
         try {
-            $branchRef = $this->connectedGithubClient->getBranchReference($repository->getOwner(), $repository->getName(), $branchName);
-            return [$branchName => $branchRef];
+            $branchRef = $this->connectedGithubClient->getBranchReference(
+                $repository->getOwner(),
+                $repository->getName(),
+                $branchName
+            );
         } catch (BranchNotFoundException $exception) {
             return [];
         }
@@ -104,12 +111,13 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
      * Builds a branch with files.
      *
      * @param Repository $repository
-     * @param $branchName
+     * @param string     $branchName
+     *
      * @return RepositoryBranch|null
      */
-    public function analyzeBranch(Repository $repository, $branchName): ?RepositoryBranch
+    public function analyzeBranch(Repository $repository, string $branchName): ?RepositoryBranch
     {
-        $this->log('Analyzing branch "' . $branchName . '"...');
+        $this->logger->info('Analyzing branch "' . $branchName . '"...');
         $branch = new RepositoryBranch($branchName);
 
         // Analyzes manifest and composer.json.
@@ -128,14 +136,20 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
     /**
      * Extracts extension name from manifest.
      * Returns null if manifest file cannot be found.
+     *
      * @param Repository $repository
-     * @param string $branchName
+     * @param string     $branchName
+     *
      * @return RepositoryFile|null
      */
     public function analyzeManifest(Repository $repository, string $branchName): ?RepositoryFile
     {
         try {
-            $manifestContents = $this->getManifestContents($repository->getOwner(), $repository->getName(), $branchName);
+            $manifestContents = $this->getManifestContents(
+                $repository->getOwner(),
+                $repository->getName(),
+                $branchName
+            );
         } catch (FileNotFoundException $exception) {
             return null;
         }
@@ -149,14 +163,20 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
     /**
      * Extracts extension name from composer.json.
      * Returns null if composer.json cannot be found.
+     *
      * @param Repository $repository
-     * @param string $branchName
+     * @param string     $branchName
+     *
      * @return RepositoryFile|null
      */
     public function analyzeComposer(Repository $repository, string $branchName): ?RepositoryFile
     {
         try {
-            $composerContents = $this->getComposerContents($repository->getOwner(), $repository->getName(), $branchName);
+            $composerContents = $this->getComposerContents(
+                $repository->getOwner(),
+                $repository->getName(),
+                $branchName
+            );
         } catch (FileNotFoundException $exception) {
             return null;
         } catch (\LogicException $exception) {
@@ -170,7 +190,7 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
         $userName = $repository->getOwner();
         $requires = [];
         $requirements = $composerContents['require'] ?? [];
-        foreach ($requirements as $requirement => $version) {
+        foreach (array_keys($requirements) as $requirement) {
             if (substr($requirement, 0, strlen($userName) + 1) === $userName . '/') {
                 $requires[] = $requirement;
             }
@@ -196,7 +216,15 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
 
         $array = json_decode($json, true);
         if ($array === null) {
-            throw new \LogicException('composer.json of repository "' . $repositoryName . '" is not valid json.');
+            throw new \LogicException(
+                sprintf(
+                    'File "%s" in branch "%s" of repository "%s/%s" is not valid json.',
+                    self::COMPOSER_FILENAME,
+                    $branchName,
+                    $owner,
+                    $repositoryName
+                )
+            );
         }
 
         return $array;
@@ -205,9 +233,13 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
     /**
      * {@inheritdoc}
      */
-    public function getFileContents(string $owner, string $repositoryName, string $branchName, string $filename): ?string
-    {
-        $this->log('Retrieving ' . $owner . '/' . $repositoryName . '/' . $branchName . '/' . $filename);
+    public function getFileContents(
+        string $owner,
+        string $repositoryName,
+        string $branchName,
+        string $filename
+    ): ?string {
+        $this->logger->info('Retrieving ' . $owner . '/' . $repositoryName . '/' . $branchName . '/' . $filename);
 
         return $this->connectedGithubClient->getContents($owner, $repositoryName, $branchName, $filename);
     }
@@ -221,7 +253,7 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
      */
     public function getExtensionName(Repository $repository, string $branchName): ?string
     {
-        // Tries to get extension name from given branch, then fallback to develop, master, or any other branch existing.
+        // Tries to get extension name from given branch and fallback to develop, master or any other branch existing.
         $branchNames = [$branchName];
         if ($branchName !== 'develop') {
             $branchNames[] = 'develop';
@@ -230,7 +262,7 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
             $branchNames[] = 'master';
         }
         foreach (array_keys($repository->getBranches()) as $existingBranchName) {
-            if (!in_array($existingBranchName, $branchNames)) {
+            if (! in_array($existingBranchName, $branchNames)) {
                 $branchNames[] = $existingBranchName;
             }
         }
@@ -255,14 +287,13 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
         return '__NOT_FOUND__';
     }
 
-
     /**
      * {@inheritdoc}
      * Composer name can be located in composer.json['name'].
      */
     public function getComposerName(Repository $repository, string $branchName): ?string
     {
-        // Tries to get extension name from given branch, then fallback to develop, master, or any other branch existing.
+        // Tries to get extension name from given branch and fallback to develop, master or any other branch existing.
         $branchNames = [$branchName];
         if ($branchName !== 'develop') {
             $branchNames[] = 'develop';
@@ -271,7 +302,7 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
             $branchNames[] = 'master';
         }
         foreach (array_keys($repository->getBranches()) as $existingBranchName) {
-            if (!in_array($existingBranchName, $branchNames)) {
+            if (! in_array($existingBranchName, $branchNames)) {
                 $branchNames[] = $existingBranchName;
             }
         }
@@ -292,10 +323,5 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
         }
 
         return '__NOT_FOUND__';
-    }
-
-    public function log(string $message)
-    {
-//        $this->output->writeln($message);
     }
 }

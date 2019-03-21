@@ -2,8 +2,12 @@
 
 namespace OAT\DependencyResolver\Repository;
 
-use OAT\DependencyResolver\FileSystem\FileAccessException;
+use OAT\DependencyResolver\Extension\Exception\NotMappedException;
+use OAT\DependencyResolver\FileSystem\Exception\FileAccessException;
 use OAT\DependencyResolver\FileSystem\FileAccessor;
+use OAT\DependencyResolver\Repository\Entity\Repository;
+use OAT\DependencyResolver\Repository\Entity\RepositoryBranch;
+use OAT\DependencyResolver\Repository\Entity\RepositoryFile;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class RepositoryMapAccessor
@@ -18,15 +22,16 @@ class RepositoryMapAccessor
 
     /**
      * RepositoryMapAccessor constructor.
+     *
      * @param ParameterBagInterface $parameterBag
-     * @param FileAccessor $fileAccessor
+     * @param FileAccessor          $fileAccessor
      */
     public function __construct(ParameterBagInterface $parameterBag, FileAccessor $fileAccessor)
     {
         $this->fileAccessor = $fileAccessor;
 
-        if (!$parameterBag->has(self::REPOSITORY_MAP_PATH) || $parameterBag->get(self::REPOSITORY_MAP_PATH) === '') {
-            throw new \LogicException('Parameter "' . self::REPOSITORY_MAP_PATH . '" not missing or empty.');
+        if (! $parameterBag->has(self::REPOSITORY_MAP_PATH) || $parameterBag->get(self::REPOSITORY_MAP_PATH) === '') {
+            throw new \LogicException('Parameter "' . self::REPOSITORY_MAP_PATH . '" missing or empty.');
         }
         $this->extensionMapPath = $parameterBag->get(self::REPOSITORY_MAP_PATH);
     }
@@ -103,11 +108,20 @@ class RepositoryMapAccessor
         $repositories = $this->read();
 
         // Sets titles.
-        $csv = [implode(',', array_merge(Repository::CSV_TITLES,
-            RepositoryBranch::CSV_TITLES, RepositoryFile::CSV_TITLES, RepositoryFile::CSV_TITLES,
-            RepositoryBranch::CSV_TITLES, RepositoryFile::CSV_TITLES, RepositoryFile::CSV_TITLES,
-            RepositoryBranch::CSV_TITLES, RepositoryFile::CSV_TITLES, RepositoryFile::CSV_TITLES
-        ))];
+        $csv = [
+            implode(',', array_merge(
+                Repository::CSV_TITLES,
+                RepositoryBranch::CSV_TITLES,
+                RepositoryFile::CSV_TITLES,
+                RepositoryFile::CSV_TITLES,
+                RepositoryBranch::CSV_TITLES,
+                RepositoryFile::CSV_TITLES,
+                RepositoryFile::CSV_TITLES,
+                RepositoryBranch::CSV_TITLES,
+                RepositoryFile::CSV_TITLES,
+                RepositoryFile::CSV_TITLES
+            )),
+        ];
 
         // Builds Repository objects.
         /** @var Repository $repository */

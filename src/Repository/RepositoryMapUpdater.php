@@ -1,14 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace OAT\DependencyResolver\Extension;
+namespace OAT\DependencyResolver\Repository;
 
-use OAT\DependencyResolver\Repository\Repository;
-use OAT\DependencyResolver\Repository\RepositoryMapAccessor;
-use OAT\DependencyResolver\Repository\RepositoryReaderInterface;
+use OAT\DependencyResolver\Repository\Entity\Repository;
+use OAT\DependencyResolver\Repository\Interfaces\RepositoryReaderInterface;
 use Packagist\Api\Client as PackagistReader;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 
-class ExtensionMapUpdater
+class RepositoryMapUpdater implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     /** @var RepositoryMapAccessor */
     private $repositoryMapAccessor;
 
@@ -19,41 +22,39 @@ class ExtensionMapUpdater
     private $packagistReader;
 
     /**
-     * ExtensionMapUpdater constructor.
-     * @param RepositoryMapAccessor $repositoryMapAccessor
+     * RepositoryMapUpdater constructor.
+     *
+     * @param RepositoryMapAccessor     $repositoryMapAccessor
      * @param RepositoryReaderInterface $repositoryReader
-     * @param PackagistReader $packagistReader
+     * @param PackagistReader           $packagistReader
      */
     public function __construct(
         RepositoryMapAccessor $repositoryMapAccessor,
         RepositoryReaderInterface $repositoryReader,
         PackagistReader $packagistReader
-    )
-    {
+    ) {
         $this->repositoryMapAccessor = $repositoryMapAccessor;
         $this->repositoryReader = $repositoryReader;
         $this->packagistReader = $packagistReader;
     }
 
     /**
-     * Reads the extension name of each repository in the list
-     * @param string $userName Owner of the repositories
-     * @param string $branchName Branch name to refer to when reading repositories
-     * @param bool $reloadList Do we need to reload list of extension?
-     * @param int $limit Number of extension names to read
+     * Reads the repositories name of each repository in the list
+     *
+     * @param string $userName   Owner of the repositories
+     * @param bool   $reloadList Do we need to reload list of repositories?
+     * @param int    $limit      Number of repositories names to read
      */
-    public function updateExtensionNames(string $userName, string $branchName, bool $reloadList, int $limit)
+    public function update(string $userName, bool $reloadList, int $limit)
     {
-        $this->repositoryReader->output = $this->output;
-
-        // Number of updated extensions.
+        // Number of updated repositories.
         $updated = 0;
-        // Number of skipped extensions.
+        // Number of skipped repositories.
         $skipped = 0;
 
         // Reload repositoryList to get repositories not mapped yet.
         if ($reloadList) {
-            $this->output->writeln($this->reloadList($userName) . ' repositories added.');
+            $this->logger->info($this->reloadList($userName) . ' repositories added.');
         }
 
         // Reads either local or distant repository list.
@@ -67,13 +68,15 @@ class ExtensionMapUpdater
                 $toUpdate++;
             }
         }
-        $this->output->writeln($toUpdate . ' repositories(s) to analyze' . ($limit ? ' (limited to ' . $limit . ')' : '') . '.');
+        $this->logger->info(
+            $toUpdate . ' repositories(s) to analyze' . ($limit ? ' (limited to ' . $limit . ')' : '') . '.'
+        );
 
-        // Finds all repository that have an integer as extension name. All the other ones are supposed to be already ok.
+        // Finds all repository that have an empty extension name.
         foreach ($repositoryList as $repositoryName => &$repository) {
             /** @var Repository $repository */
             if ($repository->getExtensionName() === '') {
-                $this->output->writeln('Analyzing repository "' . $repositoryName . '"...');
+                $this->logger->info('Analyzing repository "' . $repositoryName . '"...');
                 $repository = $this->repositoryReader->analyzeRepository($repository);
 
                 if (--$limit === 0) {
@@ -87,10 +90,10 @@ class ExtensionMapUpdater
 
         // Displays results.
         if ($updated) {
-            $this->output->writeln($updated . ' extension(s) updated.');
+            $this->logger->info($updated . ' repositories updated.');
         }
         if ($skipped) {
-            $this->output->writeln($skipped . ' extension(s) skipped.');
+            $this->logger->info($skipped . ' repositories skipped.');
         }
     }
 
@@ -103,6 +106,13 @@ class ExtensionMapUpdater
      */
     public function reloadList(string $owner)
     {
+        $organizationProperties = $this->repositoryReader->getOrganizationProperties($owner);
+        $message = 'Connected to GitHub with http token.' . "\n"
+            . 'Organisation "' . $owner . '" has:' . "\n"
+            . '- ' . $organizationProperties['public_repos'] . ' public repositories' . "\n"
+            . '- ' . $organizationProperties['total_private_repos'] . ' private repositories' . "\n";
+        echo $message;
+
         // Finds repositories on Github.
         $newReadList = $this->repositoryReader->getRepositoryList($owner);
 
@@ -123,6 +133,7 @@ class ExtensionMapUpdater
 
     /**
      * Adds presence on packagist for all repositories found.
+     *
      * @param array $repositoryList
      * @param array $packagistList
      */

@@ -21,21 +21,28 @@ class RepositoryFile implements \JsonSerializable
 
     /**
      * RepositoryFile constructor.
+     *
      * @param string $name
      * @param string $composerName
      * @param string $extensionName
-     * @param array $requires
+     * @param array  $requires
      */
-    public function __construct(string $name = '', string $composerName = '', string $extensionName = '', array $requires = [])
-    {
-        $this->name = $name;
-        $this->composerName = $composerName;
-        $this->extensionName = $extensionName;
-        $this->requires = $requires;
+    public function __construct(
+        string $name = '',
+        string $composerName = '',
+        string $extensionName = '',
+        array $requires = []
+    ) {
+        $this
+            ->setName($name)
+            ->setComposerName($composerName)
+            ->setExtensionName($extensionName)
+            ->setRequires($requires);
     }
 
     /**
      * @param array $properties
+     *
      * @return $this
      */
     public function constructFromArray(array $properties): self
@@ -59,6 +66,7 @@ class RepositoryFile implements \JsonSerializable
 
     /**
      * @param string $name
+     *
      * @return $this
      */
     public function setName(string $name): self
@@ -77,6 +85,7 @@ class RepositoryFile implements \JsonSerializable
 
     /**
      * @param string $composerName
+     *
      * @return $this
      */
     public function setComposerName(string $composerName): self
@@ -95,6 +104,7 @@ class RepositoryFile implements \JsonSerializable
 
     /**
      * @param string $extensionName
+     *
      * @return $this
      */
     public function setExtensionName(string $extensionName): self
@@ -113,6 +123,7 @@ class RepositoryFile implements \JsonSerializable
 
     /**
      * @param array $requires
+     *
      * @return $this
      */
     public function setRequires(array $requires): self

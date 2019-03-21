@@ -1,8 +1,9 @@
 <?php
 
-namespace OAT\DependencyResolver\Repository;
+namespace OAT\DependencyResolver\Repository\Interfaces;
 
 use Github\Exception\ExceptionInterface;
+use OAT\DependencyResolver\Repository\Entity\Repository;
 
 interface RepositoryReaderInterface
 {
@@ -35,7 +36,7 @@ interface RepositoryReaderInterface
      * Reads the extension name of a repository.
      *
      * @param Repository $repository
-     * @param string $branchName
+     * @param string     $branchName
      *
      * @return string|null extension names or null if it can not be found.
      */
@@ -76,5 +77,10 @@ interface RepositoryReaderInterface
      * @return string
      * @throws ExceptionInterface null when an error occurred reading the file.
      */
-    public function getFileContents(string $owner, string $repositoryName, string $branchName, string $filename): ?string;
+    public function getFileContents(
+        string $owner,
+        string $repositoryName,
+        string $branchName,
+        string $filename
+    ): ?string;
 }
