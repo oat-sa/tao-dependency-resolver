@@ -1,6 +1,8 @@
 {
     "type": "project",
-    "description": "test",
+    "name": "oat-sa/tao-dependency-resolver",
+    "description": "Resolves TAO extensions dependencies",
+    "version": "0.1.0",
     "license": "proprietary",
     "require": {
         "php": "^7.1.3",
