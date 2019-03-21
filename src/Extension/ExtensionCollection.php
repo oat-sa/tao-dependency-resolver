@@ -60,4 +60,18 @@ class ExtensionCollection extends \ArrayObject
     {
         return new \ArrayIterator($this->extensions);
     }
+
+    /**
+     * Generates a composer.json contents from the extension collection
+     *
+     * @return false|string
+     */
+    public function generateComposerJson()
+    {
+        $requires = [];
+        foreach ($this->extensions as $extension) {
+            $requires[$extension->getRepositoryName()] = $extension->getPrefixedBranchName();
+        }
+        return json_encode(['require' => $requires], JSON_PRETTY_PRINT);
+    }
 }
