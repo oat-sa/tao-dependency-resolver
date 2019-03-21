@@ -24,8 +24,19 @@ class ExtensionFactory
      */
     public function create(string $extensionName, string $branch = Extension::DEFAULT_BRANCH): Extension
     {
-        if (!isset($this->extensionMap[$extensionName])) {
-            throw new NotMappedException(sprintf('Extension "%s" not found in map.', $extensionName));
+        if (! isset($this->extensionMap[$extensionName])) {
+            // Extension names do not contain dashes so if there is no dash, we can't find the extension..
+            if (strpos($extensionName, '-') === false) {
+                throw new NotMappedException('Extension "' . $extensionName . '" not found in map.');
+            }
+
+            // Tries to find the repository name in the map values.
+            $foundIndex = array_search($extensionName, array_column($this->extensionMap, 'repository_name'));
+            if ($foundIndex === false) {
+                throw new NotMappedException('Repository "' . $extensionName . '" not found in map.');
+            }
+
+            $extensionName = array_keys($this->extensionMap)[$foundIndex];
         }
 
         $extensionMapItem = $this->extensionMap[$extensionName];

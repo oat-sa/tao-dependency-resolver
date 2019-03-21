@@ -20,7 +20,7 @@ class ExtensionMapFactory
      * Creates an extension to repository name map.
      *
      * @return array
-     * @throws FileAccessException When the repository table can not be read.
+     * @throws \LogicException When the repository table can not be read.
      */
     public function create(): array
     {

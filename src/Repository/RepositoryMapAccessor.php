@@ -32,16 +32,37 @@ class RepositoryMapAccessor
     }
 
     /**
-     * Reads contents from file.
+     * Retrieves extension name from repository name.
+     *
+     * @param string $repositoryName
+     *
+     * @return string
+     * @throws NotMappedException when the repository is not found in the map
+     */
+    public function findExtensionName(string $repositoryName): string
+    {
+        $repositoryList = $this->read();
+        if (! isset($repositoryList[$repositoryName])) {
+            throw new NotMappedException('Repository "' . $repositoryName . '" not found in map.');
+        }
+
+        /** @var Repository $repository */
+        $repository = $repositoryList[$repositoryName];
+
+        return $repository->getExtensionName();
+    }
+
+    /**
+     * Reads extension map from configured file.
      *
      * @return array
-     * @throws FileAccessException
+     * @throws \LogicException when the extension map is not available or corrupted.
      */
     public function read(): array
     {
-        $map = $this->fileAccessor->getContents($this->extensionMapPath);
-
-        if ($map === null) {
+        try {
+            $map = $this->fileAccessor->getContents($this->extensionMapPath);
+        } catch (FileAccessException $exception) {
             throw new \LogicException('Extension map does not exist.');
         }
 
@@ -75,7 +96,7 @@ class RepositoryMapAccessor
      * Converts repository map to csv.
      *
      * @return array
-     * @throws FileAccessException
+     * @throws \LogicException
      */
     public function exportCsv(): array
     {

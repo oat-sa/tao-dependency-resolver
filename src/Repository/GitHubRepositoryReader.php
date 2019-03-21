@@ -2,8 +2,17 @@
 
 namespace OAT\DependencyResolver\Repository;
 
+use Github\Exception\RuntimeException;
 use OAT\DependencyResolver\Manifest\Parser;
-use Symfony\Component\Console\Output\OutputInterface;
+use OAT\DependencyResolver\Repository\Entity\Repository;
+use OAT\DependencyResolver\Repository\Entity\RepositoryBranch;
+use OAT\DependencyResolver\Repository\Entity\RepositoryFile;
+use OAT\DependencyResolver\Repository\Exception\BranchNotFoundException;
+use OAT\DependencyResolver\Repository\Exception\EmptyRepositoryException;
+use OAT\DependencyResolver\Repository\Exception\FileNotFoundException;
+use OAT\DependencyResolver\Repository\Interfaces\RepositoryReaderInterface;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 
 class GitHubRepositoryReader implements RepositoryReaderInterface
 {
@@ -25,6 +34,14 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
     {
         $this->connectedGithubClient = $connectedGithubClient;
         $this->parser = $parser;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrganizationProperties(string $owner): array
+    {
+        return $this->connectedGithubClient->getOrganizationProperties($owner);
     }
 
     /**
@@ -78,15 +95,9 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
             return [$branchName => $branchRef];
         } catch (BranchNotFoundException $exception) {
             return [];
-        } catch (PartialBranchNamesFoundException $exception) {
-            $branches = [];
-            $branchRefs = explode(',', $exception->getMessage());
-            foreach ($branchRefs as $branchRef) {
-                $branchName = str_replace('refs/heads/', '', $branchRef);
-                $branches[$branchName] = $branchRef;
-            }
-            return $branches;
         }
+
+        return [$branchName => $branchRef];
     }
 
     /**
@@ -182,9 +193,6 @@ class GitHubRepositoryReader implements RepositoryReaderInterface
     public function getComposerContents(string $owner, string $repositoryName, string $branchName): array
     {
         $json = $this->getFileContents($owner, $repositoryName, $branchName, self::COMPOSER_FILENAME);
-        if ($json === null) {
-            throw new \LogicException('composer.json of repository "' . $repositoryName . '" does not exist.');
-        }
 
         $array = json_decode($json, true);
         if ($array === null) {

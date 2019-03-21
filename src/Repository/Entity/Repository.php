@@ -289,15 +289,8 @@ class Repository implements \JsonSerializable
             $this->getDefaultBranch(),
         ];
 
-        // Find branches other than mandatory "develop" and "master" and put them at the end.
-        $branchNames = ['develop', 'master'];
-        foreach (array_keys($this->getBranches()) as $branchName) {
-            if (!in_array($branchName, $branchNames)) {
-                $branchNames[] = $branchName;
-            }
-        }
-
         // Adds csv from each branch.
+        $branchNames = ['develop', 'master'];
         foreach ($branchNames as $branchName) {
             $branch = $this->getBranch($branchName);
             $csv = $branch !== null

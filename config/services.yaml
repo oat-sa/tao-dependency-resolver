@@ -5,8 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     repository.map.path: '%kernel.project_dir%/config/repositoryMap.json'
-    github.organization: oat-sa
-    github.token: <your token here>
+    github.token: f5122cc19f8817c01a64353f70ae0932628dcf66
 
 services:
     # default configuration for services in *this* file
@@ -52,10 +51,16 @@ services:
     PhpParser\NodeTraverserInterface:
         class: PhpParser\NodeTraverser
 
+    OAT\DependencyResolver\Manifest\Parser:
+        class: OAT\DependencyResolver\Manifest\Parser
+        arguments:
+            $extensionNameFinder: '@OAT\DependencyResolver\Manifest\ExtensionNameFinder'
+            $dependencyNamesFinder: '@OAT\DependencyResolver\Manifest\DependencyNamesFinder'
+
     OAT\DependencyResolver\Repository\ConnectedGithubClient:
         class: OAT\DependencyResolver\Repository\ConnectedGithubClient
         calls:
-            - ['storeCredentials', ['%github.organization%', '%github.token%']]
+            - ['setToken', ['%github.token%']]
 
     Packagist\Api\Client:
         class: Packagist\Api\Client

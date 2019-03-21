@@ -5,37 +5,42 @@ namespace OAT\DependencyResolver\FileSystem;
 class FileAccessor
 {
     /**
-     * Reads a file contents from url.
+     * Reads a local file contents.
      * Wraps file_get_contents into an object to ease testing.
      *
-     * @param string $url file url (local or distant)
+     * @param string $filePath file path and name
      *
      * @return string
      * @throws FileAccessException when an error occurs.
      */
-    public function getContents(string $url): ?string
+    public function getContents(string $filePath): ?string
     {
-        try {
-            return file_get_contents($url);
-        } catch (\Exception $exception) {
-            throw new FileAccessException($exception->getMessage());
+        if (! is_readable($filePath)) {
+            throw new FileAccessException('File "' . $filePath . '" does not exist or is not readable.');
         }
+        return file_get_contents($filePath);
     }
 
     /**
-     * Reads a file contents from url.
+     * Write a file contents to local path.
      * Wraps file_get_contents into an object to ease testing.
      *
-     * @param string $url file url (local or distant)
+     * @param string $filePath local file path
      * @param string $contents contents to write to file
      *
      * @return bool
      * @throws FileAccessException when an error occurs.
      */
-    public function setContents(string $url, string $contents): bool
+    public function setContents(string $filePath, string $contents): bool
     {
+        // Creates directory if necessary.
+        $directory = dirname($filePath);
+        if (! is_dir($directory)) {
+            mkdir($directory, 0775, true);
+        }
+
         try {
-            return file_put_contents($url, $contents) !== false;
+            return file_put_contents($filePath, $contents) !== false;
         } catch (\Exception $exception) {
             throw new FileAccessException($exception->getMessage());
         }

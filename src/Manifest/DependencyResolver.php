@@ -53,6 +53,10 @@ class DependencyResolver
     {
         $this->extensionBranchMap = $extensionBranchMap;
 
+        // Adds the root extension so that it is installed along with the other ones.
+        $this->extensionCollection->offsetSet($rootExtension->getExtensionName(), $rootExtension);
+
+        // Extracts all the dependencies.
         $this->extractExtensionsRecursively($rootExtension);
 
         return $this->extensionCollection;

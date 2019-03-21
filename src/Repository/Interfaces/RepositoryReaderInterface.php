@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: julien
- * Date: 28/02/19
- * Time: 12:23
- */
 
 namespace OAT\DependencyResolver\Repository;
 
@@ -12,6 +6,15 @@ use Github\Exception\ExceptionInterface;
 
 interface RepositoryReaderInterface
 {
+    /**
+     * Gets numbers of public and private repositories of a user.
+     *
+     * @param string $owner
+     *
+     * @return array
+     */
+    public function getOrganizationProperties(string $owner): array;
+
     /**
      * Reads all repositories of a user.
      *

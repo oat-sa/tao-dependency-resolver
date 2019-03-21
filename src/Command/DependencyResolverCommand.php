@@ -2,10 +2,9 @@
 
 namespace OAT\DependencyResolver\Command;
 
-use Composer\IO\ConsoleIO;
-use OAT\DependencyResolver\Installer\ExtensionInstaller;
-use OAT\DependencyResolver\Extension\Extension;
+use OAT\DependencyResolver\Extension\Entity\Extension;
 use OAT\DependencyResolver\Extension\ExtensionFactory;
+use OAT\DependencyResolver\FileSystem\FileAccessor;
 use OAT\DependencyResolver\Manifest\DependencyResolver;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -18,33 +17,56 @@ class DependencyResolverCommand extends Command
     /** @var ExtensionFactory */
     private $extensionFactory;
 
-    /** @var ExtensionInstaller */
-    private $extensionInstaller;
-
     /** @var DependencyResolver */
     private $dependencyResolver;
 
+    /** @var FileAccessor */
+    private $fileAccessor;
+
+    /**
+     * DependencyResolverCommand constructor.
+     *
+     * @param ExtensionFactory   $extensionFactory
+     * @param DependencyResolver $dependencyResolver
+     * @param FileAccessor       $fileAccessor
+     */
     public function __construct(
         ExtensionFactory $extensionFactory,
-        ExtensionInstaller $extensionInstaller,
-        DependencyResolver $dependencyResolver
-    )
-    {
+        DependencyResolver $dependencyResolver,
+        FileAccessor $fileAccessor
+    ) {
         parent::__construct();
 
         $this->extensionFactory = $extensionFactory;
-        $this->extensionInstaller = $extensionInstaller;
         $this->dependencyResolver = $dependencyResolver;
+        $this->fileAccessor = $fileAccessor;
     }
 
     protected function configure()
     {
         $this
             ->setName('dependencies:resolve')
-            ->addArgument('package-name', InputArgument::REQUIRED, 'Name of the extension being tested.')
-            ->addOption('package-branch', 'b', InputOption::VALUE_REQUIRED, 'Name of the branch being tested.', Extension::DEFAULT_BRANCH)
-            ->addOption('extensions-branch', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Branch to load for each extension.')
-            ->addOption('directory', 'd', InputOption::VALUE_REQUIRED, 'Directory in which to download dependencies', __DIR__ . '/../../tmp');
+            ->addArgument('package-name', InputArgument::REQUIRED, 'Name of the extension or repository being tested.')
+            ->addOption(
+                'package-branch',
+                'b',
+                InputOption::VALUE_REQUIRED,
+                'Name of the branch being tested.',
+                Extension::DEFAULT_BRANCH
+            )
+            ->addOption(
+                'extensions-branch',
+                null,
+                InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+                'Branch to load for each extension.'
+            )
+            ->addOption(
+                'directory',
+                'd',
+                InputOption::VALUE_REQUIRED,
+                'Directory in which to download dependencies',
+                __DIR__ . '/../../tmp'
+            );
     }
 
     /**
@@ -55,25 +77,34 @@ class DependencyResolverCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        // Build root extension.
+        // Builds root extension.
         $rootExtension = $this->extensionFactory->create(
             $input->getArgument('package-name'),
             $input->getOption('package-branch')
         );
+
+        echo 'Resolving dependencies for repository "' . $rootExtension->getRepositoryName() . '"', "\n";
 
         $extensionBranchMap = $this->getExtensionToBranchMap($input->getOption('extensions-branch'));
 
         // Resolve all extensions.
         $extensionCollection = $this->dependencyResolver->resolve($rootExtension, $extensionBranchMap);
 
-        echo 'The following rxtensions will be installed:', "\n";
+        echo 'The following extensions will be installed:', "\n";
         foreach ($extensionCollection as $extension) {
             echo '- ', $extension->getExtensionName(), "\n";
         }
 
-        // Get composer IO Helper
-        $consoleIo = new ConsoleIO($input, $output, $this->getHelperSet());
-        return $this->extensionInstaller->install($rootExtension, $extensionCollection, $input->getOption('directory'), $consoleIo);
+        // Generates and write composer.json
+        $composerJson = $extensionCollection->generateComposerJson();
+        $composerJsonPath = $input->getOption('directory') . DIRECTORY_SEPARATOR . 'composer.json';
+        $written = $this->fileAccessor->setContents($composerJsonPath, $composerJson);
+
+        if ($written) {
+            echo 'Dumped composer require to "' . realpath($composerJsonPath) . '".', "\n";
+        }
+
+        return $written ? 0 : 1;
     }
 
     private function getExtensionToBranchMap(array $extensionsBranches)
