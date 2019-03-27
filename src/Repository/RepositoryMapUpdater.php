@@ -21,13 +21,6 @@ class RepositoryMapUpdater implements LoggerAwareInterface
     /** @var PackagistReader */
     private $packagistReader;
 
-    /**
-     * RepositoryMapUpdater constructor.
-     *
-     * @param RepositoryMapAccessor     $repositoryMapAccessor
-     * @param RepositoryReaderInterface $repositoryReader
-     * @param PackagistReader           $packagistReader
-     */
     public function __construct(
         RepositoryMapAccessor $repositoryMapAccessor,
         RepositoryReaderInterface $repositoryReader,
@@ -39,23 +32,16 @@ class RepositoryMapUpdater implements LoggerAwareInterface
     }
 
     /**
-     * Reads the repositories name of each repository in the list
+     * Reads repositories name of each repository in the list
      *
-     * @param string $userName   Owner of the repositories
-     * @param bool   $reloadList Do we need to reload list of repositories?
-     * @param int    $limit      Number of repositories names to read
+     * @param int $limit Number of repositories names to read
      */
-    public function update(string $userName, bool $reloadList, int $limit)
+    public function update(int $limit)
     {
         // Number of updated repositories.
         $updated = 0;
         // Number of skipped repositories.
         $skipped = 0;
-
-        // Reload repositoryList to get repositories not mapped yet.
-        if ($reloadList) {
-            $this->logger->info($this->reloadList($userName) . ' repositories added.');
-        }
 
         // Reads either local or distant repository list.
         $repositoryList = $this->repositoryMapAccessor->read();
@@ -133,11 +119,8 @@ class RepositoryMapUpdater implements LoggerAwareInterface
 
     /**
      * Adds presence on packagist for all repositories found.
-     *
-     * @param array $repositoryList
-     * @param array $packagistList
      */
-    public function addPackagistPresence(array $repositoryList, array $packagistList)
+    private function addPackagistPresence(array $repositoryList, array $packagistList)
     {
         foreach ($packagistList as &$repositoryName) {
             if (isset($repositoryList[$repositoryName])) {

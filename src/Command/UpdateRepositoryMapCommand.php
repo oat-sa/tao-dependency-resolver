@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Command;
 
@@ -13,11 +15,6 @@ class UpdateRepositoryMapCommand extends Command
     /** @var RepositoryMapUpdater */
     private $repositoryMapUpdater;
 
-    /**
-     * UpdateRepositoryMapCommand constructor.
-     *
-     * @param RepositoryMapUpdater $repositoryMapUpdater
-     */
     public function __construct(RepositoryMapUpdater $repositoryMapUpdater)
     {
         parent::__construct();
@@ -43,20 +40,13 @@ class UpdateRepositoryMapCommand extends Command
             );
     }
 
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     *
-     * @return int status code
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->repositoryMapUpdater->update(
-            'oat-sa',
-            $input->getOption('reload-list'),
-            (int)$input->getOption('limit')
-        );
+        // Reload repositoryList to get repositories not mapped yet.
+        if ($input->getOption('reload-list')) {
+            $output->writeln($this->repositoryMapUpdater->reloadList('oat-sa') . ' repositories added.');
+        }
 
-        return 1;
+        $this->repositoryMapUpdater->update((int)$input->getOption('limit'));
     }
 }

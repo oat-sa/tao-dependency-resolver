@@ -6,8 +6,8 @@ use OAT\DependencyResolver\Repository\GitHubRepositoryReader;
 
 class RepositoryBranch implements \JsonSerializable
 {
-    const CSV_TITLES = ['branchName'];
-    const CSV_BLANK = ['', '', '', '', '', '', '', '', ''];
+    public const CSV_TITLES = ['branchName'];
+    public const CSV_BLANK = ['', '', '', '', '', '', '', '', ''];
 
     /** @var string */
     private $name = '';
@@ -15,12 +15,6 @@ class RepositoryBranch implements \JsonSerializable
     /** @var array|RepositoryFile[] */
     private $files = [];
 
-    /**
-     * RepositoryBranch constructor.
-     *
-     * @param string                      $name
-     * @param array|RepositoryFile[]|null $files
-     */
     public function __construct(string $name = '', array $files = [])
     {
         $this
@@ -28,11 +22,6 @@ class RepositoryBranch implements \JsonSerializable
             ->setFiles($files);
     }
 
-    /**
-     * @param array $properties
-     *
-     * @return $this
-     */
     public function constructFromArray(array $properties): self
     {
         $files = [];
@@ -48,68 +37,42 @@ class RepositoryBranch implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
-    /**
-     * @return array|RepositoryFile[]
-     */
     public function getFiles(): array
     {
         return $this->files;
     }
 
-    /**
-     * @param array|RepositoryFile[] $files
-     *
-     * @return $this
-     */
     public function setFiles(array $files): self
     {
         $this->files = $files;
+
         return $this;
     }
 
-    /**
-     * @param string $fileName
-     *
-     * @return RepositoryFile|null
-     */
     public function getFile($fileName): ?RepositoryFile
     {
         return $this->files[$fileName] ?? null;
     }
 
-    /**
-     * @param RepositoryFile $file
-     *
-     * @return $this
-     */
     public function addFile(RepositoryFile $file): self
     {
         $this->files[$file->getName()] = $file;
+
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize()
     {
         return [
@@ -118,12 +81,7 @@ class RepositoryBranch implements \JsonSerializable
         ];
     }
 
-    /**
-     * Converts to Csv line.
-     *
-     * @return array
-     */
-    public function toCsv()
+    public function toFlatArray()
     {
         $line = [
             $this->getName(),
@@ -134,7 +92,7 @@ class RepositoryBranch implements \JsonSerializable
         foreach ($fileNames as $fileName) {
             $file = $this->getFile($fileName);
             $csv = $file !== null
-                ? $file->toCsv()
+                ? $file->toFlatArray()
                 : RepositoryFile::CSV_BLANK;
             $line = array_merge($line, $csv);
         }

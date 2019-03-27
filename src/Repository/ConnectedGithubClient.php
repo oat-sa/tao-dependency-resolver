@@ -11,8 +11,6 @@ use OAT\DependencyResolver\Repository\Exception\FileNotFoundException;
 
 class ConnectedGithubClient
 {
-    const REPOSITORIES_PER_PAGE = 100;
-
     /** @var GithubClientProxy */
     protected $client;
 
@@ -36,11 +34,6 @@ class ConnectedGithubClient
      */
     protected $organisationProperties = [];
 
-    /**
-     * GithubConnection constructor.
-     *
-     * @param GithubClientProxy $client
-     */
     public function __construct(GithubClientProxy $client)
     {
         $this->client = $client;
@@ -48,21 +41,12 @@ class ConnectedGithubClient
 
     /**
      * Stores token for github client.
-     *
-     * @param string $token
      */
     public function setToken(string $token)
     {
         $this->token = $token;
     }
 
-    /**
-     * Retrieves organization's properties.
-     *
-     * @param string $owner
-     *
-     * @return array
-     */
     public function getOrganizationProperties(string $owner): array
     {
         $this->authenticateAndCheck($owner);
@@ -78,7 +62,7 @@ class ConnectedGithubClient
      *
      * @return array
      */
-    public function getRepositoryList(string $owner, int $perPage = self::REPOSITORIES_PER_PAGE): array
+    public function getRepositoryList(string $owner, int $perPage = 100): array
     {
         $this->authenticateAndCheck($owner);
 
@@ -102,12 +86,6 @@ class ConnectedGithubClient
     }
 
     /**
-     * @param string $owner
-     * @param string $repositoryName
-     * @param string $branchName
-     * @param string $fileName
-     *
-     * @return string|null
      * @throws FileNotFoundException when the file does not exist
      * @throws ErrorException when another error occurs
      */
@@ -142,11 +120,6 @@ class ConnectedGithubClient
     /**
      * Checks existence of a branch.
      *
-     * @param string $owner
-     * @param string $repositoryName
-     * @param string $branchName
-     *
-     * @return string
      * @throws BranchNotFoundException when the branch does not exist.
      * @throws EmptyRepositoryException when the repository is empty.
      * @throws RuntimeException when another error occurs.
@@ -195,8 +168,6 @@ class ConnectedGithubClient
     /**
      * Always make authenticated requests to avoid limitations.
      * Sets organisation's number of private and public repositories.
-     *
-     * @param string $owner
      *
      * @todo: add some cache
      * @see https://github.com/KnpLabs/php-github-api#cache-usage

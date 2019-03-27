@@ -17,8 +17,9 @@ use Psr\Log\LoggerAwareTrait;
 class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
-    const COMPOSER_FILENAME = 'composer.json';
-    const MANIFEST_FILENAME = 'manifest.php';
+
+    public const COMPOSER_FILENAME = 'composer.json';
+    public const MANIFEST_FILENAME = 'manifest.php';
 
     /** @var ConnectedGithubClient */
     public $connectedGithubClient;
@@ -26,37 +27,22 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
     /** @var Parser */
     private $parser;
 
-    /**
-     * GitHubRepositoryReader constructor.
-     *
-     * @param ConnectedGithubClient $connectedGithubClient
-     * @param Parser                $parser
-     */
     public function __construct(ConnectedGithubClient $connectedGithubClient, Parser $parser)
     {
         $this->connectedGithubClient = $connectedGithubClient;
         $this->parser = $parser;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrganizationProperties(string $owner): array
     {
         return $this->connectedGithubClient->getOrganizationProperties($owner);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRepositoryList(string $owner): array
     {
         return $this->connectedGithubClient->getRepositoryList($owner);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function analyzeRepository(Repository $repository)
     {
         // Check existence of branches 'develop', 'master', or derivated (e.g. development instead of develop).
@@ -85,10 +71,6 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
     /**
      * Checks existence of branch in repository.
      *
-     * @param Repository $repository
-     * @param string     $branchName
-     *
-     * @return array
      * @throws EmptyRepositoryException when the repository is empty.
      * @throws RuntimeException when another error occurs.
      */
@@ -109,11 +91,6 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
 
     /**
      * Builds a branch with files.
-     *
-     * @param Repository $repository
-     * @param string     $branchName
-     *
-     * @return RepositoryBranch|null
      */
     public function analyzeBranch(Repository $repository, string $branchName): ?RepositoryBranch
     {
@@ -136,11 +113,6 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
     /**
      * Extracts extension name from manifest.
      * Returns null if manifest file cannot be found.
-     *
-     * @param Repository $repository
-     * @param string     $branchName
-     *
-     * @return RepositoryFile|null
      */
     public function analyzeManifest(Repository $repository, string $branchName): ?RepositoryFile
     {
@@ -163,11 +135,6 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
     /**
      * Extracts extension name from composer.json.
      * Returns null if composer.json cannot be found.
-     *
-     * @param Repository $repository
-     * @param string     $branchName
-     *
-     * @return RepositoryFile|null
      */
     public function analyzeComposer(Repository $repository, string $branchName): ?RepositoryFile
     {
@@ -191,7 +158,7 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
         $requires = [];
         $requirements = $composerContents['require'] ?? [];
         foreach (array_keys($requirements) as $requirement) {
-            if (substr($requirement, 0, strlen($userName) + 1) === $userName . '/') {
+            if (strpos($requirement, $userName . '/') === 0) {
                 $requires[] = $requirement;
             }
         }
@@ -199,17 +166,11 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
         return new RepositoryFile(self::COMPOSER_FILENAME, $composerName, $extensionName, $requires);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getManifestContents(string $owner, string $repositoryName, string $branchName): ?string
     {
         return $this->getFileContents($owner, $repositoryName, $branchName, self::MANIFEST_FILENAME);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getComposerContents(string $owner, string $repositoryName, string $branchName): array
     {
         $json = $this->getFileContents($owner, $repositoryName, $branchName, self::COMPOSER_FILENAME);
@@ -230,9 +191,6 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
         return $array;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFileContents(
         string $owner,
         string $repositoryName,
@@ -245,7 +203,6 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
     }
 
     /**
-     * {@inheritdoc}
      * Extension name can be located either in:
      * - manifest.php['name']
      * - composer.json['extra']['tao-extension-name']
@@ -288,7 +245,6 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
     }
 
     /**
-     * {@inheritdoc}
      * Composer name can be located in composer.json['name'].
      */
     public function getComposerName(Repository $repository, string $branchName): ?string

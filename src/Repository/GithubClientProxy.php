@@ -11,46 +11,37 @@ use Github\Exception\ErrorException;
 
 class GithubClientProxy extends Client
 {
-    // Api accessor names.
-    const API_ORGANIZATION = 'organization';
-    const API_REPOSITORY = 'repo';
-    const API_REFERENCE = 'gitData';
+    /** @var Organization|ApiInterface */
+    protected $organizationApi;
 
-    /**
-     * Retrieves organization properties.
-     *
-     * @param string $owner
-     *
-     * @return array
-     */
+    /** @var Repo|ApiInterface */
+    protected $repositoryApi;
+
+    /** @var GitData|ApiInterface */
+    protected $gitDataApi;
+
+    // Api accessor names.
+    protected const API_ORGANIZATION = 'organization';
+    protected const API_REPOSITORY = 'repo';
+    protected const API_REFERENCE = 'gitData';
+
     public function getOrganizationProperties(string $owner): array
     {
         return $this->getOrganizationApi()->show($owner);
     }
 
     /**
-     * Returns a page of the repository list of the given owner?
-     *
-     * @param string $owner
-     * @param int    $page
-     * @param int    $perPage
-     *
-     * @return array
+     * Returns a page of the repository list of the given owner
      */
     public function getRepositoryList(string $owner, int $page, int $perPage): array
     {
         $organisationApi = $this->getOrganizationApi();
         $organisationApi->setPerPage($perPage);
+
         return $organisationApi->repositories($owner, 'all', $page);
     }
 
     /**
-     * @param string $owner
-     * @param string $repositoryName
-     * @param string $branchReference
-     * @param string $filename
-     *
-     * @return string|null
      * @throws ErrorException
      */
     public function getFileContents(
@@ -64,12 +55,6 @@ class GithubClientProxy extends Client
 
     /**
      * Checks existence of a branch.
-     *
-     * @param string $owner
-     * @param string $repositoryName
-     * @param string $branchName
-     *
-     * @return array
      */
     public function getReference(string $owner, string $repositoryName, string $branchName): array
     {
@@ -81,7 +66,11 @@ class GithubClientProxy extends Client
      */
     public function getOrganizationApi(): Organization
     {
-        return $this->api(self::API_ORGANIZATION);
+        if ($this->organizationApi === null) {
+            $this->organizationApi = $this->api(self::API_ORGANIZATION);
+        }
+
+        return $this->organizationApi;
     }
 
     /**
@@ -89,7 +78,11 @@ class GithubClientProxy extends Client
      */
     public function getRepositoryApi(): Repo
     {
-        return $this->api(self::API_REPOSITORY);
+        if ($this->repositoryApi === null) {
+            $this->repositoryApi = $this->api(self::API_REPOSITORY);
+        }
+
+        return $this->repositoryApi;
     }
 
     /**
@@ -97,6 +90,10 @@ class GithubClientProxy extends Client
      */
     public function getGitDataApi(): GitData
     {
-        return $this->api(self::API_REFERENCE);
+        if ($this->gitDataApi === null) {
+            $this->gitDataApi = $this->api(self::API_REFERENCE);
+        }
+
+        return $this->gitDataApi;
     }
 }

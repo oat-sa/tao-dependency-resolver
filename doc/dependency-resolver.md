@@ -2,12 +2,11 @@
 
 Resolves the inclusion tree from information in both `manifests.php` and `composer.json`.
 
-
 ## Problematics
 
 - Tao extensions inclusion currently relies on both:
-    - `manifest.php` for inclusion of other OAT extensions,
-    - `composer.json` for external libraries.
+    - `manifest.php` for inclusion of other OAT extensions
+    - `composer.json` for external libraries
 - Some repositories additionally include OAT libraries or extensions in `composer.json`.
 - Some repositories include transitive dependencies in the root `composer.json` or `manifest.php`, which could potentially lead to version conflicts.
 - `manifest.php` are written in... PHP, more difficult to parse than JSON, especially when including class names.
@@ -15,10 +14,10 @@ Resolves the inclusion tree from information in both `manifests.php` and `compos
 This leads to the need to maintain a mapping of extensions names to repository names.
 A [repository lister tool](repository-updater.md) has been developed to list every oat-sa GitHub repositories and extract the extension name when it exists.
 - `manifest.php` also contains information about:
-    - routing,
-    - dependency injection,
-    - service configuration,
-    - installation and update instructions,
+    - routing
+    - dependency injection
+    - service configuration
+    - installation and update instructions
     - ...
 
 As an example, see [tao-core's manifest.php](tao-manifest.php), where the only parts used for dependency inclusion are:
@@ -51,7 +50,6 @@ The list of included repositories is injected in a local composer execution:
 1. Install the main repository.
 2. Install each of the dependent repository.
 
-
 ## Result
 
 Currently, the result is the installation of all required extensions in a specific directory, in order to be able to independently test an extension with all its dependencies.
@@ -76,7 +74,6 @@ The dependency tree of extension `taoQtiItem` in `manifest.php` files is the fol
             `-- tao
                 `-- generis
 
-
 Resolving it with this tool will return the following list:
 
     generis       => oat-sa/generis
@@ -84,7 +81,6 @@ Resolving it with this tool will return the following list:
     taoBackOffice => oat-sa/extension-tao-backoffice  (transitive dependency)
     taoItems      => oat-sa/extension-tao-item
     taoQtiItem    => oat-sa/extension-tao-itemqti (main repository)
-
 
 This list is then injected in a local composer execution, which adds all the dependencies required in `composer.json` file from each repository:
 
@@ -109,7 +105,6 @@ This list is then injected in a local composer execution, which adds all the dep
     `-- oat-sa/lib-tao-qti
         |-- qtism/qtism (oat-sa/qti-sdk)
         `-- oat-sa/lib-beeme
-    
 
 Composer will finally install the following repositories:
 
@@ -126,7 +121,6 @@ Composer will finally install the following repositories:
     oat-sa/oatbox-extension-installer
     oat-sa/tao-core
     qtism/qtism
-
 
 ## Using the tools
 

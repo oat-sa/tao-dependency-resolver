@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Manifest;
 
@@ -18,20 +20,18 @@ class ExtensionNameFinder extends NodeVisitorAbstract implements FinderInterface
 
     /**
      * Clears all extensions found for a new traversal.
-     * @retun $this
      */
     public function clear(): FinderInterface
     {
         $this->extensionName = '';
+
         return $this;
     }
 
     /**
      * Returns all found extension names.
-     *
-     * @return string
      */
-    public function getResult()
+    public function getResult(): string
     {
         return $this->extensionName;
     }
@@ -51,6 +51,7 @@ class ExtensionNameFinder extends NodeVisitorAbstract implements FinderInterface
             && $node->value instanceof String_
         ) {
             $this->extensionName = $node->value->value;
+
             return NodeTraverser::STOP_TRAVERSAL;
         }
 

@@ -5,7 +5,6 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     repository.map.path: '%kernel.project_dir%/config/repositoryMap.json'
-    github.token: <your github token>
 
 services:
     # default configuration for services in *this* file
@@ -24,21 +23,6 @@ services:
 
     OAT\DependencyResolver\Extension\ExtensionFactory:
         arguments: ["@=service('OAT\\\\DependencyResolver\\\\Extension\\\\ExtensionMapFactory').create()"]
-
-    Composer\Factory:
-        class: Composer\Factory
-
-    Composer\IO\IOInterface:
-        class: Composer\IO\NullIO
-
-    Composer\Composer:
-        factory: 'Composer\Factory:createComposer'
-        arguments:
-            $localConfig: '%kernel.project_dir%/../package-tao/composer.json'
-            $cwd: '%kernel.project_dir%/../test-dependency-resolver/'
-
-    Composer\Installer\SuggestedPackagesReporter:
-        autowire: true
 
     PhpParser\ParserFactory:
         class: PhpParser\ParserFactory
@@ -60,7 +44,7 @@ services:
     OAT\DependencyResolver\Repository\ConnectedGithubClient:
         class: OAT\DependencyResolver\Repository\ConnectedGithubClient
         calls:
-            - ['setToken', ['%github.token%']]
+            - ['setToken', ['%env(GITHUB_SECRET)%']]
 
     Packagist\Api\Client:
         class: Packagist\Api\Client

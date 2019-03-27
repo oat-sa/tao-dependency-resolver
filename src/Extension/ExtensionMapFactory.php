@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Extension;
 
@@ -16,17 +18,12 @@ class ExtensionMapFactory
     }
 
     /**
-     * Creates an extension to repository name map.
-     *
-     * @return array
      * @throws \LogicException When the repository table can not be read.
      */
     public function create(): array
     {
-        $repositories = $this->repositoryMapAccessor->read();
-
         $extensionMap = [];
-        foreach ($repositories as $repository) {
+        foreach ($this->repositoryMapAccessor->read() as $repository) {
             /** @var Repository $repository */
             if ($repository->getExtensionName() !== '') {
                 $extensionMap[$repository->getExtensionName()] = [

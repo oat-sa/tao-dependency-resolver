@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Manifest;
 
@@ -10,9 +12,6 @@ use OAT\DependencyResolver\Repository\Interfaces\RepositoryReaderInterface;
 
 class DependencyResolver
 {
-    /** @var array */
-    private $extensionBranchMap = [];
-
     /** @var ExtensionCollection */
     private $extensionCollection;
 
@@ -25,13 +24,6 @@ class DependencyResolver
     /** @var ExtensionFactory */
     private $extensionFactory;
 
-    /**
-     * DependencyResolver constructor.
-     *
-     * @param RepositoryReaderInterface $repositoryReader
-     * @param Parser                    $parser
-     * @param ExtensionFactory          $extensionFactory
-     */
     public function __construct(
         RepositoryReaderInterface $repositoryReader,
         Parser $parser,
@@ -45,30 +37,29 @@ class DependencyResolver
 
     /**
      * @param Extension  $rootExtension
-     * @param array|null $extensionBranchMap
+     * @param array $extensionBranchMap
      *
      * @return ExtensionCollection
      * @throws NotMappedException
      */
     public function resolve(Extension $rootExtension, array $extensionBranchMap): ExtensionCollection
     {
-        $this->extensionBranchMap = $extensionBranchMap;
-
         // Adds the root extension so that it is installed along with the other ones.
         $this->extensionCollection->offsetSet($rootExtension->getExtensionName(), $rootExtension);
 
         // Extracts all the dependencies.
-        $this->extractExtensionsRecursively($rootExtension);
+        $this->extractExtensionsRecursively($rootExtension, $extensionBranchMap);
 
         return $this->extensionCollection;
     }
 
     /**
      * @param Extension $rootExtension
+     * @param array $extensionBranchMap
      *
      * @throws NotMappedException when the found extension is not mapped.
      */
-    private function extractExtensionsRecursively(Extension $rootExtension)
+    private function extractExtensionsRecursively(Extension $rootExtension, array $extensionBranchMap)
     {
         // Retrieves all required dependency names.
         [$owner, $repositoryName] = explode('/', $rootExtension->getRepositoryName());
@@ -86,14 +77,14 @@ class DependencyResolver
         foreach ($dependencyNames as $extensionName) {
             if (! $this->extensionCollection->offsetExists($extensionName)) {
                 // Finds the mapped branch.
-                $branchName = $this->extensionBranchMap[$extensionName] ?? Extension::DEFAULT_BRANCH;
+                $branchName = $extensionBranchMap[$extensionName] ?? Extension::DEFAULT_BRANCH;
 
                 // Adds dependency if not already in the collection.
                 $extension = $this->extensionFactory->create($extensionName, $branchName);
                 $this->extensionCollection->offsetSet($extensionName, $extension);
 
                 // Looks for transitive dependencies.
-                $this->extractExtensionsRecursively($extension);
+                $this->extractExtensionsRecursively($extension, $extensionBranchMap);
             }
         }
     }

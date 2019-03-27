@@ -4,7 +4,7 @@ namespace OAT\DependencyResolver\Repository\Entity;
 
 class Repository implements \JsonSerializable
 {
-    const CSV_TITLES = ['repositoryName', 'extensionName', 'composerName', 'privacy', 'packagist', 'defaultBranch'];
+    public const CSV_TITLES = ['repositoryName', 'extensionName', 'composerName', 'privacy', 'packagist', 'defaultBranch'];
 
     /** @var string */
     private $owner = '';
@@ -34,18 +34,6 @@ class Repository implements \JsonSerializable
         'other' => null,
     ];
 
-    /**
-     * Repository constructor.
-     *
-     * @param string $owner
-     * @param string $name
-     * @param bool   $private
-     * @param string $defaultBranch
-     * @param string $extensionName
-     * @param string $composerName
-     * @param bool   $onPackagist
-     * @param array  $branches
-     */
     public function __construct(
         string $owner = '',
         string $name = '',
@@ -93,182 +81,114 @@ class Repository implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getOwner(): string
     {
         return $this->owner;
     }
 
-    /**
-     * @param string $owner
-     *
-     * @return $this
-     */
     public function setOwner(string $owner): self
     {
         $this->owner = $owner;
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isPrivate(): bool
     {
         return $this->private;
     }
 
-    /**
-     * @param bool $private
-     *
-     * @return $this
-     */
     public function setPrivate(bool $private): self
     {
         $this->private = $private;
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getDefaultBranch(): string
     {
         return $this->defaultBranch;
     }
 
-    /**
-     * @param string $defaultBranch
-     *
-     * @return $this
-     */
     public function setDefaultBranch(string $defaultBranch): self
     {
         $this->defaultBranch = $defaultBranch;
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getExtensionName(): string
     {
         return $this->extensionName;
     }
 
-    /**
-     * @param string $extensionName
-     *
-     * @return $this
-     */
     public function setExtensionName(string $extensionName): self
     {
         $this->extensionName = $extensionName;
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getComposerName(): string
     {
         return $this->composerName;
     }
 
-    /**
-     * @param string $composerName
-     *
-     * @return $this
-     */
     public function setComposerName(string $composerName): self
     {
         $this->composerName = $composerName;
+
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isOnPackagist(): bool
     {
         return $this->onPackagist;
     }
 
-    /**
-     * @param bool $onPackagist
-     *
-     * @return $this
-     */
     public function setOnPackagist(bool $onPackagist): self
     {
         $this->onPackagist = $onPackagist;
+
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getBranches(): array
     {
         return $this->branches;
     }
 
-    /**
-     * @param array $branches
-     *
-     * @return $this
-     */
     public function setBranches(array $branches): self
     {
         $this->branches = $branches;
+
         return $this;
     }
 
-    /**
-     * @param string $branchName
-     *
-     * @return RepositoryBranch|null
-     */
     public function getBranch($branchName): ?RepositoryBranch
     {
         return $this->branches[$branchName] ?? null;
     }
 
-    /**
-     * @param RepositoryBranch $branch
-     *
-     * @return $this
-     */
     public function addBranch(RepositoryBranch $branch): self
     {
         $this->branches[$branch->getName()] = $branch;
+
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function jsonSerialize()
     {
         return [
@@ -283,12 +203,7 @@ class Repository implements \JsonSerializable
         ];
     }
 
-    /**
-     * Converts to Csv line.
-     *
-     * @return array
-     */
-    public function toCsv()
+    public function toFlatArray()
     {
         $line = [
             $this->getName(),
@@ -304,7 +219,7 @@ class Repository implements \JsonSerializable
         foreach ($branchNames as $branchName) {
             $branch = $this->getBranch($branchName);
             $csv = $branch !== null
-                ? $branch->toCsv()
+                ? $branch->toFlatArray()
                 : RepositoryBranch::CSV_BLANK;
             $line = array_merge($line, $csv);
         }

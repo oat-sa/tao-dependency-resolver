@@ -13,11 +13,9 @@ It will read the list of all oat-sa repositories on Github and for each reposito
     - name of the extension in `manifest.php` (key `name`) and `composer.json` (key `extra.tao-extension-name`)
 - finally determine the **extension name** used by the [dependency resolver tool](dependency-resolver.md).
 
-
 ## Usage
 
 Usage is given in the [main README](../README.md) file.
-
 
 ## Current result
 
@@ -39,36 +37,28 @@ Most of the **Tao extensions** repositories are currently based on the same patt
 
 | Repository name                    | Branches   | Default | Packagist | Missing files      | Repo name (composer.json) | Extension name                              | 
 |------------------------------------|------------|---------|-----------|--------------------|---------------------------|---------------------------------------------| 
-| extension-generis-hard-pg          | none       |         | Missing   | manifest, composer |                           | none                                        | 
-| extension-tao-unisa                | no master  | develop |           | manifest, composer |                           |                                             | 
-| extension-tao-authorization-server | no develop |         | Missing   | manifest, composer |                           | none                                        | 
-| extension-tao-itemapip             | no develop |         | Missing   | manifest, composer |                           | none                                        | 
 | extension-experimental-ekstera     | no develop |         | Missing   | manifest, composer |                           |                                             | 
 | extension-experimental-kutimo      | no develop |         | Missing   | manifest, composer |                           |                                             | 
-| extension-tao-randomcat            | no develop |         | Missing   | manifest, composer |                           |                                             | 
-| extension-tao-act-authoring        | no develop |         |           | manifest, composer |                           |                                             | 
-| extension-tao-iave                 |            | develop |           |                    |                           |                                             | 
-| extension-tao-pfs                  |            | develop |           |                    |                           |                                             | 
-| extension-tao-talk                 |            |         | Missing   |                    | taoTalk                   |                                             | 
-| extension-lti-outcomeui            |            |         | Missing   | manifest           |                           |                                             | 
-| extension-tao-item-restapi         |            |         | Missing   | manifest, composer |                           |                                             | 
-| extension-tao-lti-consumer         |            |         | Missing   | manifest, composer |                           |                                             | 
-| extension-tao-restful              |            |         | Missing   | manifest, composer |                           |                                             | 
 | extension-lti-advantage            |            |         | Missing   |                    |                           |                                             | 
+| extension-lti-outcomeui            |            |         | Missing   | manifest           |                           |                                             | 
 | extension-parcc-tei                |            |         | Missing   |                    |                           |                                             | 
 | extension-tao-delivery-keyvalue    |            |         | Missing   |                    |                           |                                             | 
+| extension-tao-extrapic             |            |         |           |                    |                           | taoExtraPic (develop), taoTextHelp (master) | 
 | extension-tao-foobar               |            |         | Missing   |                    |                           |                                             | 
+| extension-tao-iave                 |            | develop |           |                    |                           |                                             | 
 | extension-tao-itemprint            |            |         | Missing   |                    |                           |                                             | 
-| extension-tao-qtiitem-restapi      |            |         | Missing   |                    |                           |                                             | 
+| extension-tao-lti-consumer         |            |         | Missing   | manifest, composer |                           |                                             | 
+| extension-tao-marking              |            |         |           | manifest, composer |                           |                                             | 
+| extension-tao-pfs                  |            | develop |           |                    |                           |                                             | 
+| extension-tao-randomcat            | no develop |         | Missing   | manifest, composer |                           |                                             | 
 | extension-tao-restapi-docs         |            |         | Missing   |                    |                           |                                             | 
 | extension-tao-static-deliveries    |            |         | Missing   |                    |                           |                                             | 
+| extension-tao-talk                 |            |         | Missing   |                    | taoTalk                   |                                             | 
 | extension-tao-test-runner-tools    |            |         | Missing   |                    |                           |                                             | 
+| extension-tao-unisa                | no master  | develop |           | manifest, composer |                           |                                             | 
+| generis                            |            |         |           |                    |                           | generis                                     | 
 | irt-test                           |            |         | Missing   |                    |                           | irtTest                                     | 
 | Ontology-gmdb                      |            |         | Missing   |                    | taoGmdb                   | taoGmdb                                     | 
+| tao-core                           |            |         |           |                    |                           | tao                                         | 
 | training-branding                  |            |         | Missing   |                    |                           | trainingBranding                            | 
 | training-pci                       |            |         | Missing   | manifest           |                           | trainingPci                                 | 
-| extension-tao-frontoffice          |            |         |           | manifest           |                           |                                             | 
-| extension-tao-marking              |            |         |           | manifest, composer |                           |                                             | 
-| extension-tao-extrapic             |            |         |           |                    |                           | taoExtraPic (develop), taoTextHelp (master) | 
-| generis                            |            |         |           |                    |                           | generis                                     | 
-| tao-core                           |            |         |           |                    |                           | tao                                         | 

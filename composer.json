@@ -9,9 +9,9 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
-        "composer/composer": "^1.8",
         "knplabs/github-api": "^2.11",
         "knplabs/packagist-api": "^1.5",
+        "league/flysystem": "^1.0",
         "nikic/php-parser": "^4.2",
         "oat-sa/oatbox-extension-installer": "~1.1||dev-master",
         "php-http/guzzle6-adapter": "^1.1",
@@ -41,7 +41,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "OAT\\DependencyResolver\\": "tests/unit/"
+            "OAT\\DependencyResolver\\Tests\\": "tests/"
         }
     },
     "replace": {
@@ -54,8 +54,7 @@
     },
     "scripts": {
         "auto-scripts": {
-            "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "cache:clear": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"

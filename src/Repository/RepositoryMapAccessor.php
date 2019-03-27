@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class RepositoryMapAccessor
 {
-    const REPOSITORY_MAP_PATH = 'repository.map.path';
+    private const REPOSITORY_MAP_PATH = 'repository.map.path';
 
     /** @var FileAccessor */
     private $fileAccessor;
@@ -20,34 +20,23 @@ class RepositoryMapAccessor
     /** @var string */
     private $extensionMapPath;
 
-    /**
-     * RepositoryMapAccessor constructor.
-     *
-     * @param ParameterBagInterface $parameterBag
-     * @param FileAccessor          $fileAccessor
-     */
     public function __construct(ParameterBagInterface $parameterBag, FileAccessor $fileAccessor)
     {
         $this->fileAccessor = $fileAccessor;
 
-        if (! $parameterBag->has(self::REPOSITORY_MAP_PATH) || $parameterBag->get(self::REPOSITORY_MAP_PATH) === '') {
+        if (!$parameterBag->has(self::REPOSITORY_MAP_PATH) || $parameterBag->get(self::REPOSITORY_MAP_PATH) === '') {
             throw new \LogicException('Parameter "' . self::REPOSITORY_MAP_PATH . '" missing or empty.');
         }
         $this->extensionMapPath = $parameterBag->get(self::REPOSITORY_MAP_PATH);
     }
 
     /**
-     * Retrieves extension name from repository name.
-     *
-     * @param string $repositoryName
-     *
-     * @return string
      * @throws NotMappedException when the repository is not found in the map
      */
     public function findExtensionName(string $repositoryName): string
     {
         $repositoryList = $this->read();
-        if (! isset($repositoryList[$repositoryName])) {
+        if (!isset($repositoryList[$repositoryName])) {
             throw new NotMappedException('Repository "' . $repositoryName . '" not found in map.');
         }
 
@@ -60,7 +49,6 @@ class RepositoryMapAccessor
     /**
      * Reads extension map from configured file.
      *
-     * @return array
      * @throws \LogicException when the extension map is not available or corrupted.
      */
     public function read(): array
@@ -126,7 +114,7 @@ class RepositoryMapAccessor
         // Builds Repository objects.
         /** @var Repository $repository */
         foreach ($repositories as $repository) {
-            $csv[] = implode(',', $repository->toCsv());
+            $csv[] = implode(',', $repository->toFlatArray());
         }
 
         return $csv;

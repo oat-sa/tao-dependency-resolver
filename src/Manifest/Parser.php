@@ -21,14 +21,6 @@ class Parser
     /** @var NodeTraverserInterface */
     private $nodeTraverser;
 
-    /**
-     * Parser constructor.
-     *
-     * @param PhpParser              $phpParser
-     * @param FinderInterface        $extensionNameFinder
-     * @param FinderInterface        $dependencyNamesFinder
-     * @param NodeTraverserInterface $traverser
-     */
     public function __construct(
         PhpParser $phpParser,
         FinderInterface $extensionNameFinder,
@@ -43,10 +35,6 @@ class Parser
 
     /**
      * Retrieves extension name from manifest contents.
-     *
-     * @param string $manifestContents
-     *
-     * @return string
      */
     public function getExtensionName(string $manifestContents)
     {
@@ -55,10 +43,6 @@ class Parser
 
     /**
      * Finds required dependency names in manifest contents.
-     *
-     * @param string|null $manifestContents
-     *
-     * @return array
      */
     public function getDependencyNames(string $manifestContents)
     {

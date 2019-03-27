@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace OAT\DependencyResolver\FileSystem;
 
@@ -20,6 +22,7 @@ class FileAccessor
         if (! is_readable($filePath)) {
             throw new FileAccessException('File "' . $filePath . '" does not exist or is not readable.');
         }
+
         return file_get_contents($filePath);
     }
 

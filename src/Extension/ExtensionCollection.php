@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Extension;
 
@@ -9,22 +11,13 @@ class ExtensionCollection extends \ArrayObject
     /** @var Extension[] */
     private $extensions = [];
 
-    /**
-     * @param Extension $extension
-     *
-     * @return $this
-     */
-    public function add(Extension $extension)
+    public function add(Extension $extension): self
     {
         $this->offsetSet($extension->getExtensionName(), $extension);
 
         return $this;
     }
 
-    /**
-     * @param mixed $index
-     * @param mixed $newval
-     */
     public function offsetSet($index, $newval)
     {
         if (! $newval instanceof Extension) {
@@ -34,11 +27,6 @@ class ExtensionCollection extends \ArrayObject
         $this->extensions[$index] = $newval;
     }
 
-    /**
-     * @param string $index
-     *
-     * @return Extension|null
-     */
     public function offsetGet($index): ?Extension
     {
         if (! $this->offsetExists($index)) {
@@ -48,19 +36,11 @@ class ExtensionCollection extends \ArrayObject
         return $this->extensions[$index];
     }
 
-    /**
-     * @param mixed $index
-     *
-     * @return bool
-     */
     public function offsetExists($index): bool
     {
         return array_key_exists($index, $this->extensions);
     }
 
-    /**
-     * @return \ArrayIterator
-     */
     public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->extensions);
@@ -77,6 +57,7 @@ class ExtensionCollection extends \ArrayObject
         foreach ($this->extensions as $extension) {
             $requires[$extension->getRepositoryName()] = $extension->getPrefixedBranchName();
         }
+
         return json_encode(['require' => $requires], JSON_PRETTY_PRINT);
     }
 }
