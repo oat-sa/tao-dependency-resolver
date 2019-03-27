@@ -22,7 +22,7 @@ PHP extensions required: php7.1-xml, php7.1-mbstring
 
 ## Authentification
 
-You need to provide a valid [GitHub token](https://github.com/settings/tokens) with "repo" access rights into `<project dir>/config/services.yaml`, in the key `parameters > github.token`.
+You need to provide a valid [GitHub token](https://github.com/settings/tokens) with "repo" access rights into `<project dir>/.env`, in the key `GITHUB_SECRET`.
 
 ## The tools
 
