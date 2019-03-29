@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace OAT\DependencyResolver\Tests\Unit\Extension;
+namespace OAT\DependencyResolver\Tests\Unit\Extension\Entity;
 
-use OAT\DependencyResolver\Extension\ExtensionCollection;
 use OAT\DependencyResolver\Extension\Entity\Extension;
+use OAT\DependencyResolver\Extension\Entity\ExtensionCollection;
 use PHPUnit\Framework\TestCase;
 
 class ExtensionCollectionTest extends TestCase
@@ -78,26 +78,17 @@ class ExtensionCollectionTest extends TestCase
         $this->assertEquals([$extension1, $extension2], $extensionArray);
     }
 
-    public function testGenerateComposerJson()
+    public function testJsonSerialize()
     {
         $extensionName1 = 'extensionName1';
         $reposirotyName1 = 'name of repo 1';
         $branchName1 = 'name of branch 1';
-        /** @var Extension $extension1 */
-        $extension1 = $this->createConfiguredMock(Extension::class, [
-            'getExtensionName' => $extensionName1,
-            'getRepositoryName' => $reposirotyName1,
-            'getPrefixedBranchName' => $branchName1,
-        ]);
+        $extension1 = new Extension($extensionName1, $reposirotyName1, $branchName1);
+
         $extensionName2 = 'extensionName2';
         $reposirotyName2 = 'name of repo 2';
         $branchName2 = 'name of branch 2';
-        /** @var Extension $extension2 */
-        $extension2 = $this->createConfiguredMock(Extension::class, [
-            'getExtensionName' => $extensionName2,
-            'getRepositoryName' => $reposirotyName2,
-            'getPrefixedBranchName' => $branchName2,
-        ]);
+        $extension2 = new Extension($extensionName2, $reposirotyName2, $branchName2);
 
         $this->subject
             ->add($extension1)
@@ -105,11 +96,11 @@ class ExtensionCollectionTest extends TestCase
 
         $expected = '{
     "require": {
-        "' . $reposirotyName1 . '": "' . $branchName1 . '",
-        "' . $reposirotyName2 . '": "' . $branchName2 . '"
+        "' . $reposirotyName1 . '": "dev-' . $branchName1 . '",
+        "' . $reposirotyName2 . '": "dev-' . $branchName2 . '"
     }
 }';
 
-        $this->assertEquals($expected, $this->subject->generateComposerJson());
+        $this->assertEquals($expected, json_encode($this->subject, JSON_PRETTY_PRINT));
     }
 }

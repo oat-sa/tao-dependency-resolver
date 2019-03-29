@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace OAT\DependencyResolver\Extension;
+namespace OAT\DependencyResolver\Extension\Entity;
 
-use OAT\DependencyResolver\Extension\Entity\Extension;
-
-class ExtensionCollection extends \ArrayObject
+class ExtensionCollection extends \ArrayObject implements \JsonSerializable
 {
     /** @var Extension[] */
     private $extensions = [];
@@ -20,7 +18,7 @@ class ExtensionCollection extends \ArrayObject
 
     public function offsetSet($index, $newval)
     {
-        if (! $newval instanceof Extension) {
+        if (!$newval instanceof Extension) {
             throw new \TypeError('Extension provided is not an instance of ' . Extension::class . '.');
         }
 
@@ -29,7 +27,7 @@ class ExtensionCollection extends \ArrayObject
 
     public function offsetGet($index): ?Extension
     {
-        if (! $this->offsetExists($index)) {
+        if (!$this->offsetExists($index)) {
             return null;
         }
 
@@ -46,18 +44,13 @@ class ExtensionCollection extends \ArrayObject
         return new \ArrayIterator($this->extensions);
     }
 
-    /**
-     * Generates a composer.json contents from the extension collection
-     *
-     * @return false|string
-     */
-    public function generateComposerJson()
+    public function jsonSerialize()
     {
         $requires = [];
         foreach ($this->extensions as $extension) {
             $requires[$extension->getRepositoryName()] = $extension->getPrefixedBranchName();
         }
 
-        return json_encode(['require' => $requires], JSON_PRETTY_PRINT);
+        return ['require' => $requires];
     }
 }

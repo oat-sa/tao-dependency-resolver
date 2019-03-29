@@ -18,14 +18,14 @@ interface RepositoryReaderInterface
     public function getRepositoryList(string $owner): array;
 
     /**
-     * Analyzes a repository.
+     * Builds a representation of a distant code repository.
      */
-    public function analyzeRepository(Repository $repository);
+    public function readRepository(Repository $repository);
 
     /**
      * Reads the extension name of a repository.
      */
-    public function getExtensionName(Repository $repository, string $branchName): ?string;
+    public function getExtensionName(Repository $repository): ?string;
 
     /**
      * Returns contents of manifest.php file for the given repository.

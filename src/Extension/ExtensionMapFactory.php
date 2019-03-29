@@ -25,11 +25,9 @@ class ExtensionMapFactory
         $extensionMap = [];
         foreach ($this->repositoryMapAccessor->read() as $repository) {
             /** @var Repository $repository */
-            if ($repository->getExtensionName() !== '') {
-                $extensionMap[$repository->getExtensionName()] = [
-                    'repository_name' => $repository->getOwner() . '/' . $repository->getName(),
-                    'composer_name' => $repository->getComposerName(),
-                ];
+            $repositoryName = $repository->getExtensionName();
+            if ($repositoryName !== '' && $repositoryName !== null) {
+                $extensionMap[$repositoryName] = $repository->getOwner() . '/' . $repository->getName();
             }
         }
 

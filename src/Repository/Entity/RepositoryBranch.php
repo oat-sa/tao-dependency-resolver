@@ -10,10 +10,10 @@ class RepositoryBranch implements \JsonSerializable
     public const CSV_BLANK = ['', '', '', '', '', '', '', '', ''];
 
     /** @var string */
-    private $name = '';
+    private $name;
 
-    /** @var array|RepositoryFile[] */
-    private $files = [];
+    /** @var RepositoryFile[]|array */
+    private $files;
 
     public function __construct(string $name = '', array $files = [])
     {
@@ -22,19 +22,16 @@ class RepositoryBranch implements \JsonSerializable
             ->setFiles($files);
     }
 
-    public function constructFromArray(array $properties): self
+    public static function createFromArray(array $properties): self
     {
         $files = [];
-        foreach ($properties['files'] as $fileProperties) {
-            $file = (new RepositoryFile())->constructFromArray($fileProperties);
+        $filesField = $properties['files'] ?? [];
+        foreach ($filesField as $fileProperties) {
+            $file = RepositoryFile::createFromArray($fileProperties);
             $files[$file->getName()] = $file;
         }
 
-        $this
-            ->setName($properties['name'])
-            ->setFiles($files);
-
-        return $this;
+        return new self($properties['name'] ?? '', $files);
     }
 
     public function getName(): string

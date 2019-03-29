@@ -4,37 +4,46 @@ namespace OAT\DependencyResolver\Repository\Entity;
 
 class Repository implements \JsonSerializable
 {
-    public const CSV_TITLES = ['repositoryName', 'extensionName', 'composerName', 'privacy', 'packagist', 'defaultBranch'];
-
-    /** @var string */
-    private $owner = '';
-
-    /** @var string */
-    private $name = '';
-
-    /** @var bool */
-    private $private = false;
-
-    /** @var string */
-    private $defaultBranch = '';
-
-    /** @var string */
-    private $extensionName = '';
-
-    /** @var string */
-    private $composerName = '';
-
-    /** @var bool */
-    private $onPackagist = false;
-
-    /** @var array */
-    private $branches = [
-        'develop' => null,
-        'master' => null,
-        'other' => null,
+    public const CSV_TITLES = [
+        'repositoryName',
+        'extensionName',
+        'composerName',
+        'privacy',
+        'packagist',
+        'defaultBranch',
     ];
 
+    /** @var bool */
+    private $analyzed;
+
+    /** @var string */
+    private $owner;
+
+    /** @var string */
+    private $name;
+
+    /** @var bool */
+    private $private;
+
+    /** @var string */
+    private $defaultBranch;
+
+    /** @var string */
+    private $extensionName;
+
+    /** @var string */
+    private $composerName;
+
+    /** @var bool */
+    private $onPackagist;
+
+    /** @var RepositoryBranch[]|array */
+    private $branches;
+
+
+
     public function __construct(
+        bool $analyzed = false,
         string $owner = '',
         string $name = '',
         bool $private = false,
@@ -45,6 +54,7 @@ class Repository implements \JsonSerializable
         array $branches = []
     ) {
         $this
+            ->setAnalyzed($analyzed)
             ->setOwner($owner)
             ->setName($name)
             ->setPrivate($private)
@@ -55,28 +65,36 @@ class Repository implements \JsonSerializable
             ->setBranches($branches);
     }
 
-    /**
-     * @param array $properties
-     *
-     * @return $this
-     */
-    public function constructFromArray(array $properties): self
+    public static function createFromArray(array $properties): self
     {
         $branches = [];
-        foreach ($properties['branches'] as $branchProperties) {
-            $branch = (new RepositoryBranch())->constructFromArray($branchProperties);
+        $branchesField = $properties['branches'] ?? [];
+        foreach ($branchesField as $branchProperties) {
+            $branch = (new RepositoryBranch())->createFromArray($branchProperties);
             $branches[$branch->getName()] = $branch;
         }
 
-        $this
-            ->setOwner($properties['owner'])
-            ->setName($properties['name'])
-            ->setPrivate($properties['private'])
-            ->setDefaultBranch($properties['defaultBranch'])
-            ->setExtensionName($properties['extensionName'])
-            ->setComposerName($properties['composerName'])
-            ->setOnPackagist($properties['onPackagist'])
-            ->setBranches($branches);
+        return new self(
+            $properties['analyzed'] ?? false,
+            $properties['owner'] ?? '',
+            $properties['name'] ?? '',
+            $properties['private'] ?? false,
+            $properties['defaultBranch'] ?? '',
+            $properties['extensionName'] ?? '',
+            $properties['composerName'] ?? '',
+            $properties['onPackagist'] ?? false,
+            $branches
+        );
+    }
+
+    public function isAnalyzed(): bool
+    {
+        return $this->analyzed;
+    }
+
+    public function setAnalyzed(bool $analyzed): self
+    {
+        $this->analyzed = $analyzed;
 
         return $this;
     }
@@ -165,6 +183,9 @@ class Repository implements \JsonSerializable
         return $this;
     }
 
+    /**
+     * @return RepositoryBranch[]|array
+     */
     public function getBranches(): array
     {
         return $this->branches;
@@ -192,6 +213,7 @@ class Repository implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
+            'analyzed' => $this->isAnalyzed(),
             'owner' => $this->getOwner(),
             'name' => $this->getName(),
             'private' => $this->isPrivate(),

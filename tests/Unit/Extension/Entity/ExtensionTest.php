@@ -9,19 +9,24 @@ use PHPUnit\Framework\TestCase;
 
 class ExtensionTest extends TestCase
 {
+    private const EXTENSION_NAME = 'extensionName';
+    private const REPOSITORY_NAME = 'repositoryName';
+    private const BRANCH_NAME = 'branchName';
+
+    /** @var Extension */
+    private $subject;
+
+    public function setUp()
+    {
+        $this->subject = new Extension(self::EXTENSION_NAME, self::REPOSITORY_NAME, self::BRANCH_NAME);
+    }
+
     public function testConstructorReturnsExtension()
     {
-        $extensionName = 'extensionName';
-        $repositoryName = 'repositoryName';
-        $composerName = 'composerName';
-        $branchName = 'branchName';
-
-        $subject = new Extension($extensionName, $repositoryName, $composerName, $branchName);
-        $this->assertInstanceOf(Extension::class, $subject);
-        $this->assertEquals($extensionName, $subject->getExtensionName());
-        $this->assertEquals($repositoryName, $subject->getRepositoryName());
-        $this->assertEquals($composerName, $subject->getComposerName());
-        $this->assertEquals($branchName, $subject->getBranchName());
-        $this->assertEquals('dev-branchName', $subject->getPrefixedBranchName());
+        $this->assertInstanceOf(Extension::class, $this->subject);
+        $this->assertEquals(self::EXTENSION_NAME, $this->subject->getExtensionName());
+        $this->assertEquals(self::REPOSITORY_NAME, $this->subject->getRepositoryName());
+        $this->assertEquals(self::BRANCH_NAME, $this->subject->getBranchName());
+        $this->assertEquals('dev-' . self::BRANCH_NAME, $this->subject->getPrefixedBranchName());
     }
 }

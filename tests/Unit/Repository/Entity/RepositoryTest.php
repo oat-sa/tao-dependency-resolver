@@ -31,6 +31,7 @@ class RepositoryTest extends TestCase
 
     public function testConstructorAndAccessors()
     {
+        $analyzed = true;
         $owner = 'owner name';
         $repositoryName = 'repo name';
         $private = true;
@@ -43,6 +44,7 @@ class RepositoryTest extends TestCase
         $branches = [$branch1];
 
         $this->subject = new Repository(
+            $analyzed,
             $owner,
             $repositoryName,
             $private,
@@ -53,6 +55,7 @@ class RepositoryTest extends TestCase
             $branches
         );
 
+        $this->assertEquals($analyzed, $this->subject->isAnalyzed());
         $this->assertEquals($owner, $this->subject->getOwner());
         $this->assertEquals($repositoryName, $this->subject->getName());
         $this->assertEquals($private, $this->subject->isPrivate());
@@ -63,7 +66,7 @@ class RepositoryTest extends TestCase
         $this->assertEquals($branches, $this->subject->getBranches());
     }
 
-    public function testConstructFromArray()
+    public function testCreateFromArray()
     {
         $fileName = 'file name';
         $fileComposerName = 'composer.json';
@@ -107,8 +110,7 @@ class RepositoryTest extends TestCase
         $file = new RepositoryFile($fileName, $fileComposerName, $fileExtensionName, [$requires]);
         $branch = new RepositoryBranch($branchName, [$fileName => $file]);
 
-        $this->subject = new Repository();
-        $this->subject->constructFromArray($properties);
+        $this->subject = Repository::createFromArray($properties);
 
         $this->assertEquals($owner, $this->subject->getOwner());
         $this->assertEquals($repositoryName, $this->subject->getName());
@@ -149,6 +151,7 @@ class RepositoryTest extends TestCase
         $fileExtensionName = 'nameOfTheExtension';
         $requires = 'extension';
 
+        $analyzed = true;
         $owner = 'owner name';
         $repositoryName = 'name of the repo';
         $private = true;
@@ -159,6 +162,7 @@ class RepositoryTest extends TestCase
         $branchName = 'branch name';
 
         $expected = '{
+    "analyzed": ' . ($analyzed ? 'true' : 'false') . ',
     "owner": "' . $owner . '",
     "name": "' . $repositoryName . '",
     "private": ' . ($private ? 'true' : 'false') . ',
@@ -186,6 +190,7 @@ class RepositoryTest extends TestCase
         $file = new RepositoryFile($fileName, $fileComposerName, $fileExtensionName, [$requires]);
         $branch = new RepositoryBranch($branchName, [$fileName => $file]);
         $this->subject = new Repository(
+            $analyzed,
             $owner,
             $repositoryName,
             $private,
@@ -214,6 +219,7 @@ class RepositoryTest extends TestCase
         $requires2 = [$required3, $required4];
         $branchName = 'develop';
 
+        $analyzed = true;
         $owner = 'owner name';
         $repositoryName = 'name of the repo';
         $private = true;
@@ -226,6 +232,7 @@ class RepositoryTest extends TestCase
         $file2 = new RepositoryFile($fileName2, $fileComposerName, $extensionName2, $requires2);
         $branch = new RepositoryBranch($branchName, [$fileName1 => $file1, $fileName2 => $file2]);
         $this->subject = new Repository(
+            $analyzed,
             $owner,
             $repositoryName,
             $private,

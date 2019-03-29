@@ -1,8 +1,10 @@
 # Tao dependency resolver
 
-Resolves the requires tree from manifest.php in each extension needed.
+Resolves the dependency requirement tree from manifest.php in each extension needed.
 
-/!\ Works on **extension** names, not repository names.
+Default result is to displays a corresponding composer.json `require` array.
+
+Now works with both **extension** names and **repository** names.
 
 A more extensive explanation of the problematics and solutions is exposed in the [documentation](doc/dependency-resolver.md).
 
@@ -33,13 +35,13 @@ There are two tools in this repository:
 Read more about this tool [here](doc/dependency-resolver.md).
 
 ```
-$ php bin/console dependencies:resolve <root extension or repository name> [--package-branch <root extension branch>] [--extensions-branch <dependency extensions branch>] [--directory <directory>] 
+$ php bin/console dependencies:resolve <root extension or repository name> [--package-branch <root extension branch>] [--extensions-branch <dependency extensions branch>] [--dump-directory <directory>]
 ```
 
 - `root extension or repository name`: "manifest name", not the repository name, e.g. "taoQtiTest", not "oat-sa/extension-tao-testqti".
 - `root extension branch`: the branch of the extension to be tested
 - `dependency extensions branch`: the branch to download for each dependency in the form of "extensionName1:branchName1,extensionName2:branchName2,...", e.g. "tao:develop,taoQtiItem:3.2.1,generis:10.12.14". Branches for all non given extensions will default to "develop".
-- `directory`: the directory where you want to install the whole package. Defaults to the system temp dir (i.e. `/tmp` on linux systems).
+- `directory`: the directory where you want to write the composer.json file. Defaults to the system temp dir (i.e. `/tmp` on linux systems).
 
 ### Repository lister
 

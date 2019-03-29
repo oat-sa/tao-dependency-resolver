@@ -35,6 +35,9 @@
     "league/flysystem": {
         "version": "1.0.50"
     },
+    "mikey179/vfsstream": {
+        "version": "v1.6.5"
+    },
     "myclabs/deep-copy": {
         "version": "1.8.1"
     },

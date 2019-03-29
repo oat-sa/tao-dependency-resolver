@@ -7,7 +7,6 @@ namespace OAT\DependencyResolver\Extension\Entity;
 class Extension
 {
     public const DEFAULT_BRANCH = 'develop';
-
     private const BRANCH_PREFIX = 'dev';
 
     /** @var string */
@@ -17,16 +16,12 @@ class Extension
     private $repositoryName;
 
     /** @var string */
-    private $composerName;
-
-    /** @var string */
     private $branchName;
 
-    public function __construct(string $extensionName, string $repositoryName, string $composerName, string $branchName)
+    public function __construct(string $extensionName, string $repositoryName, string $branchName)
     {
         $this->extensionName = $extensionName;
         $this->repositoryName = $repositoryName;
-        $this->composerName = $composerName;
         $this->branchName = $branchName;
     }
 
@@ -38,11 +33,6 @@ class Extension
     public function getRepositoryName(): string
     {
         return $this->repositoryName;
-    }
-
-    public function getComposerName(): string
-    {
-        return $this->composerName;
     }
 
     public function getBranchName(): string

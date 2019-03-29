@@ -38,32 +38,15 @@ class RepositoryMapUpdater implements LoggerAwareInterface
      */
     public function update(int $limit)
     {
-        // Number of updated repositories.
-        $updated = 0;
-        // Number of skipped repositories.
-        $skipped = 0;
-
         // Reads either local or distant repository list.
         $repositoryList = $this->repositoryMapAccessor->read();
 
-        // Displays the number of repositories to update.
-        $toUpdate = 0;
-        foreach ($repositoryList as $repository) {
-            /** @var Repository $repository */
-            if ($repository->getExtensionName() === '') {
-                $toUpdate++;
-            }
-        }
-        $this->logger->info(
-            $toUpdate . ' repositories(s) to analyze' . ($limit ? ' (limited to ' . $limit . ')' : '') . '.'
-        );
-
         // Finds all repository that have an empty extension name.
-        foreach ($repositoryList as $repositoryName => &$repository) {
+        foreach ($repositoryList as $repositoryName => $repository) {
             /** @var Repository $repository */
-            if ($repository->getExtensionName() === '') {
+            if (!$repository->isAnalyzed()) {
                 $this->logger->info('Analyzing repository "' . $repositoryName . '"...');
-                $repository = $this->repositoryReader->analyzeRepository($repository);
+                $repositoryList[$repositoryName] = $this->repositoryReader->readRepository($repository);
 
                 if (--$limit === 0) {
                     break;
@@ -73,14 +56,6 @@ class RepositoryMapUpdater implements LoggerAwareInterface
 
         // Persists updated repositoryList.
         $this->repositoryMapAccessor->write($repositoryList);
-
-        // Displays results.
-        if ($updated) {
-            $this->logger->info($updated . ' repositories updated.');
-        }
-        if ($skipped) {
-            $this->logger->info($skipped . ' repositories skipped.');
-        }
     }
 
     /**
@@ -97,7 +72,7 @@ class RepositoryMapUpdater implements LoggerAwareInterface
             . 'Organisation "' . $owner . '" has:' . "\n"
             . '- ' . $organizationProperties['public_repos'] . ' public repositories' . "\n"
             . '- ' . $organizationProperties['total_private_repos'] . ' private repositories' . "\n";
-        echo $message;
+        $this->logger->info($message);
 
         // Finds repositories on Github.
         $newReadList = $this->repositoryReader->getRepositoryList($owner);

@@ -14,10 +14,8 @@ use PHPUnit\Framework\TestCase;
 class ExtensionMapFactoryTest extends TestCase
 {
     use ProtectedAccessorTrait;
-
     const OWNER_NAME = 'the name of the owner';
     const REPOSITORY_NAME = 'the name of the repository';
-    const COMPOSER_NAME = 'the composer name of the repository';
     const EXTENSION_NAME = 'the name of the extension as well';
 
     /** @var ExtensionMapFactory */
@@ -34,7 +32,6 @@ class ExtensionMapFactoryTest extends TestCase
                 'getOwner' => self::OWNER_NAME,
                 'getName' => self::REPOSITORY_NAME,
                 'getExtensionName' => self::EXTENSION_NAME,
-                'getComposerName' => self::COMPOSER_NAME,
             ]
         );
         $this->extensionMapAccessor = $this->createConfiguredMock(
@@ -60,12 +57,7 @@ class ExtensionMapFactoryTest extends TestCase
     public function testCreateReturnsExtensionMapAccessorReadResult()
     {
         $this->assertEquals(
-            [
-                self::EXTENSION_NAME => [
-                    'repository_name' => self::OWNER_NAME . '/' . self::REPOSITORY_NAME,
-                    'composer_name' => self::COMPOSER_NAME,
-                ],
-            ],
+            [self::EXTENSION_NAME => self::OWNER_NAME . '/' . self::REPOSITORY_NAME],
             $this->subject->create()
         );
     }

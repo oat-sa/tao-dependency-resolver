@@ -37,7 +37,7 @@ class RepositoryFileTest extends TestCase
         $this->assertEquals($requires, $this->subject->getRequires());
     }
 
-    public function testConstructFromArray()
+    public function testCreateFromArray()
     {
         $name = 'file name';
         $composerName = 'composer.json';
@@ -50,8 +50,7 @@ class RepositoryFileTest extends TestCase
             'requires' => $requires,
         ];
 
-        $this->subject = new RepositoryFile();
-        $this->subject->constructFromArray($properties);
+        $this->subject = RepositoryFile::createFromArray($properties);
         $this->assertEquals($name, $this->subject->getName());
         $this->assertEquals($composerName, $this->subject->getComposerName());
         $this->assertEquals($extensionName, $this->subject->getExtensionName());

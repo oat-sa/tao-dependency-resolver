@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Tests\Unit\Manifest;
 
-use OAT\DependencyResolver\Manifest\ExtensionNameFinder;
-use OAT\DependencyResolver\Manifest\DependencyNamesFinder;
+use OAT\DependencyResolver\Manifest\ExtensionNameNodeVisitor;
+use OAT\DependencyResolver\Manifest\DependencyNamesNodeVisitor;
 use OAT\DependencyResolver\Manifest\Parser;
 use OAT\DependencyResolver\Tests\Helpers\ProtectedAccessorTrait;
 use PhpParser\Lexer;
@@ -24,10 +24,10 @@ class ParserTest extends TestCase
     public function setUp()
     {
         $phpParser = new PhpCodeParser\Php5(new Lexer());
-        $extensionNameFinder = new ExtensionNameFinder();
-        $dependencyNamesFinder = new DependencyNamesFinder();
+        $extensionNameNodeVisitor = new ExtensionNameNodeVisitor();
+        $dependencyNamesNodeVisitor = new DependencyNamesNodeVisitor();
         $traverser = new NodeTraverser();
-        $this->subject = new Parser($phpParser, $extensionNameFinder, $dependencyNamesFinder, $traverser);
+        $this->subject = new Parser($phpParser, $extensionNameNodeVisitor, $dependencyNamesNodeVisitor, $traverser);
     }
 
     /**
@@ -38,12 +38,12 @@ class ParserTest extends TestCase
         $this->assertInstanceOf(Parser::class, $this->subject);
         $this->assertInstanceOf(PhpCodeParser::class, $this->getPrivateProperty($this->subject, 'phpParser'));
         $this->assertInstanceOf(
-            ExtensionNameFinder::class,
-            $this->getPrivateProperty($this->subject, 'extensionNameFinder')
+            ExtensionNameNodeVisitor::class,
+            $this->getPrivateProperty($this->subject, 'extensionNameNodeVisitor')
         );
         $this->assertInstanceOf(
-            DependencyNamesFinder::class,
-            $this->getPrivateProperty($this->subject, 'dependencyNamesFinder')
+            DependencyNamesNodeVisitor::class,
+            $this->getPrivateProperty($this->subject, 'dependencyNamesNodeVisitor')
         );
         $this->assertInstanceOf(
             NodeTraverserInterface::class,

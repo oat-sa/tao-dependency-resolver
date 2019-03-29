@@ -23,8 +23,11 @@
     </php>
 
     <testsuites>
-        <testsuite name="Dependency Resolver Test Suite">
+        <testsuite name="Unit Test Suite">
             <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Integration Test Suite">
+            <directory>tests/Integration</directory>
         </testsuite>
     </testsuites>
 

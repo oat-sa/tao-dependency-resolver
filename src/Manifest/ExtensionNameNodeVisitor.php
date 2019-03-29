@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Manifest;
 
-use OAT\DependencyResolver\Manifest\Interfaces\FinderInterface;
+use OAT\DependencyResolver\Manifest\Interfaces\ResultStoreInterface;
 use PhpParser\Node;
 use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitorAbstract;
 
-class ExtensionNameFinder extends NodeVisitorAbstract implements FinderInterface
+class ExtensionNameNodeVisitor extends NodeVisitorAbstract implements ResultStoreInterface
 {
     public const NAME_AST_TOKEN_KEY = 'name';
 
@@ -21,7 +21,7 @@ class ExtensionNameFinder extends NodeVisitorAbstract implements FinderInterface
     /**
      * Clears all extensions found for a new traversal.
      */
-    public function clear(): FinderInterface
+    public function clear(): ResultStoreInterface
     {
         $this->extensionName = '';
 

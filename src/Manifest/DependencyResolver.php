@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace OAT\DependencyResolver\Manifest;
 
 use OAT\DependencyResolver\Extension\Entity\Extension;
+use OAT\DependencyResolver\Extension\Entity\ExtensionCollection;
 use OAT\DependencyResolver\Extension\Exception\NotMappedException;
-use OAT\DependencyResolver\Extension\ExtensionCollection;
 use OAT\DependencyResolver\Extension\ExtensionFactory;
 use OAT\DependencyResolver\Repository\Interfaces\RepositoryReaderInterface;
 
@@ -39,10 +39,10 @@ class DependencyResolver
      * @param Extension  $rootExtension
      * @param array $extensionBranchMap
      *
-     * @return ExtensionCollection
+     * @return string
      * @throws NotMappedException
      */
-    public function resolve(Extension $rootExtension, array $extensionBranchMap): ExtensionCollection
+    public function resolve(Extension $rootExtension, array $extensionBranchMap): string
     {
         // Adds the root extension so that it is installed along with the other ones.
         $this->extensionCollection->offsetSet($rootExtension->getExtensionName(), $rootExtension);
@@ -50,7 +50,8 @@ class DependencyResolver
         // Extracts all the dependencies.
         $this->extractExtensionsRecursively($rootExtension, $extensionBranchMap);
 
-        return $this->extensionCollection;
+        // Converts extension colection into a composer.json require.
+        return json_encode($this->extensionCollection, JSON_PRETTY_PRINT);
     }
 
     /**

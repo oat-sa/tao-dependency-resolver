@@ -7,7 +7,6 @@ namespace OAT\DependencyResolver\Tests\Unit\Command;
 use OAT\DependencyResolver\Command\DependencyResolverCommand;
 use OAT\DependencyResolver\Extension\Entity\Extension;
 use OAT\DependencyResolver\Extension\ExtensionFactory;
-use OAT\DependencyResolver\FileSystem\FileAccessor;
 use OAT\DependencyResolver\Manifest\DependencyResolver;
 use OAT\DependencyResolver\Repository\RepositoryMapAccessor;
 use OAT\DependencyResolver\Tests\Helpers\ProtectedAccessorTrait;
@@ -34,19 +33,14 @@ class DependencyResolverCommandTest extends TestCase
     /** @var DependencyResolver */
     private $dependencyResolver;
 
-    /** @var FileAccessor */
-    private $fileAccessor;
-
     public function setUp()
     {
         $this->extensionFactory = $this->createMock(ExtensionFactory::class);
         $this->dependencyResolver = $this->createMock(DependencyResolver::class);
-        $this->fileAccessor = $this->createMock(FileAccessor::class);
 
         $this->subject = new DependencyResolverCommand(
             $this->extensionFactory,
-            $this->dependencyResolver,
-            $this->fileAccessor
+            $this->dependencyResolver
         );
     }
 
@@ -58,7 +52,6 @@ class DependencyResolverCommandTest extends TestCase
         $this->assertInstanceOf(DependencyResolverCommand::class, $this->subject);
         $this->assertEquals($this->extensionFactory, $this->getPrivateProperty($this->subject, 'extensionFactory'));
         $this->assertEquals($this->dependencyResolver, $this->getPrivateProperty($this->subject, 'dependencyResolver'));
-        $this->assertEquals($this->fileAccessor, $this->getPrivateProperty($this->subject, 'fileAccessor'));
     }
 
     public function testConfigure()
@@ -84,11 +77,11 @@ class DependencyResolverCommandTest extends TestCase
             'extensions-branch' => new InputOption(
                 'extensions-branch',
                 null,
-                InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+                InputOption::VALUE_REQUIRED,
                 'Branch to load for each extension.'
             ),
-            'directory' => new InputOption(
-                'directory',
+            'dump-directory' => new InputOption(
+                'dump-directory',
                 'd',
                 InputOption::VALUE_REQUIRED,
                 'Directory in which to download dependencies',

@@ -4,32 +4,32 @@ declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Tests\Unit\Manifest;
 
-use OAT\DependencyResolver\Manifest\ExtensionNameFinder;
+use OAT\DependencyResolver\Manifest\ExtensionNameNodeVisitor;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\NodeTraverser;
 use PHPUnit\Framework\TestCase;
 
-class ExtensionNameFinderTest extends TestCase
+class ExtensionNameNodeVisitorTest extends TestCase
 {
-    /** @var ExtensionNameFinder */
+    /** @var ExtensionNameNodeVisitor */
     private $subject;
 
     public function setUp()
     {
-        $this->subject = new ExtensionNameFinder();
+        $this->subject = new ExtensionNameNodeVisitor();
     }
 
-    public function testConstructorReturnsExtensionNameFinderWithEmptyExtensionName()
+    public function testConstructorReturnsExtensionNameNodeVisitorWithEmptyExtensionName()
     {
-        $this->assertInstanceOf(ExtensionNameFinder::class, $this->subject);
+        $this->assertInstanceOf(ExtensionNameNodeVisitor::class, $this->subject);
         $this->assertEquals('', $this->subject->getResult());
     }
 
-    public function testClearReturnsExtensionNameFinderWithEmptyExtensionName()
+    public function testClearReturnsExtensionNameNodeVisitorWithEmptyExtensionName()
     {
-        $this->assertInstanceOf(ExtensionNameFinder::class, $this->subject->clear());
+        $this->assertInstanceOf(ExtensionNameNodeVisitor::class, $this->subject->clear());
         $this->assertEquals('', $this->subject->getResult());
     }
 

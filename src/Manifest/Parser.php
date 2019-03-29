@@ -2,7 +2,7 @@
 
 namespace OAT\DependencyResolver\Manifest;
 
-use OAT\DependencyResolver\Manifest\Interfaces\FinderInterface;
+use OAT\DependencyResolver\Manifest\Interfaces\ResultStoreInterface;
 use PhpParser\NodeTraverserInterface;
 use PhpParser\NodeVisitor;
 use PhpParser\Parser as PhpParser;
@@ -12,62 +12,58 @@ class Parser
     /** @var PhpParser */
     private $phpParser;
 
-    /** @var FinderInterface */
-    private $extensionNameFinder;
+    /** @var ResultStoreInterface */
+    private $extensionNameNodeVisitor;
 
-    /** @var FinderInterface */
-    private $dependencyNamesFinder;
+    /** @var ResultStoreInterface */
+    private $dependencyNamesNodeVisitor;
 
     /** @var NodeTraverserInterface */
     private $nodeTraverser;
 
     public function __construct(
         PhpParser $phpParser,
-        FinderInterface $extensionNameFinder,
-        FinderInterface $dependencyNamesFinder,
+        ResultStoreInterface $extensionNameNodeVisitor,
+        ResultStoreInterface $dependencyNamesNodeVisitor,
         NodeTraverserInterface $traverser
     ) {
         $this->phpParser = $phpParser;
-        $this->extensionNameFinder = $extensionNameFinder;
-        $this->dependencyNamesFinder = $dependencyNamesFinder;
+        $this->extensionNameNodeVisitor = $extensionNameNodeVisitor;
+        $this->dependencyNamesNodeVisitor = $dependencyNamesNodeVisitor;
         $this->nodeTraverser = $traverser;
     }
 
-    /**
-     * Retrieves extension name from manifest contents.
-     */
+    // Retrieves extension name from manifest contents.
     public function getExtensionName(string $manifestContents)
     {
-        return $this->parse($manifestContents, $this->extensionNameFinder);
+        return $this->parse($manifestContents, $this->extensionNameNodeVisitor);
     }
 
-    /**
-     * Finds required dependency names in manifest contents.
-     */
+    // Finds required dependency names in manifest contents.
     public function getDependencyNames(string $manifestContents)
     {
-        return $this->parse($manifestContents, $this->dependencyNamesFinder);
+        return $this->parse($manifestContents, $this->dependencyNamesNodeVisitor);
     }
 
     /**
      * Parses the given manifest contents and populates the extensionNames and dependencyNames properties.
      *
-     * @param string                      $manifestContents
-     * @param NodeVisitor|FinderInterface $finder
+     * @param string                           $manifestContents
+     * @param NodeVisitor|ResultStoreInterface $nodeVisitor
      *
      * @return mixed
      */
-    private function parse(string $manifestContents, NodeVisitor $finder)
+    private function parse(string $manifestContents, NodeVisitor $nodeVisitor)
     {
         // Parses manifest php ast.
         $ast = $this->phpParser->parse($manifestContents);
 
-        $finder->clear();
+        $nodeVisitor->clear();
 
-        $this->nodeTraverser->addVisitor($finder);
+        $this->nodeTraverser->addVisitor($nodeVisitor);
         $this->nodeTraverser->traverse($ast);
-        $this->nodeTraverser->removeVisitor($finder);
+        $this->nodeTraverser->removeVisitor($nodeVisitor);
 
-        return $finder->getResult();
+        return $nodeVisitor->getResult();
     }
 }

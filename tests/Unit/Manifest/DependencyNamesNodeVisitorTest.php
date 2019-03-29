@@ -4,31 +4,31 @@ declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Tests\Unit\Manifest;
 
-use OAT\DependencyResolver\Manifest\DependencyNamesFinder;
+use OAT\DependencyResolver\Manifest\DependencyNamesNodeVisitor;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Scalar\String_;
 use PHPUnit\Framework\TestCase;
 
-class DependencyNamesFinderTest extends TestCase
+class DependencyNamesNodeVisitorTest extends TestCase
 {
-    /** @var DependencyNamesFinder */
+    /** @var DependencyNamesNodeVisitor */
     private $subject;
 
     public function setUp()
     {
-        $this->subject = new DependencyNamesFinder();
+        $this->subject = new DependencyNamesNodeVisitor();
     }
 
-    public function testConstructorReturnsDependencyNamesFinderWithEmptyExtensionNames()
+    public function testConstructorReturnsDependencyNamesNodeVisitorWithEmptyExtensionNames()
     {
-        $this->assertInstanceOf(DependencyNamesFinder::class, $this->subject);
+        $this->assertInstanceOf(DependencyNamesNodeVisitor::class, $this->subject);
         $this->assertEquals([], $this->subject->getResult());
     }
 
-    public function testClearReturnsDependencyNamesFinderWithEmptyExtensionNames()
+    public function testClearReturnsDependencyNamesNodeVisitorWithEmptyExtensionNames()
     {
-        $this->assertInstanceOf(DependencyNamesFinder::class, $this->subject->clear());
+        $this->assertInstanceOf(DependencyNamesNodeVisitor::class, $this->subject->clear());
         $this->assertEquals([], $this->subject->getResult());
     }
 
@@ -60,7 +60,7 @@ class DependencyNamesFinderTest extends TestCase
     public function testEnterNodeWithNonArrayInRequiresKeyNodeReturnsEmptyExtensionNames()
     {
         $value = new String_('');
-        $key = new String_(DependencyNamesFinder::REQUIRES_AST_TOKEN_KEY);
+        $key = new String_(DependencyNamesNodeVisitor::REQUIRES_AST_TOKEN_KEY);
         $node = new ArrayItem($value, $key);
         $this->subject->enterNode($node);
         $this->assertEquals([], $this->subject->getResult());
@@ -69,7 +69,7 @@ class DependencyNamesFinderTest extends TestCase
     public function testEnterNodeWithNoExtensionReturnsEmptyExtensionNames()
     {
         $value = new Array_();
-        $key = new String_(DependencyNamesFinder::REQUIRES_AST_TOKEN_KEY);
+        $key = new String_(DependencyNamesNodeVisitor::REQUIRES_AST_TOKEN_KEY);
         $node = new ArrayItem($value, $key);
         $this->subject->enterNode($node);
         $this->assertEquals([], $this->subject->getResult());
@@ -80,7 +80,7 @@ class DependencyNamesFinderTest extends TestCase
         $extensions = $this->generateExtensionItems(2);
 
         $value = new Array_(array_values($extensions));
-        $key = new String_(DependencyNamesFinder::REQUIRES_AST_TOKEN_KEY);
+        $key = new String_(DependencyNamesNodeVisitor::REQUIRES_AST_TOKEN_KEY);
         $node = new ArrayItem($value, $key);
 
         $this->subject->enterNode($node);

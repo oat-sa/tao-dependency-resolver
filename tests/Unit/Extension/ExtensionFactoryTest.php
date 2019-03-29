@@ -16,15 +16,11 @@ class ExtensionFactoryTest extends TestCase
 
     const EXTENSION_NAME = 'extension name';
     const REPOSITORY_NAME = 'repository-name';
-    const COMPOSER_NAME = 'oat-sa/composer-name';
 
     public function setUp()
     {
         $extensionMap = [
-            self::EXTENSION_NAME => [
-                'repository_name' => self::REPOSITORY_NAME,
-                'composer_name' => self::COMPOSER_NAME,
-            ],
+            self::EXTENSION_NAME => self::REPOSITORY_NAME,
         ];
         $this->subject = new ExtensionFactory($extensionMap);
     }
@@ -39,7 +35,6 @@ class ExtensionFactoryTest extends TestCase
         $this->assertInstanceOf(Extension::class, $extension);
         $this->assertEquals(self::EXTENSION_NAME, $extension->getExtensionName());
         $this->assertEquals(self::REPOSITORY_NAME, $extension->getRepositoryName());
-        $this->assertEquals(self::COMPOSER_NAME, $extension->getComposerName());
         $this->assertEquals(Extension::DEFAULT_BRANCH, $extension->getBranchName());
     }
 
@@ -55,7 +50,6 @@ class ExtensionFactoryTest extends TestCase
         $this->assertInstanceOf(Extension::class, $extension);
         $this->assertEquals(self::EXTENSION_NAME, $extension->getExtensionName());
         $this->assertEquals(self::REPOSITORY_NAME, $extension->getRepositoryName());
-        $this->assertEquals(self::COMPOSER_NAME, $extension->getComposerName());
         $this->assertEquals($customBranch, $extension->getBranchName());
     }
 
@@ -94,7 +88,6 @@ class ExtensionFactoryTest extends TestCase
         $this->assertInstanceOf(Extension::class, $extension);
         $this->assertEquals(self::EXTENSION_NAME, $extension->getExtensionName());
         $this->assertEquals(self::REPOSITORY_NAME, $extension->getRepositoryName());
-        $this->assertEquals(self::COMPOSER_NAME, $extension->getComposerName());
         $this->assertEquals(Extension::DEFAULT_BRANCH, $extension->getBranchName());
     }
 }

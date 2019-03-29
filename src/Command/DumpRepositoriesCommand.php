@@ -4,23 +4,22 @@ declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Command;
 
-use OAT\DependencyResolver\Repository\RepositoryMapAccessor;
+use OAT\DependencyResolver\Repository\RepositoryMapConverter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class DumpRepositoriesCommand extends Command
 {
-    /** @var RepositoryMapAccessor */
-    private $repositoryMapAccessor;
+    /** @var RepositoryMapConverter */
+    private $repositoryMapConverter;
 
-    public function __construct(RepositoryMapAccessor $repositoryMapAccessor)
+    public function __construct(RepositoryMapConverter $repositoryMapConverter)
     {
         parent::__construct();
 
-        $this->repositoryMapAccessor = $repositoryMapAccessor;
+        $this->repositoryMapConverter = $repositoryMapConverter;
     }
 
     protected function configure()
@@ -36,8 +35,16 @@ class DumpRepositoriesCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $csv = $this->repositoryMapAccessor->exportCsv();
+        $csv = $this->repositoryMapConverter->toCsv();
 
-        file_put_contents($input->getOption('filename'), implode("\n", $csv));
+        $filename = $input->getOption('filename');
+
+        // Creates directory if necessary.
+        $directory = dirname($filename);
+        if (!is_dir($directory)) {
+            mkdir($directory, 0775, true);
+        }
+
+        file_put_contents($filename, implode("\n", $csv));
     }
 }

@@ -6,11 +6,10 @@ namespace OAT\DependencyResolver\Tests\Unit\Manifest;
 
 use OAT\DependencyResolver\Extension\Entity\Extension;
 use OAT\DependencyResolver\Extension\Exception\NotMappedException;
-use OAT\DependencyResolver\Extension\ExtensionCollection;
 use OAT\DependencyResolver\Extension\ExtensionFactory;
-use OAT\DependencyResolver\Manifest\DependencyNamesFinder;
+use OAT\DependencyResolver\Manifest\DependencyNamesNodeVisitor;
 use OAT\DependencyResolver\Manifest\DependencyResolver;
-use OAT\DependencyResolver\Manifest\ExtensionNameFinder;
+use OAT\DependencyResolver\Manifest\ExtensionNameNodeVisitor;
 use OAT\DependencyResolver\Manifest\Parser;
 use OAT\DependencyResolver\Repository\ConnectedGithubClient;
 use OAT\DependencyResolver\Repository\GitHubRepositoryReader;
@@ -26,27 +25,14 @@ use Psr\Log\NullLogger;
 class DependencyResolverTest extends TestCase
 {
     use ProtectedAccessorTrait;
-
     const EXTENSION_MAP = [
-        'generis' => ['repository_name' => 'oat-sa/generis', 'composer_name' => 'oat-sa/generis'],
-        'package-tao' => ['repository_name' => 'oat-sa/package-tao', 'composer_name' => 'oat-sa/package-tao'],
-        'tao' => ['repository_name' => 'oat-sa/tao-core', 'composer_name' => 'oat-sa/tao-core'],
-        'taoBackOffice' => [
-            'repository_name' => 'oat-sa/extension-tao-backoffice',
-            'composer_name' => 'oat-sa/extension-tao-backoffice',
-        ],
-        'taoItems' => [
-            'repository_name' => 'oat-sa/extension-tao-item',
-            'composer_name' => 'oat-sa/extension-tao-item',
-        ],
-        'taoQtiItem' => [
-            'repository_name' => 'oat-sa/extension-tao-itemqti',
-            'composer_name' => 'oat-sa/extension-tao-itemqti',
-        ],
-        'taoQtiTest' => [
-            'repository_name' => 'oat-sa/extension-tao-testqti',
-            'composer_name' => 'oat-sa/extension-tao-testqti',
-        ],
+        'generis' => 'oat-sa/generis',
+        'package-tao' => 'oat-sa/package-tao',
+        'tao' => 'oat-sa/tao-core',
+        'taoBackOffice' => 'oat-sa/extension-tao-backoffice',
+        'taoItems' => 'oat-sa/extension-tao-item',
+        'taoQtiItem' => 'oat-sa/extension-tao-itemqti',
+        'taoQtiTest' => 'oat-sa/extension-tao-testqti',
     ];
 
     /** @var DependencyResolver */
@@ -93,14 +79,14 @@ class DependencyResolverTest extends TestCase
         $rootExtension = $this->extensionFactory->create($rootExtensionName, $rootBranch);
         $actual = $this->subject->resolve($rootExtension, $extensionBranchMap);
 
-        $expected = new ExtensionCollection();
-        $expected->add($rootExtension);
+        $expected = [];
+        $expected[self::EXTENSION_MAP[$rootExtensionName]] = 'dev-' . $rootBranch;
 
         foreach ($expectedExtensions as $expectedExtension => $expectedBranch) {
-            $expected->add($this->extensionFactory->create($expectedExtension, $expectedBranch));
+            $expected[self::EXTENSION_MAP[$expectedExtension]] = 'dev-' . $expectedBranch;
         }
 
-        $this->assertEquals($expected, $actual);
+        $this->assertEquals(json_encode(['require' => $expected], JSON_PRETTY_PRINT), $actual);
     }
 
     public function extensionsToTest()
@@ -136,12 +122,7 @@ class DependencyResolverTest extends TestCase
     public function testExtractExtensionsRecursivelyWithNotMappedExtensionThrowsException()
     {
         // This should return 'tao' and 'generis' extensions, let's not map 'generis'.
-        $this->subject = $this->createDependencyResolver([
-            'tao' => [
-                'repository_name' => 'oat-sa/tao-core',
-                'composer_name' => 'oat-sa/tao-core',
-            ],
-        ]);
+        $this->subject = $this->createDependencyResolver(['tao' => 'oat-sa/tao-core']);
 
         // Performs the recursive extraction.
         $rootExtension = $this->extensionFactory->create('tao');
@@ -161,7 +142,7 @@ class DependencyResolverTest extends TestCase
     private function createDependencyResolver($extensionMap = self::EXTENSION_MAP)
     {
         $phpParser = new PhpCodeParser\Php5(new Lexer());
-        $parser = new Parser($phpParser, new ExtensionNameFinder(), new DependencyNamesFinder(), new NodeTraverser());
+        $parser = new Parser($phpParser, new ExtensionNameNodeVisitor(), new DependencyNamesNodeVisitor(), new NodeTraverser());
 
         /** @var ConnectedGithubClient|MockObject $connectedGithubClient */
         $connectedGithubClient = $this->createMock(ConnectedGithubClient::class);

@@ -8,16 +8,16 @@ class RepositoryFile implements \JsonSerializable
     public const CSV_BLANK = ['', '', '', ''];
 
     /** @var string */
-    private $name = '';
+    private $name;
 
     /** @var string */
-    private $composerName = '';
+    private $composerName;
 
     /** @var string */
-    private $extensionName = '';
+    private $extensionName;
 
     /** @var array */
-    private $requires = [];
+    private $requires;
 
     public function __construct(
         string $name = '',
@@ -32,15 +32,14 @@ class RepositoryFile implements \JsonSerializable
             ->setRequires($requires);
     }
 
-    public function constructFromArray(array $properties): self
+    public static function createFromArray(array $properties): self
     {
-        $this
-            ->setName($properties['name'])
-            ->setComposerName($properties['composerName'])
-            ->setExtensionName($properties['extensionName'])
-            ->setRequires($properties['requires']);
-
-        return $this;
+        return new self(
+            $properties['name'] ?? '',
+            $properties['composerName'] ?? '',
+            $properties['extensionName'] ?? '',
+            $properties['requires'] ?? []
+        );
     }
 
     public function getName(): string

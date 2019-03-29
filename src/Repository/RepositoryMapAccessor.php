@@ -2,28 +2,18 @@
 
 namespace OAT\DependencyResolver\Repository;
 
-use OAT\DependencyResolver\Extension\Exception\NotMappedException;
-use OAT\DependencyResolver\FileSystem\Exception\FileAccessException;
-use OAT\DependencyResolver\FileSystem\FileAccessor;
 use OAT\DependencyResolver\Repository\Entity\Repository;
-use OAT\DependencyResolver\Repository\Entity\RepositoryBranch;
-use OAT\DependencyResolver\Repository\Entity\RepositoryFile;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class RepositoryMapAccessor
 {
     private const REPOSITORY_MAP_PATH = 'repository.map.path';
 
-    /** @var FileAccessor */
-    private $fileAccessor;
-
     /** @var string */
     private $extensionMapPath;
 
-    public function __construct(ParameterBagInterface $parameterBag, FileAccessor $fileAccessor)
+    public function __construct(ParameterBagInterface $parameterBag)
     {
-        $this->fileAccessor = $fileAccessor;
-
         if (!$parameterBag->has(self::REPOSITORY_MAP_PATH) || $parameterBag->get(self::REPOSITORY_MAP_PATH) === '') {
             throw new \LogicException('Parameter "' . self::REPOSITORY_MAP_PATH . '" missing or empty.');
         }
@@ -31,33 +21,17 @@ class RepositoryMapAccessor
     }
 
     /**
-     * @throws NotMappedException when the repository is not found in the map
-     */
-    public function findExtensionName(string $repositoryName): string
-    {
-        $repositoryList = $this->read();
-        if (!isset($repositoryList[$repositoryName])) {
-            throw new NotMappedException('Repository "' . $repositoryName . '" not found in map.');
-        }
-
-        /** @var Repository $repository */
-        $repository = $repositoryList[$repositoryName];
-
-        return $repository->getExtensionName();
-    }
-
-    /**
      * Reads extension map from configured file.
      *
-     * @throws \LogicException when the extension map is not available or corrupted.
+     * @throws \LogicException when the extension map is not valid json.
      */
     public function read(): array
     {
-        try {
-            $map = $this->fileAccessor->getContents($this->extensionMapPath);
-        } catch (FileAccessException $exception) {
-            throw new \LogicException('Extension map does not exist.');
+        if (!file_exists($this->extensionMapPath)) {
+            return [];
         }
+
+        $map = file_get_contents($this->extensionMapPath);
 
         $decodedMap = json_decode($map, true);
         if ($decodedMap === null) {
@@ -66,7 +40,7 @@ class RepositoryMapAccessor
 
         // Builds Repository objects.
         foreach ($decodedMap as &$repository) {
-            $repository = (new Repository())->constructFromArray($repository);
+            $repository = Repository::createFromArray($repository);
         }
 
         return $decodedMap;
@@ -77,46 +51,16 @@ class RepositoryMapAccessor
      *
      * @param array $map Extension maps extracted from updater.
      *
-     * @return bool
-     * @throws FileAccessException
+     * @return bool was the content well written?
      */
     public function write(array $map): bool
     {
-        return $this->fileAccessor->setContents($this->extensionMapPath, json_encode($map, JSON_PRETTY_PRINT));
-    }
-
-    /**
-     * Converts repository map to csv.
-     *
-     * @return array
-     * @throws \LogicException
-     */
-    public function exportCsv(): array
-    {
-        $repositories = $this->read();
-
-        // Sets titles.
-        $csv = [
-            implode(',', array_merge(
-                Repository::CSV_TITLES,
-                RepositoryBranch::CSV_TITLES,
-                RepositoryFile::CSV_TITLES,
-                RepositoryFile::CSV_TITLES,
-                RepositoryBranch::CSV_TITLES,
-                RepositoryFile::CSV_TITLES,
-                RepositoryFile::CSV_TITLES,
-                RepositoryBranch::CSV_TITLES,
-                RepositoryFile::CSV_TITLES,
-                RepositoryFile::CSV_TITLES
-            )),
-        ];
-
-        // Builds Repository objects.
-        /** @var Repository $repository */
-        foreach ($repositories as $repository) {
-            $csv[] = implode(',', $repository->toFlatArray());
+        // Creates directory if necessary.
+        $directory = dirname($this->extensionMapPath);
+        if (!is_dir($directory)) {
+            mkdir($directory, 0775, true);
         }
 
-        return $csv;
+        return (bool)file_put_contents($this->extensionMapPath, json_encode($map, JSON_PRETTY_PRINT));
     }
 }

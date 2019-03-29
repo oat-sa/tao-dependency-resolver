@@ -17,7 +17,6 @@ use Psr\Log\LoggerAwareTrait;
 class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
-
     public const COMPOSER_FILENAME = 'composer.json';
     public const MANIFEST_FILENAME = 'manifest.php';
 
@@ -43,27 +42,19 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
         return $this->connectedGithubClient->getRepositoryList($owner);
     }
 
-    public function analyzeRepository(Repository $repository)
+    public function readRepository(Repository $repository)
     {
-        // Check existence of branches 'develop', 'master', or derivated (e.g. development instead of develop).
-        $branches = [];
+        // Adds branches 'develop' and 'master' when they exist.
         foreach (['develop', 'master'] as $branchName) {
-            // Checks for branch existence.
-            try {
-                $branches = array_merge($branches, $this->findBranch($repository, $branchName));
-            } catch (EmptyRepositoryException $exception) {
-                break;
+            if ($this->branchExists($repository, $branchName)) {
+                $repository->addBranch($this->readBranch($repository, $branchName));
             }
         }
 
-        // Analyzes existing branches.
-        foreach (array_keys($branches) as $branchName) {
-            $repository->addBranch($this->analyzeBranch($repository, $branchName));
-        }
-
         // Finally determines the extension name and composer name.
-        $repository->setExtensionName($this->getExtensionName($repository, 'develop'));
-        $repository->setComposerName($this->getComposerName($repository, 'develop'));
+        $repository->setExtensionName($this->getExtensionName($repository));
+        $repository->setComposerName($this->getComposerName($repository));
+        $repository->setAnalyzed(true);
 
         return $repository;
     }
@@ -71,38 +62,37 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
     /**
      * Checks existence of branch in repository.
      *
-     * @throws EmptyRepositoryException when the repository is empty.
      * @throws RuntimeException when another error occurs.
      */
-    public function findBranch(Repository $repository, string $branchName): array
+    public function branchExists(Repository $repository, string $branchName): bool
     {
         try {
-            $branchRef = $this->connectedGithubClient->getBranchReference(
+            $this->connectedGithubClient->getBranchReference(
                 $repository->getOwner(),
                 $repository->getName(),
                 $branchName
             );
-        } catch (BranchNotFoundException $exception) {
-            return [];
+        } catch (BranchNotFoundException|EmptyRepositoryException $exception) {
+            return false;
         }
 
-        return [$branchName => $branchRef];
+        return true;
     }
 
     /**
      * Builds a branch with files.
      */
-    public function analyzeBranch(Repository $repository, string $branchName): ?RepositoryBranch
+    public function readBranch(Repository $repository, string $branchName): ?RepositoryBranch
     {
         $this->logger->info('Analyzing branch "' . $branchName . '"...');
         $branch = new RepositoryBranch($branchName);
 
         // Analyzes manifest and composer.json.
-        $file = $this->analyzeManifest($repository, $branchName);
+        $file = $this->readManifest($repository, $branchName);
         if ($file !== null) {
             $branch->addFile($file);
         }
-        $file = $this->analyzeComposer($repository, $branchName);
+        $file = $this->readComposer($repository, $branchName);
         if ($file !== null) {
             $branch->addFile($file);
         }
@@ -111,10 +101,10 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
     }
 
     /**
-     * Extracts extension name from manifest.
+     * Extracts extension name and dependencies from manifest.
      * Returns null if manifest file cannot be found.
      */
-    public function analyzeManifest(Repository $repository, string $branchName): ?RepositoryFile
+    public function readManifest(Repository $repository, string $branchName): ?RepositoryFile
     {
         try {
             $manifestContents = $this->getManifestContents(
@@ -132,11 +122,9 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
         return new RepositoryFile(self::MANIFEST_FILENAME, '', $extensionName, $requires);
     }
 
-    /**
-     * Extracts extension name from composer.json.
-     * Returns null if composer.json cannot be found.
-     */
-    public function analyzeComposer(Repository $repository, string $branchName): ?RepositoryFile
+    // Extracts extension name from composer.json.
+    // Returns null if composer.json cannot be found.
+    public function readComposer(Repository $repository, string $branchName): ?RepositoryFile
     {
         try {
             $composerContents = $this->getComposerContents(
@@ -202,75 +190,20 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
         return $this->connectedGithubClient->getContents($owner, $repositoryName, $branchName, $filename);
     }
 
-    /**
-     * Extension name can be located either in:
-     * - manifest.php['name']
-     * - composer.json['extra']['tao-extension-name']
-     * Manifest overrides composer if both are present and different.
-     */
-    public function getExtensionName(Repository $repository, string $branchName): ?string
+    /*
+    Extension name can be located either in:
+    - manifest.php['name']
+    - composer.json['extra']['tao-extension-name']
+    Manifest overrides composer if both are present and different.
+    */
+    public function getExtensionName(Repository $repository): string
     {
-        // Tries to get extension name from given branch and fallback to develop, master or any other branch existing.
-        $branchNames = [$branchName];
-        if ($branchName !== 'develop') {
-            $branchNames[] = 'develop';
-        }
-        if ($branchName !== 'master') {
-            $branchNames[] = 'master';
-        }
-        foreach (array_keys($repository->getBranches()) as $existingBranchName) {
-            if (! in_array($existingBranchName, $branchNames)) {
-                $branchNames[] = $existingBranchName;
-            }
-        }
-
         // Tries to find extension from manifest, then composer.json for each branch, until we find.
-        foreach ($branchNames as $branchName) {
-            $branch = $repository->getBranch($branchName);
-
-            if ($branch !== null) {
-                foreach ([self::MANIFEST_FILENAME, self::COMPOSER_FILENAME] as $filename) {
-                    $file = $branch->getFile($filename);
-                    if ($file !== null) {
-                        $extensionName = $file->getExtensionName();
-                        if ($extensionName !== '') {
-                            return $extensionName;
-                        }
-                    }
-                }
-            }
-        }
-
-        return '__NOT_FOUND__';
-    }
-
-    /**
-     * Composer name can be located in composer.json['name'].
-     */
-    public function getComposerName(Repository $repository, string $branchName): ?string
-    {
-        // Tries to get extension name from given branch and fallback to develop, master or any other branch existing.
-        $branchNames = [$branchName];
-        if ($branchName !== 'develop') {
-            $branchNames[] = 'develop';
-        }
-        if ($branchName !== 'master') {
-            $branchNames[] = 'master';
-        }
-        foreach (array_keys($repository->getBranches()) as $existingBranchName) {
-            if (! in_array($existingBranchName, $branchNames)) {
-                $branchNames[] = $existingBranchName;
-            }
-        }
-
-        // Tries to find extension from composer.json for each branch, until we find.
-        foreach ($branchNames as $branchName) {
-            $branch = $repository->getBranch($branchName);
-
-            if ($branch !== null) {
-                $file = $branch->getFile(self::COMPOSER_FILENAME);
+        foreach ($repository->getBranches() as $branch) {
+            foreach ([self::MANIFEST_FILENAME, self::COMPOSER_FILENAME] as $filename) {
+                $file = $branch->getFile($filename);
                 if ($file !== null) {
-                    $extensionName = $file->getComposerName();
+                    $extensionName = $file->getExtensionName();
                     if ($extensionName !== '') {
                         return $extensionName;
                     }
@@ -278,6 +211,23 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
             }
         }
 
-        return '__NOT_FOUND__';
+        return '';
+    }
+
+    // Composer name can be located in composer.json['name'].
+    public function getComposerName(Repository $repository): string
+    {
+        // Tries to find extension from composer.json for each branch, until we find.
+        foreach ($repository->getBranches() as $branch) {
+            $file = $branch->getFile(self::COMPOSER_FILENAME);
+            if ($file !== null) {
+                $extensionName = $file->getComposerName();
+                if ($extensionName !== '') {
+                    return $extensionName;
+                }
+            }
+        }
+
+        return '';
     }
 }

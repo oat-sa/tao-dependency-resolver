@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Tests\Unit\Repository;
 
-use OAT\DependencyResolver\Manifest\DependencyNamesFinder;
-use OAT\DependencyResolver\Manifest\ExtensionNameFinder;
+use OAT\DependencyResolver\Manifest\DependencyNamesNodeVisitor;
+use OAT\DependencyResolver\Manifest\ExtensionNameNodeVisitor;
 use OAT\DependencyResolver\Manifest\Parser;
 use OAT\DependencyResolver\Repository\ConnectedGithubClient;
 use OAT\DependencyResolver\Repository\Entity\Repository;
@@ -28,7 +28,6 @@ use Psr\Log\NullLogger;
 class GitHubRepositoryReaderTest extends TestCase
 {
     use ProtectedAccessorTrait;
-
     const REPOSITORY_LIST = ['some repositories'];
 
     /** @var GitHubRepositoryReader */
@@ -51,7 +50,7 @@ class GitHubRepositoryReaderTest extends TestCase
                     . DIRECTORY_SEPARATOR . $repositoryName
                     . DIRECTORY_SEPARATOR . $branchName
                     . DIRECTORY_SEPARATOR . $filename;
-                if (! file_exists($filePath)) {
+                if (!file_exists($filePath)) {
                     throw new FileNotFoundException(
                         sprintf(
                             'File "%s" not found in branch "%s" of repository "%s/%s".',
@@ -68,7 +67,12 @@ class GitHubRepositoryReaderTest extends TestCase
         );
 
         $phpParser = new PhpParser\Php5(new Lexer());
-        $parser = new Parser($phpParser, new ExtensionNameFinder(), new DependencyNamesFinder(), new NodeTraverser());
+        $parser = new Parser(
+            $phpParser,
+            new ExtensionNameNodeVisitor(),
+            new DependencyNamesNodeVisitor(),
+            new NodeTraverser()
+        );
 
         $this->subject = new GitHubRepositoryReader($this->connectedGithubClient, $parser);
 
@@ -106,7 +110,7 @@ class GitHubRepositoryReaderTest extends TestCase
         $this->assertEquals($repositories, $this->subject->getRepositoryList($userName));
     }
 
-    public function testFindBranchWithNotExistingBranchReturnsEmptyArray()
+    public function testBranchExistsWithNotExistingBranchReturnsFalse()
     {
         $owner = 'name of the owner';
         $repositoryName = 'name of the repository';
@@ -121,10 +125,10 @@ class GitHubRepositoryReaderTest extends TestCase
         $this->connectedGithubClient->method('getBranchReference')->with($owner, $repositoryName)
             ->willThrowException(new BranchNotFoundException(''));
 
-        $this->assertEquals([], $this->subject->findBranch($repository, $branchName));
+        $this->assertFalse($this->subject->branchExists($repository, $branchName));
     }
 
-    public function testFindBranchWithEmptyRepositoryThrowsException()
+    public function testBranchExistsWithEmptyRepositoryReturnsFalse()
     {
         $owner = 'name of the owner';
         $repositoryName = 'name of the repository';
@@ -139,11 +143,10 @@ class GitHubRepositoryReaderTest extends TestCase
         $this->connectedGithubClient->method('getBranchReference')->with($owner, $repositoryName)
             ->willThrowException(new EmptyRepositoryException(''));
 
-        $this->expectException(EmptyRepositoryException::class);
-        $this->subject->findBranch($repository, $branchName);
+        $this->assertFalse($this->subject->branchExists($repository, $branchName));
     }
 
-    public function testFindBranchWithExistingBranchReturnsBranchNameAndReference()
+    public function testBranchExistsWithExistingBranchReturnsTrue()
     {
         $owner = 'name of the owner';
         $repositoryName = 'name of the repository';
@@ -159,7 +162,7 @@ class GitHubRepositoryReaderTest extends TestCase
         $this->connectedGithubClient->method('getBranchReference')->with($owner, $repositoryName)
             ->willReturn($branchReference);
 
-        $this->assertEquals([$branchName => $branchReference], $this->subject->findBranch($repository, $branchName));
+        $this->assertTrue($this->subject->branchExists($repository, $branchName));
     }
 
     public function testGetManifestContentsWithNonExistingFileThrowsException()

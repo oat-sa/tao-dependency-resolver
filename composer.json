@@ -12,6 +12,7 @@
         "knplabs/github-api": "^2.11",
         "knplabs/packagist-api": "^1.5",
         "league/flysystem": "^1.0",
+        "mikey179/vfsStream": "^1.6",
         "nikic/php-parser": "^4.2",
         "oat-sa/oatbox-extension-installer": "~1.1||dev-master",
         "php-http/guzzle6-adapter": "^1.1",

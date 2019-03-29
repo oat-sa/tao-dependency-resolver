@@ -74,6 +74,7 @@ class ConnectedGithubClient
             foreach ($foundRepositories as $repository) {
                 $repositoryName = $repository['name'];
                 $repositories[$owner . '/' . $repositoryName] = new Repository(
+                    false, // repository not yet analyzed.
                     $owner,
                     $repositoryName,
                     $repository['private'],

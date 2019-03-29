@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace OAT\DependencyResolver\Command;
 
 use OAT\DependencyResolver\Extension\Entity\Extension;
+use OAT\DependencyResolver\Extension\Exception\NotMappedException;
 use OAT\DependencyResolver\Extension\ExtensionFactory;
-use OAT\DependencyResolver\FileSystem\Exception\FileAccessException;
-use OAT\DependencyResolver\FileSystem\FileAccessor;
 use OAT\DependencyResolver\Manifest\DependencyResolver;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -23,19 +22,14 @@ class DependencyResolverCommand extends Command
     /** @var DependencyResolver */
     private $dependencyResolver;
 
-    /** @var FileAccessor */
-    private $fileAccessor;
-
     public function __construct(
         ExtensionFactory $extensionFactory,
-        DependencyResolver $dependencyResolver,
-        FileAccessor $fileAccessor
+        DependencyResolver $dependencyResolver
     ) {
         parent::__construct();
 
         $this->extensionFactory = $extensionFactory;
         $this->dependencyResolver = $dependencyResolver;
-        $this->fileAccessor = $fileAccessor;
     }
 
     protected function configure()
@@ -53,11 +47,11 @@ class DependencyResolverCommand extends Command
             ->addOption(
                 'extensions-branch',
                 null,
-                InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+                InputOption::VALUE_REQUIRED,
                 'Branch to load for each extension.'
             )
             ->addOption(
-                'directory',
+                'dump-directory',
                 'd',
                 InputOption::VALUE_REQUIRED,
                 'Directory in which to download dependencies',
@@ -66,58 +60,60 @@ class DependencyResolverCommand extends Command
     }
 
     /**
-     * @throws \Exception
+     * @throws NotMappedException when root extension or one of its dependencies is not present in the extension map.
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // Builds root extension.
+        $extensionBranchMap = $this->parseExtensionBranches($input->getOption('extensions-branch'));
+
+        // Builds root extension. Checks that it exists.
         $rootExtension = $this->extensionFactory->create(
             $input->getArgument('package-name'),
             $input->getOption('package-branch')
         );
-
         $output->writeln('Resolving dependencies for repository "' . $rootExtension->getRepositoryName() . '".');
 
-        $extensionBranchMap = $this->getExtensionToBranchMap($input->getOption('extensions-branch'));
-
         // Resolve all extensions.
-        $extensionCollection = $this->dependencyResolver->resolve($rootExtension, $extensionBranchMap);
+        $composerJson = $this->dependencyResolver->resolve($rootExtension, $extensionBranchMap);
 
-        $output->writeln('The following extensions will be installed:');
-        foreach ($extensionCollection as $extension) {
-            $output->writeln('- ', $extension->getExtensionName());
-        }
-
-        // Generates and write composer.json
-        $composerJson = $extensionCollection->generateComposerJson();
-        $composerJsonPath = $input->getOption('directory') . DIRECTORY_SEPARATOR . 'composer.json';
-        try {
-            $this->fileAccessor->setContents($composerJsonPath, $composerJson);
-        } catch (FileAccessException $exception) {
-            $output->writeln(
-                sprintf(
-                    'An error occurred while writing composer.json to "%s": %s',
-                    realpath($composerJsonPath),
-                    $exception->getMessage()
-                )
-            );
-
-            return 1;
-        }
-
-        $output->writeln('Dumped composer require to "' . realpath($composerJsonPath) . '".');
+        // Outputs result.
+        $this->outputResult($composerJson, $input->getOption('dump-directory'), $output);
     }
 
-    private function getExtensionToBranchMap(array $extensionsBranches)
+    private function parseExtensionBranches(string $extensionBranches)
     {
         $extensionToBranchMap = [];
 
-        foreach ($extensionsBranches as $extensionBranch) {
+        foreach (explode(',', $extensionBranches) as $extensionBranch) {
             $extensionBranchParts = explode(':', $extensionBranch);
+            if (count($extensionBranchParts) > 2 || $extensionBranchParts[0] === '') {
+                throw new \LogicException(
+                    sprintf('The extensions-branch option has a non-resolvable value: "%s".', $extensionBranch)
+                );
+            }
 
-            $extensionToBranchMap[$extensionBranchParts[0]] = $extensionBranchParts[1];
+            $extensionToBranchMap[$extensionBranchParts[0]] = $extensionBranchParts[1] ?? Extension::DEFAULT_BRANCH;
         }
 
         return $extensionToBranchMap;
+    }
+
+    private function outputResult(string $composerJson, ?string $dumpDirectory, OutputInterface $output)
+    {
+        // Displays result when no directory is provided.
+        if ($dumpDirectory === null) {
+            $output->write($composerJson);
+            return;
+        }
+
+        // Creates directory if necessary.
+        if (!is_dir($dumpDirectory)) {
+            mkdir($dumpDirectory, 0775, true);
+        }
+
+        // Writes json to file.
+        $composerJsonPath = rtrim($dumpDirectory, '/\\') . DIRECTORY_SEPARATOR . 'composer.json';
+        file_put_contents($composerJsonPath, $composerJson);
+        $output->writeln('Dumped composer require to "' . realpath($composerJsonPath) . '".');
     }
 }

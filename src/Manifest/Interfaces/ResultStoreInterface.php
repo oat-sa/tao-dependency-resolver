@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace OAT\DependencyResolver\Manifest\Interfaces;
 
-interface FinderInterface
+interface ResultStoreInterface
 {
     /**
      * Clears the result for a new traversal.
      *
      * @retun $this
      */
-    public function clear(): FinderInterface;
+    public function clear(): ResultStoreInterface;
 
     /**
      * Returns found result.
