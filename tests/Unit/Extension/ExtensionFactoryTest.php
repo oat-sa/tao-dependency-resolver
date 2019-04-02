@@ -64,30 +64,4 @@ class ExtensionFactoryTest extends TestCase
         $this->expectExceptionMessage('Extension "' . $invalidExtensionName . '" not found in map');
         $this->subject->create($invalidExtensionName);
     }
-
-    /**
-     * @throws NotMappedException
-     */
-    public function testCreateWithNotMappedRepositoryThrowsException()
-    {
-        $owner = 'oat-sa';
-        $invalidRepositoryName = 'invalid-repository-name';
-
-        $this->expectException(NotMappedException::class);
-        $this->expectExceptionMessage('Repository "' . $owner . '/' . $invalidRepositoryName . '" not found in map');
-        $this->subject->create($owner . '/' . $invalidRepositoryName);
-    }
-
-    /**
-     * @throws NotMappedException
-     */
-    public function testCreateWithMappedRepositoryReturnsExtension()
-    {
-        $extension = $this->subject->create(self::REPOSITORY_NAME);
-
-        $this->assertInstanceOf(Extension::class, $extension);
-        $this->assertEquals(self::EXTENSION_NAME, $extension->getExtensionName());
-        $this->assertEquals(self::REPOSITORY_NAME, $extension->getRepositoryName());
-        $this->assertEquals(Extension::DEFAULT_BRANCH, $extension->getBranchName());
-    }
 }
