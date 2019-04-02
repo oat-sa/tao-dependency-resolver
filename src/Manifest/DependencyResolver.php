@@ -55,7 +55,7 @@ class DependencyResolver implements LoggerAwareInterface
         $this->extractExtensionsRecursively($rootExtension, $extensionBranchMap);
 
         // Converts extension colection into a composer.json require.
-        return json_encode($this->extensionCollection, JSON_PRETTY_PRINT);
+        return json_encode($this->extensionCollection, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     }
 
     /**

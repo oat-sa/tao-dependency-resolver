@@ -86,7 +86,7 @@ class DependencyResolverTest extends TestCase
             $expected[self::EXTENSION_MAP[$expectedExtension]] = 'dev-' . $expectedBranch;
         }
 
-        $this->assertEquals(json_encode(['require' => $expected], JSON_PRETTY_PRINT), $actual);
+        $this->assertEquals(json_encode(['require' => $expected], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES), $actual);
     }
 
     public function extensionsToTest()
@@ -142,7 +142,8 @@ class DependencyResolverTest extends TestCase
     private function createDependencyResolver($extensionMap = self::EXTENSION_MAP)
     {
         $phpParser = new PhpCodeParser\Php5(new Lexer());
-        $parser = new Parser($phpParser, new ExtensionNameNodeVisitor(), new DependencyNamesNodeVisitor(), new NodeTraverser());
+        $parser = new Parser($phpParser, new ExtensionNameNodeVisitor(), new DependencyNamesNodeVisitor(),
+            new NodeTraverser());
 
         /** @var ConnectedGithubClient|MockObject $connectedGithubClient */
         $connectedGithubClient = $this->createMock(ConnectedGithubClient::class);
@@ -167,6 +168,9 @@ class DependencyResolverTest extends TestCase
 
         $this->extensionFactory = new ExtensionFactory($extensionMap);
 
-        return new DependencyResolver($repositoryReader, $parser, $this->extensionFactory);
+        $dependencyResolver = new DependencyResolver($repositoryReader, $parser, $this->extensionFactory);
+        $dependencyResolver->setLogger(new NullLogger());
+
+        return $dependencyResolver;
     }
 }
