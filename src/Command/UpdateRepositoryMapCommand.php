@@ -40,7 +40,7 @@ class UpdateRepositoryMapCommand extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         // Reload repositoryList to get repositories not mapped yet.
         if ($input->getOption('reload-list')) {

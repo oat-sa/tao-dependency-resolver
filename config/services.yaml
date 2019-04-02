@@ -38,8 +38,8 @@ services:
     OAT\DependencyResolver\Manifest\Parser:
         class: OAT\DependencyResolver\Manifest\Parser
         arguments:
-            $extensionNameFinder: '@OAT\DependencyResolver\Manifest\ExtensionNameFinder'
-            $dependencyNamesFinder: '@OAT\DependencyResolver\Manifest\DependencyNamesFinder'
+            $extensionNameNodeVisitor: '@OAT\DependencyResolver\Manifest\ExtensionNameNodeVisitor'
+            $dependencyNamesNodeVisitor: '@OAT\DependencyResolver\Manifest\DependencyNamesNodeVisitor'
 
     OAT\DependencyResolver\Repository\ConnectedGithubClient:
         class: OAT\DependencyResolver\Repository\ConnectedGithubClient
