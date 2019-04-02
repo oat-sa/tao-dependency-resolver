@@ -11146,7 +11146,7 @@
         "defaultBranch": "master",
         "extensionName": "",
         "composerName": "oat-sa\/oneroster-import",
-        "onPackagist": false,
+        "onPackagist": true,
         "branches": {
             "develop": {
                 "name": "develop",
@@ -12272,6 +12272,119 @@
         "branches": {
             "master": {
                 "name": "master",
+                "files": []
+            }
+        }
+    },
+    "oat-sa\/tao-dependency-resolver": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "tao-dependency-resolver",
+        "private": false,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "oat-sa\/tao-dependency-resolver",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": {
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/tao-dependency-resolver",
+                        "extensionName": "",
+                        "requires": []
+                    }
+                }
+            },
+            "master": {
+                "name": "master",
+                "files": {
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/tao-dependency-resolver",
+                        "extensionName": "",
+                        "requires": []
+                    }
+                }
+            }
+        }
+    },
+    "oat-sa\/audio-file-delivery-api": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "audio-file-delivery-api",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "oat-sa\/audio-file-delivery-api",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": {
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/audio-file-delivery-api",
+                        "extensionName": "",
+                        "requires": []
+                    }
+                }
+            },
+            "master": {
+                "name": "master",
+                "files": []
+            }
+        }
+    },
+    "oat-sa\/audio-file-delivery-client": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "audio-file-delivery-client",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": {
+            "master": {
+                "name": "master",
+                "files": []
+            }
+        }
+    },
+    "oat-sa\/docker-stack": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "docker-stack",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": []
+            },
+            "master": {
+                "name": "master",
+                "files": []
+            }
+        }
+    },
+    "oat-sa\/tao-outcome-filesystem": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "tao-outcome-filesystem",
+        "private": false,
+        "defaultBranch": "develop",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
                 "files": []
             }
         }
