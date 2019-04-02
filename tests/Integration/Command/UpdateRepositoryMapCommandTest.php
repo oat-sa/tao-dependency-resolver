@@ -44,7 +44,7 @@ class UpdateRepositoryMapCommandTest extends TestCase
 
     public function testConfigure()
     {
-        $this->assertEquals('repositories:update', $this->subject->getName());
+        $this->assertEquals('oat:repositories:update', $this->subject->getName());
 
         $options = [
             'reload-list' => new InputOption(

@@ -32,6 +32,12 @@ class GithubClientProxy extends Client
 
     /**
      * Returns a page of the repository list of the given owner
+     *
+     * @param string $owner
+     * @param int    $page
+     * @param int    $perPage
+     *
+     * @return array
      */
     public function getRepositoryList(string $owner, int $page, int $perPage): array
     {
@@ -42,6 +48,12 @@ class GithubClientProxy extends Client
     }
 
     /**
+     * @param string $owner
+     * @param string $repositoryName
+     * @param string $branchReference
+     * @param string $filename
+     *
+     * @return string|null
      * @throws ErrorException
      */
     public function getFileContents(
@@ -55,6 +67,12 @@ class GithubClientProxy extends Client
 
     /**
      * Checks existence of a branch.
+     *
+     * @param string $owner
+     * @param string $repositoryName
+     * @param string $branchName
+     *
+     * @return array
      */
     public function getReference(string $owner, string $repositoryName, string $branchName): array
     {

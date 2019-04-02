@@ -12,6 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateRepositoryMapCommand extends Command
 {
+    public const NAME = 'oat:repositories:update';
+
     /** @var RepositoryMapUpdater */
     private $repositoryMapUpdater;
 
@@ -24,7 +26,7 @@ class UpdateRepositoryMapCommand extends Command
 
     protected function configure()
     {
-        $this->setName('repositories:update')
+        $this->setName(self::NAME)
             ->addOption(
                 'reload-list',
                 'r',

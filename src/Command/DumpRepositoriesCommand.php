@@ -12,6 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DumpRepositoriesCommand extends Command
 {
+    public const NAME = 'oat:repositories:dump';
+
     /** @var RepositoryMapConverter */
     private $repositoryMapConverter;
 
@@ -24,10 +26,9 @@ class DumpRepositoriesCommand extends Command
 
     protected function configure()
     {
-        $this->setName('repositories:dump')
-            ->addOption(
+        $this->setName(self::NAME)
+            ->addArgument(
                 'filename',
-                'f',
                 InputArgument::REQUIRED,
                 'Filename to which to export the repository table'
             );
@@ -37,7 +38,7 @@ class DumpRepositoriesCommand extends Command
     {
         $csv = $this->repositoryMapConverter->toCsv();
 
-        $filename = $input->getOption('filename');
+        $filename = $input->getArgument('filename');
 
         // Creates directory if necessary.
         $directory = dirname($filename);
