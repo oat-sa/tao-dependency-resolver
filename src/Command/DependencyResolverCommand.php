@@ -66,7 +66,7 @@ class DependencyResolverCommand extends Command
                 Extension::DEFAULT_BRANCH
             )
             ->addOption(
-                'extension-branches',
+                'dependency-branches',
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Branch to load for each dependency.',
@@ -82,7 +82,7 @@ class DependencyResolverCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $extensionBranchMap = $this->parseExtensionBranches($input->getOption('extension-branches'));
+        $extensionBranchMap = $this->parseExtensionBranches($input->getOption('dependency-branches'));
 
         // Builds root extension. Checks that it exists.
         $rootExtension = $this->extensionFactory->create(

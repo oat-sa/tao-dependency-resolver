@@ -116,7 +116,7 @@ class DependencyResolverCommandTest extends KernelTestCase
                 [
                     '--repository-name' => 'oat-sa/extension-tao-itemqti',
                     '--main-branch' => 'custom-branch',
-                    '--extension-branches' => implode(',', [
+                    '--dependency-branches' => implode(',', [
                         'taoBackOffice:fix-branch',
                         'taoItems:customBranch',
                         'generis:master',
@@ -175,7 +175,7 @@ class DependencyResolverCommandTest extends KernelTestCase
                 'Repository "oat-sa/package-tao" has no extension name.',
             ],
             [
-                ['--extension-branches' => ':oat-sa/package-tao'],
+                ['--dependency-branches' => ':oat-sa/package-tao'],
                 LogicException::class,
                 'The extensions-branch option has a non-resolvable value: ":oat-sa/package-tao".',
             ],

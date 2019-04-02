@@ -23,7 +23,7 @@ Minimal PHP version required: 7.1
 
 PHP extensions required: php7.1-xml, php7.1-mbstring
 
-## Authentification
+## Authentication
 
 You need to provide a valid [GitHub token](https://github.com/settings/tokens) with "repo" access rights into `<project dir>/.env`, in the key `GITHUB_SECRET`.
 
@@ -36,13 +36,16 @@ There are two tools in this repository:
 Read more about this tool [here](doc/dependency-resolver.md).
 
 ```
-$ php bin/console dependencies:resolve <root extension or repository name> [--package-branch <root extension branch>] [--extensions-branch <dependency extensions branch>] [--dump-directory <directory>]
+$ php bin/console oat:dependencies:resolve [--repository-name <repository name> | --extension-name <extension name>] [--main-branch <main repository branch>] [--dependency-branches <dependency branches>]
 ```
 
-- `root extension or repository name`: "manifest name", not the repository name, e.g. "taoQtiTest", not "oat-sa/extension-tao-testqti".
-- `root extension branch`: the branch of the extension to be tested
-- `dependency extensions branch`: the branch to download for each dependency in the form of "extensionName1:branchName1,extensionName2:branchName2,...", e.g. "tao:develop,taoQtiItem:3.2.1,generis:10.12.14". Branches for all non given extensions will default to "develop".
-- `directory`: the directory where you want to write the composer.json file. Defaults to the system temp dir (i.e. `/tmp` on linux systems).
+- `main repository name`: repository name, e.g. "oat-sa/extension-tao-testqti" of the repository to resolve.
+- `main extension name`: "manifest name", e.g. "taoQtiTest" of the extension to resolve.
+- `main repository branch`: the branch of the extension to be resolved.
+- `dependency branches`: desired branches to download include for each dependency. In the form of "extensionName1:branchName1,extensionName2:branchName2,...", e.g. "tao:develop,taoQtiItem:fix/tao-1234,generis:10.12.14". Branches for all non given extensions will default to "develop".
+
+Only one of the two options `repository-name` and `extension-name` must be provided.
+
 
 ### Repository lister
 
