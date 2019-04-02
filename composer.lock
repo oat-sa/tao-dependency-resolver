@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f439466ad8fbdccbd9d3ee23fd1733c1",
+    "content-hash": "df7f20ec6a847690a7b2ffc9c4b0f294",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -429,16 +429,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.50",
+            "version": "1.0.51",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "dab4e7624efa543a943be978008f439c333f2249"
+                "reference": "755ba7bf3fb9031e6581d091db84d78275874396"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/dab4e7624efa543a943be978008f439c333f2249",
-                "reference": "dab4e7624efa543a943be978008f439c333f2249",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/755ba7bf3fb9031e6581d091db84d78275874396",
+                "reference": "755ba7bf3fb9031e6581d091db84d78275874396",
                 "shasum": ""
             },
             "require": {
@@ -509,7 +509,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2019-02-01T08:50:36+00:00"
+            "time": "2019-03-30T13:22:34+00:00"
         },
         {
             "name": "mikey179/vfsStream",
@@ -685,58 +685,6 @@
                 "php"
             ],
             "time": "2019-02-16T20:54:15+00:00"
-        },
-        {
-            "name": "oat-sa/oatbox-extension-installer",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/oat-sa/oatbox-extension-installer.git",
-                "reference": "3fa57ad0188b8888aedcd67062ffacb37d001cde"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/oat-sa/oatbox-extension-installer/zipball/3fa57ad0188b8888aedcd67062ffacb37d001cde",
-                "reference": "3fa57ad0188b8888aedcd67062ffacb37d001cde",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0",
-                "php": ">=5.4"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "oatbox\\composer\\ExtensionInstallerPlugin"
-            },
-            "autoload": {
-                "psr-0": {
-                    "oatbox\\composer": "./"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Open Assessment Technologies S.A.",
-                    "homepage": "http://www.taotesting.com"
-                },
-                {
-                    "name": "Lionel Lecaque",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Custom composer extension installer for oatbox extension",
-            "homepage": "http://www.taotesting.com",
-            "keywords": [
-                "OAT",
-                "TAO",
-                "composer",
-                "computer-based-assessment",
-                "oatbox"
-            ],
-            "time": "2015-11-23T11:35:13+00:00"
         },
         {
             "name": "php-http/cache-plugin",
@@ -4494,9 +4442,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "oat-sa/oatbox-extension-installer": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

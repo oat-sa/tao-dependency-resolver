@@ -47,9 +47,6 @@
     "nikic/php-parser": {
         "version": "v4.2.0"
     },
-    "oat-sa/oatbox-extension-installer": {
-        "version": "dev-master"
-    },
     "pdepend/pdepend": {
         "version": "2.5.2"
     },
