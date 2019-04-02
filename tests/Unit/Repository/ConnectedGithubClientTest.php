@@ -105,7 +105,7 @@ class ConnectedGithubClientTest extends TestCase
     public function testGetRepositoryList(string $owner, array $pageResults, array $expected)
     {
         $this->client->method('getRepositoryList')->willReturnCallback(
-            function ($organization, $page, $perPage) use ($owner, $pageResults) {
+            function ($organization, $page, $perPage) use ($pageResults) {
                 return $pageResults[$page - 1];
             }
         );

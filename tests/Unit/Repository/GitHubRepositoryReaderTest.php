@@ -28,7 +28,6 @@ use Psr\Log\NullLogger;
 class GitHubRepositoryReaderTest extends TestCase
 {
     use ProtectedAccessorTrait;
-    const REPOSITORY_LIST = ['some repositories'];
 
     /** @var GitHubRepositoryReader */
     private $subject;
@@ -190,18 +189,16 @@ class GitHubRepositoryReaderTest extends TestCase
         $repositoryName = 'tao-core';
         $branchName = 'develop';
 
-        $this->assertEquals(
-            file_get_contents(
-                __DIR__
-                . DIRECTORY_SEPARATOR . '..'
-                . DIRECTORY_SEPARATOR . '..'
-                . DIRECTORY_SEPARATOR . 'resources'
-                . DIRECTORY_SEPARATOR . 'raw.githubusercontent.com'
-                . DIRECTORY_SEPARATOR . $owner
-                . DIRECTORY_SEPARATOR . $repositoryName
-                . DIRECTORY_SEPARATOR . $branchName
-                . DIRECTORY_SEPARATOR . $this->subject::MANIFEST_FILENAME
-            ),
+        $this->assertStringEqualsFile(
+            __DIR__
+            . DIRECTORY_SEPARATOR . '..'
+            . DIRECTORY_SEPARATOR . '..'
+            . DIRECTORY_SEPARATOR . 'resources'
+            . DIRECTORY_SEPARATOR . 'raw.githubusercontent.com'
+            . DIRECTORY_SEPARATOR . $owner
+            . DIRECTORY_SEPARATOR . $repositoryName
+            . DIRECTORY_SEPARATOR . $branchName
+            . DIRECTORY_SEPARATOR . $this->subject::MANIFEST_FILENAME,
             $this->subject->getManifestContents($owner, $repositoryName, $branchName)
         );
     }
@@ -280,18 +277,16 @@ class GitHubRepositoryReaderTest extends TestCase
 
     public function testGetFileContentsWithExistingFileReturnsFileContents()
     {
-        $this->assertEquals(
-            file_get_contents(
-                __DIR__
-                . DIRECTORY_SEPARATOR . '..'
-                . DIRECTORY_SEPARATOR . '..'
-                . DIRECTORY_SEPARATOR . 'resources'
-                . DIRECTORY_SEPARATOR . 'raw.githubusercontent.com'
-                . DIRECTORY_SEPARATOR . 'oat-sa'
-                . DIRECTORY_SEPARATOR . 'generis'
-                . DIRECTORY_SEPARATOR . 'develop'
-                . DIRECTORY_SEPARATOR . 'manifest.php'
-            ),
+        $this->assertStringEqualsFile(
+            __DIR__
+            . DIRECTORY_SEPARATOR . '..'
+            . DIRECTORY_SEPARATOR . '..'
+            . DIRECTORY_SEPARATOR . 'resources'
+            . DIRECTORY_SEPARATOR . 'raw.githubusercontent.com'
+            . DIRECTORY_SEPARATOR . 'oat-sa'
+            . DIRECTORY_SEPARATOR . 'generis'
+            . DIRECTORY_SEPARATOR . 'develop'
+            . DIRECTORY_SEPARATOR . 'manifest.php',
             $this->subject->getFileContents('oat-sa', 'generis', 'develop', 'manifest.php')
         );
     }

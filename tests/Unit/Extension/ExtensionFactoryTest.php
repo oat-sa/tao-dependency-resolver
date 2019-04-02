@@ -11,11 +11,11 @@ use PHPUnit\Framework\TestCase;
 
 class ExtensionFactoryTest extends TestCase
 {
+    private const EXTENSION_NAME = 'extension name';
+    private const REPOSITORY_NAME = 'repository-name';
+
     /** @var ExtensionFactory */
     private $subject;
-
-    const EXTENSION_NAME = 'extension name';
-    const REPOSITORY_NAME = 'repository-name';
 
     public function setUp()
     {
