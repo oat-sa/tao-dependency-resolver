@@ -21,6 +21,7 @@
         "symfony/expression-language": "4.2.*",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.2.*",
+        "symfony/monolog-bundle": "^3.3",
         "symfony/yaml": "4.2.*"
     },
     "require-dev": {

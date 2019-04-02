@@ -17,6 +17,7 @@ use Psr\Log\LoggerAwareTrait;
 class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
+
     public const COMPOSER_FILENAME = 'composer.json';
     public const MANIFEST_FILENAME = 'manifest.php';
 

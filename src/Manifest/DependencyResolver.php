@@ -9,9 +9,13 @@ use OAT\DependencyResolver\Extension\Entity\ExtensionCollection;
 use OAT\DependencyResolver\Extension\Exception\NotMappedException;
 use OAT\DependencyResolver\Extension\ExtensionFactory;
 use OAT\DependencyResolver\Repository\Interfaces\RepositoryReaderInterface;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 
-class DependencyResolver
+class DependencyResolver implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     /** @var ExtensionCollection */
     private $extensionCollection;
 
@@ -62,6 +66,8 @@ class DependencyResolver
      */
     private function extractExtensionsRecursively(Extension $rootExtension, array $extensionBranchMap)
     {
+        $this->logger->info('Resolving dependencies for repository "' . $rootExtension->getRepositoryName() . '".');
+
         // Retrieves all required dependency names.
         [$owner, $repositoryName] = explode('/', $rootExtension->getRepositoryName());
         $manifestContents = $this->repositoryReader->getManifestContents(
