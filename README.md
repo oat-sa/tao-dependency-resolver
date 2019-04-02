@@ -3,6 +3,7 @@
 Resolves the dependency requirement tree from manifest.php in each extension needed.
 
 Default result is to displays a corresponding composer.json `require` array.
+If you need to write this to a file, just redirect the standard output.
 
 Now works with both **extension** names and **repository** names.
 

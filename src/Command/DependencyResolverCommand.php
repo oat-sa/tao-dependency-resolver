@@ -48,14 +48,8 @@ class DependencyResolverCommand extends Command
                 'extensions-branch',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Branch to load for each extension.'
-            )
-            ->addOption(
-                'dump-directory',
-                'd',
-                InputOption::VALUE_REQUIRED,
-                'Directory in which to download dependencies',
-                sys_get_temp_dir()
+                'Branch to load for each extension.',
+                ''
             );
     }
 
@@ -71,17 +65,20 @@ class DependencyResolverCommand extends Command
             $input->getArgument('package-name'),
             $input->getOption('package-branch')
         );
-        $output->writeln('Resolving dependencies for repository "' . $rootExtension->getRepositoryName() . '".');
 
         // Resolve all extensions.
         $composerJson = $this->dependencyResolver->resolve($rootExtension, $extensionBranchMap);
 
         // Outputs result.
-        $this->outputResult($composerJson, $input->getOption('dump-directory'), $output);
+        $output->writeln($composerJson);
     }
 
     private function parseExtensionBranches(string $extensionBranches)
     {
+        if ($extensionBranches === '') {
+            return [];
+        }
+
         $extensionToBranchMap = [];
 
         foreach (explode(',', $extensionBranches) as $extensionBranch) {
@@ -96,24 +93,5 @@ class DependencyResolverCommand extends Command
         }
 
         return $extensionToBranchMap;
-    }
-
-    private function outputResult(string $composerJson, ?string $dumpDirectory, OutputInterface $output)
-    {
-        // Displays result when no directory is provided.
-        if ($dumpDirectory === null) {
-            $output->write($composerJson);
-            return;
-        }
-
-        // Creates directory if necessary.
-        if (!is_dir($dumpDirectory)) {
-            mkdir($dumpDirectory, 0775, true);
-        }
-
-        // Writes json to file.
-        $composerJsonPath = rtrim($dumpDirectory, '/\\') . DIRECTORY_SEPARATOR . 'composer.json';
-        file_put_contents($composerJsonPath, $composerJson);
-        $output->writeln('Dumped composer require to "' . realpath($composerJsonPath) . '".');
     }
 }

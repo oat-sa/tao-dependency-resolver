@@ -125,7 +125,7 @@ class ConnectedGithubClient
      * @throws EmptyRepositoryException when the repository is empty.
      * @throws RuntimeException when another error occurs.
      */
-    public function getBranchReference(string $owner, string $repositoryName, string $branchName)
+    public function getBranchReference(string $owner, string $repositoryName, string $branchName): string
     {
         $this->authenticateAndCheck($owner);
 
