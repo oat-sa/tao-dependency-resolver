@@ -70,7 +70,7 @@ class Repository implements \JsonSerializable
         $branches = [];
         $branchesField = $properties['branches'] ?? [];
         foreach ($branchesField as $branchProperties) {
-            $branch = (new RepositoryBranch())->createFromArray($branchProperties);
+            $branch = RepositoryBranch::createFromArray($branchProperties);
             $branches[$branch->getName()] = $branch;
         }
 
