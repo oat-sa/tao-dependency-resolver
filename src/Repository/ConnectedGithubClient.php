@@ -34,9 +34,10 @@ class ConnectedGithubClient
      */
     protected $organisationProperties = [];
 
-    public function __construct(GithubClientProxy $client)
+    public function __construct(GithubClientProxy $client, string $token)
     {
         $this->client = $client;
+        $this->token = $token;
     }
 
     /**

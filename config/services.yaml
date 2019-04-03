@@ -43,8 +43,8 @@ services:
 
     OAT\DependencyResolver\Repository\ConnectedGithubClient:
         class: OAT\DependencyResolver\Repository\ConnectedGithubClient
-        calls:
-            - ['setToken', ['%env(GITHUB_SECRET)%']]
+        arguments:
+            $token: '%env(GITHUB_SECRET)%'
 
     Packagist\Api\Client:
         class: Packagist\Api\Client

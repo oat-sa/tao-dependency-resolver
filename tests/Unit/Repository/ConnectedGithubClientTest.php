@@ -28,10 +28,13 @@ class ConnectedGithubClientTest extends TestCase
     /** @var GithubClientProxy|MockObject */
     private $client;
 
+    /** @var string */
+    private $token = 'a token in here';
+
     public function setUp()
     {
         $this->client = $this->createMock(GithubClientProxy::class);
-        $this->subject = new ConnectedGithubClient($this->client);
+        $this->subject = new ConnectedGithubClient($this->client, $this->token);
     }
 
     /**
@@ -41,17 +44,7 @@ class ConnectedGithubClientTest extends TestCase
     {
         $this->assertInstanceOf(ConnectedGithubClient::class, $this->subject);
         $this->assertEquals($this->client, $this->getPrivateProperty($this->subject, 'client'));
-        $this->assertEquals('', $this->getPrivateProperty($this->subject, 'token'));
-    }
-
-    /**
-     * @throws \ReflectionException
-     */
-    public function testSetToken()
-    {
-        $token = 'anything in there';
-        $this->subject->setToken($token);
-        $this->assertEquals($token, $this->getPrivateProperty($this->subject, 'token'));
+        $this->assertEquals($this->token, $this->getPrivateProperty($this->subject, 'token'));
     }
 
     /**
