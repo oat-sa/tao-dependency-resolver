@@ -46,6 +46,99 @@ $ php bin/console oat:dependencies:resolve [--repository-name <repository name> 
 
 Only one of the two options `repository-name` and `extension-name` must be provided.
 
+#### Usage examples
+
+Resolve dependencies for repository `oat-sa/extension-tao-items` with no branch specified (defaults to `develop`) and write the result to `/dest/dir/composer.json` with verbose output:
+
+```
+php bin/console oat:dependencies:resolve --repository-name oat-sa/extension-tao-items > /dest/dir/composer.json -vv
+```
+
+Will display the following in the console:
+
+```
+app.INFO: Resolving dependencies for repository "oat-sa/extension-tao-item".
+app.INFO: Retrieving oat-sa/extension-tao-item/develop/manifest.php
+app.INFO: Resolving dependencies for repository "oat-sa/extension-tao-backoffice".
+app.INFO: Retrieving oat-sa/extension-tao-backoffice/develop/manifest.php
+app.INFO: Resolving dependencies for repository "oat-sa/tao-core".
+app.INFO: Retrieving oat-sa/tao-core/develop/manifest.php
+app.INFO: Resolving dependencies for repository "oat-sa/generis".
+app.INFO: Retrieving oat-sa/generis/develop/manifest.php
+```
+
+And write the following to `/dest/dir/composer.json`:
+
+```
+{
+    "require": {
+        "oat-sa/extension-tao-item": "dev-develop",
+        "oat-sa/extension-tao-backoffice": "dev-develop",
+        "oat-sa/tao-core": "dev-develop",
+        "oat-sa/generis": "dev-develop"
+    }
+}
+```
+
+Resolve dependencies for extension `taoQtiTest` with main branch feature/tao-1234, branch feature/tao-1234 for tao, branch master for generis and display the result to console:
+
+```
+php bin/console oat:dependencies:resolve --extension-name taoQtiTest --main-branch feature/tao-1234 --dependency-branches tao:feature/tao-1234,generis:master
+```
+
+Will display the following in the console:
+
+```
+{
+    "require": {
+        "oat-sa/extension-tao-testqti": "dev-feature/TAO-7304-CSRF-timed-token-pool",
+        "oat-sa/extension-tao-itemqti": "dev-develop",
+        "oat-sa/extension-tao-item": "dev-develop",
+        "oat-sa/extension-tao-backoffice": "dev-develop",
+        "oat-sa/tao-core": "dev-feature/TAO-7304-CSRF-timed-token-pool",
+        "oat-sa/generis": "dev-master",
+        "oat-sa/extension-tao-test": "dev-develop",
+        "oat-sa/extension-tao-delivery": "dev-develop",
+        "oat-sa/extension-tao-outcome": "dev-develop"
+    }
+}
+```
+
+Requiring a non-existing branch will result in a exception both for main repository and dependencies:
+
+```
+php bin/console oat:dependencies:resolve --repository-name oat-sa/tao-core --main-branch foo
+                                                          
+  Unable to retrieve reference to "oat-sa/tao-core/foo".
+```
+
+```
+php bin/console oat:dependencies:resolve --repository-name oat-sa/tao-core --dependency-branches generis:bar
+
+  Unable to retrieve reference to "oat-sa/generis/bar".
+```
+
+Trying to resolve dependencies for unknown repository will result in a exception:
+
+```
+php bin/console oat:dependencies:resolve --repository-name oat-sa/tao-foo
+
+  Unknown repository "oat-sa/tao-foo".  
+```
+
+Trying to resolve dependencies for unknown *extension* will also result in a exception:
+
+```
+php bin/console oat:dependencies:resolve --extension-name extension-tao-bar
+
+  Extension "extension-tao-bar" not found in map.  
+```
+
+But if it is a newly added extension, it may just not be in the extension map. If this is the case, you can update the extension map with the second tool:
+
+```
+php bin/console oat:repositories:update --reload-list
+```
 
 ### Repository lister
 
@@ -60,11 +153,10 @@ This tool reads every oat-sa repositories in Github and maintains the map of **e
 Reads and analyzes repositories from Github.
 
 ```
-$ php bin/console repositories:update [-b branch name] [-r] [-l limit]
+$ php bin/console repositories:update [--reload-list] [--limit limit]
 ```
 
-- `branch name` : name of the branch we want to inspect first when updating repository list. Defaults to `develop`
-- `-r` : reloads the list of oat-sa repositories in addition to analyzing every repository
+- `--reload-list` : reloads the list of oat-sa repositories in addition to analyzing every repository
 - `limit` : number of repositories to analyze at a time
 
 #### Dump repository list
