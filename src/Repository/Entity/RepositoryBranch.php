@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OAT\DependencyResolver\Repository\Entity;
 
 use OAT\DependencyResolver\Repository\GitHubRepositoryReader;

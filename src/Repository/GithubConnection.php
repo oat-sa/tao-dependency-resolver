@@ -1,21 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OAT\DependencyResolver\Repository;
 
 use Github\Exception\ErrorException;
+use Github\Exception\InvalidArgumentException;
 use Github\Exception\RuntimeException;
 use OAT\DependencyResolver\Repository\Entity\Repository;
 use OAT\DependencyResolver\Repository\Exception\BranchNotFoundException;
 use OAT\DependencyResolver\Repository\Exception\EmptyRepositoryException;
 use OAT\DependencyResolver\Repository\Exception\FileNotFoundException;
 
-class ConnectedGithubClient
+class GithubConnection
 {
     /** @var GithubClientProxy */
     protected $client;
-
-    /** @var string */
-    protected $organization = '';
 
     /** @var string */
     protected $token = '';
@@ -40,14 +40,6 @@ class ConnectedGithubClient
         $this->token = $token;
     }
 
-    /**
-     * Stores token for github client.
-     */
-    public function setToken(string $token)
-    {
-        $this->token = $token;
-    }
-
     public function getOrganizationProperties(string $owner): array
     {
         $this->authenticateAndCheck($owner);
@@ -66,6 +58,9 @@ class ConnectedGithubClient
     public function getRepositoryList(string $owner, int $perPage = 100): array
     {
         $this->authenticateAndCheck($owner);
+
+        // Ensures $perPage is strictly positive and limited to 100.
+        $perPage = min(max($perPage, 1), 100);
 
         $repositories = [];
         $page = 0;
@@ -98,25 +93,36 @@ class ConnectedGithubClient
         // Gets a reference to the given branch of the repository if it exists.
         $branchReference = $this->getBranchReference($owner, $repositoryName, $branchName);
 
+        $fileNotFound = false;
+        $contents = '';
         try {
-            return $this->client->getFileContents($owner, $repositoryName, $branchReference, $fileName);
-        } catch (RuntimeException $exception) {
-            if ($exception->getCode() === 404) {
-                // Throws an understandable exception.
-                throw new FileNotFoundException(
-                    sprintf(
-                        'File "%s" not found in branch "%s" of repository "%s/%s".',
-                        $fileName,
-                        $branchName,
-                        $owner,
-                        $repositoryName
-                    )
-                );
+            $contents = $this->client->getFileContents($owner, $repositoryName, $branchReference, $fileName);
+            if ($contents === null) {
+                $fileNotFound = true;
+            }
+        } catch (ErrorException|InvalidArgumentException $exception) {
+            if ($exception->getCode() !== 404) {
+                // Transmits any other exception.
+                throw $exception;
             }
 
-            // Transmits any other exception.
-            throw $exception;
+            $fileNotFound = true;
         }
+
+        if ($fileNotFound) {
+            // Throws an understandable exception.
+            throw new FileNotFoundException(
+                sprintf(
+                    'File "%s" not found in branch "%s" of repository "%s/%s".',
+                    $fileName,
+                    $branchName,
+                    $owner,
+                    $repositoryName
+                )
+            );
+        }
+
+        return $contents;
     }
 
     /**
@@ -144,10 +150,11 @@ class ConnectedGithubClient
                 case 409:
                     // Throws an understandable exception.
                     throw new EmptyRepositoryException($repositoryName);
-            }
 
-            // Transmits any other exception.
-            throw $exception;
+                default:
+                    // Transmits any other exception.
+                    throw $exception;
+            }
         }
 
         // More than one reference returned: branchName was not found but other branches containing the name where.
@@ -174,7 +181,7 @@ class ConnectedGithubClient
      * @todo: add some cache
      * @see https://github.com/KnpLabs/php-github-api#cache-usage
      */
-    protected function authenticateAndCheck(string $owner)
+    private function authenticateAndCheck(string $owner)
     {
         if ($this->authenticated) {
             return;

@@ -11,7 +11,7 @@ use OAT\DependencyResolver\Manifest\DependencyNamesNodeVisitor;
 use OAT\DependencyResolver\Manifest\DependencyResolver;
 use OAT\DependencyResolver\Manifest\ExtensionNameNodeVisitor;
 use OAT\DependencyResolver\Manifest\Parser;
-use OAT\DependencyResolver\Repository\ConnectedGithubClient;
+use OAT\DependencyResolver\Repository\GithubConnection;
 use OAT\DependencyResolver\Repository\GitHubRepositoryReader;
 use OAT\DependencyResolver\Repository\Interfaces\RepositoryReaderInterface;
 use OAT\DependencyResolver\Tests\Helpers\ProtectedAccessorTrait;
@@ -145,8 +145,8 @@ class DependencyResolverTest extends TestCase
         $parser = new Parser($phpParser, new ExtensionNameNodeVisitor(), new DependencyNamesNodeVisitor(),
             new NodeTraverser());
 
-        /** @var ConnectedGithubClient|MockObject $connectedGithubClient */
-        $connectedGithubClient = $this->createMock(ConnectedGithubClient::class);
+        /** @var GithubConnection|MockObject $connectedGithubClient */
+        $connectedGithubClient = $this->createMock(GithubConnection::class);
         $connectedGithubClient->method('getContents')->willReturnCallback(
             function (string $owner, string $repositoryName, string $branchName, string $filename) {
                 $filePath = __DIR__

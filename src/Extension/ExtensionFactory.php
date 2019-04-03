@@ -10,9 +10,9 @@ use OAT\DependencyResolver\Extension\Exception\NotMappedException;
 class ExtensionFactory
 {
     /** @var array */
-    private $extensionMap = [];
+    private $extensionMap;
 
-    public function __construct(array $extensionMap)
+    public function __construct(array $extensionMap = [])
     {
         $this->extensionMap = $extensionMap;
     }

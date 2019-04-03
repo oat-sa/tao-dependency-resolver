@@ -16,9 +16,6 @@ class DependencyResolver implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
-    /** @var ExtensionCollection */
-    private $extensionCollection;
-
     /** @var RepositoryReaderInterface */
     private $repositoryReader;
 
@@ -36,7 +33,6 @@ class DependencyResolver implements LoggerAwareInterface
         $this->repositoryReader = $repositoryReader;
         $this->parser = $parser;
         $this->extensionFactory = $extensionFactory;
-        $this->extensionCollection = new ExtensionCollection();
     }
 
     /**
@@ -49,26 +45,36 @@ class DependencyResolver implements LoggerAwareInterface
     public function resolve(Extension $rootExtension, array $extensionBranchMap): string
     {
         // Adds the root extension so that it is installed along with the other ones.
-        $this->extensionCollection->offsetSet($rootExtension->getExtensionName(), $rootExtension);
+        $extensionCollection = new ExtensionCollection();
+        $extensionCollection->offsetSet($rootExtension->getExtensionName(), $rootExtension);
 
         // Extracts all the dependencies.
-        $this->extractExtensionsRecursively($rootExtension, $extensionBranchMap);
+        $extensionCollection = $this->extractExtensionsRecursively(
+            $rootExtension,
+            $extensionBranchMap,
+            $extensionCollection
+        );
 
-        // Converts extension colection into a composer.json require.
-        return json_encode($this->extensionCollection, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        // Converts extension collection into a composer.json require.
+        return json_encode($extensionCollection, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     }
 
     /**
      * @param Extension $rootExtension
      * @param array $extensionBranchMap
+     * @param ExtensionCollection $extensionCollection
      *
+     * @return ExtensionCollection The amended collection
      * @throws NotMappedException when the found extension is not mapped.
      */
-    private function extractExtensionsRecursively(Extension $rootExtension, array $extensionBranchMap)
-    {
+    private function extractExtensionsRecursively(
+        Extension $rootExtension,
+        array $extensionBranchMap,
+        ExtensionCollection $extensionCollection
+    ): ExtensionCollection {
         $this->logger->info('Resolving dependencies for repository "' . $rootExtension->getRepositoryName() . '".');
 
-        // Retrieves all required dependency names.
+        // Retrieves all required dependency names from manifest.
         [$owner, $repositoryName] = explode('/', $rootExtension->getRepositoryName());
         $manifestContents = $this->repositoryReader->getManifestContents(
             $owner,
@@ -77,22 +83,26 @@ class DependencyResolver implements LoggerAwareInterface
         );
 
         if ($manifestContents === null) {
-            return;
+            return $extensionCollection;
         }
+
+        // Retrieves transitive dependencies.
         $dependencyNames = $this->parser->getDependencyNames($manifestContents);
 
         foreach ($dependencyNames as $extensionName) {
-            if (! $this->extensionCollection->offsetExists($extensionName)) {
+            if (! $extensionCollection->offsetExists($extensionName)) {
                 // Finds the mapped branch.
                 $branchName = $extensionBranchMap[$extensionName] ?? Extension::DEFAULT_BRANCH;
 
                 // Adds dependency if not already in the collection.
                 $extension = $this->extensionFactory->create($extensionName, $branchName);
-                $this->extensionCollection->offsetSet($extensionName, $extension);
+                $extensionCollection->offsetSet($extensionName, $extension);
 
                 // Looks for transitive dependencies.
-                $this->extractExtensionsRecursively($extension, $extensionBranchMap);
+                $this->extractExtensionsRecursively($extension, $extensionBranchMap, $extensionCollection);
             }
         }
+
+        return $extensionCollection;
     }
 }

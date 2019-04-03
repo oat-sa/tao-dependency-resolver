@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OAT\DependencyResolver\Repository;
 
 use Github\Exception\RuntimeException;
@@ -21,13 +23,13 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
     public const COMPOSER_FILENAME = 'composer.json';
     public const MANIFEST_FILENAME = 'manifest.php';
 
-    /** @var ConnectedGithubClient */
+    /** @var GithubConnection */
     public $connectedGithubClient;
 
     /** @var Parser */
     private $parser;
 
-    public function __construct(ConnectedGithubClient $connectedGithubClient, Parser $parser)
+    public function __construct(GithubConnection $connectedGithubClient, Parser $parser)
     {
         $this->connectedGithubClient = $connectedGithubClient;
         $this->parser = $parser;

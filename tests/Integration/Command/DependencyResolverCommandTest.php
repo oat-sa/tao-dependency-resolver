@@ -16,7 +16,7 @@ use OAT\DependencyResolver\Extension\Exception\NotMappedException;
 use OAT\DependencyResolver\Extension\ExtensionFactory;
 use OAT\DependencyResolver\Kernel;
 use OAT\DependencyResolver\Manifest\DependencyResolver;
-use OAT\DependencyResolver\Repository\ConnectedGithubClient;
+use OAT\DependencyResolver\Repository\GithubConnection;
 use OAT\DependencyResolver\Repository\RepositoryMapAccessor;
 use OAT\DependencyResolver\Tests\Helpers\ProtectedAccessorTrait;
 use OAT\DependencyResolver\Tests\Unit\Repository\GithubClientProxyMock;
@@ -63,8 +63,8 @@ class DependencyResolverCommandTest extends KernelTestCase
         // Mocks the githubClient to avoid making distant calls.
         $this->githubClient = new GithubClientProxyMock();
 
-        /** @var ConnectedGithubClient $connectedGithubClient */
-        $connectedGithubClient = self::$container->get(ConnectedGithubClient::class);
+        /** @var GithubConnection $connectedGithubClient */
+        $connectedGithubClient = self::$container->get(GithubConnection::class);
         $this->setPrivateProperty($connectedGithubClient, 'client', $this->githubClient);
 
         $this->commandTester = new CommandTester($application->find(DependencyResolverCommand::NAME));

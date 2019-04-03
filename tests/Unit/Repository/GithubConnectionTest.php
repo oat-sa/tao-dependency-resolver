@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace OAT\DependencyResolver\Tests\Unit\Repository;
 
 use Github\Exception\RuntimeException;
-use OAT\DependencyResolver\Repository\ConnectedGithubClient;
+use OAT\DependencyResolver\Repository\GithubConnection;
 use OAT\DependencyResolver\Repository\Entity\Repository;
 use OAT\DependencyResolver\Repository\Exception\BranchNotFoundException;
 use OAT\DependencyResolver\Repository\Exception\EmptyRepositoryException;
@@ -18,11 +18,11 @@ use PHPUnit\Framework\TestCase;
 /**
  * Sociable unit tests for GitHubRepositoryReader class.
  */
-class ConnectedGithubClientTest extends TestCase
+class GithubConnectionTest extends TestCase
 {
     use ProtectedAccessorTrait;
 
-    /** @var ConnectedGithubClient */
+    /** @var GithubConnection */
     private $subject;
 
     /** @var GithubClientProxy|MockObject */
@@ -34,7 +34,7 @@ class ConnectedGithubClientTest extends TestCase
     public function setUp()
     {
         $this->client = $this->createMock(GithubClientProxy::class);
-        $this->subject = new ConnectedGithubClient($this->client, $this->token);
+        $this->subject = new GithubConnection($this->client, $this->token);
     }
 
     /**
@@ -42,7 +42,7 @@ class ConnectedGithubClientTest extends TestCase
      */
     public function testConstructorReturnsConnectedGithubClientWithEmptyToken()
     {
-        $this->assertInstanceOf(ConnectedGithubClient::class, $this->subject);
+        $this->assertInstanceOf(GithubConnection::class, $this->subject);
         $this->assertEquals($this->client, $this->getPrivateProperty($this->subject, 'client'));
         $this->assertEquals($this->token, $this->getPrivateProperty($this->subject, 'token'));
     }
@@ -164,7 +164,13 @@ class ConnectedGithubClientTest extends TestCase
         // Assume the reference exists (tested below).
         $this->client->method('getReference')->with($owner, $repositoryName, $branchName)->willReturn($reference);
         $this->client->method('getFileContents')->with($owner, $repositoryName, $branchReference, $fileName)
-            ->willThrowException(new RuntimeException('message', 404));
+            ->willThrowException(new FileNotFoundException(sprintf(
+                'File "%s" not found in branch "%s" of repository "%s/%s".',
+                $fileName,
+                $branchName,
+                $owner,
+                $repositoryName
+            ), 404));
 
         $this->expectException(FileNotFoundException::class);
         $this->expectExceptionMessage(

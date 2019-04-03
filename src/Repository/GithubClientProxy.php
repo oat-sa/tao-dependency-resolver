@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OAT\DependencyResolver\Repository;
 
 use Github\Api\ApiInterface;
@@ -8,6 +10,7 @@ use Github\Api\Organization;
 use Github\Api\Repo;
 use Github\Client;
 use Github\Exception\ErrorException;
+use Github\Exception\InvalidArgumentException;
 
 class GithubClientProxy extends Client
 {
@@ -54,7 +57,8 @@ class GithubClientProxy extends Client
      * @param string $filename
      *
      * @return string|null
-     * @throws ErrorException
+     * @throws InvalidArgumentException If $path is not a file or if its encoding is different from base64
+     * @throws ErrorException           If $path doesn't include a 'content' index
      */
     public function getFileContents(
         string $owner,

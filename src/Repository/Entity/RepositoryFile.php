@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OAT\DependencyResolver\Repository\Entity;
 
 class RepositoryFile implements \JsonSerializable

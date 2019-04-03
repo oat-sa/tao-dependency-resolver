@@ -41,8 +41,8 @@ services:
             $extensionNameNodeVisitor: '@OAT\DependencyResolver\Manifest\ExtensionNameNodeVisitor'
             $dependencyNamesNodeVisitor: '@OAT\DependencyResolver\Manifest\DependencyNamesNodeVisitor'
 
-    OAT\DependencyResolver\Repository\ConnectedGithubClient:
-        class: OAT\DependencyResolver\Repository\ConnectedGithubClient
+    OAT\DependencyResolver\Repository\GithubConnection:
+        class: OAT\DependencyResolver\Repository\GithubConnection
         arguments:
             $token: '%env(GITHUB_SECRET)%'
 

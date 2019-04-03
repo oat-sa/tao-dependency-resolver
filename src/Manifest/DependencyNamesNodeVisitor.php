@@ -45,7 +45,7 @@ class DependencyNamesNodeVisitor extends NodeVisitorAbstract implements ResultSt
     {
         if ($node instanceof ArrayItem
             && $node->key instanceof String_
-            && $node->key->value == self::REQUIRES_AST_TOKEN_KEY
+            && $node->key->value === self::REQUIRES_AST_TOKEN_KEY
             && $node->value instanceof Array_
         ) {
             foreach ($node->value->items as $item) {

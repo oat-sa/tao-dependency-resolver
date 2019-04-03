@@ -47,7 +47,7 @@ class ExtensionNameNodeVisitor extends NodeVisitorAbstract implements ResultStor
     {
         if ($node instanceof ArrayItem
             && $node->key instanceof String_
-            && $node->key->value == self::NAME_AST_TOKEN_KEY
+            && $node->key->value === self::NAME_AST_TOKEN_KEY
             && $node->value instanceof String_
         ) {
             $this->extensionName = $node->value->value;

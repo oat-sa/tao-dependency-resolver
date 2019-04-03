@@ -7,7 +7,7 @@ namespace OAT\DependencyResolver\Tests\Unit\Repository;
 use OAT\DependencyResolver\Manifest\DependencyNamesNodeVisitor;
 use OAT\DependencyResolver\Manifest\ExtensionNameNodeVisitor;
 use OAT\DependencyResolver\Manifest\Parser;
-use OAT\DependencyResolver\Repository\ConnectedGithubClient;
+use OAT\DependencyResolver\Repository\GithubConnection;
 use OAT\DependencyResolver\Repository\Entity\Repository;
 use OAT\DependencyResolver\Repository\Exception\BranchNotFoundException;
 use OAT\DependencyResolver\Repository\Exception\EmptyRepositoryException;
@@ -32,12 +32,12 @@ class GitHubRepositoryReaderTest extends TestCase
     /** @var GitHubRepositoryReader */
     private $subject;
 
-    /** @var ConnectedGithubClient|MockObject */
+    /** @var GithubConnection|MockObject */
     private $connectedGithubClient;
 
     public function setUp()
     {
-        $this->connectedGithubClient = $this->createMock(ConnectedGithubClient::class);
+        $this->connectedGithubClient = $this->createMock(GithubConnection::class);
         $this->connectedGithubClient->method('getContents')->willReturnCallback(
             function ($owner, $repositoryName, $branchName, $filename) {
                 $filePath = __DIR__
@@ -85,7 +85,7 @@ class GitHubRepositoryReaderTest extends TestCase
     {
         $this->assertInstanceOf(RepositoryReaderInterface::class, $this->subject);
         $this->assertInstanceOf(
-            ConnectedGithubClient::class,
+            GithubConnection::class,
             $this->getPrivateProperty($this->subject, 'connectedGithubClient')
         );
         $this->assertInstanceOf(Parser::class, $this->getPrivateProperty($this->subject, 'parser'));
