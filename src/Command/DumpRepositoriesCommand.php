@@ -19,18 +19,18 @@ class DumpRepositoriesCommand extends Command
 
     public function __construct(RepositoryMapConverter $repositoryMapConverter)
     {
-        parent::__construct();
+        parent::__construct(self::NAME);
 
         $this->repositoryMapConverter = $repositoryMapConverter;
     }
 
     protected function configure()
     {
-        $this->setName(self::NAME)
+        $this
             ->addArgument(
-                'filename',
+                'filepath',
                 InputArgument::REQUIRED,
-                'Filename to which to export the repository table'
+                'File path and name to which to export the repository table'
             );
     }
 
@@ -38,14 +38,14 @@ class DumpRepositoriesCommand extends Command
     {
         $csv = $this->repositoryMapConverter->toCsv();
 
-        $filename = $input->getArgument('filename');
+        $filePath = $input->getArgument('filepath');
 
         // Creates directory if necessary.
-        $directory = dirname($filename);
-        if (!is_dir($directory)) {
-            mkdir($directory, 0775, true);
+        $directory = dirname($filePath);
+        if (!is_dir($directory) && !mkdir($directory, 0775, true) && !is_dir($directory)) {
+            throw new \RuntimeException(sprintf('Directory "%s" was not created', $directory));
         }
 
-        file_put_contents($filename, implode("\n", $csv));
+        file_put_contents($filePath, implode("\n", $csv));
     }
 }

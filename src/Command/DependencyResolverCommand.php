@@ -35,7 +35,7 @@ class DependencyResolverCommand extends Command
         DependencyResolver $dependencyResolver,
         RepositoryMapAccessor $repositoryMapAccessor
     ) {
-        parent::__construct();
+        parent::__construct(self::NAME);
 
         $this->extensionFactory = $extensionFactory;
         $this->dependencyResolver = $dependencyResolver;
@@ -45,7 +45,6 @@ class DependencyResolverCommand extends Command
     protected function configure()
     {
         $this
-            ->setName(self::NAME)
             ->addOption(
                 'repository-name',
                 null,
@@ -97,7 +96,7 @@ class DependencyResolverCommand extends Command
         $output->writeln($composerJson);
     }
 
-    private function findRootExtensionName(InputInterface $input)
+    private function findRootExtensionName(InputInterface $input): string
     {
         $repositoryName = $input->getOption('repository-name');
         $extensionName = $input->getOption('extension-name');
@@ -128,7 +127,7 @@ class DependencyResolverCommand extends Command
         return $repository->getExtensionName();
     }
 
-    private function parseExtensionBranches(string $extensionBranches)
+    private function parseExtensionBranches(string $extensionBranches): array
     {
         if ($extensionBranches === '') {
             return [];

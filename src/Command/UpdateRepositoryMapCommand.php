@@ -17,16 +17,20 @@ class UpdateRepositoryMapCommand extends Command
     /** @var RepositoryMapUpdater */
     private $repositoryMapUpdater;
 
-    public function __construct(RepositoryMapUpdater $repositoryMapUpdater)
+    /** @var string */
+    private $organizationName;
+
+    public function __construct(RepositoryMapUpdater $repositoryMapUpdater, string $organizationName)
     {
-        parent::__construct();
+        parent::__construct(self::NAME);
 
         $this->repositoryMapUpdater = $repositoryMapUpdater;
+        $this->organizationName = $organizationName;
     }
 
     protected function configure()
     {
-        $this->setName(self::NAME)
+        $this
             ->addOption(
                 'reload-list',
                 'r',
@@ -37,7 +41,7 @@ class UpdateRepositoryMapCommand extends Command
                 'limit',
                 'l',
                 InputOption::VALUE_REQUIRED,
-                'Limits the number of extension names read to pace the API calls.',
+                'Limits the number of extension names read: 0 means no limit, upper limit is 100.',
                 0
             );
     }
@@ -46,9 +50,15 @@ class UpdateRepositoryMapCommand extends Command
     {
         // Reload repositoryList to get repositories not mapped yet.
         if ($input->getOption('reload-list')) {
-            $output->writeln($this->repositoryMapUpdater->reloadList('oat-sa') . ' repositories added.');
+            $output->writeln($this->repositoryMapUpdater->reloadList($this->organizationName) . ' repositories added.');
         }
 
-        $this->repositoryMapUpdater->update((int)$input->getOption('limit'));
+        $limit = $input->getOption('limit');
+        if (!is_integer($limit)) {
+            throw new \LogicException('Limit option must be an integer between 0 (no limit) and 100');
+        }
+        $limit = min(max($limit, 0), 100);
+
+        $this->repositoryMapUpdater->update($limit);
     }
 }

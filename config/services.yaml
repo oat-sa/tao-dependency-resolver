@@ -25,7 +25,7 @@ services:
         arguments: ["@=service('OAT\\\\DependencyResolver\\\\Extension\\\\ExtensionMapFactory').create()"]
 
     PhpParser\ParserFactory:
-        class: PhpParser\ParserFactory
+        public: true
 
     PhpParser\Parser:
         factory: 'PhpParser\ParserFactory:create'
@@ -47,4 +47,10 @@ services:
             $token: '%env(GITHUB_SECRET)%'
 
     Packagist\Api\Client:
-        class: Packagist\Api\Client
+        public: true
+
+    OAT\DependencyResolver\Command\UpdateRepositoryMapCommand:
+        class: OAT\DependencyResolver\Command\UpdateRepositoryMapCommand
+        arguments:
+            $organizationName: '%env(GITHUB_ORGANIZATION)%'
+
