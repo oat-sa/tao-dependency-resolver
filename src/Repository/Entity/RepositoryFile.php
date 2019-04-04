@@ -6,7 +6,6 @@ namespace OAT\DependencyResolver\Repository\Entity;
 
 class RepositoryFile implements \JsonSerializable
 {
-    public const CSV_TITLES = ['filename', 'composerName', 'extensionName', 'requires'];
     public const CSV_BLANK = ['', '', '', ''];
 
     /** @var string */

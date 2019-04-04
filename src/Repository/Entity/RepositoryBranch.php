@@ -8,7 +8,6 @@ use OAT\DependencyResolver\Repository\GitHubRepositoryReader;
 
 class RepositoryBranch implements \JsonSerializable
 {
-    public const CSV_TITLES = ['branchName'];
     public const CSV_BLANK = ['', '', '', '', '', '', '', '', ''];
 
     /** @var string */

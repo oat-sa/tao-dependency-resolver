@@ -6,15 +6,6 @@ namespace OAT\DependencyResolver\Repository\Entity;
 
 class Repository implements \JsonSerializable
 {
-    public const CSV_TITLES = [
-        'repositoryName',
-        'extensionName',
-        'composerName',
-        'privacy',
-        'packagist',
-        'defaultBranch',
-    ];
-
     /** @var bool */
     private $analyzed;
 

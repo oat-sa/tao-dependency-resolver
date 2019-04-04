@@ -10,6 +10,17 @@ use OAT\DependencyResolver\Repository\Entity\RepositoryFile;
 
 class RepositoryMapConverter
 {
+    private const REPOSITORY_CSV_TITLES = [
+        'repositoryName',
+        'extensionName',
+        'composerName',
+        'privacy',
+        'packagist',
+        'defaultBranch',
+    ];
+    public const BRANCH_CSV_TITLES = ['branchName'];
+    public const FILE_CSV_TITLES = ['filename', 'composerName', 'extensionName', 'requires'];
+
     /** @var RepositoryMapAccessor */
     private $repositoryMapAccessor;
 
@@ -31,16 +42,16 @@ class RepositoryMapConverter
         // Sets titles.
         $csv = [
             implode(',', array_merge(
-                Repository::CSV_TITLES,
-                RepositoryBranch::CSV_TITLES,
-                RepositoryFile::CSV_TITLES,
-                RepositoryFile::CSV_TITLES,
-                RepositoryBranch::CSV_TITLES,
-                RepositoryFile::CSV_TITLES,
-                RepositoryFile::CSV_TITLES,
-                RepositoryBranch::CSV_TITLES,
-                RepositoryFile::CSV_TITLES,
-                RepositoryFile::CSV_TITLES
+                self::REPOSITORY_CSV_TITLES,
+                self::BRANCH_CSV_TITLES,
+                self::FILE_CSV_TITLES,
+                self::FILE_CSV_TITLES,
+                self::BRANCH_CSV_TITLES,
+                self::FILE_CSV_TITLES,
+                self::FILE_CSV_TITLES,
+                self::BRANCH_CSV_TITLES,
+                self::FILE_CSV_TITLES,
+                self::FILE_CSV_TITLES
             )),
         ];
 
