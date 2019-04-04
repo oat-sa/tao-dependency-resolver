@@ -46,7 +46,7 @@ class DependencyResolver implements LoggerAwareInterface
     {
         // Adds the root extension so that it is installed along with the other ones.
         $extensionCollection = new ExtensionCollection();
-        $extensionCollection->offsetSet($rootExtension->getExtensionName(), $rootExtension);
+        $extensionCollection->add($rootExtension);
 
         // Extracts all the dependencies.
         $extensionCollection = $this->extractExtensionsRecursively(
@@ -90,13 +90,13 @@ class DependencyResolver implements LoggerAwareInterface
         $dependencyNames = $this->parser->getDependencyNames($manifestContents);
 
         foreach ($dependencyNames as $extensionName) {
-            if (! $extensionCollection->offsetExists($extensionName)) {
+            if (! $extensionCollection->has($extensionName)) {
                 // Finds the mapped branch.
                 $branchName = $extensionBranchMap[$extensionName] ?? Extension::DEFAULT_BRANCH;
 
                 // Adds dependency if not already in the collection.
                 $extension = $this->extensionFactory->create($extensionName, $branchName);
-                $extensionCollection->offsetSet($extensionName, $extension);
+                $extensionCollection->add($extension);
 
                 // Looks for transitive dependencies.
                 $this->extractExtensionsRecursively($extension, $extensionBranchMap, $extensionCollection);

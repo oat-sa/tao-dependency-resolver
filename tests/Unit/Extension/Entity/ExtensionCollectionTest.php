@@ -35,16 +35,14 @@ class ExtensionCollectionTest extends TestCase
         $this->assertInstanceOf(ExtensionCollection::class, $this->subject->add($extension));
 
         $this->assertCount(1, $this->subject->getIterator());
-        $this->assertTrue($this->subject->offsetExists($extensionName));
-        $this->assertEquals($extension, $this->subject->offsetGet($extensionName));
+        $this->assertTrue($this->subject->has($extensionName));
     }
 
     public function testOffsetSetWithInvalidExtensionThrowsException()
     {
-        $extensionName = 'extensionName';
         $extension = 'not an Extension object';
         $this->expectException(\TypeError::class);
-        $this->subject->offsetSet($extensionName, $extension);
+        $this->subject->add($extension);
     }
 
     public function testOffsetGetWithNotExistingExtensionReturnsNull()
@@ -52,7 +50,7 @@ class ExtensionCollectionTest extends TestCase
         $extensionName = 'extensionName';
         /** @var Extension $extension */
         $this->createConfiguredMock(Extension::class, ['getExtensionName' => $extensionName]);
-        $this->assertNull($this->subject->offsetGet($extensionName . 'blah'));
+        $this->assertFalse($this->subject->has($extensionName . 'blah'));
     }
 
     public function testGetIteratorWithExtensionsReturnsIteratorOnExtensions()
