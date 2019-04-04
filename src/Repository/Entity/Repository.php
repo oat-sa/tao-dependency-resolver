@@ -42,18 +42,16 @@ class Repository implements \JsonSerializable
     /** @var RepositoryBranch[]|array */
     private $branches;
 
-
-
     public function __construct(
-        bool $analyzed = false,
-        string $owner = '',
-        string $name = '',
-        bool $private = false,
-        string $defaultBranch = '',
-        string $extensionName = '',
-        string $composerName = '',
-        bool $onPackagist = false,
-        array $branches = []
+        bool $analyzed,
+        string $owner,
+        string $name,
+        bool $private,
+        string $defaultBranch,
+        string $extensionName,
+        string $composerName,
+        bool $onPackagist,
+        array $branches
     ) {
         $this
             ->setAnalyzed($analyzed)

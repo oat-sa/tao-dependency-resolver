@@ -74,7 +74,11 @@ class GithubConnection
                     $owner,
                     $repositoryName,
                     $repository['private'],
-                    $repository['default_branch']
+                    $repository['default_branch'],
+                    '',
+                    '',
+                    false,
+                    []
                 );
             }
         } while (count($foundRepositories) === $perPage);

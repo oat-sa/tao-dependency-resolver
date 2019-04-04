@@ -15,20 +15,6 @@ class RepositoryTest extends TestCase
     /** @var Repository */
     protected $subject;
 
-    public function testConstructorWithDefaultValues()
-    {
-        $this->subject = new Repository();
-
-        $this->assertEquals('', $this->subject->getOwner());
-        $this->assertEquals('', $this->subject->getName());
-        $this->assertEquals(false, $this->subject->isPrivate());
-        $this->assertEquals('', $this->subject->getDefaultBranch());
-        $this->assertEquals('', $this->subject->getExtensionName());
-        $this->assertEquals('', $this->subject->getComposerName());
-        $this->assertEquals(false, $this->subject->isOnPackagist());
-        $this->assertEquals([], $this->subject->getBranches());
-    }
-
     public function testConstructorAndAccessors()
     {
         $analyzed = true;
@@ -127,7 +113,7 @@ class RepositoryTest extends TestCase
         $branchName = 'branch name';
         $branch = new RepositoryBranch($branchName);
 
-        $this->subject = new Repository();
+        $this->subject = new Repository(false, '', '', false, '', '', '', false, []);
         $this->assertEquals(null, $this->subject->getBranch($branchName));
         $this->subject->setBranches([$branchName => $branch]);
         $this->assertEquals($branch, $this->subject->getBranch($branchName));
@@ -138,7 +124,7 @@ class RepositoryTest extends TestCase
         $branchName = 'branch name';
         $branch = new RepositoryBranch($branchName);
 
-        $this->subject = new Repository();
+        $this->subject = new Repository(false, '', '', false, '', '', '', false, []);
         $this->assertEquals([], $this->subject->getBranches());
         $this->subject->addBranch($branch);
         $this->assertEquals([$branchName => $branch], $this->subject->getBranches());
