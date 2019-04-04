@@ -10,16 +10,17 @@ use Github\Api\GitData\References;
 use Github\Api\Organization;
 use Github\Api\Repo;
 use Github\Api\Repository\Contents;
+use Github\Client;
 use LogicException;
 use OAT\DependencyResolver\Command\DependencyResolverCommand;
 use OAT\DependencyResolver\Extension\Exception\NotMappedException;
 use OAT\DependencyResolver\Extension\ExtensionFactory;
 use OAT\DependencyResolver\Kernel;
 use OAT\DependencyResolver\Manifest\DependencyResolver;
+use OAT\DependencyResolver\Repository\GithubClientProxy;
 use OAT\DependencyResolver\Repository\GithubConnection;
 use OAT\DependencyResolver\Repository\RepositoryMapAccessor;
 use OAT\DependencyResolver\Tests\Helpers\ProtectedAccessorTrait;
-use OAT\DependencyResolver\Tests\Unit\Repository\GithubClientProxyMock;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -47,8 +48,8 @@ class DependencyResolverCommandTest extends KernelTestCase
     /** @var DependencyResolver */
     private $dependencyResolver;
 
-    /** @var GithubClientProxyMock */
-    private $githubClient;
+    /** @var Client|MockObject */
+    private $client;
 
     public static function getKernelClass()
     {
@@ -61,11 +62,12 @@ class DependencyResolverCommandTest extends KernelTestCase
         $application = new Application($kernel);
 
         // Mocks the githubClient to avoid making distant calls.
-        $this->githubClient = new GithubClientProxyMock();
+        $this->client = $this->createMock(Client::class);
+        $githubClient = new GithubClientProxy($this->client);
 
         /** @var GithubConnection $connectedGithubClient */
         $connectedGithubClient = self::$container->get(GithubConnection::class);
-        $this->setPrivateProperty($connectedGithubClient, 'client', $this->githubClient);
+        $this->setPrivateProperty($connectedGithubClient, 'client', $githubClient);
 
         $this->commandTester = new CommandTester($application->find(DependencyResolverCommand::NAME));
     }
@@ -217,9 +219,16 @@ class DependencyResolverCommandTest extends KernelTestCase
         /** @var Repo|MockObject $repositoryApi */
         $repositoryApi = $this->createConfiguredMock(Repo::class, ['contents' => $contentsApi]);
 
-        $this->githubClient
-            ->setOrganizationApi($organizationApi)
-            ->setGitDataApi($gitDataApi)
-            ->setRepositoryApi($repositoryApi);
+        $this->client->method('api')->willReturnCallback(
+            function ($apiName) use ($organizationApi, $repositoryApi, $gitDataApi) {
+                $apis = [
+                    GithubClientProxy::API_ORGANIZATION => $organizationApi,
+                    GithubClientProxy::API_REPOSITORY => $repositoryApi,
+                    GithubClientProxy::API_REFERENCE => $gitDataApi,
+                ];
+
+                return $apis[$apiName];
+            }
+        );
     }
 }

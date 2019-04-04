@@ -54,3 +54,5 @@ services:
         arguments:
             $organizationName: '%env(GITHUB_ORGANIZATION)%'
 
+    Github\Client:
+        public: true

@@ -191,7 +191,7 @@ class GithubConnection
             return;
         }
 
-        $this->client->authenticate($this->token, null, $this->client::AUTH_HTTP_TOKEN);
+        $this->client->authenticate($this->token);
 
         try {
             // This is performed just to ensure we have a proper authentication.

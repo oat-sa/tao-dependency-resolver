@@ -12,21 +12,34 @@ use Github\Client;
 use Github\Exception\ErrorException;
 use Github\Exception\InvalidArgumentException;
 
-class GithubClientProxy extends Client
+class GithubClientProxy
 {
+    /** @var Client */
+    private $client;
+
     /** @var Organization|ApiInterface */
-    protected $organizationApi;
+    private $organizationApi;
 
     /** @var Repo|ApiInterface */
-    protected $repositoryApi;
+    private $repositoryApi;
 
     /** @var GitData|ApiInterface */
-    protected $gitDataApi;
+    private $gitDataApi;
 
     // Api accessor names.
-    protected const API_ORGANIZATION = 'organization';
-    protected const API_REPOSITORY = 'repo';
-    protected const API_REFERENCE = 'gitData';
+    public const API_ORGANIZATION = 'organization';
+    public const API_REPOSITORY = 'repo';
+    public const API_REFERENCE = 'gitData';
+
+    public function __construct(Client $client)
+    {
+        $this->client = $client;
+    }
+
+    public function authenticate($token)
+    {
+        $this->client->authenticate($token, null, $this->client::AUTH_HTTP_TOKEN);
+    }
 
     public function getOrganizationProperties(string $owner): array
     {
@@ -89,7 +102,7 @@ class GithubClientProxy extends Client
     public function getOrganizationApi(): Organization
     {
         if ($this->organizationApi === null) {
-            $this->organizationApi = $this->api(self::API_ORGANIZATION);
+            $this->organizationApi = $this->client->api(self::API_ORGANIZATION);
         }
 
         return $this->organizationApi;
@@ -101,7 +114,7 @@ class GithubClientProxy extends Client
     public function getRepositoryApi(): Repo
     {
         if ($this->repositoryApi === null) {
-            $this->repositoryApi = $this->api(self::API_REPOSITORY);
+            $this->repositoryApi = $this->client->api(self::API_REPOSITORY);
         }
 
         return $this->repositoryApi;
@@ -113,7 +126,7 @@ class GithubClientProxy extends Client
     public function getGitDataApi(): GitData
     {
         if ($this->gitDataApi === null) {
-            $this->gitDataApi = $this->api(self::API_REFERENCE);
+            $this->gitDataApi = $this->client->api(self::API_REFERENCE);
         }
 
         return $this->gitDataApi;

@@ -119,9 +119,9 @@ class GithubConnectionTest extends TestCase
         $props1 = ['name' => $name1, 'private' => true, 'default_branch' => $branch1];
         $props2 = ['name' => $name2, 'private' => false, 'default_branch' => $branch2];
         $props3 = ['name' => $name3, 'private' => true, 'default_branch' => $branch3];
-        $repo1 = new Repository(false, $owner, $name1, true, $branch1);
-        $repo2 = new Repository(false, $owner, $name2, false, $branch2);
-        $repo3 = new Repository(false, $owner, $name3, true, $branch3);
+        $repo1 = new Repository(false, $owner, $name1, true, $branch1, '', '', false, []);
+        $repo2 = new Repository(false, $owner, $name2, false, $branch2, '', '', false, []);
+        $repo3 = new Repository(false, $owner, $name3, true, $branch3, '', '', false, []);
 
         return [
             'empty list' => [

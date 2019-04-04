@@ -9,6 +9,8 @@ use Github\Api\GitData\References;
 use Github\Api\Organization;
 use Github\Api\Repo;
 use Github\Api\Repository\Contents;
+use Github\Client;
+use OAT\DependencyResolver\Repository\GithubClientProxy;
 use OAT\DependencyResolver\Tests\Helpers\ProtectedAccessorTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -20,12 +22,16 @@ class GithubClientProxyTest extends TestCase
 {
     use ProtectedAccessorTrait;
 
-    /** @var GithubClientProxyMock */
+    /** @var GithubClientProxy */
     private $subject;
+
+    /** @var Client|MockObject */
+    private $client;
 
     public function setUp()
     {
-        $this->subject = new GithubClientProxyMock();
+        $this->client = $this->createMock(Client::class);
+        $this->subject = new GithubClientProxy($this->client);
     }
 
     public function testGetOrganizationProperties()
@@ -36,7 +42,7 @@ class GithubClientProxyTest extends TestCase
         /** @var Organization|MockObject $organizationApi */
         $organizationApi = $this->createMock(Organization::class);
         $organizationApi->method('show')->with($owner)->willReturn($properties);
-        $this->subject->setOrganizationApi($organizationApi);
+        $this->client->method('api')->with($this->subject::API_ORGANIZATION)->willReturn($organizationApi);
 
         $this->assertEquals($properties, $this->subject->getOrganizationProperties($owner));
     }
@@ -52,7 +58,7 @@ class GithubClientProxyTest extends TestCase
         $organizationApi = $this->createMock(Organization::class);
         $organizationApi->expects($this->once())->method('setPerPage')->with($perPage);
         $organizationApi->method('repositories')->with($owner, 'all', $page)->willReturn($repositories);
-        $this->subject->setOrganizationApi($organizationApi);
+        $this->client->method('api')->with($this->subject::API_ORGANIZATION)->willReturn($organizationApi);
 
         $this->assertEquals($repositories, $this->subject->getRepositoryList($owner, $page, $perPage));
     }
@@ -72,7 +78,7 @@ class GithubClientProxyTest extends TestCase
 
         /** @var Repo $repositoryApi */
         $repositoryApi = $this->createConfiguredMock(Repo::class, ['contents' => $contentsApi]);
-        $this->subject->setRepositoryApi($repositoryApi);
+        $this->client->method('api')->with($this->subject::API_REPOSITORY)->willReturn($repositoryApi);
 
         $this->assertEquals(
             $contents,
@@ -93,7 +99,7 @@ class GithubClientProxyTest extends TestCase
 
         /** @var GitData $gitDataApi */
         $gitDataApi = $this->createConfiguredMock(GitData::class, ['references' => $referenceApi]);
-        $this->subject->setGitDataApi($gitDataApi);
+        $this->client->method('api')->with($this->subject::API_REFERENCE)->willReturn($gitDataApi);
 
         $this->assertEquals($reference, $this->subject->getReference($username, $repository, $branch));
     }
@@ -102,7 +108,7 @@ class GithubClientProxyTest extends TestCase
     {
         /** @var Organization $organizationApi */
         $organizationApi = $this->createMock(Organization::class);
-        $this->subject->setOrganizationApi($organizationApi);
+        $this->client->method('api')->with($this->subject::API_ORGANIZATION)->willReturn($organizationApi);
 
         $this->assertInstanceOf(Organization::class, $this->subject->getOrganizationApi());
     }
@@ -111,7 +117,7 @@ class GithubClientProxyTest extends TestCase
     {
         /** @var Repo $repositoryApi */
         $repositoryApi = $this->createMock(Repo::class);
-        $this->subject->setRepositoryApi($repositoryApi);
+        $this->client->method('api')->with($this->subject::API_REPOSITORY)->willReturn($repositoryApi);
 
         $this->assertInstanceOf(Repo::class, $this->subject->getRepositoryApi());
     }
@@ -120,7 +126,7 @@ class GithubClientProxyTest extends TestCase
     {
         /** @var GitData $gitDataApi */
         $gitDataApi = $this->createMock(GitData::class);
-        $this->subject->setGitDataApi($gitDataApi);
+        $this->client->method('api')->with($this->subject::API_REFERENCE)->willReturn($gitDataApi);
 
         $this->assertInstanceOf(GitData::class, $this->subject->getGitDataApi());
     }
