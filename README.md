@@ -27,7 +27,8 @@ PHP extensions required: php7.1-xml, php7.1-mbstring
 
 ## Authentication
 
-You need to provide a valid [GitHub token](https://github.com/settings/tokens) with "repo" access rights into `<project dir>/.env`, in the key `GITHUB_SECRET`.
+Create a `.env` file in the root directory with your github token and organization name (you can copy and populate the existing .env.dist template file).
+You need to provide a valid [GitHub token](https://github.com/settings/tokens) with "repo" access rights.
 
 ## The tools
 
