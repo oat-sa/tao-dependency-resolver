@@ -13,6 +13,8 @@ A more extensive explanation of the problematics and solutions is exposed in the
 
 Clone this repository.
 
+Create a `.env` file in the root directory with your github token and organization name (you can copy and populate the existing .env.dist template file).
+
 Install dependencies :
 
 ```
