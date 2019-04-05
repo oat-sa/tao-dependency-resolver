@@ -1,0 +1,58 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    repository.map.path: '%kernel.project_dir%/config/repositoryMap.json'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    OAT\DependencyResolver\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    OAT\DependencyResolver\Extension\ExtensionFactory:
+        arguments: ["@=service('OAT\\\\DependencyResolver\\\\Extension\\\\ExtensionMapFactory').create()"]
+
+    PhpParser\ParserFactory:
+        public: true
+
+    PhpParser\Parser:
+        factory: 'PhpParser\ParserFactory:create'
+        arguments:
+            $kind: 1
+
+    PhpParser\NodeTraverserInterface:
+        class: PhpParser\NodeTraverser
+
+    OAT\DependencyResolver\Manifest\Parser:
+        class: OAT\DependencyResolver\Manifest\Parser
+        arguments:
+            $extensionNameNodeVisitor: '@OAT\DependencyResolver\Manifest\ExtensionNameNodeVisitor'
+            $dependencyNamesNodeVisitor: '@OAT\DependencyResolver\Manifest\DependencyNamesNodeVisitor'
+
+    OAT\DependencyResolver\Repository\GithubConnection:
+        class: OAT\DependencyResolver\Repository\GithubConnection
+        arguments:
+            $token: '%env(GITHUB_SECRET)%'
+
+    Packagist\Api\Client:
+        public: true
+
+    OAT\DependencyResolver\Command\UpdateRepositoryMapCommand:
+        class: OAT\DependencyResolver\Command\UpdateRepositoryMapCommand
+        arguments:
+            $organizationName: '%env(GITHUB_ORGANIZATION)%'
+
+    Github\Client:
+        public: true
