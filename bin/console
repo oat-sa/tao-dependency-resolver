@@ -1,0 +1,69 @@
+#!/usr/bin/env php
+<?php
+
+use OAT\DependencyResolver\Kernel;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Debug\Debug;
+
+set_time_limit(0);
+
+require dirname(__DIR__).'/vendor/autoload.php';
+
+if (!class_exists(Application::class)) {
+    throw new RuntimeException('You need to add "symfony/framework-bundle" as a Composer dependency.');
+}
+
+$input = new ArgvInput();
+if (null !== $env = $input->getParameterOption(['--env', '-e'], null, true)) {
+    putenv('APP_ENV='.$_SERVER['APP_ENV'] = $_ENV['APP_ENV'] = $env);
+}
+
+if ($input->hasParameterOption('--no-debug', true)) {
+    putenv('APP_DEBUG='.$_SERVER['APP_DEBUG'] = $_ENV['APP_DEBUG'] = '0');
+}
+
+require dirname(__DIR__).'/config/bootstrap.php';
+
+if ($_SERVER['APP_DEBUG']) {
+    umask(0000);
+
+    if (class_exists(Debug::class)) {
+        Debug::enable();
+    }
+}
+
+
+if (function_exists('ini_set')) {
+    @ini_set('display_errors', 1);
+    $memoryInBytes = function ($value) {
+        $unit = strtolower(substr($value, -1, 1));
+        $value = (int) $value;
+        switch($unit) {
+            case 'g':
+                $value *= 1024;
+            // no break (cumulative multiplier)
+            case 'm':
+                $value *= 1024;
+            // no break (cumulative multiplier)
+            case 'k':
+                $value *= 1024;
+        }
+        return $value;
+    };
+    $memoryLimit = trim(ini_get('memory_limit'));
+    // Increase memory_limit if it is lower than 1.5GB
+    if ($memoryLimit != -1 && $memoryInBytes($memoryLimit) < 1024 * 1024 * 1536) {
+        @ini_set('memory_limit', '1536M');
+    }
+    // Set user defined memory limit
+    if ($memoryLimit = getenv('COMPOSER_MEMORY_LIMIT')) {
+        @ini_set('memory_limit', $memoryLimit);
+    }
+    unset($memoryInBytes, $memoryLimit);
+}
+
+
+$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
+$application = new Application($kernel);
+$application->run($input);
