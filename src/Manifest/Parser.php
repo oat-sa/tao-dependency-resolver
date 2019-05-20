@@ -20,6 +20,9 @@ class Parser
     /** @var ResultStoreInterface */
     private $dependencyNamesNodeVisitor;
 
+    /** @var ResultStoreInterface */
+    private $extensionLicenseNodeVisitor;
+
     /** @var NodeTraverserInterface */
     private $nodeTraverser;
 
@@ -27,11 +30,13 @@ class Parser
         PhpParser $phpParser,
         ResultStoreInterface $extensionNameNodeVisitor,
         ResultStoreInterface $dependencyNamesNodeVisitor,
+        ResultStoreInterface $extensionLicenseNodeVisitor,
         NodeTraverserInterface $traverser
     ) {
         $this->phpParser = $phpParser;
         $this->extensionNameNodeVisitor = $extensionNameNodeVisitor;
         $this->dependencyNamesNodeVisitor = $dependencyNamesNodeVisitor;
+        $this->extensionLicenseNodeVisitor = $extensionLicenseNodeVisitor;
         $this->nodeTraverser = $traverser;
     }
 
@@ -47,8 +52,15 @@ class Parser
         return $this->parse($manifestContents, $this->dependencyNamesNodeVisitor);
     }
 
+    // Retrieves extension name from manifest contents.
+    public function getLicenseName(string $manifestContents)
+    {
+        return $this->parse($manifestContents, $this->extensionLicenseNodeVisitor);
+    }
+
     /**
-     * Parses the given manifest contents and populates the extensionNames and dependencyNames properties.
+     * Parses the given manifest contents and populates the extensionNames, the extensionLicenses
+     * and dependencyNames properties.
      *
      * @param string                           $manifestContents
      * @param NodeVisitor|ResultStoreInterface $nodeVisitor
