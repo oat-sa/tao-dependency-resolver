@@ -57,8 +57,7 @@ class UpdateRepositoryMapCommand extends Command
         if (!is_numeric($limit)) {
             throw new \LogicException('Limit option must be an integer between 0 (no limit) and 100');
         }
-
-        $limit = min(max(intval($limit), 0), 100);
+        $limit = min(max((int)$limit, 0), 100);
 
         $this->repositoryMapUpdater->update($limit);
     }

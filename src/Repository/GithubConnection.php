@@ -104,7 +104,7 @@ class GithubConnection
             if ($contents === null) {
                 $fileNotFound = true;
             }
-        } catch (ErrorException|InvalidArgumentException $exception) {
+        } catch (ErrorException|InvalidArgumentException|RuntimeException $exception) {
             if ($exception->getCode() !== 404) {
                 // Transmits any other exception.
                 throw $exception;
