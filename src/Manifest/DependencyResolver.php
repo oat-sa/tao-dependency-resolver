@@ -43,7 +43,7 @@ class DependencyResolver implements LoggerAwareInterface
      * @return string
      * @throws NotMappedException
      */
-    public function resolve(Extension $rootExtension, array $extensionBranchMap): string
+    public function resolve(Extension $rootExtension, array $extensionBranchMap, bool $repositoriesInfo = false): string
     {
         // Adds the root extension so that it is installed along with the other ones.
         $extensionCollection = new ExtensionCollection();
@@ -56,18 +56,27 @@ class DependencyResolver implements LoggerAwareInterface
             $extensionCollection
         );
 
-        $repositoryCollection = new RepositoryCollection();
-        foreach ($extensionCollection as $extension)
-        {
-            $this->logger->info('Retrieving repository information for repository "' . $extension->getRepositoryName() . '".');
-            
-            [$owner, $repositoryName] = explode('/', $extension->getRepositoryName());
-            $repositoryCollection->add($this->repositoryReader->getRepository($owner, $repositoryName));
+        // Final data to be encoded.
+        $compose = [];
+
+        if ($repositoriesInfo !== false) {
+            $repositoryCollection = new RepositoryCollection();
+            foreach ($extensionCollection as $extension)
+            {
+                $this->logger->info('Retrieving repository information for repository "' . $extension->getRepositoryName() . '".');
+
+                [$owner, $repositoryName] = explode('/', $extension->getRepositoryName());
+                $repositoryCollection->add($this->repositoryReader->getRepository($owner, $repositoryName));
+            }
+
+            $compose['repositories'] = $repositoryCollection->asArray();
         }
+
+        $compose['require'] = $extensionCollection->asArray();
 
         // Converts extension collection into a composer.json require.
         return json_encode(
-            ['repositories' => $repositoryCollection->asArray(), 'require' => $extensionCollection->asArray()],
+            $compose,
             JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
         );
     }
