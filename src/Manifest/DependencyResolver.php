@@ -61,8 +61,7 @@ class DependencyResolver implements LoggerAwareInterface
 
         if ($repositoriesInfo !== false) {
             $repositoryCollection = new RepositoryCollection();
-            foreach ($extensionCollection as $extension)
-            {
+            foreach ($extensionCollection as $extension) {
                 $this->logger->info('Retrieving repository information for repository "' . $extension->getRepositoryName() . '".');
 
                 [$owner, $repositoryName] = explode('/', $extension->getRepositoryName());

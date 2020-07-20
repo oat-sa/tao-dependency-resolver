@@ -35,15 +35,14 @@ class RepositoryCollection implements \IteratorAggregate, \JsonSerializable
     {
         $repositories = [];
 
-        foreach ($this->repositories as $repository)
-        {
+        foreach ($this->repositories as $repository) {
             $organization = $repository->getOwner();
             $repoName = $repository->getName();
 
             $repositories[] = [
                 'type' => 'vcs',
                 'url' => "https://github.com/${organization}/${repoName}",
-                'no-api' => (($repository->isPrivate()) ? 'false' : 'true')
+                'no-api' => !$repository->isPrivate()
             ];
         }
 
