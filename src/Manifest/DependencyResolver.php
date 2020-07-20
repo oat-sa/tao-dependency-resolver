@@ -8,6 +8,7 @@ use OAT\DependencyResolver\Extension\Entity\Extension;
 use OAT\DependencyResolver\Extension\Entity\ExtensionCollection;
 use OAT\DependencyResolver\Extension\Exception\NotMappedException;
 use OAT\DependencyResolver\Extension\ExtensionFactory;
+use OAT\DependencyResolver\Repository\Entity\RepositoryCollection;
 use OAT\DependencyResolver\Repository\Interfaces\RepositoryReaderInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -55,8 +56,20 @@ class DependencyResolver implements LoggerAwareInterface
             $extensionCollection
         );
 
+        $repositoryCollection = new RepositoryCollection();
+        foreach ($extensionCollection as $extension)
+        {
+            $this->logger->info('Retrieving repository information for repository "' . $extension->getRepositoryName() . '".');
+            
+            [$owner, $repositoryName] = explode('/', $extension->getRepositoryName());
+            $repositoryCollection->add($this->repositoryReader->getRepository($owner, $repositoryName));
+        }
+
         // Converts extension collection into a composer.json require.
-        return json_encode($extensionCollection, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        return json_encode(
+            ['repositories' => $repositoryCollection->asArray(), 'require' => $extensionCollection->asArray()],
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+        );
     }
 
     /**

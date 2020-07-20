@@ -87,6 +87,30 @@ class GithubConnection
     }
 
     /**
+     * @param string $owner
+     * @param string $repositoryName
+     * @return Repository
+     */
+    public function getRepository(string $owner, string $repositoryName): Repository
+    {
+        $this->authenticateAndCheck($owner);
+
+        $repositoryInfo = $this->client->getRepositoryInfo($owner, $repositoryName);
+
+        return new Repository(
+            false,
+            $owner,
+            $repositoryName,
+            $repositoryInfo['private'],
+            $repositoryInfo['default_branch'],
+            '',
+            '',
+            false,
+            []
+        );
+    }
+
+    /**
      * @throws FileNotFoundException when the file does not exist
      * @throws ErrorException when another error occurs
      */

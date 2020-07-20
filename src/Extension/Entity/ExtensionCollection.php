@@ -28,11 +28,16 @@ class ExtensionCollection implements \IteratorAggregate, \JsonSerializable
 
     public function jsonSerialize()
     {
+        return ['require' => $this->asArray()];
+    }
+
+    public function asArray(): array
+    {
         $requires = [];
         foreach ($this->extensions as $extension) {
             $requires[$extension->getRepositoryName()] = $extension->getPrefixedBranchName();
         }
 
-        return ['require' => $requires];
+        return $requires;
     }
 }

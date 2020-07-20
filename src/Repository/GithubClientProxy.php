@@ -66,6 +66,17 @@ class GithubClientProxy
     /**
      * @param string $owner
      * @param string $repositoryName
+     * @return array
+     */
+    public function getRepositoryInfo(string $owner, string $repositoryName)
+    {
+        $repoApi = $this->getRepositoryApi();
+        return $repoApi->show($owner, $repositoryName);
+    }
+
+    /**
+     * @param string $owner
+     * @param string $repositoryName
      * @param string $branchReference
      * @param string $filename
      *
