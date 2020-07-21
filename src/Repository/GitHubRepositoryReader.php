@@ -45,11 +45,6 @@ class GitHubRepositoryReader implements RepositoryReaderInterface, LoggerAwareIn
         return $this->connectedGithubClient->getRepositoryList($owner);
     }
 
-    public function getRepository(string $owner, string $repositoryName): Repository
-    {
-        return $this->connectedGithubClient->getRepository($owner, $repositoryName);
-    }
-
     public function readRepository(Repository $repository)
     {
         // Adds branches 'develop' and 'master' when they exist.

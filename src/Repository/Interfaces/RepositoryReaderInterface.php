@@ -23,8 +23,6 @@ interface RepositoryReaderInterface
      */
     public function getRepositoryList(string $owner): array;
 
-    public function getRepository(string $owner, string $repositoryName): Repository;
-
     /**
      * Builds a representation of a distant code repository.
      * @param Repository $repository
