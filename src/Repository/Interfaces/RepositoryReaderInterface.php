@@ -11,11 +11,15 @@ interface RepositoryReaderInterface
 {
     /**
      * Gets numbers of public and private repositories of a user.
+     * @param string $owner
+     * @return array
      */
     public function getOrganizationProperties(string $owner): array;
 
     /**
      * Reads all repositories of a user.
+     * @param string $owner
+     * @return array
      */
     public function getRepositoryList(string $owner): array;
 
@@ -23,25 +27,34 @@ interface RepositoryReaderInterface
 
     /**
      * Builds a representation of a distant code repository.
+     * @param Repository $repository
      */
     public function readRepository(Repository $repository);
 
     /**
      * Reads the extension name of a repository.
+     * @param Repository $repository
+     * @return string|null
      */
     public function getExtensionName(Repository $repository): ?string;
 
     /**
      * Returns contents of manifest.php file for the given repository.
      *
-     * @throws \LogicException when the manifest.php is not valid php
+     * @param string $owner
+     * @param string $repositoryName
+     * @param string $branchName
+     * @return string|null
      */
     public function getManifestContents(string $owner, string $repositoryName, string $branchName): ?string;
 
     /**
      * Returns contents of composer.json file for the given repository.
      *
-     * @throws \LogicException when the composer.json is not valid json
+     * @param string $owner
+     * @param string $repositoryName
+     * @param string $branchName
+     * @return array
      */
     public function getComposerContents(string $owner, string $repositoryName, string $branchName): array;
 

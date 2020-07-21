@@ -37,9 +37,9 @@ class DependencyResolver implements LoggerAwareInterface
     }
 
     /**
-     * @param Extension  $rootExtension
+     * @param Extension $rootExtension
      * @param array $extensionBranchMap
-     *
+     * @param bool $repositoriesInfo
      * @return string
      * @throws NotMappedException
      */
@@ -60,18 +60,25 @@ class DependencyResolver implements LoggerAwareInterface
         $compose = [];
 
         if ($repositoriesInfo !== false) {
-            $repositoryCollection = new RepositoryCollection();
-            foreach ($extensionCollection as $extension) {
-                $this->logger->info('Retrieving repository information for repository "' . $extension->getRepositoryName() . '".');
+            // Get private repositories information.
+            $this->logger->info('Retrieving repositories information.');
+            [$owner, $repositoryName] = explode('/', $rootExtension->getRepositoryName());
+            $repositories = $this->repositoryReader->getRepositoryList($owner);
 
-                [$owner, $repositoryName] = explode('/', $extension->getRepositoryName());
-                $repositoryCollection->add($this->repositoryReader->getRepository($owner, $repositoryName));
+            $repositoryCollection = new RepositoryCollection();
+            /** @var Extension $extension */
+            foreach ($extensionCollection as $extension) {
+                if (isset($repositories[$extension->getRepositoryName()])) {
+                    $repositoryCollection->add($repositories[$extension->getRepositoryName()]);
+                }
             }
 
             $compose['repositories'] = $repositoryCollection->asArray();
         }
 
         $compose['require'] = $extensionCollection->asArray();
+
+        $this->logger->info('Dependency Resolution process finished.');
 
         // Converts extension collection into a composer.json require.
         return json_encode(

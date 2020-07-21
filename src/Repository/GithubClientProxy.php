@@ -50,9 +50,8 @@ class GithubClientProxy
      * Returns a page of the repository list of the given owner
      *
      * @param string $owner
-     * @param int    $page
-     * @param int    $perPage
-     *
+     * @param int $page
+     * @param int $perPage
      * @return array
      */
     public function getRepositoryList(string $owner, int $page, int $perPage): array

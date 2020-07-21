@@ -31,6 +31,9 @@ class RepositoryCollection implements \IteratorAggregate, \JsonSerializable
         return ['repositories' => $this->asArray()];
     }
 
+    /**
+     * @return Repository[]
+     */
     public function asArray(): array
     {
         $repositories = [];
