@@ -66,6 +66,7 @@ class GithubConnection
         do {
             $page++;
             $foundRepositories = $this->client->getRepositoryList($owner, $page, $perPage);
+
             foreach ($foundRepositories as $repository) {
                 $repositoryName = $repository['name'];
                 $repositories[$owner . '/' . $repositoryName] = new Repository(
