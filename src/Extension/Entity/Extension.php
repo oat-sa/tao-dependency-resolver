@@ -44,9 +44,4 @@ class Extension
     {
         return sprintf('%s-%s', self::BRANCH_PREFIX, $this->branchName);
     }
-
-    public function asArray(): array
-    {
-        return [$this->getExtensionName() => $this->getPrefixedBranchName()];
-    }
 }
