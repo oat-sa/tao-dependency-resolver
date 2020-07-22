@@ -12,7 +12,7 @@
         "knplabs/github-api": "^2.11",
         "knplabs/packagist-api": "^1.5",
         "league/flysystem": "^1.0",
-        "mikey179/vfsStream": "^1.6",
+        "mikey179/vfsstream": "^1.6",
         "nikic/php-parser": "^4.2",
         "php-http/guzzle6-adapter": "^1.1",
         "symfony/console": "4.2.*",
