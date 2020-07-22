@@ -52,6 +52,7 @@ class GithubClientProxy
      * @param string $owner
      * @param int    $page
      * @param int    $perPage
+     *
      * @return array
      */
     public function getRepositoryList(string $owner, int $page, int $perPage): array
