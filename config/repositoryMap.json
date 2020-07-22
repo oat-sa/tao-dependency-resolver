@@ -127,33 +127,6 @@
             }
         }
     },
-    "oat-sa\/extension-experimental-ekstera": {
-        "analyzed": true,
-        "owner": "oat-sa",
-        "name": "extension-experimental-ekstera",
-        "private": false,
-        "defaultBranch": "master",
-        "extensionName": "ekstera",
-        "composerName": "",
-        "onPackagist": false,
-        "branches": {
-            "master": {
-                "name": "master",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "ekstera",
-                        "requires": [
-                            "irtTest",
-                            "kutimo",
-                            "taoQtiItem"
-                        ]
-                    }
-                }
-            }
-        }
-    },
     "oat-sa\/tao-core": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -296,31 +269,6 @@
                         "extensionName": "taoTestTaker",
                         "requires": [
                             "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            }
-        }
-    },
-    "oat-sa\/extension-experimental-kutimo": {
-        "analyzed": true,
-        "owner": "oat-sa",
-        "name": "extension-experimental-kutimo",
-        "private": false,
-        "defaultBranch": "master",
-        "extensionName": "kutimo",
-        "composerName": "",
-        "onPackagist": false,
-        "branches": {
-            "master": {
-                "name": "master",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "kutimo",
-                        "requires": [
-                            "taoQtiCommon"
                         ]
                     }
                 }
@@ -2097,60 +2045,6 @@
             }
         }
     },
-    "oat-sa\/extension-tao-talk": {
-        "analyzed": true,
-        "owner": "oat-sa",
-        "name": "extension-tao-talk",
-        "private": false,
-        "defaultBranch": "master",
-        "extensionName": "taoTalk",
-        "composerName": "oat\/taoTalk",
-        "onPackagist": false,
-        "branches": {
-            "develop": {
-                "name": "develop",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "taoTalk",
-                        "requires": [
-                            "tao"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat\/taoTalk",
-                        "extensionName": "taoTalk",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            },
-            "master": {
-                "name": "master",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "taoTalk",
-                        "requires": [
-                            "tao"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat\/taoTalk",
-                        "extensionName": "taoTalk",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            }
-        }
-    },
     "oat-sa\/extension-tao-outcomeui": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -3192,39 +3086,6 @@
             }
         }
     },
-    "oat-sa\/extension-tao-randomcat": {
-        "analyzed": true,
-        "owner": "oat-sa",
-        "name": "extension-tao-randomcat",
-        "private": false,
-        "defaultBranch": "master",
-        "extensionName": "taoCat",
-        "composerName": "oat-sa\/extension-tao-randomcat",
-        "onPackagist": false,
-        "branches": {
-            "master": {
-                "name": "master",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "taoCat",
-                        "requires": [
-                            "taoCat"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-randomcat",
-                        "extensionName": "taoRandomCat",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            }
-        }
-    },
     "oat-sa\/infrastructure-service": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -3320,59 +3181,16 @@
             }
         }
     },
-    "oat-sa\/extension-tao-extrapic": {
-        "analyzed": true,
+    "oat-sa\/PARCC-ACR": {
+        "analyzed": false,
         "owner": "oat-sa",
-        "name": "extension-tao-extrapic",
+        "name": "PARCC-ACR",
         "private": true,
         "defaultBranch": "master",
-        "extensionName": "taoExtraPic",
-        "composerName": "oat-sa\/extension-tao-extrapic",
+        "extensionName": "",
+        "composerName": "",
         "onPackagist": false,
-        "branches": {
-            "develop": {
-                "name": "develop",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "taoExtraPic",
-                        "requires": [
-                            "qtiItemPic"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-extrapic",
-                        "extensionName": "taoExtraPic",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            },
-            "master": {
-                "name": "master",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "taoTextHelp",
-                        "requires": [
-                            "qtiItemPic"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-extrapic",
-                        "extensionName": "taoTextHelp",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            }
-        }
+        "branches": []
     },
     "oat-sa\/tao-html-boilerplate": {
         "analyzed": true,
@@ -3998,6 +3816,17 @@
             }
         }
     },
+    "oat-sa\/act-test-crypted-package": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "act-test-crypted-package",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/unmatrix": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -4069,41 +3898,6 @@
                             "oat-sa\/extension-tao-outcomekeyvalue",
                             "oat-sa\/extension-tao-clientdiag",
                             "oat-sa\/lib-advkv-dynamodb"
-                        ]
-                    }
-                }
-            }
-        }
-    },
-    "oat-sa\/extension-tao-unisa": {
-        "analyzed": true,
-        "owner": "oat-sa",
-        "name": "extension-tao-unisa",
-        "private": true,
-        "defaultBranch": "develop",
-        "extensionName": "unisa",
-        "composerName": "oat-sa\/extension-tao-unisa",
-        "onPackagist": false,
-        "branches": {
-            "develop": {
-                "name": "develop",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "unisa",
-                        "requires": [
-                            "taoCe",
-                            "taoMediaManager",
-                            "taoQtiItem"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-unisa",
-                        "extensionName": "unisa",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
                         ]
                     }
                 }
@@ -4997,61 +4791,6 @@
                         "composerName": "oat-sa\/extension-builder",
                         "extensionName": "",
                         "requires": []
-                    }
-                }
-            }
-        }
-    },
-    "oat-sa\/extension-tao-unisa-theme": {
-        "analyzed": true,
-        "owner": "oat-sa",
-        "name": "extension-tao-unisa-theme",
-        "private": true,
-        "defaultBranch": "master",
-        "extensionName": "unisaTheme",
-        "composerName": "oat-sa\/extension-tao-unisa-theme",
-        "onPackagist": false,
-        "branches": {
-            "develop": {
-                "name": "develop",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "unisaTheme",
-                        "requires": [
-                            "tao",
-                            "taoQtiItem"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-unisa-theme",
-                        "extensionName": "unisaTheme",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            },
-            "master": {
-                "name": "master",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "unisaTheme",
-                        "requires": [
-                            "tao"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-unisa-theme",
-                        "extensionName": "unisaTheme",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
                     }
                 }
             }
@@ -5952,6 +5691,17 @@
             }
         }
     },
+    "oat-sa\/taoadm": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taoadm",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/extension-tao-nccer-authoring": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -6149,43 +5899,6 @@
                         ]
                     }
                 }
-            }
-        }
-    },
-    "oat-sa\/extension-tao-marking": {
-        "analyzed": true,
-        "owner": "oat-sa",
-        "name": "extension-tao-marking",
-        "private": true,
-        "defaultBranch": "master",
-        "extensionName": "taoMarking",
-        "composerName": "oat-sa\/extension-tao-marking",
-        "onPackagist": false,
-        "branches": {
-            "develop": {
-                "name": "develop",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "taoMarking",
-                        "requires": [
-                            "taoOutcomeUi"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-marking",
-                        "extensionName": "taoMarking",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            },
-            "master": {
-                "name": "master",
-                "files": []
             }
         }
     },
@@ -6867,6 +6580,28 @@
             }
         }
     },
+    "oat-sa\/taocloud": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taocloud",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/taohub-forum": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taohub-forum",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/extension-tao-lati": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -7000,6 +6735,17 @@
                 "files": []
             }
         }
+    },
+    "oat-sa\/taohub-business-confidential": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taohub-business-confidential",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/extension-tao-resource-workflow": {
         "analyzed": true,
@@ -7378,62 +7124,6 @@
             }
         }
     },
-    "oat-sa\/extension-tao-test-runner-tools": {
-        "analyzed": true,
-        "owner": "oat-sa",
-        "name": "extension-tao-test-runner-tools",
-        "private": false,
-        "defaultBranch": "master",
-        "extensionName": "taoTestRunnerTools",
-        "composerName": "oat-sa\/extension-tao-test-runner-tools",
-        "onPackagist": false,
-        "branches": {
-            "develop": {
-                "name": "develop",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "taoTestRunnerTools",
-                        "requires": [
-                            "tao",
-                            "taoQtiTest"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-test-runner-tools",
-                        "extensionName": "taoTestRunnerTools",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            },
-            "master": {
-                "name": "master",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "taoTestRunnerTools",
-                        "requires": [
-                            "tao",
-                            "taoQtiTest"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-test-runner-tools",
-                        "extensionName": "taoTestRunnerTools",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            }
-        }
-    },
     "oat-sa\/package-multitenancy": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -7712,6 +7402,17 @@
                 }
             }
         }
+    },
+    "oat-sa\/itsm": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "itsm",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/lib-test-cat": {
         "analyzed": true,
@@ -8167,6 +7868,17 @@
             }
         }
     },
+    "oat-sa\/grafana-dashboard": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "grafana-dashboard",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/extension-tao-premium": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -8299,64 +8011,6 @@
             }
         }
     },
-    "oat-sa\/extension-tao-delivery-keyvalue": {
-        "analyzed": true,
-        "owner": "oat-sa",
-        "name": "extension-tao-delivery-keyvalue",
-        "private": false,
-        "defaultBranch": "master",
-        "extensionName": "taoDeliveryKv",
-        "composerName": "oat-sa\/extension-tao-delivery-keyvalue",
-        "onPackagist": false,
-        "branches": {
-            "develop": {
-                "name": "develop",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "taoDeliveryKv",
-                        "requires": [
-                            "generis",
-                            "tao",
-                            "taoDelivery"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-delivery-keyvalue",
-                        "extensionName": "taoDeliveryKv",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            },
-            "master": {
-                "name": "master",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "taoDeliveryKv",
-                        "requires": [
-                            "generis",
-                            "tao",
-                            "taoDelivery"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-delivery-keyvalue",
-                        "extensionName": "taoDeliveryKv",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            }
-        }
-    },
     "oat-sa\/extension-tao-task-queue": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -8412,6 +8066,17 @@
                 }
             }
         }
+    },
+    "oat-sa\/package-nfer": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "package-nfer",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/extension-tao-battery": {
         "analyzed": true,
@@ -8585,6 +8250,17 @@
                 }
             }
         }
+    },
+    "oat-sa\/metrics-agent": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "metrics-agent",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/qa-autotests": {
         "analyzed": true,
@@ -9048,6 +8724,17 @@
             }
         }
     },
+    "oat-sa\/tenant-registry-api-deploy": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "tenant-registry-api-deploy",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/tao-community": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -9231,346 +8918,6 @@
             }
         }
     },
-    "oat-sa\/extension-tao-ncsbn": {
-        "analyzed": true,
-        "owner": "oat-sa",
-        "name": "extension-tao-ncsbn",
-        "private": true,
-        "defaultBranch": "master",
-        "extensionName": "taoNcsbn",
-        "composerName": "oat-sa\/extension-tao-ncsbn",
-        "onPackagist": false,
-        "branches": {
-            "develop": {
-                "name": "develop",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "taoNcsbn",
-                        "requires": [
-                            "taoCe",
-                            "tao",
-                            "generis",
-                            "funcAcl",
-                            "taoQtiTest",
-                            "taoQtiItem",
-                            "taoTestRunnerPlugins",
-                            "taoProctoring",
-                            "taoScheduler",
-                            "taoOauth",
-                            "ltiDeliveryProvider",
-                            "taoDeliveryRdf",
-                            "taoDelivery",
-                            "taoGroups",
-                            "taoTestTaker",
-                            "taoOutcomeUi"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-ncsbn",
-                        "extensionName": "taoNcsbn",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            },
-            "master": {
-                "name": "master",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "taoNcsbn",
-                        "requires": [
-                            "taoCe",
-                            "tao",
-                            "generis",
-                            "funcAcl",
-                            "taoQtiTest",
-                            "taoQtiItem",
-                            "taoTestRunnerPlugins",
-                            "taoProctoring",
-                            "taoScheduler",
-                            "taoOauth",
-                            "ltiDeliveryProvider",
-                            "taoDeliveryRdf",
-                            "taoDelivery",
-                            "taoGroups",
-                            "taoTestTaker",
-                            "taoOutcomeUi"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-ncsbn",
-                        "extensionName": "taoNcsbn",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            }
-        }
-    },
-    "oat-sa\/extension-tao-ncsbn-delivery": {
-        "analyzed": true,
-        "owner": "oat-sa",
-        "name": "extension-tao-ncsbn-delivery",
-        "private": true,
-        "defaultBranch": "master",
-        "extensionName": "btDelivery",
-        "composerName": "oat-sa\/extension-tao-ncsbn-delivery",
-        "onPackagist": false,
-        "branches": {
-            "develop": {
-                "name": "develop",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "btDelivery",
-                        "requires": [
-                            "taoDeliveryRdf",
-                            "taoDelivery",
-                            "taoGroups",
-                            "taoTestTaker",
-                            "taoOutcomeUi",
-                            "tao",
-                            "generis",
-                            "btRest",
-                            "ltiDeliveryProvider"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-ncsbn-delivery",
-                        "extensionName": "btDelivery",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            },
-            "master": {
-                "name": "master",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "btDelivery",
-                        "requires": [
-                            "taoDeliveryRdf",
-                            "taoDelivery",
-                            "taoGroups",
-                            "taoTestTaker",
-                            "taoOutcomeUi",
-                            "tao",
-                            "generis",
-                            "btRest",
-                            "ltiDeliveryProvider"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-ncsbn-delivery",
-                        "extensionName": "btDelivery",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            }
-        }
-    },
-    "oat-sa\/extension-tao-ncsbn-release": {
-        "analyzed": true,
-        "owner": "oat-sa",
-        "name": "extension-tao-ncsbn-release",
-        "private": true,
-        "defaultBranch": "master",
-        "extensionName": "btRelease",
-        "composerName": "oat-sa\/extension-tao-ncsbn-release",
-        "onPackagist": false,
-        "branches": {
-            "develop": {
-                "name": "develop",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "btRelease",
-                        "requires": [
-                            "funcAcl",
-                            "tao",
-                            "btRest"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-ncsbn-release",
-                        "extensionName": "btRelease",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            },
-            "master": {
-                "name": "master",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "btRelease",
-                        "requires": [
-                            "funcAcl",
-                            "tao",
-                            "btRest"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-ncsbn-release",
-                        "extensionName": "btRelease",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            }
-        }
-    },
-    "oat-sa\/extension-tao-ncsbn-rest": {
-        "analyzed": true,
-        "owner": "oat-sa",
-        "name": "extension-tao-ncsbn-rest",
-        "private": true,
-        "defaultBranch": "master",
-        "extensionName": "btRest",
-        "composerName": "oat-sa\/extension-tao-ncsbn-rest",
-        "onPackagist": false,
-        "branches": {
-            "develop": {
-                "name": "develop",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "btRest",
-                        "requires": [
-                            "tao",
-                            "generis",
-                            "taoOauth"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-ncsbn-rest",
-                        "extensionName": "btRest",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            },
-            "master": {
-                "name": "master",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "btRest",
-                        "requires": [
-                            "tao",
-                            "generis",
-                            "taoOauth"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-ncsbn-rest",
-                        "extensionName": "btRest",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            }
-        }
-    },
-    "oat-sa\/tao-enterprise-ncsbn": {
-        "analyzed": true,
-        "owner": "oat-sa",
-        "name": "tao-enterprise-ncsbn",
-        "private": true,
-        "defaultBranch": "master",
-        "extensionName": "",
-        "composerName": "oat-sa\/tao-enterprise-ncsbn",
-        "onPackagist": false,
-        "branches": {
-            "develop": {
-                "name": "develop",
-                "files": {
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/tao-enterprise-ncsbn",
-                        "extensionName": "",
-                        "requires": [
-                            "oat-sa\/generis",
-                            "oat-sa\/tao-core",
-                            "oat-sa\/extension-tao-community",
-                            "oat-sa\/extension-tao-funcacl",
-                            "oat-sa\/extension-tao-dac-simple",
-                            "oat-sa\/extension-tao-testtaker",
-                            "oat-sa\/extension-tao-group",
-                            "oat-sa\/extension-tao-item",
-                            "oat-sa\/extension-tao-itemhtml",
-                            "oat-sa\/extension-tao-itemqti",
-                            "oat-sa\/extension-tao-itemqti-pci",
-                            "oat-sa\/extension-tao-itemqti-pic",
-                            "oat-sa\/extension-tao-test",
-                            "oat-sa\/extension-tao-testlinear",
-                            "oat-sa\/extension-tao-testqti",
-                            "oat-sa\/extension-tao-outcome",
-                            "oat-sa\/extension-tao-outcomeui",
-                            "oat-sa\/extension-tao-outcomerds",
-                            "oat-sa\/extension-tao-outcomekeyvalue",
-                            "oat-sa\/extension-tao-outcomelti",
-                            "oat-sa\/extension-tao-delivery",
-                            "oat-sa\/extension-tao-lti",
-                            "oat-sa\/extension-tao-ltideliveryprovider",
-                            "oat-sa\/extension-tao-revision",
-                            "oat-sa\/extension-tao-mediamanager",
-                            "oat-sa\/extension-pcisample",
-                            "oat-sa\/extension-tao-backoffice",
-                            "oat-sa\/extension-tao-proctoring",
-                            "oat-sa\/extension-tao-clientdiag",
-                            "oat-sa\/extension-tao-eventlog",
-                            "oat-sa\/extension-tao-task-queue",
-                            "oat-sa\/extension-tao-scheduler",
-                            "oat-sa\/extension-tao-oauth",
-                            "oat-sa\/extension-tao-test-runner-plugins",
-                            "oat-sa\/extension-tao-publishing",
-                            "oat-sa\/extension-tao-theming-platform",
-                            "oat-sa\/lib-flysystem-filecache",
-                            "oat-sa\/extension-tao-ncsbn",
-                            "oat-sa\/extension-tao-ncsbn-release",
-                            "oat-sa\/extension-tao-ncsbn-rest",
-                            "oat-sa\/extension-tao-ncsbn-delivery",
-                            "oat-sa\/extension-tao-testqti-previewer"
-                        ]
-                    }
-                }
-            },
-            "master": {
-                "name": "master",
-                "files": []
-            }
-        }
-    },
     "oat-sa\/tao-mobile-app": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -9717,12 +9064,12 @@
             }
         }
     },
-    "oat-sa\/ncsbn-deploy": {
-        "analyzed": true,
+    "oat-sa\/iave-deploy": {
+        "analyzed": false,
         "owner": "oat-sa",
-        "name": "ncsbn-deploy",
+        "name": "iave-deploy",
         "private": true,
-        "defaultBranch": "ussbn01dee",
+        "defaultBranch": "master",
         "extensionName": "",
         "composerName": "",
         "onPackagist": false,
@@ -9743,6 +9090,17 @@
                 "files": []
             }
         }
+    },
+    "oat-sa\/spout": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "spout",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/protected-data-provider": {
         "analyzed": true,
@@ -10075,6 +9433,17 @@
             }
         }
     },
+    "oat-sa\/tango-infra": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "tango-infra",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/caed-deploy": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -10168,6 +9537,28 @@
                 }
             }
         }
+    },
+    "oat-sa\/sqs-test": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "sqs-test",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/package-act": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "package-act",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/portal-deploy": {
         "analyzed": true,
@@ -10523,6 +9914,17 @@
             }
         }
     },
+    "oat-sa\/enterprise-deploy": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "enterprise-deploy",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/extension-tao-result-export": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -10584,6 +9986,17 @@
                 }
             }
         }
+    },
+    "oat-sa\/tao-infra-enterprise": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "tao-infra-enterprise",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/extension-tao-static-deliveries": {
         "analyzed": true,
@@ -10844,6 +10257,17 @@
             }
         }
     },
+    "oat-sa\/taohub-premium-quickstart": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taohub-premium-quickstart",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/composer-npm-bridge": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -10877,6 +10301,17 @@
                 }
             }
         }
+    },
+    "oat-sa\/lamda-firehose-result-storage": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "lamda-firehose-result-storage",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/extension-tao-lti-consumer": {
         "analyzed": true,
@@ -10952,75 +10387,16 @@
             }
         }
     },
-    "oat-sa\/lib-result-storage": {
-        "analyzed": true,
+    "oat-sa\/depp-item-generator": {
+        "analyzed": false,
         "owner": "oat-sa",
-        "name": "lib-result-storage",
-        "private": false,
+        "name": "depp-item-generator",
+        "private": true,
         "defaultBranch": "master",
         "extensionName": "",
         "composerName": "",
         "onPackagist": false,
-        "branches": {
-            "master": {
-                "name": "master",
-                "files": []
-            }
-        }
-    },
-    "oat-sa\/extension-lti-advantage": {
-        "analyzed": true,
-        "owner": "oat-sa",
-        "name": "extension-lti-advantage",
-        "private": false,
-        "defaultBranch": "master",
-        "extensionName": "ltiAdvantage",
-        "composerName": "oat-sa\/extension-lti-advantage",
-        "onPackagist": false,
-        "branches": {
-            "develop": {
-                "name": "develop",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "ltiAdvantage",
-                        "requires": [
-                            "tao"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-lti-advantage",
-                        "extensionName": "ltiAdvantage",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            },
-            "master": {
-                "name": "master",
-                "files": {
-                    "manifest.php": {
-                        "name": "manifest.php",
-                        "composerName": "",
-                        "extensionName": "ltiAdvantage",
-                        "requires": [
-                            "tao"
-                        ]
-                    },
-                    "composer.json": {
-                        "name": "composer.json",
-                        "composerName": "oat-sa\/extension-lti-advantage",
-                        "extensionName": "ltiAdvantage",
-                        "requires": [
-                            "oat-sa\/oatbox-extension-installer"
-                        ]
-                    }
-                }
-            }
-        }
+        "branches": []
     },
     "oat-sa\/simple-roster": {
         "analyzed": true,
@@ -11096,6 +10472,17 @@
             }
         }
     },
+    "oat-sa\/tao-infra-kitchen": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "tao-infra-kitchen",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/extension-tao-ccc": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -11149,6 +10536,17 @@
                 }
             }
         }
+    },
+    "oat-sa\/depp-docker": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "depp-docker",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/extension-tao-infosign": {
         "analyzed": true,
@@ -11353,6 +10751,17 @@
                 }
             }
         }
+    },
+    "oat-sa\/aws_ops_tool": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "aws_ops_tool",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/tao-skeleton": {
         "analyzed": true,
@@ -11623,6 +11032,17 @@
                 "files": []
             }
         }
+    },
+    "oat-sa\/package-mp": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "package-mp",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/grunt-retire": {
         "analyzed": true,
@@ -12009,6 +11429,28 @@
             }
         }
     },
+    "oat-sa\/taohub-open-api": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taohub-open-api",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/github": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "github",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/rollup-plugin-handlebars-plus": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -12209,6 +11651,17 @@
             }
         }
     },
+    "oat-sa\/freshBooks-extractor": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "freshBooks-extractor",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/extension-tao-bosa-selor": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -12342,6 +11795,28 @@
                 }
             }
         }
+    },
+    "oat-sa\/taocloud-saas": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taocloud-saas",
+        "private": true,
+        "defaultBranch": "experiment",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/generis-mock": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "generis-mock",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/nextgen-deploy": {
         "analyzed": true,
@@ -12525,7 +12000,7 @@
         "defaultBranch": "master",
         "extensionName": "ltiTestReview",
         "composerName": "oat-sa\/extension-lti-test-review",
-        "onPackagist": false,
+        "onPackagist": true,
         "branches": {
             "develop": {
                 "name": "develop",
@@ -12696,6 +12171,17 @@
                 "files": []
             }
         }
+    },
+    "oat-sa\/snowflake": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "snowflake",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/tao-qunit-testrunner-fe": {
         "analyzed": true,
@@ -12907,6 +12393,17 @@
             }
         }
     },
+    "oat-sa\/tango-qa": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "tango-qa",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/taohub-ng-developer-guide": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -12941,6 +12438,17 @@
             }
         }
     },
+    "oat-sa\/infra-monitoring": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "infra-monitoring",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/eslint-config-tao": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -12960,6 +12468,39 @@
                 "files": []
             }
         }
+    },
+    "oat-sa\/bench-saas": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "bench-saas",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/nextgen-artefacts": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "nextgen-artefacts",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/saas-scale": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "saas-scale",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/qti-resources": {
         "analyzed": true,
@@ -13142,6 +12683,17 @@
             }
         }
     },
+    "oat-sa\/nextgen-package": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "nextgen-package",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/qunit-parameterize": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -13157,6 +12709,17 @@
                 "files": []
             }
         }
+    },
+    "oat-sa\/bong-deploy": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "bong-deploy",
+        "private": true,
+        "defaultBranch": "develop",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/tao-tenant-preferences-be": {
         "analyzed": true,
@@ -13245,6 +12808,39 @@
                 }
             }
         }
+    },
+    "oat-sa\/nextgen-infra": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "nextgen-infra",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/nextgen-env": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "nextgen-env",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/nextgen-pipelines": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "nextgen-pipelines",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/tao-enterprise-nec": {
         "analyzed": true,
@@ -13431,6 +13027,28 @@
             }
         }
     },
+    "oat-sa\/nextgen-artefacts-base": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "nextgen-artefacts-base",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/nextgen-artefacts-bong": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "nextgen-artefacts-bong",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/package-caed": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -13446,6 +13064,17 @@
                 "files": []
             }
         }
+    },
+    "oat-sa\/taohub-combined-guides": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taohub-combined-guides",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/nextgen-stack": {
         "analyzed": true,
@@ -13497,6 +13126,28 @@
             }
         }
     },
+    "oat-sa\/nextgen-charts": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "nextgen-charts",
+        "private": true,
+        "defaultBranch": "develop",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/depp-teacher-portal-tool": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "depp-teacher-portal-tool",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/bundle-elasticsearch-document-manager": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -13534,6 +13185,39 @@
                 }
             }
         }
+    },
+    "oat-sa\/taohub-installation-guide": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taohub-installation-guide",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/taohub-extension-guide": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taohub-extension-guide",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/taohub-appendix-guide": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taohub-appendix-guide",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/extension-tao-deakin": {
         "analyzed": true,
@@ -13633,6 +13317,28 @@
                 "files": []
             }
         }
+    },
+    "oat-sa\/taohub-ng-user-guide": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taohub-ng-user-guide",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/taohub-ng-quickstart-guide": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taohub-ng-quickstart-guide",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/dsp-svelte": {
         "analyzed": true,
@@ -14269,7 +13975,7 @@
         "defaultBranch": "master",
         "extensionName": "taoSystemStatus",
         "composerName": "oat-sa\/extension-tao-system-status",
-        "onPackagist": false,
+        "onPackagist": true,
         "branches": {
             "develop": {
                 "name": "develop",
@@ -14355,25 +14061,16 @@
             }
         }
     },
-    "oat-sa\/tao-infra-cloudformation": {
-        "analyzed": true,
+    "oat-sa\/delivery-template": {
+        "analyzed": false,
         "owner": "oat-sa",
-        "name": "tao-infra-cloudformation",
+        "name": "delivery-template",
         "private": true,
         "defaultBranch": "master",
         "extensionName": "",
         "composerName": "",
         "onPackagist": false,
-        "branches": {
-            "develop": {
-                "name": "develop",
-                "files": []
-            },
-            "master": {
-                "name": "master",
-                "files": []
-            }
-        }
+        "branches": []
     },
     "oat-sa\/extension-symfony-messenger-prototype": {
         "analyzed": true,
@@ -14690,7 +14387,7 @@
         "defaultBranch": "master",
         "extensionName": "",
         "composerName": "oat-sa\/bundle-health-check",
-        "onPackagist": false,
+        "onPackagist": true,
         "branches": {
             "develop": {
                 "name": "develop",
@@ -14719,6 +14416,17 @@
                 }
             }
         }
+    },
+    "oat-sa\/taohub-hands-on-guide": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taohub-hands-on-guide",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/lib-qti-package-compilation": {
         "analyzed": true,
@@ -14812,6 +14520,17 @@
             }
         }
     },
+    "oat-sa\/taohub-api-guide": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taohub-api-guide",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/scoring-docker-stack": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -14899,6 +14618,28 @@
         "onPackagist": false,
         "branches": []
     },
+    "oat-sa\/tao-infra-env": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "tao-infra-env",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/jira-extractor": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "jira-extractor",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/focus-visible": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -14923,7 +14664,7 @@
         "defaultBranch": "master",
         "extensionName": "",
         "composerName": "oat-sa\/lib-health-check",
-        "onPackagist": false,
+        "onPackagist": true,
         "branches": {
             "develop": {
                 "name": "develop",
@@ -15043,6 +14784,17 @@
             }
         }
     },
+    "oat-sa\/premium-enterprise-infra": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "premium-enterprise-infra",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
     "oat-sa\/recipes-contrib": {
         "analyzed": true,
         "owner": "oat-sa",
@@ -15112,6 +14864,17 @@
                 }
             }
         }
+    },
+    "oat-sa\/nextgen-tenants": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "nextgen-tenants",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
     },
     "oat-sa\/extension-tao-testcenter-rostering": {
         "analyzed": true,
@@ -15203,6 +14966,1398 @@
         "composerName": "",
         "onPackagist": false,
         "branches": {
+            "master": {
+                "name": "master",
+                "files": []
+            }
+        }
+    },
+    "oat-sa\/lib-lti1p3-core": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "lib-lti1p3-core",
+        "private": false,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": true,
+        "branches": []
+    },
+    "oat-sa\/tao-i18n-tools": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "tao-i18n-tools",
+        "private": false,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/taohub-depp-principal-portal-guide": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taohub-depp-principal-portal-guide",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/tao-inventory-api": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "tao-inventory-api",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/tao-inventory-client": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "tao-inventory-client",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/taohub-depp-teacher-portal-guide": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taohub-depp-teacher-portal-guide",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/websocket-tester": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "websocket-tester",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/newmeridian-deploy": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "newmeridian-deploy",
+        "private": true,
+        "defaultBranch": "usnme01dex",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/extension-remote-proctoring": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "extension-remote-proctoring",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": true,
+        "branches": []
+    },
+    "oat-sa\/lib-proctorio": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "lib-proctorio",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": true,
+        "branches": []
+    },
+    "oat-sa\/taocloud-limits": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taocloud-limits",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/bundle-oauth2": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "bundle-oauth2",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/lib-oauth2-tenant-management": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "lib-oauth2-tenant-management",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/lib-lti1p3-ags": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "lib-lti1p3-ags",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/bundle-lti1p3": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "bundle-lti1p3",
+        "private": false,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": true,
+        "branches": []
+    },
+    "oat-sa\/taohub-offline-capability-fr-guide": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taohub-offline-capability-fr-guide",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/taohub-offline-capability-en-guide": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "taohub-offline-capability-en-guide",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/premium-enterprise-pipeline": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "premium-enterprise-pipeline",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/nextgen-gitops": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "nextgen-gitops",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/tao-proctoring-be": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "tao-proctoring-be",
+        "private": true,
+        "defaultBranch": "develop",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/root-pipeline": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "root-pipeline",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/lib-generis-saft": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "lib-generis-saft",
+        "private": false,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/premium-enterprise-template": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "premium-enterprise-template",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/demo-lti1p3": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "demo-lti1p3",
+        "private": false,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/nextgen-ci": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "nextgen-ci",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/tao-core-shared-libs-fe": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "tao-core-shared-libs-fe",
+        "private": false,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/lambda-metrics-manager": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "lambda-metrics-manager",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/tao-lti13-be": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "tao-lti13-be",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/nextgen-dev": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "nextgen-dev",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/nextgen-gcp": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "nextgen-gcp",
+        "private": true,
+        "defaultBranch": "dev",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/tao-deliver-testrunner-nui-fe": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "tao-deliver-testrunner-nui-fe",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/migrations": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "migrations",
+        "private": false,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/nextgen-backoffice": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "nextgen-backoffice",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/extension-tao-metrics": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "extension-tao-metrics",
+        "private": true,
+        "defaultBranch": "feature\/NEX-1095\/extension-skeleton",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/multicluster-infra": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "multicluster-infra",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/portal-template": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "portal-template",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/ci-pipelines": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "ci-pipelines",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/dtw-infra": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "dtw-infra",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/lib-health-check-bigtable": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "lib-health-check-bigtable",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/lib-health-check-google-pub-sub": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "lib-health-check-google-pub-sub",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/glue-job-scripts": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "glue-job-scripts",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/enterprise-template": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "enterprise-template",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/vagrant-sandbox": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "vagrant-sandbox",
+        "private": false,
+        "defaultBranch": "main",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/nextgen-k6": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "nextgen-k6",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/nextgen-sanctuary": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "nextgen-sanctuary",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/te-tools": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "te-tools",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/ci-config": {
+        "analyzed": false,
+        "owner": "oat-sa",
+        "name": "ci-config",
+        "private": true,
+        "defaultBranch": "main",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/extension-experimental-ekstera": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "extension-experimental-ekstera",
+        "private": false,
+        "defaultBranch": "master",
+        "extensionName": "ekstera",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": {
+            "master": {
+                "name": "master",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "ekstera",
+                        "requires": [
+                            "irtTest",
+                            "kutimo",
+                            "taoQtiItem"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "oat-sa\/extension-experimental-kutimo": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "extension-experimental-kutimo",
+        "private": false,
+        "defaultBranch": "master",
+        "extensionName": "kutimo",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": {
+            "master": {
+                "name": "master",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "kutimo",
+                        "requires": [
+                            "taoQtiCommon"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "oat-sa\/extension-tao-talk": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "extension-tao-talk",
+        "private": false,
+        "defaultBranch": "master",
+        "extensionName": "taoTalk",
+        "composerName": "oat\/taoTalk",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "taoTalk",
+                        "requires": [
+                            "tao"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat\/taoTalk",
+                        "extensionName": "taoTalk",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            },
+            "master": {
+                "name": "master",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "taoTalk",
+                        "requires": [
+                            "tao"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat\/taoTalk",
+                        "extensionName": "taoTalk",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "oat-sa\/extension-tao-randomcat": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "extension-tao-randomcat",
+        "private": false,
+        "defaultBranch": "master",
+        "extensionName": "taoCat",
+        "composerName": "oat-sa\/extension-tao-randomcat",
+        "onPackagist": false,
+        "branches": {
+            "master": {
+                "name": "master",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "taoCat",
+                        "requires": [
+                            "taoCat"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-randomcat",
+                        "extensionName": "taoRandomCat",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "oat-sa\/extension-tao-extrapic": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "extension-tao-extrapic",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "taoExtraPic",
+        "composerName": "oat-sa\/extension-tao-extrapic",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "taoExtraPic",
+                        "requires": [
+                            "qtiItemPic"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-extrapic",
+                        "extensionName": "taoExtraPic",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            },
+            "master": {
+                "name": "master",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "taoTextHelp",
+                        "requires": [
+                            "qtiItemPic"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-extrapic",
+                        "extensionName": "taoTextHelp",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "oat-sa\/extension-tao-unisa": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "extension-tao-unisa",
+        "private": true,
+        "defaultBranch": "develop",
+        "extensionName": "unisa",
+        "composerName": "oat-sa\/extension-tao-unisa",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "unisa",
+                        "requires": [
+                            "taoCe",
+                            "taoMediaManager",
+                            "taoQtiItem"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-unisa",
+                        "extensionName": "unisa",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "oat-sa\/extension-tao-unisa-theme": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "extension-tao-unisa-theme",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "unisaTheme",
+        "composerName": "oat-sa\/extension-tao-unisa-theme",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "unisaTheme",
+                        "requires": [
+                            "tao",
+                            "taoQtiItem"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-unisa-theme",
+                        "extensionName": "unisaTheme",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            },
+            "master": {
+                "name": "master",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "unisaTheme",
+                        "requires": [
+                            "tao"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-unisa-theme",
+                        "extensionName": "unisaTheme",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "oat-sa\/extension-tao-marking": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "extension-tao-marking",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "taoMarking",
+        "composerName": "oat-sa\/extension-tao-marking",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "taoMarking",
+                        "requires": [
+                            "taoOutcomeUi"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-marking",
+                        "extensionName": "taoMarking",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            },
+            "master": {
+                "name": "master",
+                "files": []
+            }
+        }
+    },
+    "oat-sa\/extension-tao-test-runner-tools": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "extension-tao-test-runner-tools",
+        "private": false,
+        "defaultBranch": "master",
+        "extensionName": "taoTestRunnerTools",
+        "composerName": "oat-sa\/extension-tao-test-runner-tools",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "taoTestRunnerTools",
+                        "requires": [
+                            "tao",
+                            "taoQtiTest"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-test-runner-tools",
+                        "extensionName": "taoTestRunnerTools",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            },
+            "master": {
+                "name": "master",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "taoTestRunnerTools",
+                        "requires": [
+                            "tao",
+                            "taoQtiTest"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-test-runner-tools",
+                        "extensionName": "taoTestRunnerTools",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "oat-sa\/extension-tao-delivery-keyvalue": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "extension-tao-delivery-keyvalue",
+        "private": false,
+        "defaultBranch": "master",
+        "extensionName": "taoDeliveryKv",
+        "composerName": "oat-sa\/extension-tao-delivery-keyvalue",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "taoDeliveryKv",
+                        "requires": [
+                            "generis",
+                            "tao",
+                            "taoDelivery"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-delivery-keyvalue",
+                        "extensionName": "taoDeliveryKv",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            },
+            "master": {
+                "name": "master",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "taoDeliveryKv",
+                        "requires": [
+                            "generis",
+                            "tao",
+                            "taoDelivery"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-delivery-keyvalue",
+                        "extensionName": "taoDeliveryKv",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "oat-sa\/extension-tao-ncsbn": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "extension-tao-ncsbn",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "taoNcsbn",
+        "composerName": "oat-sa\/extension-tao-ncsbn",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "taoNcsbn",
+                        "requires": [
+                            "taoCe",
+                            "tao",
+                            "generis",
+                            "funcAcl",
+                            "taoQtiTest",
+                            "taoQtiItem",
+                            "taoTestRunnerPlugins",
+                            "taoProctoring",
+                            "taoScheduler",
+                            "taoOauth",
+                            "ltiDeliveryProvider",
+                            "taoDeliveryRdf",
+                            "taoDelivery",
+                            "taoGroups",
+                            "taoTestTaker",
+                            "taoOutcomeUi"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-ncsbn",
+                        "extensionName": "taoNcsbn",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            },
+            "master": {
+                "name": "master",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "taoNcsbn",
+                        "requires": [
+                            "taoCe",
+                            "tao",
+                            "generis",
+                            "funcAcl",
+                            "taoQtiTest",
+                            "taoQtiItem",
+                            "taoTestRunnerPlugins",
+                            "taoProctoring",
+                            "taoScheduler",
+                            "taoOauth",
+                            "ltiDeliveryProvider",
+                            "taoDeliveryRdf",
+                            "taoDelivery",
+                            "taoGroups",
+                            "taoTestTaker",
+                            "taoOutcomeUi"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-ncsbn",
+                        "extensionName": "taoNcsbn",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "oat-sa\/extension-tao-ncsbn-delivery": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "extension-tao-ncsbn-delivery",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "btDelivery",
+        "composerName": "oat-sa\/extension-tao-ncsbn-delivery",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "btDelivery",
+                        "requires": [
+                            "taoDeliveryRdf",
+                            "taoDelivery",
+                            "taoGroups",
+                            "taoTestTaker",
+                            "taoOutcomeUi",
+                            "tao",
+                            "generis",
+                            "btRest",
+                            "ltiDeliveryProvider"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-ncsbn-delivery",
+                        "extensionName": "btDelivery",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            },
+            "master": {
+                "name": "master",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "btDelivery",
+                        "requires": [
+                            "taoDeliveryRdf",
+                            "taoDelivery",
+                            "taoGroups",
+                            "taoTestTaker",
+                            "taoOutcomeUi",
+                            "tao",
+                            "generis",
+                            "btRest",
+                            "ltiDeliveryProvider"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-ncsbn-delivery",
+                        "extensionName": "btDelivery",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "oat-sa\/extension-tao-ncsbn-release": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "extension-tao-ncsbn-release",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "btRelease",
+        "composerName": "oat-sa\/extension-tao-ncsbn-release",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "btRelease",
+                        "requires": [
+                            "funcAcl",
+                            "tao",
+                            "btRest"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-ncsbn-release",
+                        "extensionName": "btRelease",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            },
+            "master": {
+                "name": "master",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "btRelease",
+                        "requires": [
+                            "funcAcl",
+                            "tao",
+                            "btRest"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-ncsbn-release",
+                        "extensionName": "btRelease",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "oat-sa\/extension-tao-ncsbn-rest": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "extension-tao-ncsbn-rest",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "btRest",
+        "composerName": "oat-sa\/extension-tao-ncsbn-rest",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "btRest",
+                        "requires": [
+                            "tao",
+                            "generis",
+                            "taoOauth"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-ncsbn-rest",
+                        "extensionName": "btRest",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            },
+            "master": {
+                "name": "master",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "btRest",
+                        "requires": [
+                            "tao",
+                            "generis",
+                            "taoOauth"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-tao-ncsbn-rest",
+                        "extensionName": "btRest",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "oat-sa\/tao-enterprise-ncsbn": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "tao-enterprise-ncsbn",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "oat-sa\/tao-enterprise-ncsbn",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": {
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/tao-enterprise-ncsbn",
+                        "extensionName": "",
+                        "requires": [
+                            "oat-sa\/generis",
+                            "oat-sa\/tao-core",
+                            "oat-sa\/extension-tao-community",
+                            "oat-sa\/extension-tao-funcacl",
+                            "oat-sa\/extension-tao-dac-simple",
+                            "oat-sa\/extension-tao-testtaker",
+                            "oat-sa\/extension-tao-group",
+                            "oat-sa\/extension-tao-item",
+                            "oat-sa\/extension-tao-itemhtml",
+                            "oat-sa\/extension-tao-itemqti",
+                            "oat-sa\/extension-tao-itemqti-pci",
+                            "oat-sa\/extension-tao-itemqti-pic",
+                            "oat-sa\/extension-tao-test",
+                            "oat-sa\/extension-tao-testlinear",
+                            "oat-sa\/extension-tao-testqti",
+                            "oat-sa\/extension-tao-outcome",
+                            "oat-sa\/extension-tao-outcomeui",
+                            "oat-sa\/extension-tao-outcomerds",
+                            "oat-sa\/extension-tao-outcomekeyvalue",
+                            "oat-sa\/extension-tao-outcomelti",
+                            "oat-sa\/extension-tao-delivery",
+                            "oat-sa\/extension-tao-lti",
+                            "oat-sa\/extension-tao-ltideliveryprovider",
+                            "oat-sa\/extension-tao-revision",
+                            "oat-sa\/extension-tao-mediamanager",
+                            "oat-sa\/extension-pcisample",
+                            "oat-sa\/extension-tao-backoffice",
+                            "oat-sa\/extension-tao-proctoring",
+                            "oat-sa\/extension-tao-clientdiag",
+                            "oat-sa\/extension-tao-eventlog",
+                            "oat-sa\/extension-tao-task-queue",
+                            "oat-sa\/extension-tao-scheduler",
+                            "oat-sa\/extension-tao-oauth",
+                            "oat-sa\/extension-tao-test-runner-plugins",
+                            "oat-sa\/extension-tao-publishing",
+                            "oat-sa\/extension-tao-theming-platform",
+                            "oat-sa\/lib-flysystem-filecache",
+                            "oat-sa\/extension-tao-ncsbn",
+                            "oat-sa\/extension-tao-ncsbn-release",
+                            "oat-sa\/extension-tao-ncsbn-rest",
+                            "oat-sa\/extension-tao-ncsbn-delivery",
+                            "oat-sa\/extension-tao-testqti-previewer"
+                        ]
+                    }
+                }
+            },
+            "master": {
+                "name": "master",
+                "files": []
+            }
+        }
+    },
+    "oat-sa\/ncsbn-deploy": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "ncsbn-deploy",
+        "private": true,
+        "defaultBranch": "ussbn01dee",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": []
+    },
+    "oat-sa\/lib-result-storage": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "lib-result-storage",
+        "private": false,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": {
+            "master": {
+                "name": "master",
+                "files": []
+            }
+        }
+    },
+    "oat-sa\/extension-lti-advantage": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "extension-lti-advantage",
+        "private": false,
+        "defaultBranch": "master",
+        "extensionName": "ltiAdvantage",
+        "composerName": "oat-sa\/extension-lti-advantage",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "ltiAdvantage",
+                        "requires": [
+                            "tao"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-lti-advantage",
+                        "extensionName": "ltiAdvantage",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            },
+            "master": {
+                "name": "master",
+                "files": {
+                    "manifest.php": {
+                        "name": "manifest.php",
+                        "composerName": "",
+                        "extensionName": "ltiAdvantage",
+                        "requires": [
+                            "tao"
+                        ]
+                    },
+                    "composer.json": {
+                        "name": "composer.json",
+                        "composerName": "oat-sa\/extension-lti-advantage",
+                        "extensionName": "ltiAdvantage",
+                        "requires": [
+                            "oat-sa\/oatbox-extension-installer"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "oat-sa\/tao-infra-cloudformation": {
+        "analyzed": true,
+        "owner": "oat-sa",
+        "name": "tao-infra-cloudformation",
+        "private": true,
+        "defaultBranch": "master",
+        "extensionName": "",
+        "composerName": "",
+        "onPackagist": false,
+        "branches": {
+            "develop": {
+                "name": "develop",
+                "files": []
+            },
             "master": {
                 "name": "master",
                 "files": []

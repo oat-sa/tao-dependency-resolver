@@ -6,7 +6,7 @@ namespace OAT\DependencyResolver\Extension\Entity;
 
 class ExtensionCollection implements \IteratorAggregate, \JsonSerializable
 {
-    /** @var Extension[]|array */
+    /** @var Extension[] */
     private $extensions = [];
 
     public function add(Extension $extension): self
@@ -28,11 +28,19 @@ class ExtensionCollection implements \IteratorAggregate, \JsonSerializable
 
     public function jsonSerialize()
     {
+        return ['require' => $this->asArray()];
+    }
+
+    /**
+     * @return Extension[]
+     */
+    public function asArray(): array
+    {
         $requires = [];
         foreach ($this->extensions as $extension) {
             $requires[$extension->getRepositoryName()] = $extension->getPrefixedBranchName();
         }
 
-        return ['require' => $requires];
+        return $requires;
     }
 }

@@ -82,13 +82,31 @@ class DependencyResolverCommandTest extends KernelTestCase
     /**
      * @dataProvider workingCasesToTest
      */
-    public function testWorkingCases($options, $expected)
+    public function testWorkingCases($options, $expectedRequire, $expectedRepositories)
     {
         $this->configureClient();
         $output = $this->commandTester->execute($options);
         $this->assertEquals(0, $output);
+
+        // Build composer.json
+        $compose = [];
+        if (!empty($expectedRepositories)) {
+            $composeRepositories = [];
+            foreach ($expectedRepositories as $repoFullName) {
+                $composeRepositories[] = [
+                    'type' => 'vcs',
+                    'url' => "https://github.com/${repoFullName}",
+                    'no-api' => true
+                ];
+            }
+
+            $compose['repositories'] = $composeRepositories;
+        }
+
+        $compose['require'] = $expectedRequire;
+
         $this->assertEquals(
-            json_encode(['require' => $expected], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n",
+            json_encode($compose, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n",
             $this->commandTester->getDisplay()
         );
     }
@@ -101,9 +119,10 @@ class DependencyResolverCommandTest extends KernelTestCase
                     '--repository-name' => 'oat-sa/generis',
                 ],
                 ['oat-sa/generis' => 'dev-develop'],
+                [],
             ],
 
-            'ext name branch devlop' => [
+            'ext name branch develop' => [
                 [
                     '--extension-name' => 'tao',
                     '--main-branch' => 'develop',
@@ -112,6 +131,7 @@ class DependencyResolverCommandTest extends KernelTestCase
                     'oat-sa/tao-core' => 'dev-develop',
                     'oat-sa/generis' => 'dev-develop',
                 ],
+                [],
             ],
 
             'repo name custom branches' => [
@@ -132,7 +152,29 @@ class DependencyResolverCommandTest extends KernelTestCase
                     'oat-sa/tao-core' => 'dev-develop',
                     'oat-sa/generis' => 'dev-master',
                 ],
+                [],
             ],
+
+            'repo name repositories' => [
+                [
+                    '--repository-name' => 'oat-sa/extension-tao-itemqti',
+                    '--repositories' => ''
+                ],
+                [
+                    'oat-sa/extension-tao-itemqti' => 'dev-develop',
+                    'oat-sa/extension-tao-item' => 'dev-develop',
+                    'oat-sa/extension-tao-backoffice' => 'dev-develop',
+                    'oat-sa/tao-core' => 'dev-develop',
+                    'oat-sa/generis' => 'dev-develop',
+                ],
+                [
+                    'oat-sa/extension-tao-itemqti',
+                    'oat-sa/extension-tao-item',
+                    'oat-sa/extension-tao-backoffice',
+                    'oat-sa/tao-core',
+                    'oat-sa/generis',
+                ]
+            ]
         ];
     }
 
@@ -188,6 +230,52 @@ class DependencyResolverCommandTest extends KernelTestCase
     {
         /** @var Organization|MockObject $organizationApi */
         $organizationApi = $this->createConfiguredMock(Organization::class, ['show' => ['properties']]);
+        $organizationApi->method('repositories')->willReturn(
+            [
+                [
+                    'id' => 123456,
+                    'name' => 'extension-tao-backoffice',
+                    'private' => false,
+                    'default_branch' => 'master'
+                ],
+                [
+                    'id' => 234567,
+                    'name' => 'extension-tao-item',
+                    'private' => false,
+                    'default_branch' => 'master'
+                ],
+                [
+                    'id' => 345678,
+                    'name' => 'extension-tao-itemqti',
+                    'private' => false,
+                    'default_branch' => 'master'
+                ],
+                [
+                    'id' => 8720920,
+                    'name' => 'extension-tao-private',
+                    'private' => true,
+                    'default_branch' => 'master'
+                ],
+                [
+                    'id' => 456789,
+                    'name' => 'generis',
+                    'private' => false,
+                    'default_branch' => 'master'
+                ],
+                [
+                    'id' => 5678910,
+                    'name' => 'tao-core',
+                    'private' => false,
+                    'default_branch' => 'master'
+                ],
+                [
+                    'id' => 67891011,
+                    'name' => 'wrong-repo',
+                    'private' => false,
+                    'default_branch' => 'master'
+                ],
+            ]
+        );
 
         /** @var References|MockObject $gitDataApi */
         $referenceApi = $this->createMock(References::class);

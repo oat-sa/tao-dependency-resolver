@@ -70,6 +70,12 @@ class DependencyResolverCommand extends Command
                 InputOption::VALUE_REQUIRED,
                 'Branch to load for each dependency.',
                 ''
+            )
+            ->addOption(
+                'repositories',
+                null,
+                InputOption::VALUE_NONE,
+                'Include repositories information (flag).'
             );
     }
 
@@ -90,7 +96,11 @@ class DependencyResolverCommand extends Command
         );
 
         // Resolve all extensions.
-        $composerJson = $this->dependencyResolver->resolve($rootExtension, $extensionBranchMap);
+        $composerJson = $this->dependencyResolver->resolve(
+            $rootExtension,
+            $extensionBranchMap,
+            $input->getOption('repositories') !== false
+        );
 
         // Outputs result.
         $output->writeln($composerJson);

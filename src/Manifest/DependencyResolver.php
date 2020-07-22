@@ -8,6 +8,8 @@ use OAT\DependencyResolver\Extension\Entity\Extension;
 use OAT\DependencyResolver\Extension\Entity\ExtensionCollection;
 use OAT\DependencyResolver\Extension\Exception\NotMappedException;
 use OAT\DependencyResolver\Extension\ExtensionFactory;
+use OAT\DependencyResolver\Repository\Entity\Repository;
+use OAT\DependencyResolver\Repository\Entity\RepositoryCollection;
 use OAT\DependencyResolver\Repository\Interfaces\RepositoryReaderInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -36,13 +38,13 @@ class DependencyResolver implements LoggerAwareInterface
     }
 
     /**
-     * @param Extension  $rootExtension
+     * @param Extension $rootExtension
      * @param array $extensionBranchMap
-     *
+     * @param bool $repositoriesInfo
      * @return string
      * @throws NotMappedException
      */
-    public function resolve(Extension $rootExtension, array $extensionBranchMap): string
+    public function resolve(Extension $rootExtension, array $extensionBranchMap, bool $repositoriesInfo = false): string
     {
         // Adds the root extension so that it is installed along with the other ones.
         $extensionCollection = new ExtensionCollection();
@@ -55,8 +57,44 @@ class DependencyResolver implements LoggerAwareInterface
             $extensionCollection
         );
 
+        // Final data to be encoded.
+        $compose = [];
+
+        if ($repositoriesInfo !== false) {
+            // Build repositories information.
+            $this->logger->info('Retrieving repositories information.');
+            $repositories = new RepositoryCollection();
+
+            $repositoryCollection = new RepositoryCollection();
+            /** @var Extension $extension */
+            foreach ($extensionCollection as $extension) {
+                // We do not go through GitHub API for repositories to avoid non critical extra requests.
+                [$owner, $repositoryName] = explode('/', $extension->getRepositoryName());
+                $repositoryCollection->add(new Repository(
+                    false,
+                    $owner,
+                    $repositoryName,
+                    false,
+                    'master',
+                    'unknown',
+                    'unknown',
+                    true,
+                    []
+                ));
+            }
+
+            $compose['repositories'] = $repositoryCollection->asArray();
+        }
+
+        $compose['require'] = $extensionCollection->asArray();
+
+        $this->logger->info('Dependency Resolution process finished.');
+
         // Converts extension collection into a composer.json require.
-        return json_encode($extensionCollection, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        return json_encode(
+            $compose,
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+        );
     }
 
     /**
