@@ -92,11 +92,11 @@ class DependencyResolverCommandTest extends KernelTestCase
         $compose = [];
         if (!empty($expectedRepositories)) {
             $composeRepositories = [];
-            foreach ($expectedRepositories as $repoFullName => $private) {
+            foreach ($expectedRepositories as $repoFullName) {
                 $composeRepositories[] = [
                     'type' => 'vcs',
                     'url' => "https://github.com/${repoFullName}",
-                    'no-api' => !$private
+                    'no-api' => true
                 ];
             }
 
@@ -168,11 +168,11 @@ class DependencyResolverCommandTest extends KernelTestCase
                     'oat-sa/generis' => 'dev-develop',
                 ],
                 [
-                    'oat-sa/extension-tao-itemqti' => false,
-                    'oat-sa/extension-tao-item' => false,
-                    'oat-sa/extension-tao-backoffice' => false,
-                    'oat-sa/tao-core' => false,
-                    'oat-sa/generis' => false,
+                    'oat-sa/extension-tao-itemqti',
+                    'oat-sa/extension-tao-item',
+                    'oat-sa/extension-tao-backoffice',
+                    'oat-sa/tao-core',
+                    'oat-sa/generis',
                 ]
             ]
         ];
