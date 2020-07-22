@@ -51,7 +51,7 @@ class GithubConnection
      * Retrieves organization's repositories.
      *
      * @param string $owner
-     * @param int $perPage Number of repositories to load per client call.
+     * @param int    $perPage Number of repositories to load per client call.
      * @return array
      */
     public function getRepositoryList(string $owner, int $perPage = 100): array
@@ -66,7 +66,6 @@ class GithubConnection
         do {
             $page++;
             $foundRepositories = $this->client->getRepositoryList($owner, $page, $perPage);
-
             foreach ($foundRepositories as $repository) {
                 $repositoryName = $repository['name'];
                 $repositories[$owner . '/' . $repositoryName] = new Repository(
