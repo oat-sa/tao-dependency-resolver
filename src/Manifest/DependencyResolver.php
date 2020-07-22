@@ -8,6 +8,7 @@ use OAT\DependencyResolver\Extension\Entity\Extension;
 use OAT\DependencyResolver\Extension\Entity\ExtensionCollection;
 use OAT\DependencyResolver\Extension\Exception\NotMappedException;
 use OAT\DependencyResolver\Extension\ExtensionFactory;
+use OAT\DependencyResolver\Repository\Entity\Repository;
 use OAT\DependencyResolver\Repository\Entity\RepositoryCollection;
 use OAT\DependencyResolver\Repository\Interfaces\RepositoryReaderInterface;
 use Psr\Log\LoggerAwareInterface;
@@ -60,17 +61,26 @@ class DependencyResolver implements LoggerAwareInterface
         $compose = [];
 
         if ($repositoriesInfo !== false) {
-            // Get private repositories information.
+            // Build repositories information.
             $this->logger->info('Retrieving repositories information.');
-            [$owner, $repositoryName] = explode('/', $rootExtension->getRepositoryName());
-            $repositories = $this->repositoryReader->getRepositoryList($owner);
+            $repositories = new RepositoryCollection();
 
             $repositoryCollection = new RepositoryCollection();
             /** @var Extension $extension */
             foreach ($extensionCollection as $extension) {
-                if (isset($repositories[$extension->getRepositoryName()])) {
-                    $repositoryCollection->add($repositories[$extension->getRepositoryName()]);
-                }
+                // We do not go through GitHub API for repositories to avoid non critical extra requests.
+                [$owner, $repositoryName] = explode('/', $extension->getRepositoryName());
+                $repositoryCollection->add(new Repository(
+                    false,
+                    $owner,
+                    $repositoryName,
+                    false,
+                    'master',
+                    'unknown',
+                    'unknown',
+                    true,
+                    []
+                ));
             }
 
             $compose['repositories'] = $repositoryCollection->asArray();

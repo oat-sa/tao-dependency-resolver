@@ -45,7 +45,7 @@ class RepositoryCollection implements \IteratorAggregate, \JsonSerializable
             $repositories[] = [
                 'type' => 'vcs',
                 'url' => "https://github.com/${organization}/${repoName}",
-                'no-api' => !$repository->isPrivate()
+                'no-api' => true
             ];
         }
 
