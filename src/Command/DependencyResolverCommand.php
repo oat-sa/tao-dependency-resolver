@@ -74,9 +74,8 @@ class DependencyResolverCommand extends Command
             ->addOption(
                 'repositories',
                 null,
-                InputOption::VALUE_OPTIONAL,
-                'Include repositories information (flag).',
-                false
+                InputOption::VALUE_NONE,
+                'Include repositories information (flag).'
             );
     }
 
