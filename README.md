@@ -44,7 +44,7 @@ $ php bin/console oat:dependencies:resolve [--repository-name <repository name> 
 - `main extension name`: "manifest name", e.g. "taoQtiTest" of the extension to resolve.
 - `main repository branch`: the branch of the extension to be resolved.
 - `dependency branches`: desired branches to download include for each dependency. In the form of "extensionName1:branchName1,extensionName2:branchName2,...", e.g. "tao:develop,taoQtiItem:fix/tao-1234,generis:10.12.14". Branches for all non given extensions will default to "develop".
-- `repositories`: flag to indicate that composer repositories information must be included.
+- `repositories`: flag to indicate that composer repositories information must be included. In case of private repositories, ssh authentication must be set up to use the generated composer.json file.
 
 Only one of the two options `repository-name` and `extension-name` must be provided.
 
