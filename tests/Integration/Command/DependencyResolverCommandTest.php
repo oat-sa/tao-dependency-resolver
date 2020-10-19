@@ -33,6 +33,8 @@ class DependencyResolverCommandTest extends KernelTestCase
 {
     use ProtectedAccessorTrait;
 
+    const OUTPUT_FILE = 'tests/resources/composer.json';
+
     /** @var CommandTester */
     private $commandTester;
 
@@ -72,6 +74,11 @@ class DependencyResolverCommandTest extends KernelTestCase
         $this->commandTester = new CommandTester($application->find(DependencyResolverCommand::NAME));
     }
 
+    public function tearDown()
+    {
+        is_file(self::OUTPUT_FILE) && unlink(self::OUTPUT_FILE);
+    }
+
     public function testMissingArgument()
     {
         $this->expectException(ArgumentCountError::class);
@@ -109,6 +116,10 @@ class DependencyResolverCommandTest extends KernelTestCase
             json_encode($compose, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n",
             $this->commandTester->getDisplay()
         );
+
+        if (isset($options['--file'])) {
+            $this->assertTrue(file_exists($options['--file']));
+        }
     }
 
     public function workingCasesToTest()
@@ -174,7 +185,16 @@ class DependencyResolverCommandTest extends KernelTestCase
                     'oat-sa/tao-core',
                     'oat-sa/generis',
                 ]
-            ]
+            ],
+
+            'repo name file' => [
+                [
+                    '--repository-name' => 'oat-sa/generis',
+                    '--file' => self::OUTPUT_FILE
+                ],
+                ['oat-sa/generis' => 'dev-develop'],
+                [],
+            ],
         ];
     }
 
