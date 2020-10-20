@@ -37,7 +37,7 @@ There are two tools in this repository:
 Read more about this tool [here](doc/dependency-resolver.md).
 
 ```
-$ php bin/console oat:dependencies:resolve [--repository-name <repository name> | --extension-name <extension name>] [--main-branch <main repository branch>] [--dependency-branches <dependency branches>] [--repositories]
+$ php bin/console oat:dependencies:resolve [--repository-name <repository name> | --extension-name <extension name>] [--main-branch <main repository branch>] [--dependency-branches <dependency branches>] [--repositories] [--file <path to composer.json>]
 ```
 
 - `main repository name`: repository name, e.g. "oat-sa/extension-tao-testqti" of the repository to resolve.
@@ -45,6 +45,7 @@ $ php bin/console oat:dependencies:resolve [--repository-name <repository name> 
 - `main repository branch`: the branch of the extension to be resolved.
 - `dependency branches`: desired branches to download include for each dependency. In the form of "extensionName1:branchName1,extensionName2:branchName2,...", e.g. "tao:develop,taoQtiItem:fix/tao-1234,generis:10.12.14". Branches for all non given extensions will default to "develop".
 - `repositories`: flag to indicate that composer repositories information must be included. In case of private repositories, ssh authentication must be set up to use the generated composer.json file.
+- `file`: when given, the command will generate the composer.json into this file along the stdout. The target need to be writeable, and can be either a relative or absolute path. For instance, `--file output/composer.json` will generate the composer.json in the `output` directory (within the current working directory). 
 
 Only one of the two options `repository-name` and `extension-name` must be provided.
 
