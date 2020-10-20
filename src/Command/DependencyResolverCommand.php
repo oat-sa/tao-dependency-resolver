@@ -180,10 +180,12 @@ class DependencyResolverCommand extends Command
     {
         $dir = dirname($file);
 
-        if (!is_dir($dir)) {
-            if (false === mkdir($dir, 0755, true)) {
-                throw new RuntimeException('Could not save the result, unable to create the required folder hierarchy.');
-            }
+        if (file_exists($file)) {
+            throw new RuntimeException('Could not save the result, the file already exists.');
+        }
+
+        if (!mkdir($dir, 0755, true) && !is_dir($dir)) {
+            throw new RuntimeException('Could not save the result, unable to create the required folder hierarchy.');
         }
 
         if (false === file_put_contents($file, $composerJson)) {
