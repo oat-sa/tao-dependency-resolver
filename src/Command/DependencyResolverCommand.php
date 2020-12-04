@@ -12,6 +12,7 @@ use OAT\DependencyResolver\Extension\ExtensionFactory;
 use OAT\DependencyResolver\Manifest\DependencyResolver;
 use OAT\DependencyResolver\Repository\Entity\Repository;
 use OAT\DependencyResolver\Repository\RepositoryMapAccessor;
+use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -76,6 +77,12 @@ class DependencyResolverCommand extends Command
                 null,
                 InputOption::VALUE_NONE,
                 'Include repositories information (flag).'
+            )
+            ->addOption(
+                'file',
+                'f',
+                InputOption::VALUE_OPTIONAL,
+                'Save composer.json to given file.'
             );
     }
 
@@ -101,6 +108,10 @@ class DependencyResolverCommand extends Command
             $extensionBranchMap,
             $input->getOption('repositories') !== false
         );
+
+        if ($input->getOption('file')) {
+            $this->resultToFile($input->getOption('file'), $composerJson);
+        }
 
         // Outputs result.
         $output->writeln($composerJson);
@@ -157,5 +168,28 @@ class DependencyResolverCommand extends Command
         }
 
         return $extensionToBranchMap;
+    }
+
+    /**
+     * Saves the generated composer.json into a file represented by its path.
+     *
+     * @param string $file
+     * @param string $composerJson
+     */
+    protected function resultToFile(string $file, string $composerJson): void
+    {
+        $dir = dirname($file);
+
+        if (file_exists($file)) {
+            throw new RuntimeException('Could not save the result, the file already exists.');
+        }
+
+        if (!mkdir($dir, 0755, true) && !is_dir($dir)) {
+            throw new RuntimeException('Could not save the result, unable to create the required folder hierarchy.');
+        }
+
+        if (false === file_put_contents($file, $composerJson)) {
+            throw new RuntimeException('Could not save the result, unable to write the file.');
+        }
     }
 }
