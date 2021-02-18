@@ -14882,8 +14882,8 @@
         "name": "extension-tao-testcenter-rostering",
         "private": false,
         "defaultBranch": "master",
-        "extensionName": "taoTestCenter",
-        "composerName": "oat-sa\/extension-tao-testcenter",
+        "extensionName": "taoTestcenterRostering",
+        "composerName": "oat-sa\/extension-tao-testcenter-rostering",
         "onPackagist": false,
         "branches": {
             "develop": {
@@ -14892,20 +14892,20 @@
                     "manifest.php": {
                         "name": "manifest.php",
                         "composerName": "",
-                        "extensionName": "taoTestCenter",
+                        "extensionName": "taoTestcenterRostering",
                         "requires": [
-                            "taoProctoring",
                             "taoDelivery",
                             "generis",
                             "tao",
                             "taoTestTaker",
-                            "taoDeliveryRdf"
+                            "taoDeliveryRdf",
+                            "taoClientDiagnostic"
                         ]
                     },
                     "composer.json": {
                         "name": "composer.json",
-                        "composerName": "oat-sa\/extension-tao-testcenter",
-                        "extensionName": "taoTestCenter",
+                        "composerName": "oat-sa\/extension-tao-testcenter-rostering",
+                        "extensionName": "taoTestcenterRostering",
                         "requires": [
                             "oat-sa\/oatbox-extension-installer"
                         ]
@@ -14920,12 +14920,12 @@
                         "composerName": "",
                         "extensionName": "taoTestcenterRostering",
                         "requires": [
-                            "taoProctoring",
                             "taoDelivery",
                             "generis",
                             "tao",
                             "taoTestTaker",
-                            "taoDeliveryRdf"
+                            "taoDeliveryRdf",
+                            "taoClientDiagnostic"
                         ]
                     },
                     "composer.json": {
