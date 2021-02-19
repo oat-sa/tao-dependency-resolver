@@ -156,7 +156,7 @@ This tool reads every oat-sa repositories in Github and maintains the map of **e
 Reads and analyzes repositories from Github.
 
 ```
-$ php bin/console repositories:update [--reload-list] [--limit limit]
+$ php bin/console oat:repositories:update [--reload-list] [--limit limit]
 ```
 
 - `--reload-list` : reloads the list of oat-sa repositories in addition to analyzing every repository
